@@ -4,6 +4,8 @@ import Draggable from 'react-draggable';
 import Page from '../components/Page'
 import Layout from '../components/Layout'
 
+import "../styles/styles.scss"
+
 const DraggableImg = props => (
   <Draggable>
     <div>
