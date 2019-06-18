@@ -29,11 +29,12 @@ html {
 }
 
 img {
-  -webkit-user-drag: none;
+  /* -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  user-drag: none;
+  user-drag: none; */
+  pointer-events: none;
 }
 
 body {
@@ -95,6 +96,7 @@ sup {
   width: 100vw;
   padding: 1em;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 nav {
@@ -116,4 +118,8 @@ nav a {
 .home-copy {
   padding-top: 6em;
   padding-right: 4em;
+}
+
+img {
+  width: 60em;
 }

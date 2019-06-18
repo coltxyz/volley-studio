@@ -1,7 +1,16 @@
 import Link from 'next/link'
+import Draggable from 'react-draggable';
 
 import Page from '../components/Page'
 import Layout from '../components/Layout'
+
+const DraggableImg = props => (
+  <Draggable>
+    <div>
+      <img src={ props.src } />
+    </div>
+  </Draggable>
+)
 
 export default class Home extends Page {
 
@@ -17,6 +26,11 @@ export default class Home extends Page {
         <h1 className="home-copy">
           We are an industry-leading architectural visualization and creative studio specializing in the crafting of stunning imagery that evokes the best possibilities of our clients’ designs.
         </h1>
+
+
+        <DraggableImg src="/static/demo-images/02_Tribune_white.jpg" />
+
+
       </Layout>
     )
   }
