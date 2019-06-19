@@ -8,10 +8,13 @@ const DraggableImg = props => (
   >
     <div
       onMouseEnter={ props.onMouseEnter }
-      className="stack__image"
+      className={ `stack__image ${ props.isActive ? 'stack__image--active' : '' }` }
       style={ props.style }
     >
-      <img src={ props.src } />
+      <div className="stack__image__inner">
+        <img className="stack-img-active" src={ props.activeSrc } />
+        <img className="stack-img-default" src={ props.src } />
+      </div>
     </div>
   </DraggableCore>
 )
@@ -21,7 +24,8 @@ export default class Stack extends React.Component {
   constructor({ images }) {
     super();
     this.state = {
-      isReady: false
+      isReady: false,
+      currentTargetId: null
     };
     this.imageLocations = null;
     this.imageStack = images.map( image => (image.id) );
@@ -93,16 +97,16 @@ export default class Stack extends React.Component {
   render() {
     return (
       <div className="stack">
-        <div className="stack-reset-button" onClick={ this.reshuffle }>
+        <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
           Reshuffle Stack
         </div>
         {
           this.props.images.map( image => (
             <DraggableImg
               key={ image.id }
-              src={
-                this.state.currentTargetId === image.id ? image.activeSrc : image.src
-              }
+              isActive={ image.id === this.state.currentTargetId }
+              activeSrc={ image.activeSrc }
+              src={ image.src }
               style={{
                 transform: this.getTransform({ id: image.id }),
                 zIndex: this.imageStack.indexOf(image.id) + 10,
