@@ -61,10 +61,10 @@ export default class Home extends React.Component {
         </Head>
         <div id="main" className={ this.state.isNavOpen ? 'nav--open' : ''}>
           <Nav { ...this.props } />
+          <div className="logo">
+            <Link href="/"><a>VOLLEY STUDIO</a></Link>
+          </div>
           <div className="content-main">
-            <div className="logo">
-              <Link href="/"><a>VOLLEY STUDIO</a></Link>
-            </div>
             <div className="content-inner">
               { this.props.children }
             </div>

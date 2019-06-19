@@ -39,6 +39,7 @@ export default class Stack extends React.Component {
   }
 
   createStack() {
+    console.log(this.refs.stack)
     // const midX = Math.floor(window.document.body.clientWidth / 9 * 3);
     const midY = Math.floor(window.document.body.clientHeight - 540);
     const midX = 0;
@@ -49,17 +50,31 @@ export default class Stack extends React.Component {
     }, {});
   }
 
+  broadcastTouch(id) {
+    if (this.props.onTouch) {
+      this.props.onTouch( this.props.images.find( img => img.id === id ))
+    }
+  }
+
   setTarget({e, id}) {
+    e.stopPropagation();
     this.target = e.target;
     this.setState({
       currentTargetId: id
     });
     this.imageStack.splice(this.imageStack.indexOf(id), 1);
     this.imageStack.push(id);
+    this.broadcastTouch(id);
+
   }
 
-  unsetTarget() {
+  unsetTarget = ({e, id}) => {
+    e.stopPropagation();
+    this.broadcastTouch(null);
     this.target = null;
+    this.setState({
+      currentTargetId: null
+    });
   }
 
   getTransform({ id }) {
@@ -77,6 +92,7 @@ export default class Stack extends React.Component {
   }
 
   handleDrag({ id, data, e }) {
+    e.stopPropagation();
     if (!this.imageLocations  ) {
       return;
     }
@@ -96,7 +112,7 @@ export default class Stack extends React.Component {
 
   render() {
     return (
-      <div className="stack">
+      <div className="stack" ref="stack">
         <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
           Reshuffle Stack
         </div>

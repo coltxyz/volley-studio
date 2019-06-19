@@ -9,6 +9,7 @@
     left: 0;
     z-index: 1;
     transition: 200ms opacity, 20ms transform;
+    cursor: grab;
     &__inner {
       pointer-events: none;
       img {
@@ -18,13 +19,13 @@
           position: absolute;
           left: 0;
           opacity: 0;
-          transition: 500ms opacity;
+          transition: 30ms opacity;
         }
       }
     }
     &--active {
       .stack__image__inner .stack-img-active {
-        border: 1px solid white;
+        outline: 1px solid white;
         opacity: 1;
       }
     }
