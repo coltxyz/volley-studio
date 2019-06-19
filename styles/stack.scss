@@ -1,0 +1,18 @@
+.stack {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: 200ms opacity;
+
+    img {
+      min-width: 20vw;
+      max-width: 40rem;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Head from 'next/head'
 import Nav from './Nav.js';
 import Footer from './Footer.js';
@@ -58,9 +59,12 @@ export default class Home extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         </Head>
-        <div id="main" className={ this.state.isNavOpen && 'nav--open' }>
+        <div id="main" className={ this.state.isNavOpen ? 'nav--open' : ''}>
           <Nav { ...this.props } />
           <div className="content-main">
+            <div className="logo">
+              <Link href="/"><a>VOLLEY STUDIO</a></Link>
+            </div>
             <div className="content-inner">
               { this.props.children }
             </div>
