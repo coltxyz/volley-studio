@@ -6,7 +6,11 @@ const DraggableImg = props => (
     onMouseDown={ props.onMouseDown }
     onMouseUp={ props.onMouseUp }
   >
-    <div className="stack__image" style={ props.style }>
+    <div
+      onMouseEnter={ props.onMouseEnter }
+      className="stack__image"
+      style={ props.style }
+    >
       <img src={ props.src } />
     </div>
   </DraggableCore>
@@ -20,24 +24,25 @@ export default class Stack extends React.Component {
       isReady: false
     };
     this.imageLocations = null;
-    this.imageStack = [];
+    this.imageStack = images.map( image => (image.id) );
   }
 
   componentDidMount() {
-    // const midX = Math.floor(window.document.body.clientWidth / 9 * 3);
-    // const midY = Math.floor(window.document.body.clientHeight / 9 * 3);
-
-    const [midX, midY] = [200, 200]
-
-    console.log(midX, midY);
-    this.imageLocations = this.props.images.reduce((acc, item, i) => {
-      acc[item.id] = { x:20*i + midX, y: 20*i + midY};
-      return acc;
-    }, {});
-    this.imageStack = this.props.images.map( image => (image.id) );
+    this.createStack();
     this.setState({
       isReady: true
     });
+  }
+
+  createStack() {
+    // const midX = Math.floor(window.document.body.clientWidth / 9 * 3);
+    const midY = Math.floor(window.document.body.clientHeight - 540);
+    const midX = 0;
+
+    this.imageLocations = this.props.images.reduce((acc, item, i) => {
+      acc[item.id] = { x:20*i + midX, y: -20*i + midY};
+      return acc;
+    }, {});
   }
 
   setTarget({e, id}) {
@@ -61,6 +66,12 @@ export default class Stack extends React.Component {
     return `translate(${ x }px, ${ y }px)`;
   }
 
+  reshuffle = () => {
+    this.unsetTarget();
+    this.createStack();
+    this.forceUpdate();
+  }
+
   handleDrag({ id, data, e }) {
     if (!this.imageLocations  ) {
       return;
@@ -82,6 +93,9 @@ export default class Stack extends React.Component {
   render() {
     return (
       <div className="stack">
+        <div className="stack-reset-button" onClick={ this.reshuffle }>
+          Reshuffle Stack
+        </div>
         {
           this.props.images.map( image => (
             <DraggableImg

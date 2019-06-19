@@ -8,11 +8,21 @@
     top: 0;
     left: 0;
     z-index: 1;
-    transition: 200ms opacity;
+    transition: 200ms opacity, 20ms transform;
 
     img {
-      min-width: 20vw;
-      max-width: 40rem;
+      height: 500px;
     }
   }
+}
+
+.stack-reset-button {
+  font-family: 'Basis-Mono';
+  float: right;
+  border: 1px solid black;
+  padding: 1em;
+  cursor: pointer;
+}
+.stack-reset-button:hover {
+  text-decoration: underline;
 }
