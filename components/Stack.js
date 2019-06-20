@@ -1,22 +1,16 @@
 import { DraggableCore } from 'react-draggable';
 
-const DraggableImg = props => (
-  <DraggableCore
-    onDrag={ props.onDrag }
-    onMouseDown={ props.onMouseDown }
-    onMouseUp={ props.onMouseUp }
+const StackImage = props => (
+  <div
+    data-img-id={ props.id }
+    className={ `stack__image ${ props.isActive ? 'stack__image--active' : '' }` }
+    style={ props.style }
   >
-    <div
-      onMouseEnter={ props.onMouseEnter }
-      className={ `stack__image ${ props.isActive ? 'stack__image--active' : '' }` }
-      style={ props.style }
-    >
-      <div className="stack__image__inner">
-        <img className="stack-img-active" src={ props.activeSrc } />
-        <img className="stack-img-default" src={ props.src } />
-      </div>
+    <div className="stack__image__inner">
+      <img className="stack-img-active" src={ props.activeSrc } />
+      <img className="stack-img-default" src={ props.src } />
     </div>
-  </DraggableCore>
+  </div>
 )
 
 export default class Stack extends React.Component {
@@ -27,19 +21,19 @@ export default class Stack extends React.Component {
       isReady: false,
       currentTargetId: null
     };
+    this.target = null;
     this.imageLocations = null;
     this.imageStack = images.map( image => (image.id) );
   }
 
   componentDidMount() {
-    this.createStack();
+    this.initializeStack();
     this.setState({
       isReady: true
     });
   }
 
-  createStack() {
-    console.log(this.refs.stack)
+  initializeStack() {
     // const midX = Math.floor(window.document.body.clientWidth / 9 * 3);
     const midY = Math.floor(window.document.body.clientHeight - 540);
     const midX = 0;
@@ -54,27 +48,24 @@ export default class Stack extends React.Component {
     if (this.props.onTouch) {
       this.props.onTouch( this.props.images.find( img => img.id === id ))
     }
-  }
-
-  setTarget({e, id}) {
-    e.stopPropagation();
-    this.target = e.target;
     this.setState({
       currentTargetId: id
     });
+  }
+
+  setTarget = (e, data) => {
+    e.stopPropagation();
+    this.target = e.target;
+    const id = e.target.dataset.imgId;
     this.imageStack.splice(this.imageStack.indexOf(id), 1);
     this.imageStack.push(id);
     this.broadcastTouch(id);
-
   }
 
-  unsetTarget = ({e, id}) => {
+  unsetTarget = (e, data) => {
     e.stopPropagation();
     this.broadcastTouch(null);
     this.target = null;
-    this.setState({
-      currentTargetId: null
-    });
   }
 
   getTransform({ id }) {
@@ -87,54 +78,58 @@ export default class Stack extends React.Component {
 
   reshuffle = () => {
     this.unsetTarget();
-    this.createStack();
+    this.initializeStack();
     this.forceUpdate();
   }
 
-  handleDrag({ id, data, e }) {
+  handleDrag = (e, data) => {
     e.stopPropagation();
-    if (!this.imageLocations  ) {
+    const id = this.target.dataset.imgId;
+    if ( !this.imageLocations || !id) {
       return;
     }
+
     const { x, y } = this.imageLocations[id];
     this.imageLocations[id] = {
       x: x + data.deltaX,
       y: y + data.deltaY
     };
-    this.target.setAttribute(
-      'style',
-      `
-        transform: ${ this.getTransform({ id }) };
-        z-index: ${ this.imageStack.indexOf(id) + 10 };
-      `
-    );
+
+    this.target.setAttribute('style', `
+      transform: ${ this.getTransform({ id }) };
+      z-index: ${ this.imageStack.indexOf(id) + 10 };
+    `);
   }
 
   render() {
     return (
-      <div className="stack" ref="stack">
-        <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
-          Reshuffle Stack
+      <DraggableCore
+        onDrag={ this.handleDrag }
+        onMouseDown={ this.setTarget }
+        onMouseUp={ this.unsetTarget }
+      >
+        <div className="stack" ref="stack">
+          <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
+            Reshuffle Stack
+          </div>
+          {
+            this.props.images.map( image => (
+              <StackImage
+                key={ image.id }
+                id={ image.id }
+                isActive={ image.id === this.state.currentTargetId }
+                activeSrc={ image.activeSrc }
+                src={ image.src }
+                style={{
+                  transform: this.getTransform({ id: image.id }),
+                  zIndex: this.imageStack.indexOf(image.id) + 10,
+                  opacity: this.state.isReady ? 1 : 0
+                }}
+              />
+            ))
+          }
         </div>
-        {
-          this.props.images.map( image => (
-            <DraggableImg
-              key={ image.id }
-              isActive={ image.id === this.state.currentTargetId }
-              activeSrc={ image.activeSrc }
-              src={ image.src }
-              style={{
-                transform: this.getTransform({ id: image.id }),
-                zIndex: this.imageStack.indexOf(image.id) + 10,
-                opacity: this.state.isReady ? 1 : 0
-              }}
-              onMouseDown={ (e) => this.setTarget({ e, id: image.id }) }
-              onMouseUp={ (e) => this.unsetTarget({ e, id: image.id }) }
-              onDrag={ (e, data) => this.handleDrag({ e, id: image.id, data }) }
-            />
-          ))
-        }
-      </div>
+      </DraggableCore>
     )
   }
 

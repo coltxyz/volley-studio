@@ -2,6 +2,7 @@
   height: 100%;
   width: 100%;
   position: relative;
+  pointer-events: none;
 
   &__image {
     position: absolute;
@@ -10,11 +11,11 @@
     z-index: 1;
     transition: 200ms opacity, 20ms transform;
     cursor: grab;
+    pointer-events: all;
     &__inner {
       pointer-events: none;
       img {
         height: 500px;
-        pointer-events: none;
         &.stack-img-active {
           position: absolute;
           left: 0;
