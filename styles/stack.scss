@@ -12,6 +12,17 @@
     transition: 200ms opacity, 20ms transform;
     cursor: grab;
     pointer-events: all;
+    transform-origin: bottom left;
+    &__resize {
+      cursor: nesw-resize;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 1.5em;
+      width: 1.5em;
+      z-index: 1;
+      pointer-events: all;
+    }
     &__inner {
       pointer-events: none;
       img {

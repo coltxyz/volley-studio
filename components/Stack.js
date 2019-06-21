@@ -1,5 +1,7 @@
 import { DraggableCore } from 'react-draggable';
 
+const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
+
 const StackImage = props => (
   <div
     data-img-id={ props.id }
@@ -7,6 +9,11 @@ const StackImage = props => (
     style={ props.style }
   >
     <div className="stack__image__inner">
+      <div
+        className="stack__image__resize"
+        data-img-id={ props.id }
+        data-img-resize={ true }
+      ></div>
       <img className="stack-img-active" src={ props.activeSrc } />
       <img className="stack-img-default" src={ props.src } />
     </div>
@@ -19,10 +26,11 @@ export default class Stack extends React.Component {
     super();
     this.state = {
       isReady: false,
-      currentTargetId: null
+      currentTargetId: null,
+      isResize: false
     };
     this.target = null;
-    this.imageLocations = null;
+    this.imageTransforms = null;
     this.imageStack = images.map( image => (image.id) );
   }
 
@@ -38,28 +46,32 @@ export default class Stack extends React.Component {
     const midY = Math.floor(window.document.body.clientHeight - 540);
     const midX = 0;
 
-    this.imageLocations = this.props.images.reduce((acc, item, i) => {
-      acc[item.id] = { x:20*i + midX, y: -20*i + midY};
+    this.imageTransforms = this.props.images.reduce((acc, item, i) => {
+      acc[item.id] = { x:20*i + midX, y: -20*i + midY, s: 1};
       return acc;
     }, {});
   }
 
-  broadcastTouch(id) {
+  broadcastTouch(id=null, isResize=false) {
     if (this.props.onTouch) {
       this.props.onTouch( this.props.images.find( img => img.id === id ))
     }
     this.setState({
-      currentTargetId: id
+      currentTargetId: id,
+      isResize
     });
   }
 
   setTarget = (e, data) => {
     e.stopPropagation();
-    this.target = e.target;
     const id = e.target.dataset.imgId;
-    this.imageStack.splice(this.imageStack.indexOf(id), 1);
-    this.imageStack.push(id);
-    this.broadcastTouch(id);
+    const isResize = e.target.dataset.imgResize;
+    if (id) {
+      this.target = e.target.closest('.stack__image');
+      this.imageStack.splice(this.imageStack.indexOf(id), 1);
+      this.imageStack.push(id);
+      this.broadcastTouch(id, isResize);
+    }
   }
 
   unsetTarget = (e, data) => {
@@ -69,11 +81,11 @@ export default class Stack extends React.Component {
   }
 
   getTransform({ id }) {
-    if (!this.imageLocations) {
+    if (!this.imageTransforms) {
       return;
     }
-    const { x, y } = this.imageLocations[id];
-    return `translate(${ x }px, ${ y }px)`;
+    const { x, y, s } = this.imageTransforms[id];
+    return `translate(${ x }px, ${ y }px) scale(${ s })`;
   }
 
   reshuffle = () => {
@@ -85,15 +97,29 @@ export default class Stack extends React.Component {
   handleDrag = (e, data) => {
     e.stopPropagation();
     const id = this.target.dataset.imgId;
-    if ( !this.imageLocations || !id) {
+    const targetClassName = e.target.className;
+    if ( !this.imageTransforms || !id ) {
       return;
     }
 
-    const { x, y } = this.imageLocations[id];
-    this.imageLocations[id] = {
-      x: x + data.deltaX,
-      y: y + data.deltaY
-    };
+    let {x, y, s} = this.imageTransforms[id];
+    if (this.state.isResize) {
+      const targetSize = this.target.getBoundingClientRect().width;
+      const scale = s + maxMagnitude(data.deltaX, -1 * data.deltaY) / targetSize;
+      this.imageTransforms[id] = {
+        x,
+        y,
+        s: scale
+      };
+    } else {
+      this.imageTransforms[id] = {
+        s,
+        x: x + data.deltaX,
+        y: y + data.deltaY
+      };
+    }
+
+    console.log(s);
 
     this.target.setAttribute('style', `
       transform: ${ this.getTransform({ id }) };
@@ -102,6 +128,7 @@ export default class Stack extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <DraggableCore
         onDrag={ this.handleDrag }
