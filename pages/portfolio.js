@@ -78,43 +78,45 @@ export default class Porfolio extends Page {
   render() {
     return (
       <Layout { ...this.props }>
-        <div className="flex-container flex-bottom flex-col">
-          <Stack
-            key="portfolio"
-            className="portfolio-stack"
-            style={{ display: 'static' }}
-            imgHeight={ 300 }
-            images={ stackImages }
-            isVisible={ this.state.isStackVisible }
-            position={['center', 'center']}
-          />
-          <div className="porfolio-projects">
-            {
-              [1,2,3,4,5].map( () => (
-                <div className="col-6 pad-sides">
-                  {
-                    projectDemo.map( project => (
-                      <div
-                        className="inline-block"
-                        key={ project.title }
-                        onMouseEnter={ this.makeVisible }
-                        onMouseLeave={ this.makeInvisible }
-                      >
-                        <p className="inline-block cursor-pointer">
-                          <a href="/project">
-                            <strong>{ project.title }</strong><br/>
-                            { project.credit }<br/>
-                            { project.location }<br/>
-                            { project.type }<br/>
-                          </a>
-                        </p>
-                      </div>
-                    ))
-                  }
-                </div>
-              ))
-            }
-            <div className="col-6 pad-sides" />
+        <div className="content-main">
+          <div className="flex-container flex-bottom flex-col">
+            <Stack
+              key="portfolio"
+              className="portfolio-stack"
+              style={{ display: 'static' }}
+              imgHeight={ 300 }
+              images={ stackImages }
+              isVisible={ this.state.isStackVisible }
+              position={['center', 'center']}
+            />
+            <div className="porfolio-projects">
+              {
+                [1,2,3,4,5].map( () => (
+                  <div className="col-6 pad-right">
+                    {
+                      projectDemo.map( project => (
+                        <div
+                          className="inline-block"
+                          key={ project.title }
+                          onMouseEnter={ this.makeVisible }
+                          onMouseLeave={ this.makeInvisible }
+                        >
+                          <p className="inline-block cursor-pointer">
+                            <a href="/project">
+                              <strong>{ project.title }</strong><br/>
+                              { project.credit }<br/>
+                              { project.location }<br/>
+                              { project.type }<br/>
+                            </a>
+                          </p>
+                        </div>
+                      ))
+                    }
+                  </div>
+                ))
+              }
+              <div className="col-6 pad-sides" />
+            </div>
           </div>
         </div>
       </Layout>

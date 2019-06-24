@@ -39,11 +39,13 @@ export default class Porfolio extends Page {
     return (
       <Layout { ...this.props }>
         <div className="flex-container flex-bottom flex-col">
-          <Stack
-            imgHeight={ 600 }
-            images={ stackImages }
-          />
-          <div className="bottom">
+          <div className="full pad">
+            <Stack
+              imgHeight={ 600 }
+              images={ stackImages }
+            />
+          </div>
+          <div className="bottom pad">
             <div className="col-4">
               <span className="uppercase">318 W 47th street</span>
             </div>
