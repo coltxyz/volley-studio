@@ -1,18 +1,11 @@
+$black: #666;
+
 @import './typography';
 @import './stack';
 @import './grid';
 
 html {
   background: white;
-}
-
-img {
-  /* -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none; */
-  pointer-events: none;
 }
 
 #main {
@@ -43,16 +36,21 @@ nav {
   position: absolute;
   right: 0;
   top: 0;
-  border-left: 1px solid black;
-  padding-left: .2em;
-  padding-right: 1.4em;
+  border-left: 1px solid $black;
+  padding-left: .3em;
+  padding-right: 1.6em;
   background: white;
   z-index: 100;
   font-weight: 500;
 }
 
 nav a {
-  padding: 2em 0;
+  margin: 2em 0;
+  padding: 0.2em 0;
+  &:hover, &.active {
+    text-decoration: none;
+    border-left: 1.2px solid black
+  }
 }
 
 .home-copy {
@@ -90,6 +88,9 @@ nav a {
 }
 .cursor-pointer {
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .inline-block {
   display: inline-block;

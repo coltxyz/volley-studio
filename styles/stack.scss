@@ -27,6 +27,7 @@
       pointer-events: none;
       img {
         height: 500px;
+        pointer-events: none;
         &.stack-img-active {
           position: absolute;
           left: 0;

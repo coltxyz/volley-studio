@@ -34,6 +34,7 @@ export default class Home extends Page {
           </p>
         </h1>
         <Stack
+          key="home"
           onTouch={ this.onStackItemTouch }
           images={[
             {

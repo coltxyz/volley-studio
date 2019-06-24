@@ -80,6 +80,7 @@ export default class Porfolio extends Page {
       <Layout { ...this.props }>
         <div className="flex-container flex-bottom flex-col">
           <Stack
+            key="portfolio"
             className="portfolio-stack"
             style={{ display: 'static' }}
             imgHeight={ 300 }
@@ -94,12 +95,12 @@ export default class Porfolio extends Page {
                   {
                     projectDemo.map( project => (
                       <div
-                        className="cursor-pointer inline-block"
+                        className="inline-block"
                         key={ project.title }
                         onMouseEnter={ this.makeVisible }
                         onMouseLeave={ this.makeInvisible }
                       >
-                        <p className="inline-block">
+                        <p className="inline-block cursor-pointer ">
                           <strong>{ project.title }</strong><br/>
                           { project.credit }<br/>
                           { project.location }<br/>
