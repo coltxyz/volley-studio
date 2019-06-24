@@ -95,3 +95,21 @@ nav a {
 .inline-block {
   display: inline-block;
 }
+.bottom {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  position: relative;
+  background: white;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    border-top: 1px solid #666;
+    width: 100vw;
+    z-index: 100;
+  }
+  > div {
+    vertical-align: top;
+  }
+}

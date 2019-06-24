@@ -100,11 +100,13 @@ export default class Porfolio extends Page {
                         onMouseEnter={ this.makeVisible }
                         onMouseLeave={ this.makeInvisible }
                       >
-                        <p className="inline-block cursor-pointer ">
-                          <strong>{ project.title }</strong><br/>
-                          { project.credit }<br/>
-                          { project.location }<br/>
-                          { project.type }<br/>
+                        <p className="inline-block cursor-pointer">
+                          <a href="/project">
+                            <strong>{ project.title }</strong><br/>
+                            { project.credit }<br/>
+                            { project.location }<br/>
+                            { project.type }<br/>
+                          </a>
                         </p>
                       </div>
                     ))

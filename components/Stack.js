@@ -174,7 +174,7 @@ export default class Stack extends React.Component {
         onMouseDown={ this.setTarget }
         onMouseUp={ this.unsetTarget }
       >
-        <div className={`stack ${ this.props.className }`} ref="stackContainerRef">
+        <div className={`stack ${ this.props.className || '' }`} ref="stackContainerRef">
           <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
             Reshuffle Stack
           </div>
