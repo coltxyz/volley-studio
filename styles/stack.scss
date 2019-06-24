@@ -1,7 +1,7 @@
 .stack {
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
   pointer-events: none;
 
   &__image {
@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     z-index: 1;
-    transition: 200ms opacity, 20ms transform;
+    transition: 20ms opacity, 20ms transform;
     cursor: grab;
     pointer-events: all;
     transform-origin: bottom left;
@@ -53,4 +53,8 @@
 }
 .stack-reset-button:hover {
   text-decoration: underline;
+}
+
+.stack.portfolio-stack {
+  position: static;
 }

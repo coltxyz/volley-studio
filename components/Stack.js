@@ -14,13 +14,27 @@ const StackImage = props => (
         data-img-id={ props.id }
         data-img-resize={ true }
       ></div>
-      <img className="stack-img-active" src={ props.activeSrc } />
-      <img className="stack-img-default" src={ props.src } />
+      <img
+        className="stack-img-active"
+        src={ props.activeSrc }
+        style={{ height: props.height }}
+      />
+      <img
+        className="stack-img-default"
+        src={ props.src }
+        style={{ height: props.height }}
+      />
     </div>
   </div>
 )
 
 export default class Stack extends React.Component {
+
+  static defaultProps = {
+    imgHeight: 500,
+    isVisible: true,
+    position: ['bottom', 'left']
+  }
 
   constructor({ images }) {
     super();
@@ -35,19 +49,47 @@ export default class Stack extends React.Component {
   }
 
   componentDidMount() {
-    this.initializeStack();
+    window.addEventListener('resize', this.initializeStack)
+    this.initializeStack()
     this.setState({
       isReady: true
     });
   }
 
-  initializeStack() {
-    // const midX = Math.floor(window.document.body.clientWidth / 9 * 3);
-    const midY = Math.floor(window.document.body.clientHeight - 540);
-    const midX = 0;
+  initializeStack = () => {
+    const containerHeight = this.refs.stackContainerRef.clientHeight
+    const containerWidth = this.refs.stackContainerRef.clientWidth
+    const imgHeight = this.props.imgHeight;
+    const imgWidth = this.refs.stackContainerRef.lastChild.clientWidth;
+
+    let initY, initX
+    switch (this.props.position[0]) {
+      case 'center':
+        initY = (containerHeight - imgHeight) / 2
+        break;
+      case 'bottom':
+        initY = containerHeight - imgHeight
+        break;
+      case 'top':
+      default:
+        initY = 0
+        break;
+    }
+    switch (this.props.position[1]) {
+      case 'center':
+        initX = (containerWidth - imgWidth) / 2
+        break;
+      case 'right':
+        initX = containerWidth = imgWidth
+        break;
+      case 'left':
+      default:
+        initX = 0
+        break;
+    }
 
     this.imageTransforms = this.props.images.reduce((acc, item, i) => {
-      acc[item.id] = { x:20*i + midX, y: -20*i + midY, s: 1};
+      acc[item.id] = { x:20*i + initX, y: -20*i + initY, s: 1};
       return acc;
     }, {});
   }
@@ -119,8 +161,6 @@ export default class Stack extends React.Component {
       };
     }
 
-    console.log(s);
-
     this.target.setAttribute('style', `
       transform: ${ this.getTransform({ id }) };
       z-index: ${ this.imageStack.indexOf(id) + 10 };
@@ -128,14 +168,13 @@ export default class Stack extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <DraggableCore
         onDrag={ this.handleDrag }
         onMouseDown={ this.setTarget }
         onMouseUp={ this.unsetTarget }
       >
-        <div className="stack" ref="stack">
+        <div className={`stack ${ this.props.className }`} ref="stackContainerRef">
           <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
             Reshuffle Stack
           </div>
@@ -147,10 +186,11 @@ export default class Stack extends React.Component {
                 isActive={ image.id === this.state.currentTargetId }
                 activeSrc={ image.activeSrc }
                 src={ image.src }
+                height={ this.props.imgHeight }
                 style={{
                   transform: this.getTransform({ id: image.id }),
                   zIndex: this.imageStack.indexOf(image.id) + 10,
-                  opacity: this.state.isReady ? 1 : 0
+                  opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
                 }}
               />
             ))
