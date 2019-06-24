@@ -1,4 +1,4 @@
-$black: #666;
+$black-ln: #666;
 
 @import './typography';
 @import './stack';
@@ -24,6 +24,9 @@ html {
   height: 100%;
   position: relative;
 }
+.border-right {
+  border-right: 1px solid #666;
+}
 .logo {
   position: absolute;
   font-weight: 500;
@@ -38,7 +41,7 @@ nav {
   position: absolute;
   right: 0;
   top: 0;
-  border-left: 1px solid $black;
+  border-left: 1px solid $black-ln;
   padding-left: .3em;
   padding-right: 1.6em;
   background: white;
@@ -83,6 +86,9 @@ nav a {
   width: 100%;
   box-sizing: border-box;
 }
+.flex-1 {
+  flex: 1;
+}
 .flex-bottom {
   align-items: end;
 }
@@ -118,11 +124,51 @@ nav a {
     position: absolute;
     top: 0;
     left: 0;
-    border-top: 1px solid #666;
+    border-top: 1px solid $black-ln;
     width: 100vw;
     z-index: 100;
   }
   > div {
     vertical-align: top;
+  }
+}
+
+
+.about-pg {
+  .team-section {
+    overflow: scroll;
+  }
+  .team-member {
+    display: flex;
+    padding-bottom: 4rem;
+    padding-right: 8rem;
+    max-width: 45rem;
+    .team-img {
+      padding-right: 1rem;
+      img {
+        width: 8rem;
+        display: inline;
+      }
+    }
+    .team-bio {
+      display: inline;
+    }
+  }
+  .volley-logo {
+    border-bottom: 1px solid $black-ln;
+    img {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12rem 16rem;
+    }
+  }
+  .volley-bio {
+    padding: 2rem 1rem 1rem 12rem;
+    border-bottom: 1px solid $black-ln;
+  }
+  .select-clients {
+    > div {
+      vertical-align: top;
+    }
   }
 }

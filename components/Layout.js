@@ -61,9 +61,9 @@ export default class Home extends React.Component {
         </Head>
         <div id="main" className={ this.state.isNavOpen ? 'nav--open' : ''}>
           <Nav { ...this.props } />
-          <div className="logo">
+          <div className="logo" hidden={ this.props.nologo }>
             <Link href="/"><a>VOLLEY STUDIO</a></Link>
-          </div>  
+          </div>
           { this.props.children }
         </div>
       </div>
