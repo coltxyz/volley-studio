@@ -154,12 +154,19 @@ nav a {
       display: inline;
     }
   }
+  .about-section {
+    display: flex;
+    flex-direction: column;
+  }
   .volley-logo {
     border-bottom: 1px solid $black-ln;
-    img {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 12rem 16rem;
+    display: grid;
+    > a {
+      display: block;
+      margin: auto;
+      img {
+        width: 20rem;
+      }
     }
   }
   .volley-bio {

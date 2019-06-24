@@ -57,9 +57,11 @@ export default class Porfolio extends Page {
               ))
             }
           </div>
-          <div className="about-section flex-1 ">
-            <div className="volley-logo">
-              <img src="/static/logo-black.png" />
+          <div className="about-section flex-1">
+            <div className="volley-logo flex-1">
+              <a href="/">
+                <img src="/static/logo-black.png" />
+              </a>
             </div>
             <div className="volley-bio">
               <p>
