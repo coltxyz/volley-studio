@@ -3,7 +3,7 @@
   width: 100%;
   pointer-events: none;
   position: relative;
-  
+
   &__image {
     position: absolute;
     top: 0;
@@ -26,7 +26,7 @@
     &__inner {
       pointer-events: none;
       img {
-        height: 500px;
+        height: auto;
         pointer-events: none;
         &.stack-img-active {
           position: absolute;

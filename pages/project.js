@@ -43,7 +43,6 @@ export default class Porfolio extends Page {
           <div className="full pad">
             <Stack
               position={['center', 'center']}
-              imgHeight={ 600 }
               images={ stackImages }
             />
           </div>

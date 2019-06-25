@@ -32,7 +32,6 @@ export default class Home extends Page {
           </div>
           <Stack
             key="home"
-            imgHeight={ 500 }
             cta={ this.state.ctaText }
             position={['center', 'center']}
             onTouch={ this.onStackItemTouch }

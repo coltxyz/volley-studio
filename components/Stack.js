@@ -17,12 +17,12 @@ const StackImage = props => (
       <img
         className="stack-img-active"
         src={ props.activeSrc }
-        style={{ height: props.height }}
+        style={{ width: props.width }}
       />
       <img
         className="stack-img-default"
         src={ props.src }
-        style={{ height: props.height }}
+        style={{ width: props.width }}
       />
     </div>
   </div>
@@ -31,7 +31,7 @@ const StackImage = props => (
 export default class Stack extends React.Component {
 
   static defaultProps = {
-    imgHeight: 500,
+    imgWidth: 700,
     isVisible: true,
     position: ['bottom', 'left']
   }
@@ -59,8 +59,8 @@ export default class Stack extends React.Component {
   initializeStack = () => {
     const containerHeight = this.refs.stackContainerRef.clientHeight
     const containerWidth = this.refs.stackContainerRef.clientWidth
-    const imgHeight = this.props.imgHeight;
-    const imgWidth = this.refs.stackContainerRef.lastChild.clientWidth;
+    const imgWidth = this.props.imgWidth;
+    const imgHeight = this.refs.stackContainerRef.lastChild.clientHeight;
 
     let initY, initX
     switch (this.props.position[0]) {
@@ -186,7 +186,7 @@ export default class Stack extends React.Component {
                 isActive={ image.id === this.state.currentTargetId }
                 activeSrc={ image.activeSrc }
                 src={ image.src }
-                height={ this.props.imgHeight }
+                width={ this.props.imgWidth}
                 style={{
                   transform: this.getTransform({ id: image.id }),
                   zIndex: this.imageStack.indexOf(image.id) + 10,

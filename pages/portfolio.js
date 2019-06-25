@@ -84,7 +84,7 @@ export default class Porfolio extends Page {
               key="portfolio"
               className="portfolio-stack"
               style={{ display: 'static' }}
-              imgHeight={ 300 }
+              imgWidth={ 400 }
               images={ stackImages }
               isVisible={ this.state.isStackVisible }
               position={['center', 'center']}
