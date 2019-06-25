@@ -92,7 +92,7 @@ export default class Porfolio extends Page {
             <div className="porfolio-projects">
               {
                 [1,2,3,4,5].map( () => (
-                  <div className="col-6 pad-right">
+                  <div className="col-6">
                     {
                       projectDemo.map( project => (
                         <div

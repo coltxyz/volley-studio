@@ -89,7 +89,7 @@ export default class Stack extends React.Component {
     }
 
     this.imageTransforms = this.props.images.reduce((acc, item, i) => {
-      acc[item.id] = { x:20*i + initX, y: -20*i + initY, s: 1};
+      acc[item.id] = { x:30*i + initX, y: -30*i + initY, s: 1};
       return acc;
     }, {});
   }
@@ -175,8 +175,8 @@ export default class Stack extends React.Component {
         onMouseUp={ this.unsetTarget }
       >
         <div className={`stack ${ this.props.className || '' }`} ref="stackContainerRef">
-          <div className="stack-reset-button" onClick={ this.reshuffle } hidden>
-            Reshuffle Stack
+          <div className="stack-reset-button" onClick={ this.reshuffle } hidden={ !this.props.cta }>
+            { this.props.cta }
           </div>
           {
             this.props.images.map( image => (

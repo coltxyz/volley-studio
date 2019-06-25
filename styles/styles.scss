@@ -27,6 +27,9 @@ html {
 .border-right {
   border-right: 1px solid #666;
 }
+.border-top {
+  border-top: 1px solid #666;
+}
 .logo {
   position: absolute;
   font-weight: 500;
@@ -59,8 +62,9 @@ nav a {
 }
 
 .home-copy {
-  padding-top: 1em;
-  padding-right: 4em;
+  bottom: 0rem;
+  right: 4rem;
+  width: 20rem;
   position: absolute;
   .home-copy-cta {
     line-height: inherit;
@@ -114,29 +118,28 @@ nav a {
 .inline-block {
   display: inline-block;
 }
-.bottom {
-  padding-top: 1rem;
-  position: relative;
-  background: white;
-  z-index: 100;
-  &:before {
-    content: '';
+
+.project-pg {
+  .project-title {
     position: absolute;
-    top: 0;
-    left: 0;
-    border-top: 1px solid $black-ln;
-    width: 100vw;
-    z-index: 100;
+    left: 14rem;
+    top: 1rem;
   }
-  > div {
-    vertical-align: top;
+  .bottom {
+    padding-top: 1rem;
+    position: absolute;
+    right: 3rem;
+    bottom: 0;
+    width: 30rem;
+    z-index: 100;
   }
 }
 
 
 .about-pg {
+  overflow: scroll;
   .team-section {
-    overflow: scroll;
+    padding-top: 100vh;
   }
   .team-member {
     display: flex;

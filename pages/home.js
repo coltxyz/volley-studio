@@ -25,17 +25,16 @@ export default class Home extends Page {
     return (
       <Layout { ...this.props }>
         <div className="content-main">
-          <h1 className="home-copy">
-            We are an industry-leading architectural visualization and creative studio specializing in the crafting of stunning imagery that evokes the best possibilities of our clients’ designs.
-            <br/>
-            <p className="home-copy-cta">
-              <a href="/portfolio">
-                { this.state.ctaText }
-              </a>
+          <div className="home-copy">
+            <p>
+              We are an industry-leading architectural visualization and creative studio specializing in the crafting of stunning imagery that evokes the best possibilities of our clients’ designs.
             </p>
-          </h1>
+          </div>
           <Stack
             key="home"
+            imgHeight={ 500 }
+            cta={ this.state.ctaText }
+            position={['center', 'center']}
             onTouch={ this.onStackItemTouch }
             images={[
               {
