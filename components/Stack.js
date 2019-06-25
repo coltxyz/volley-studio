@@ -49,11 +49,12 @@ export default class Stack extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.initializeStack)
-    this.initializeStack()
-    this.setState({
-      isReady: true
-    });
+    window.setTimeout( () => {
+      this.initializeStack()
+      this.setState({
+        isReady: true
+      });
+    }, 1000);
   }
 
   initializeStack = () => {

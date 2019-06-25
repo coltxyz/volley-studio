@@ -1,6 +1,6 @@
 .stack {
   height: 100%;
-  width: 100%;
+  width: 100vw;
   pointer-events: none;
   position: relative;
 
@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     z-index: 1;
-    transition: 20ms opacity, 20ms transform;
+    transition: 200ms opacity, 20ms transform;
     cursor: grab;
     pointer-events: all;
     transform-origin: bottom left;
@@ -47,10 +47,12 @@
 
 .stack-reset-button {
   font-family: 'Basis-Mono';
-  float: right;
   border: 1px solid black;
   padding: 1em;
   cursor: pointer;
+  position: absolute;
+  top: 0rem;
+  right: 6rem;
 }
 .stack-reset-button:hover {
   text-decoration: underline;
