@@ -34,20 +34,35 @@ export default class Porfolio extends Page {
     this.state = {}
   }
 
-
   render() {
     return (
       <Layout { ...this.props }>
         <div className="flex-container flex-bottom flex-col project-pg">
-          <span className="uppercase project-title">318 W 47th street</span>
-          <div className="full pad">
+          <div className="full pad rel topspc">
             <Stack
+              cta="Expand Stack"
+              action="expand"
               position={['center', 'center']}
+              imgHeight={ 600 }
               images={ stackImages }
             />
           </div>
           <div className="bottom pad">
-            <p>318 West 47 is a new build low-rise in Manhattan’s midtown west.  This boutique residence has 5 units including a ground floor unit with a backyard and personal garage, gracious balconies for all.</p>
+            <div className="col-4">
+              <span className="uppercase">318 W 47th street</span>
+            </div>
+            <div className="col-4"></div>
+            <div className="col-4">
+              <p>318 West 47 is a new build low-rise in Manhattan’s midtown west.  This boutique residence has 5 units including a ground floor unit with a backyard and personal garage, gracious balconies for all.</p>
+            </div>
+            <div className="col-4">
+              <span className="action-button no-2">
+                Prev
+              </span>
+              <span className="action-button">
+                Next
+              </span>
+            </div>
           </div>
         </div>
       </Layout>

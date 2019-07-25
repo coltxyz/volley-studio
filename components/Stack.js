@@ -1,4 +1,5 @@
 import { DraggableCore } from 'react-draggable';
+import classnames from 'classnames';
 
 const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
 
@@ -58,6 +59,11 @@ export default class Stack extends React.Component {
   }
 
   initializeStack = () => {
+
+    if (this.props.isExpanded) {
+      return;
+    }
+
     const containerHeight = this.refs.stackContainerRef.clientHeight
     const containerWidth = this.refs.stackContainerRef.clientWidth
     const imgWidth = this.props.imgWidth;
@@ -175,27 +181,38 @@ export default class Stack extends React.Component {
         onMouseDown={ this.setTarget }
         onMouseUp={ this.unsetTarget }
       >
-        <div className={`stack ${ this.props.className || '' }`} ref="stackContainerRef">
-          <div className="stack-reset-button" onClick={ this.reshuffle } hidden={ !this.props.cta }>
-            { this.props.cta }
+        <div className={classnames("stack-wrapper", {
+          'stack--expanded': this.props.isExpanded
+        })}>
+          <div
+            ref="stackContainerRef"
+            className={classnames('stack', this.props.className)}
+          >
+            <div
+              className="action-button"
+              onClick={ this.doAction }
+              hidden={ !this.props.cta }
+            >
+              { this.props.cta }
+            </div>
+            {
+              this.props.images.map( image => (
+                <StackImage
+                  key={ image.id }
+                  id={ image.id }
+                  isActive={ image.id === this.state.currentTargetId }
+                  activeSrc={ image.activeSrc }
+                  src={ image.src }
+                  width={ this.props.imgWidth}
+                  style={{
+                    transform: this.getTransform({ id: image.id }),
+                    zIndex: this.imageStack.indexOf(image.id) + 10,
+                    opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
+                  }}
+                />
+              ))
+            }
           </div>
-          {
-            this.props.images.map( image => (
-              <StackImage
-                key={ image.id }
-                id={ image.id }
-                isActive={ image.id === this.state.currentTargetId }
-                activeSrc={ image.activeSrc }
-                src={ image.src }
-                width={ this.props.imgWidth}
-                style={{
-                  transform: this.getTransform({ id: image.id }),
-                  zIndex: this.imageStack.indexOf(image.id) + 10,
-                  opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
-                }}
-              />
-            ))
-          }
         </div>
       </DraggableCore>
     )

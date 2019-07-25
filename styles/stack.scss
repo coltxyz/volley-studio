@@ -1,61 +1,90 @@
-.stack {
-  height: 100%;
-  width: 100vw;
-  pointer-events: none;
-  position: relative;
 
-  &__image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    transition: 200ms opacity, 20ms transform;
-    cursor: grab;
-    pointer-events: all;
-    transform-origin: bottom left;
-    &__resize {
-      cursor: nesw-resize;
+.stack-wrapper:not(.stack--expanded) {
+  height: 100%;
+  .stack {
+    height: 100%;
+    width: auto;
+    pointer-events: none;
+    &__image {
       position: absolute;
       top: 0;
-      right: 0;
-      height: 1.5em;
-      width: 1.5em;
+      left: 0;
       z-index: 1;
+      transition: 200ms opacity, 20ms transform;
+      cursor: grab;
       pointer-events: all;
-    }
-    &__inner {
-      pointer-events: none;
-      img {
-        height: auto;
+      transform-origin: bottom left;
+      &__resize {
+        cursor: nesw-resize;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 1.5em;
+        width: 1.5em;
+        z-index: 1;
+        pointer-events: all;
+      }
+      &__inner {
         pointer-events: none;
-        &.stack-img-active {
-          position: absolute;
-          left: 0;
-          opacity: 0;
-          transition: 30ms opacity;
+        img {
+          height: auto;
+          pointer-events: none;
+          &.stack-img-active {
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: 30ms opacity;
+          }
         }
       }
-    }
-    &--active {
-      .stack__image__inner .stack-img-active {
-        outline: 1px solid white;
-        opacity: 1;
+      &--active {
+        .stack__image__inner {
+          .stack-img-active {
+            outline: 1px solid white;
+            opacity: 1;
+          }
+        }
       }
     }
   }
 }
 
-.stack-reset-button {
-  font-family: 'Basis-Mono';
-  border: 1px solid black;
-  padding: 1em;
-  cursor: pointer;
-  position: absolute;
-  top: 0rem;
-  right: 6rem;
-}
-.stack-reset-button:hover {
-  text-decoration: underline;
+
+.stack-wrapper.stack--expanded {
+  overflow: scroll;
+  .stack {
+    height: 100%;
+    width: auto;
+    pointer-events: none;
+    overflow: visible;
+    white-space: nowrap;
+    .stack__image {
+      display: inline-block;
+      padding: 0 4rem;
+      &__inner {
+        display: inline-block;
+        img {
+          display: inline-block;
+        }
+      }
+    }
+    .stack__image__resize {
+      display: none;
+    }
+    img.stack-img-default {
+      display: none;
+    }
+    img {
+      height: 75vh;
+      width: auto !important;
+    }
+  }
+
+  .action-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 .stack.portfolio-stack {
