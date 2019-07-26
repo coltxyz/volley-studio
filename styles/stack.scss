@@ -1,6 +1,7 @@
 
 .stack-wrapper {
   position: relative;
+  scroll-snap-align: start;
   &:not(.stack--expanded) {
     height: 100%;
     .stack-btn {
