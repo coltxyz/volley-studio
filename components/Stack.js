@@ -1,20 +1,22 @@
 import { DraggableCore } from 'react-draggable';
 import classnames from 'classnames';
+import Arrow from './svg/arrow';
 
 const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
+
+const UNIT = 30;
+const ANIMATION_TIME = 200;
 
 const StackImage = props => (
   <div
     data-img-id={ props.id }
     className={ `stack__image ${ props.isActive ? 'stack__image--active' : '' }` }
     style={ props.style }
+    onMouseEnter={ props.onMouseEnter }
+    onMouseLeave={ props.onMouseLeave }
+    onClick={ props.onClick }
   >
     <div className="stack__image__inner">
-      <div
-        className="stack__image__resize"
-        data-img-id={ props.id }
-        data-img-resize={ true }
-      ></div>
       <img
         className="stack-img-active"
         src={ props.activeSrc }
@@ -32,7 +34,7 @@ const StackImage = props => (
 export default class Stack extends React.Component {
 
   static defaultProps = {
-    imgWidth: 700,
+    imgWidth: 800,
     isVisible: true,
     position: ['bottom', 'left']
   }
@@ -42,7 +44,8 @@ export default class Stack extends React.Component {
     this.state = {
       isReady: false,
       currentTargetId: null,
-      isResize: false
+      isResize: false,
+      isAnimating: false
     };
     this.target = null;
     this.imageTransforms = null;
@@ -50,12 +53,10 @@ export default class Stack extends React.Component {
   }
 
   componentDidMount() {
-    window.setTimeout( () => {
-      this.initializeStack()
-      this.setState({
-        isReady: true
-      });
-    }, 1000);
+    this.initializeStack()
+    this.setState({
+      isReady: true
+    });
   }
 
   initializeStack = () => {
@@ -69,64 +70,68 @@ export default class Stack extends React.Component {
     const imgWidth = this.props.imgWidth;
     const imgHeight = this.refs.stackContainerRef.lastChild.clientHeight;
 
-    let initY, initX
     switch (this.props.position[0]) {
       case 'center':
-        initY = (containerHeight - imgHeight) / 2
+        this.initY = (containerHeight - imgHeight) / 2 - (Math.floor(this.props.images.length / 2) * UNIT)
         break;
       case 'bottom':
-        initY = containerHeight - imgHeight
+        this.initY = containerHeight - imgHeight
         break;
       case 'top':
       default:
-        initY = 0
+        this.initY = 0
         break;
     }
     switch (this.props.position[1]) {
       case 'center':
-        initX = (containerWidth - imgWidth) / 2
+        this.initX = (containerWidth - imgWidth) / 2 - (Math.floor(this.props.images.length / 2) * UNIT)
         break;
       case 'right':
-        initX = containerWidth = imgWidth
+        this.initX = containerWidth - imgWidth
         break;
       case 'left':
       default:
-        initX = 0
+        this.initX = 0
         break;
     }
+    this.computeTransforms();
+  }
 
-    this.imageTransforms = this.props.images.reduce((acc, item, i) => {
-      acc[item.id] = { x:30*i + initX, y: -30*i + initY, s: 1};
+  computeTransforms() {
+    this.imageTransforms = this.imageStack.reduce((acc, imgId, i) => {
+      acc[imgId] = { x:UNIT*i + this.initX, y: -UNIT*i + this.initY, s: 1};
       return acc;
     }, {});
   }
 
-  broadcastTouch(id=null, isResize=false) {
-    if (this.props.onTouch) {
-      this.props.onTouch( this.props.images.find( img => img.id === id ))
-    }
+  onMouseEnter = () => {
     this.setState({
-      currentTargetId: id,
-      isResize
+      currentTargetId: this.imageStack[this.imageStack.length - 1]
     });
   }
 
-  setTarget = (e, data) => {
-    e.stopPropagation();
-    const id = e.target.dataset.imgId;
-    const isResize = e.target.dataset.imgResize;
-    if (id) {
-      this.target = e.target.closest('.stack__image');
-      this.imageStack.splice(this.imageStack.indexOf(id), 1);
-      this.imageStack.push(id);
-      this.broadcastTouch(id, isResize);
-    }
+  onMouseLeave = () => {
+    this.setState({
+      currentTargetId: null
+    });
   }
 
-  unsetTarget = (e, data) => {
-    e.stopPropagation();
-    this.broadcastTouch(null);
-    this.target = null;
+  onStackClick = () => {
+
+    this.imageStack.unshift(this.imageStack.pop())
+    this.computeTransforms();
+
+    this.setState({
+      currentTargetId: this.imageStack[this.imageStack.length - 1],
+      isAnimating: true
+    });
+
+    window.setTimeout(() => {
+      this.setState({
+        isAnimating: false
+      })
+    }, ANIMATION_TIME)
+
   }
 
   getTransform({ id }) {
@@ -137,84 +142,44 @@ export default class Stack extends React.Component {
     return `translate(${ x }px, ${ y }px) scale(${ s })`;
   }
 
-  reshuffle = () => {
-    this.unsetTarget();
-    this.initializeStack();
-    this.forceUpdate();
-  }
-
-  handleDrag = (e, data) => {
-    e.stopPropagation();
-    const id = this.target.dataset.imgId;
-    const targetClassName = e.target.className;
-    if ( !this.imageTransforms || !id ) {
-      return;
-    }
-
-    let {x, y, s} = this.imageTransforms[id];
-    if (this.state.isResize) {
-      const targetSize = this.target.getBoundingClientRect().width;
-      const scale = s + maxMagnitude(data.deltaX, -1 * data.deltaY) / targetSize;
-      this.imageTransforms[id] = {
-        x,
-        y,
-        s: scale
-      };
-    } else {
-      this.imageTransforms[id] = {
-        s,
-        x: x + data.deltaX,
-        y: y + data.deltaY
-      };
-    }
-
-    this.target.setAttribute('style', `
-      transform: ${ this.getTransform({ id }) };
-      z-index: ${ this.imageStack.indexOf(id) + 10 };
-    `);
-  }
-
   render() {
     return (
-      <DraggableCore
-        onDrag={ this.handleDrag }
-        onMouseDown={ this.setTarget }
-        onMouseUp={ this.unsetTarget }
-      >
-        <div className={classnames("stack-wrapper", {
-          'stack--expanded': this.props.isExpanded
-        })}>
-          <div
-            ref="stackContainerRef"
-            className={classnames('stack', this.props.className)}
-          >
-            <div
-              className="action-button"
-              onClick={ this.doAction }
-              hidden={ !this.props.cta }
-            >
-              { this.props.cta }
-            </div>
-            {
-              this.props.images.map( image => (
-                <StackImage
-                  key={ image.id }
-                  id={ image.id }
-                  isActive={ image.id === this.state.currentTargetId }
-                  activeSrc={ image.activeSrc }
-                  src={ image.src }
-                  width={ this.props.imgWidth}
-                  style={{
-                    transform: this.getTransform({ id: image.id }),
-                    zIndex: this.imageStack.indexOf(image.id) + 10,
-                    opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
-                  }}
-                />
-              ))
-            }
-          </div>
+      <div className={classnames("stack-wrapper", {
+        'stack--expanded': this.props.isExpanded
+      })}>
+        <div
+          ref="stackContainerRef"
+          className={classnames('stack', this.props.className)}
+        >
+          {
+            this.props.images.map( image => (
+              <StackImage
+                onMouseEnter={ this.onMouseEnter }
+                onMouseLeave={ this.onMouseLeave }
+                onClick={ this.onStackClick }
+                key={ image.id }
+                id={ image.id }
+                isActive={ image.id === this.state.currentTargetId }
+                activeSrc={ image.activeSrc }
+                src={ image.src }
+                width={ this.props.imgWidth}
+                style={{
+                  transform: this.getTransform({ id: image.id }),
+                  zIndex: this.imageStack.indexOf(image.id) + 10,
+                  opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
+                }}
+              />
+            ))
+          }
         </div>
-      </DraggableCore>
+        <div className="stack__content">
+          <p className="stack__content__p">
+            { this.props.title }<br/>
+            <span className="mono">{ this.props.year }</span>
+          </p>
+          <Arrow hidden />
+        </div>
+      </div>
     )
   }
 

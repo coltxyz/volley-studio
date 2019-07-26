@@ -21,6 +21,8 @@ html {
 .content-main {
   height: 100%;
   padding: 1rem;
+  overflow: scroll;
+  scrollbar-width: none;
 }
 .content-inner {
   height: 100%;
@@ -168,132 +170,121 @@ nav a {
   }
 }
 
+.full-pg {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
 
-.about-pg {
-  overflow: scroll;
-  .team-section {
-    padding-top: 100vh;
+.home-title {
+  img {
+    width: 100%;
+    padding-bottom: 2rem;
   }
-  .team-member {
-    display: flex;
-    padding-bottom: 4rem;
-    padding-right: 8rem;
-    max-width: 45rem;
-    .team-img {
-      padding-right: 1rem;
-      img {
-        width: 8rem;
-        display: inline;
-      }
-    }
-    .team-bio {
-      display: inline;
-    }
+  h2 {
+    padding-left: 0.6em;
   }
-  .about-section {
-    display: flex;
-    flex-direction: column;
+  &__inner {
+    width: 600px;
+    margin: 0 auto;
   }
-  .volley-logo {
-    border-bottom: 1px solid $black-ln;
-    display: grid;
-    > a {
-      display: block;
-      margin: auto;
-      img {
-        width: 20rem;
-      }
-    }
-  }
-  .volley-bio {
-    padding: 2rem 1rem 1rem 12rem;
-    border-bottom: 1px solid $black-ln;
-  }
-  .select-clients {
-    > div {
-      vertical-align: top;
-    }
+  &__content {
+    position: absolute;
+    bottom: 0;
+    height: 4em;
+    width: 100%;
+    text-align: center;
   }
 }
 
 
-.contact-pg {
-  display: grid;
-  .contact-card {
-    margin: auto;
-    width: 45rem;
-    border: 1px solid $black-ln;
-    position: relative;
-    background: white;
-    &__header {
-      border-bottom: 1px solid $black-ln;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      img {
-        height: 2.8rem;
-        padding: 0rem 2rem;
-      }
-      .info {
-        padding: 1rem 2rem 0 1rem;
-      }
+.about-pg {
+  &__inner {
+    margin-left: 16.67%;
+    width: 33.33%;
+    img {
+      height: 5em;
+      margin-bottom: 2em;
     }
-    &__body {
-      padding: 1rem;
-      border-bottom: 1px solid $black-ln;
-      textarea {
-        font-family: 'Basis-Mono';
-        font-size: 1rem;
-        resize: none;
-        border: none;
-        height: 18rem;
-        width: 100%;
-      }
+  }
+}
+
+.contact-card {
+  margin: auto;
+  width: 45rem;
+  border: 1px solid $black-ln;
+  position: relative;
+  background: white;
+  &__header {
+    border-bottom: 1px solid $black-ln;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      height: 2.8rem;
+      padding: 0rem 2rem;
     }
-    &__footer {
-      position: relative;
-      padding: 1rem;
-      height: 3rem;
-      input {
-        font-family: 'Basis-Mono';
-        font-size: 1rem;
-        border: none;
-        width: 33rem;
-      }
-      button {
-        font-family: 'Basis-Mono';
-        font-size: 1rem;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 10rem;
-        background: white;
-        color: #777;
-        border: none;
-        height: 3rem;
-        border-left: 1px solid $black-ln;
-        cursor: pointer;
-        &:hover {
-          background: black;
-          color: white;
-        }
-      }
+    .info {
+      padding: 1rem 2rem 0 1rem;
     }
-    &__bg-1, &__bg-2 {
+  }
+  &__body {
+    padding: 1rem;
+    border-bottom: 1px solid $black-ln;
+    textarea {
+      font-family: 'Basis-Mono';
+      font-size: 1rem;
+      resize: none;
+      border: none;
+      height: 18rem;
       width: 100%;
-      height: 100%;
+    }
+  }
+  &__footer {
+    position: relative;
+    padding: 1rem;
+    height: 3rem;
+    input {
+      font-family: 'Basis-Mono';
+      font-size: 1rem;
+      border: none;
+      width: 33rem;
+    }
+    button {
+      font-family: 'Basis-Mono';
+      font-size: 1rem;
       position: absolute;
-      border: 1px solid $black-ln;
+      right: 0;
+      top: 0;
+      width: 10rem;
       background: white;
-      z-index: -1
+      color: #777;
+      border: none;
+      height: 3rem;
+      border-left: 1px solid $black-ln;
+      cursor: pointer;
+      &:hover {
+        background: black;
+        color: white;
+      }
     }
-    &__bg-2 {
-      left: -1rem;
-      top: 1rem;
-    }
-    &__bg-1 {
-      left: -2rem;
-      top: 2rem;
-    }
+  }
+  &__bg-1, &__bg-2 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 1px solid $black-ln;
+    background: white;
+    z-index: -1
+  }
+  &__bg-2 {
+    left: -1rem;
+    top: 1rem;
+  }
+  &__bg-1 {
+    left: -2rem;
+    top: 2rem;
   }
 }
