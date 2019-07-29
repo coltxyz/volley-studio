@@ -16,18 +16,35 @@ const StackImage = props => (
     onMouseLeave={ props.onMouseLeave }
     onClick={ props.onClick }
   >
-    <div className="stack__image__inner">
-      <img
-        className="stack-img-active"
-        src={ props.activeSrc }
-        style={{ width: props.width }}
-      />
-      <img
-        className="stack-img-default"
-        src={ props.src }
-        style={{ width: props.width }}
-      />
-    </div>
+    {
+      props.videoSrc ? (
+        <div className="stack__image__inner">
+          <video
+            className="stack-img-active"
+            src={ props.activeVideoSrc }
+            muted autoPlay loop
+          />
+          <video
+            className="stack-img-default"
+            src={ props.videoSrc }
+            muted autoPlay loop
+          />
+        </div>
+      ) : (
+        <div className="stack__image__inner">
+          <img
+            className="stack-img-active"
+            src={ props.activeSrc }
+            style={{ width: props.width }}
+          />
+          <img
+            className="stack-img-default"
+            src={ props.src }
+            style={{ width: props.width }}
+          />
+        </div>
+      )
+    }
   </div>
 )
 
@@ -35,8 +52,7 @@ export default class Stack extends React.Component {
 
   static defaultProps = {
     imgWidth: 800,
-    isVisible: true,
-    position: ['bottom', 'left']
+    isVisible: true
   }
 
   constructor({ images }) {
@@ -53,53 +69,15 @@ export default class Stack extends React.Component {
   }
 
   componentDidMount() {
-    this.initializeStack()
+    this.computeTransforms()
     this.setState({
       isReady: true
     });
   }
 
-  initializeStack = () => {
-
-    if (this.props.isExpanded) {
-      return;
-    }
-
-    const containerHeight = this.refs.stackContainerRef.clientHeight
-    const containerWidth = this.refs.stackContainerRef.clientWidth
-    const imgWidth = this.props.imgWidth;
-    const imgHeight = this.refs.stackContainerRef.lastChild.clientHeight;
-
-    switch (this.props.position[0]) {
-      case 'center':
-        this.initY = (containerHeight - imgHeight) / 2 - (Math.floor(this.props.images.length / 2) * UNIT)
-        break;
-      case 'bottom':
-        this.initY = containerHeight - imgHeight
-        break;
-      case 'top':
-      default:
-        this.initY = 0
-        break;
-    }
-    switch (this.props.position[1]) {
-      case 'center':
-        this.initX = (containerWidth - imgWidth) / 2 - (Math.floor(this.props.images.length / 2) * UNIT)
-        break;
-      case 'right':
-        this.initX = containerWidth - imgWidth
-        break;
-      case 'left':
-      default:
-        this.initX = 0
-        break;
-    }
-    this.computeTransforms();
-  }
-
   computeTransforms() {
     this.imageTransforms = this.imageStack.reduce((acc, imgId, i) => {
-      acc[imgId] = { x:UNIT*i + this.initX, y: -UNIT*i + this.initY, s: 1};
+      acc[imgId] = { x:UNIT*i , y: -UNIT*i , s: 1};
       return acc;
     }, {});
   }
@@ -117,21 +95,17 @@ export default class Stack extends React.Component {
   }
 
   onStackClick = () => {
-
     this.imageStack.unshift(this.imageStack.pop())
     this.computeTransforms();
-
     this.setState({
       currentTargetId: this.imageStack[this.imageStack.length - 1],
       isAnimating: true
     });
-
     window.setTimeout(() => {
       this.setState({
         isAnimating: false
       })
     }, ANIMATION_TIME)
-
   }
 
   getTransform({ id }) {
@@ -145,11 +119,15 @@ export default class Stack extends React.Component {
   render() {
     return (
       <div className={classnames("stack-wrapper", {
-        'stack--expanded': this.props.isExpanded
+        'stack--expanded': this.state.isExpanded
       })}>
         <div
           ref="stackContainerRef"
           className={classnames('stack', this.props.className)}
+          style={{
+            width: this.props.imgWidth + (this.imageStack.length - 1) * UNIT,
+            height: 600
+          }}
         >
           {
             this.props.images.map( image => (
@@ -161,6 +139,8 @@ export default class Stack extends React.Component {
                 id={ image.id }
                 isActive={ image.id === this.state.currentTargetId }
                 activeSrc={ image.activeSrc }
+                videoSrc={ image.videoSrc }
+                activeVideoSrc={ image.activeVideoSrc }
                 src={ image.src }
                 width={ this.props.imgWidth}
                 style={{
@@ -172,13 +152,7 @@ export default class Stack extends React.Component {
             ))
           }
         </div>
-        <div className="stack__content">
-          <p className="stack__content__p">
-            { this.props.title }<br/>
-            <span className="mono">{ this.props.year }</span>
-          </p>
-          <Arrow hidden />
-        </div>
+        { this.props.children }
       </div>
     )
   }

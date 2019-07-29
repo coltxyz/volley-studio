@@ -1,7 +1,8 @@
-$black-ln: #666;
+$black-ln: #333;
 
 @import './typography';
 @import './stack';
+@import './project';
 @import './grid';
 
 html {
@@ -41,6 +42,14 @@ html {
   top: 1em;
   left: 1em;
 }
+video.bg-video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.5;
+}
 
 nav {
   text-orientation: sideways;
@@ -52,7 +61,6 @@ nav {
   border-left: 1px solid $black-ln;
   padding-left: .3em;
   padding-right: 1.6em;
-  background: white;
   z-index: 100;
   font-weight: 500;
 }
@@ -142,35 +150,6 @@ nav a {
   }
 }
 
-.project-pg {
-  .bottom {
-    position: relative;
-    z-index: 200;
-    background: white;
-    width: 100%;
-    > div {
-      vertical-align: top;
-    }
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      border-top: 1px solid $black-ln;
-    }
-    .action-button {
-      position: static;
-      float: right;
-    }
-  }
-  .action-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-}
-
 .full-pg {
   height: 100%;
   display: flex;
@@ -195,12 +174,10 @@ nav a {
   &__content {
     position: absolute;
     bottom: 0;
-    height: 4em;
     width: 100%;
     text-align: center;
   }
 }
-
 
 .about-pg {
   &__inner {

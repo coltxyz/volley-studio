@@ -1,0 +1,50 @@
+.project-pg {
+  .project-container {
+    overflow: scroll;
+    display: flex;
+    align-items: center;
+    scrollbar-width: none;
+  }
+  .project-image {
+    height: 60vh;
+    padding-right: 6em;
+    img {
+      height: 100%;
+    }
+  }
+  .bottom {
+    position: relative;
+    z-index: 200;
+    background: white;
+    width: 100%;
+    > div {
+      vertical-align: top;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      border-top: 1px solid $black-ln;
+    }
+    .action-button {
+      position: static;
+      float: right;
+    }
+    p {
+      margin-bottom: 0.1rem;
+    }
+  }
+  .action-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+.project-close-btn {
+  position: absolute;
+  right: 3em;
+  padding: 1em;
+}

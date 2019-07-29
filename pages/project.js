@@ -1,6 +1,7 @@
 import Page from '../components/Page'
 import Layout from '../components/Layout'
 import Stack from '../components/Stack'
+import Cross from '../components/svg/cross';
 
 import "../styles/styles.scss"
 
@@ -37,6 +38,11 @@ export default class Porfolio extends Page {
   render() {
     return (
       <Layout { ...this.props }>
+        <div className="project-close-btn">
+          <a href="/">
+            <Cross />
+          </a>
+        </div>
         <div className="flex-container flex-bottom flex-col project-pg">
           <div className="full pad rel topspc">
             <Stack
@@ -53,15 +59,9 @@ export default class Porfolio extends Page {
             </div>
             <div className="col-4"></div>
             <div className="col-4">
-              <p>318 West 47 is a new build low-rise in Manhattan’s midtown west.  This boutique residence has 5 units including a ground floor unit with a backyard and personal garage, gracious balconies for all.</p>
             </div>
             <div className="col-4">
-              <span className="action-button no-2">
-                Prev
-              </span>
-              <span className="action-button">
-                Next
-              </span>
+              <p>318 West 47 is a new build low-rise in Manhattan’s midtown west.  This boutique residence has 5 units including a ground floor unit with a backyard and personal garage, gracious balconies for all.</p>
             </div>
           </div>
         </div>

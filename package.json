@@ -10,6 +10,7 @@
     "@sanity/client": "^0.132.2",
     "@sanity/image-url": "^0.132.2",
     "@zeit/next-sass": "^1.0.1",
+    "array-shuffle": "^1.0.1",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "classnames": "^2.2.6",
     "next": "^8.1.0",
