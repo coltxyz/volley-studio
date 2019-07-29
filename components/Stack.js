@@ -22,11 +22,13 @@ const StackImage = props => (
           <video
             className="stack-img-active"
             src={ props.activeVideoSrc }
+            style={{ width: props.width }}
             muted autoPlay loop
           />
           <video
             className="stack-img-default"
             src={ props.videoSrc }
+            style={{ width: props.width }}
             muted autoPlay loop
           />
         </div>
@@ -52,6 +54,7 @@ export default class Stack extends React.Component {
 
   static defaultProps = {
     imgWidth: 800,
+    defaultHeight: 600,
     isVisible: true
   }
 
@@ -126,7 +129,7 @@ export default class Stack extends React.Component {
           className={classnames('stack', this.props.className)}
           style={{
             width: this.props.imgWidth + (this.imageStack.length - 1) * UNIT,
-            height: 600
+            height: this.props.defaultHeight
           }}
         >
           {
@@ -151,8 +154,8 @@ export default class Stack extends React.Component {
               />
             ))
           }
+          { this.props.children }
         </div>
-        { this.props.children }
       </div>
     )
   }

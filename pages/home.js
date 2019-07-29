@@ -2,33 +2,11 @@ import Page from '../components/Page'
 import Layout from '../components/Layout'
 import Stack from '../components/Stack';
 import Arrow from '../components/svg/arrow';
+import { mockStackImages } from '../lib/constants';
 
 import "../styles/styles.scss"
 
 import arrayShuffle from 'array-shuffle';
-
-const mockStackImages = [
-  {
-    src: '/static/demo-images/02_Tribune_white.jpg',
-    activeSrc: '/static/demo-images/02_Tribune.jpg',
-    id: '1'
-  },
-  {
-    src: '/static/demo-images/04_TheShed_white.jpg',
-    activeSrc: '/static/demo-images/04_TheShed.jpg',
-    id: '2'
-  },
-  {
-    src: '/static/demo-images/03_Couch_white.jpg',
-    activeSrc: '/static/demo-images/03_Couch.jpg',
-    id: '3'
-  },
-  {
-    videoSrc: 'https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4',
-    activeVideoSrc: 'https://volley-dev.s3.amazonaws.com/TerracelivingVignette.mp4',
-    id: '4'
-  }
-];
 
 const mockTeamImages = [
   {
@@ -71,11 +49,22 @@ export default class Home extends Page {
     super();
   }
 
+
+
+  handleScroll() {
+    console.log('we scrolly')
+  }
+
   render() {
     return (
       <Layout { ...this.props }>
-        <div className="content-main">
-
+        <video
+          hidden
+          className="bg-video"
+          src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
+          autoPlay loop muted
+        />
+        <div className="content-main" onScroll={ this.handleScroll }>
           <div className="home-title full-pg">
             <div className="home-title__inner">
               <img src="/static/logo-lg.png"/>
@@ -87,6 +76,7 @@ export default class Home extends Page {
               <Arrow />
             </div>
           </div>
+
           <Stack
             images={ mockStackImages }
           >
@@ -95,9 +85,9 @@ export default class Home extends Page {
                 <a href="/project">47 W 47th Street</a><br/>
                 <span className="mono">2016</span>
               </p>
-              <Arrow hidden />
             </div>
           </Stack>
+
           <Stack
             images={ arrayShuffle(mockStackImages) }
           >
@@ -106,9 +96,9 @@ export default class Home extends Page {
                 <a href="/project">47 W 47th Street</a><br/>
                 <span className="mono">2016</span>
               </p>
-              <Arrow hidden />
             </div>
           </Stack>
+
           <Stack
             images={ arrayShuffle(mockStackImages) }
           >
@@ -117,9 +107,97 @@ export default class Home extends Page {
                 <a href="/project">47 W 47th Street</a><br/>
                 <span className="mono">2016</span>
               </p>
-              <Arrow hidden />
             </div>
           </Stack>
+
+          <div className="flex-container full-pg about-pg border-top">
+            <div className="about-pg__inner">
+              <img src="/static/logo-lg.png"/>
+              <p>
+                <strong>Volley</strong> is an industry-leading architectural visualization and creative studio, specializing in the crafting of stunning imagery that evokes the best possibilities of our clients’ designs. We believe fundamentally in our ability to add value to our clients’ vision through a deep understanding of design intent, a project’s commercial potential, and refined art direction. Volley is led by Michael Klausmeier who has over a decade of experience in high-end architecture and visualization. The studio is located in the Dumbo area of Brooklyn, NY.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex-container full-pg team-stack">
+            <Stack
+              imgWidth={ 250 }
+              defaultHeight={ 470 }
+              images={ mockTeamImages }
+            >
+              <div className="team-stack__content">
+                <p>
+                  Michael Klausmeier, Creative Director, is the founding member of Volley. After receiving his Bachelor of Science in Civil Engineering with a Certificate in Architecture from Princeton University, he moved to New York to develop his signature photography-based visualization aesthetic. With over a decade of professional experience in CG visualization,
+                </p>
+              </div>
+            </Stack>
+          </div>
+
+          <div className="flex-container full-pg team-stack">
+            <div>
+              <div className="col-6"></div>
+              <div className="col-6">
+                <p class="uppercase">
+                  Select Clients
+                </p>
+              </div>
+            </div>
+            <div>
+              <div className="col-6"></div>
+              <div className="col-6">
+                <p>
+                    & Partners<br/>
+                    Brookfield Properties<br/>
+                    Cadillac Fairview<br/>
+                    Catapult [13]<br/>
+                    Corcoran Sunshine<br/>
+                    Cushman & Wakefield<br/>
+                    Dattner Architects<br/>
+                    Deborah Berke Partners<br/>
+                    Gluck +<br/>
+                </p>
+              </div>
+              <div className="col-6">
+                <p>
+                    Michael Maltzan Architecture<br/>
+                    Moinian Group<br/>
+                    OMA<br/>
+                    Oxford Properties<br/>
+                    Related<br/>
+                    Rene Gonzalez Architect<br/>
+                    Richard Meier & Partners<br/>
+                    Robert A.M. Stern<br/>
+                    Rockwell Group<br/>
+                </p>
+              </div>
+              <div className="col-6">
+                <p>
+                  Google<br/>
+                  Grimshaw Architects<br/>
+                  H3 Hardy Collaboration<br/>
+                  Halstead Property Development Marketing<br/>
+                  Hines<br/>
+                  Jacob & Co.<br/>
+                  KPF<br/>
+                  Marchetto Higgins Stieve<br/>
+                </p>
+              </div>
+              <div className="col-6">
+                <p>
+                  Roman and Williams<br/>
+                  RKF<br/>
+                  Salvatore Ferragamo<br/>
+                  Steiner<br/>
+                  SOM<br/>
+                  Tishman Speyer<br/>
+                  Thomas Phifer and Partners<br/>
+                  Two Trees<br/>
+                  Zaha Hadid Architects<br/>
+                </p>
+              </div>
+              <div className="col-6"></div>
+            </div>
+          </div>
 
           <div className="flex-container full-pg">
             <div className="contact-card">
@@ -149,22 +227,6 @@ export default class Home extends Page {
                 </button>
               </div>
             </div>
-          </div>
-
-          <div className="flex-container full-pg about-pg">
-            <div className="about-pg__inner">
-              <img src="/static/logo-lg.png"/>
-              <p>
-                <strong>Volley</strong> is an industry-leading architectural visualization and creative studio, specializing in the crafting of stunning imagery that evokes the best possibilities of our clients’ designs. We believe fundamentally in our ability to add value to our clients’ vision through a deep understanding of design intent, a project’s commercial potential, and refined art direction. Volley is led by Michael Klausmeier who has over a decade of experience in high-end architecture and visualization. The studio is located in the Dumbo area of Brooklyn, NY.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex-container full-pg">
-            <Stack
-              imgWidth={ 250 }
-              images={ mockTeamImages }
-            />
           </div>
 
         </div>

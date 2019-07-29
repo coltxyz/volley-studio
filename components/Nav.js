@@ -22,11 +22,11 @@ const Nav = props => (
       <ActiveLink href="/">
         Portfolio
       </ActiveLink>
-      <ActiveLink href="/contact">
-        Contact
-      </ActiveLink>
-      <ActiveLink href="/about">
+      <ActiveLink href="/">
         About
+      </ActiveLink>
+      <ActiveLink href="/">
+        Contact
       </ActiveLink>
     </nav>
   </div>
