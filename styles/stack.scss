@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
   .stack-btn {
     position: absolute;
     height: 100%;
@@ -102,5 +103,8 @@
     p {
       margin-bottom: 0;
     }
+  }
+  .stack__image__inner img {
+    outline: none;
   }
 }

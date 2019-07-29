@@ -47,20 +47,21 @@ export default class Home extends Page {
 
   constructor() {
     super();
+    this.state = {
+      videoOpacity: 0.4
+    }
   }
 
-
-
-  handleScroll() {
-    console.log('we scrolly')
+  handleScroll(e) {
+    console.log(e.target.scrollTop)
   }
 
   render() {
     return (
       <Layout { ...this.props }>
         <video
-          hidden
           className="bg-video"
+          style={{ opacity: this.state.videoOpacity }}
           src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
           autoPlay loop muted
         />
@@ -110,7 +111,39 @@ export default class Home extends Page {
             </div>
           </Stack>
 
-          <div className="flex-container full-pg about-pg border-top">
+          <div className="flex-container full-pg bg-white">
+            <div className="contact-card">
+              <div className="contact-card__bg-1" />
+              <div className="contact-card__bg-2" />
+              <div className="contact-card__bg-0">
+                <div className="contact-card__header">
+                  <img src="/static/logo-black.png"/>
+                  <div className="info">
+                    <p style={{ marginBottom: '0.4rem'}}>
+                      <strong>hello@volleystudio.us</strong>
+                    </p>
+                    <p>
+                      45 Main Street, Suite 516<br/>
+                      Brooklyn, NY 11201<br/>
+                      info@volleystudio.us<br/>
+                      718.801.8890<br/>
+                    </p>
+                  </div>
+                </div>
+                <div className="contact-card__body">
+                  <textarea placeholder="drop us a line"/>
+                </div>
+                <div className="contact-card__footer">
+                  <input placeholder="your email"/>
+                  <button>
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-container full-pg about-pg bg-white">
             <div className="about-pg__inner">
               <img src="/static/logo-lg.png"/>
               <p>
@@ -133,11 +166,11 @@ export default class Home extends Page {
             </Stack>
           </div>
 
-          <div className="flex-container full-pg team-stack">
+          <div className="flex-container full-pg bg-white">
             <div>
               <div className="col-6"></div>
               <div className="col-6">
-                <p class="uppercase">
+                <p className="uppercase">
                   Select Clients
                 </p>
               </div>
@@ -199,34 +232,7 @@ export default class Home extends Page {
             </div>
           </div>
 
-          <div className="flex-container full-pg">
-            <div className="contact-card">
-              <div className="contact-card__bg-1" />
-              <div className="contact-card__bg-2" />
-              <div className="contact-card__header">
-                <img src="/static/logo-black.png"/>
-                <div className="info">
-                  <p style={{ marginBottom: '0.4rem'}}>
-                    <strong>hello@volleystudio.us</strong>
-                  </p>
-                  <p>
-                    45 Main Street, Suite 516<br/>
-                    Brooklyn, NY 11201<br/>
-                    info@volleystudio.us<br/>
-                    718.801.8890<br/>
-                  </p>
-                </div>
-              </div>
-              <div className="contact-card__body">
-                <textarea placeholder="drop us a line"/>
-              </div>
-              <div className="contact-card__footer">
-                <input placeholder="your email"/>
-                <button>
-                  Submit
-                </button>
-              </div>
-            </div>
+          <div className="full-pg">
           </div>
 
         </div>
