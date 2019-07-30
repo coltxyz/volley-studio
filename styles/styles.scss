@@ -52,7 +52,6 @@ video.bg-video {
   z-index: -1;
   opacity: 0.5;
 }
-
 nav {
   text-orientation: sideways;
   writing-mode: vertical-lr;
@@ -63,10 +62,9 @@ nav {
   border-left: 1px solid $black-ln;
   padding-left: .3em;
   padding-right: 1.6em;
-  z-index: 100;
+  z-index: 200;
   font-weight: 500;
 }
-
 nav a {
   margin: 2em 0;
   padding: 0.2em 0;
@@ -145,12 +143,14 @@ nav a {
 .action-button {
   font-family: 'Basis-Mono';
   border: 1px solid black;
-  padding: 1em;
+  padding: 1em 2em;
+  min-width: 8em;
   cursor: pointer;
+  background: none;
   &:hover {
     text-decoration: underline;
   }
-  &.no-2 {
+  & ~ .action-button {
     border-left: none;
   }
 }

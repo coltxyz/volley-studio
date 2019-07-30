@@ -23,10 +23,10 @@ const Nav = props => (
         Portfolio
       </ActiveLink>
       <ActiveLink href="/">
-        About
+        Contact
       </ActiveLink>
       <ActiveLink href="/">
-        Contact
+        About
       </ActiveLink>
     </nav>
   </div>

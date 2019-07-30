@@ -7,6 +7,7 @@ import Contact from '../components/contact';
 import About from '../components/about';
 import HomepageStack from '../components/homepage-stack';
 import Fin from '../components/fin';
+import ProjectDetail from '../components/project-detail';
 
 import "../styles/styles.scss"
 
@@ -20,7 +21,8 @@ export default class Home extends Page {
     super();
     this.state = {
       videoOpacity: 0.4,
-      noLogo: true
+      noLogo: true,
+      projectDetail: false
     }
   }
 
@@ -44,6 +46,12 @@ export default class Home extends Page {
     }
   }
 
+  onDetailClick = () => {
+    this.setState({
+      projectDetail: true
+    })
+  }
+
   render() {
     return (
       <Layout { ...this.props } noLogo={ this.state.noLogo }>
@@ -53,11 +61,19 @@ export default class Home extends Page {
           src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
           autoPlay loop muted
         />
-        <div className="content-main" ref="scrollContainer" onScroll={ throttle(300, this.updateScroll) }>
+        <div
+          className="content-main"
+          ref="scrollContainer"
+          onScroll={ throttle(300, this.updateScroll) }
+        >
+          <ProjectDetail
+            isVisible={ this.state.projectDetail }
+            onCloseClick={ () => this.setState({ projectDetail: false })}
+          />
           <HomeHero />
-          <HomepageStack />
-          <HomepageStack />
-          <HomepageStack />
+          <HomepageStack onDetailClick={ this.onDetailClick } />
+          <HomepageStack onDetailClick={ this.onDetailClick } />
+          <HomepageStack onDetailClick={ this.onDetailClick } />
           <Contact />
           <About />
           <Fin />

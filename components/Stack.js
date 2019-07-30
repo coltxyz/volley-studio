@@ -1,6 +1,5 @@
 import { DraggableCore } from 'react-draggable';
 import classnames from 'classnames';
-import Arrow from './svg/arrow';
 
 const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
 
@@ -74,6 +73,11 @@ export default class Stack extends React.Component {
     }
     const { x, y, s } = this.imageTransforms[id];
     return `translate(${ x }px, ${ y }px) scale(${ s })`;
+  }
+
+  onDetailClick(e) {
+    e.preventDefault();
+    this.props.onDetailClick && this.props.onDetailClick();
   }
 
   render() {
