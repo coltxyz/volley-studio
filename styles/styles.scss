@@ -39,8 +39,10 @@ html {
 .logo {
   position: absolute;
   font-weight: 500;
+  z-index: 200;
   top: 1em;
   left: 1em;
+  transition: 200ms opacity;
 }
 video.bg-video {
   object-fit: cover;
@@ -153,7 +155,7 @@ nav a {
   }
 }
 
-.full-pg {
+.module {
   height: 100%;
   display: flex;
   flex-direction: column;

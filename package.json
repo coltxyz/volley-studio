@@ -19,6 +19,7 @@
     "react-dom": "^16.8.6",
     "react-draggable": "^3.3.0",
     "styled-jsx": "^2.2.6",
+    "throttle-debounce": "^2.1.0",
     "webpack": "^4.34.0"
   },
   "devDependencies": {},

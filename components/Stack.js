@@ -7,49 +7,6 @@ const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
 const UNIT = 30;
 const ANIMATION_TIME = 200;
 
-const StackImage = props => (
-  <div
-    data-img-id={ props.id }
-    className={ `stack__image ${ props.isActive ? 'stack__image--active' : '' }` }
-    style={ props.style }
-    onMouseEnter={ props.onMouseEnter }
-    onMouseLeave={ props.onMouseLeave }
-    onClick={ props.onClick }
-  >
-    {
-      props.videoSrc ? (
-        <div className="stack__image__inner">
-          <video
-            className="stack-img-active"
-            src={ props.activeVideoSrc }
-            style={{ width: props.width }}
-            muted autoPlay loop
-          />
-          <video
-            className="stack-img-default"
-            src={ props.videoSrc }
-            style={{ width: props.width }}
-            muted autoPlay loop
-          />
-        </div>
-      ) : (
-        <div className="stack__image__inner">
-          <img
-            className="stack-img-active"
-            src={ props.activeSrc }
-            style={{ width: props.width }}
-          />
-          <img
-            className="stack-img-default"
-            src={ props.src }
-            style={{ width: props.width }}
-          />
-        </div>
-      )
-    }
-  </div>
-)
-
 export default class Stack extends React.Component {
 
   static defaultProps = {
@@ -134,24 +91,50 @@ export default class Stack extends React.Component {
         >
           {
             this.props.images.map( image => (
-              <StackImage
+              <div
                 onMouseEnter={ this.onMouseEnter }
                 onMouseLeave={ this.onMouseLeave }
                 onClick={ this.onStackClick }
                 key={ image.id }
-                id={ image.id }
-                isActive={ image.id === this.state.currentTargetId }
-                activeSrc={ image.activeSrc }
-                videoSrc={ image.videoSrc }
-                activeVideoSrc={ image.activeVideoSrc }
-                src={ image.src }
-                width={ this.props.imgWidth}
+                className={ `stack__image ${ image.id === this.state.currentTargetId ? 'stack__image--active' : '' }` }
                 style={{
                   transform: this.getTransform({ id: image.id }),
                   zIndex: this.imageStack.indexOf(image.id) + 10,
                   opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
                 }}
-              />
+              >
+                {
+                  image.videoSrc ? (
+                    <div className="stack__image__inner">
+                      <video
+                        className="stack-img-active"
+                        src={ image.activeVideoSrc }
+                        style={{ width: this.props.imgWidth }}
+                        muted autoPlay loop
+                      />
+                      <video
+                        className="stack-img-default"
+                        src={ image.videoSrc }
+                        style={{ width: this.props.imgWidth }}
+                        muted autoPlay loop
+                      />
+                    </div>
+                  ) : (
+                    <div className="stack__image__inner">
+                      <img
+                        className="stack-img-active"
+                        src={ image.activeSrc }
+                        style={{ width: this.props.imgWidth }}
+                      />
+                      <img
+                        className="stack-img-default"
+                        src={ image.src }
+                        style={{ width: this.props.imgWidth }}
+                      />
+                    </div>
+                  )
+                }
+              </div>
             ))
           }
           { this.props.children }

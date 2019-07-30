@@ -10,6 +10,10 @@ const ga_id = ''
 
 export default class Home extends React.Component {
 
+  defaultProps = {
+    noLogo: true
+  }
+
   constructor() {
     super();
     this.state = {
@@ -61,7 +65,7 @@ export default class Home extends React.Component {
         </Head>
         <div id="main" className={ this.state.isNavOpen ? 'nav--open' : ''}>
           <Nav { ...this.props } />
-          <div className="logo" hidden={ this.props.nologo }>
+          <div className="logo" style={{ opacity: this.props.noLogo ? 0 : 1 }}>
             <Link href="/"><a>VOLLEY STUDIO</a></Link>
           </div>
           { this.props.children }
