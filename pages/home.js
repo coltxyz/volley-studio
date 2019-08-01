@@ -9,6 +9,7 @@ import About from '../components/about';
 import HomepageStack from '../components/homepage-stack';
 import Fin from '../components/fin';
 import ProjectDetail from '../components/project-detail';
+import { mockStackImages, tribuneImages, schermerhornImages } from '../lib/constants';
 
 import "../styles/styles.scss";
 
@@ -76,18 +77,21 @@ export default class Home extends Page {
             <HomeHero />
             <HomepageStack
               frameId="1"
+              images={ mockStackImages }
               activeFrameId={ this.state.activeFrameId }
               onDetailClick={ this.onDetailClick }
               isProjectDetail={ this.state.projectDetail }
             />
             <HomepageStack
               frameId="2"
+              images={ schermerhornImages }
               activeFrameId={ this.state.activeFrameId }
               onDetailClick={ this.onDetailClick }
               isProjectDetail={ this.state.projectDetail }
             />
             <HomepageStack
               frameId="3"
+              images={ tribuneImages }
               activeFrameId={ this.state.activeFrameId }
               onDetailClick={ this.onDetailClick }
               isProjectDetail={ this.state.projectDetail }

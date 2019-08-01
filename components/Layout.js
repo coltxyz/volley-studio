@@ -11,7 +11,8 @@ const ga_id = ''
 export default class Home extends React.Component {
 
   defaultProps = {
-    noLogo: true
+    noLogo: true,
+    srollPos: 0
   }
 
   constructor() {

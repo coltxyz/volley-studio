@@ -130,13 +130,13 @@ export default class Stack extends React.Component {
                       <video
                         className="stack-img-active"
                         src={ image.activeVideoSrc }
-                        style={{ width: this.props.imgWidth }}
+                        style={{ maxWidth: this.props.imgWidth }}
                         muted autoPlay loop
                       />
                       <video
                         className="stack-img-default"
                         src={ image.videoSrc }
-                        style={{ width: this.props.imgWidth }}
+                        style={{ maxWidth: this.props.imgWidth }}
                         muted autoPlay loop
                       />
                     </div>
@@ -145,12 +145,12 @@ export default class Stack extends React.Component {
                       <img
                         className="stack-img-active"
                         src={ image.activeSrc }
-                        style={{ width: this.props.imgWidth }}
+                        style={{ maxWidth: this.props.imgWidth }}
                       />
                       <img
                         className="stack-img-default"
                         src={ image.src }
-                        style={{ width: this.props.imgWidth }}
+                        style={{ maxWidth: this.props.imgWidth }}
                       />
                     </div>
                   )

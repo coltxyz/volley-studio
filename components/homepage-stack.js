@@ -2,7 +2,6 @@ import arrayShuffle from 'array-shuffle';
 
 import Stack from './Stack';
 import ArrowRight from './svg/arrow-right';
-import { mockStackImages } from '../lib/constants';
 
 export default props => (
   <Stack
@@ -10,7 +9,7 @@ export default props => (
     frameId={ props.frameId }
     isActiveFrame={ props.activeFrameId == props.frameId }
     isExpanded={ props.isProjectDetail }
-    images={ mockStackImages }
+    images={ props.images }
     onDetailClick={ props.onDetailClick }
     arrow
   >
