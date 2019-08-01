@@ -52,11 +52,13 @@ export default props => (
         defaultHeight={ 470 }
         images={ mockTeamImages }
       >
-        <div className="team-stack__content">
-          <p>
-            Michael Klausmeier, Creative Director, is the founding member of Volley. After receiving his Bachelor of Science in Civil Engineering with a Certificate in Architecture from Princeton University, he moved to New York to develop his signature photography-based visualization aesthetic. With over a decade of professional experience in CG visualization,
-          </p>
-        </div>
+        { ({}) => (
+          <div className="team-stack__content">
+            <p>
+              Michael Klausmeier, Creative Director, is the founding member of Volley. After receiving his Bachelor of Science in Civil Engineering with a Certificate in Architecture from Princeton University, he moved to New York to develop his signature photography-based visualization aesthetic. With over a decade of professional experience in CG visualization,
+            </p>
+          </div>
+        )}
       </Stack>
     </div>
 

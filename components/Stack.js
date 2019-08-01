@@ -1,6 +1,8 @@
 import { DraggableCore } from 'react-draggable';
 import classnames from 'classnames';
 
+import ArrowRight from './svg/arrow-right';
+
 const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
 
 const UNIT = 30;
@@ -80,7 +82,7 @@ export default class Stack extends React.Component {
     return `translate(${ x }px, ${ y }px) scale(${ s })`;
   }
 
-  onDetailClick(e) {
+  onDetailClick = (e) => {
     e.preventDefault();
     this.props.onDetailClick && this.props.onDetailClick();
   }
@@ -152,8 +154,13 @@ export default class Stack extends React.Component {
               </div>
             ))
           }
-          { this.props.children }
+          { this.props.children({ onDetailClick: this.onDetailClick }) }
         </div>
+        { this.props.arrow && (
+          <div className="stack__arrow" onClick={ this.onDetailClick }>
+            <ArrowRight />
+          </div>
+        )}
       </div>
     )
   }

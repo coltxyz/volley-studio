@@ -37,7 +37,7 @@
       bottom: 0;
       left: 0;
       z-index: 1;
-      transition: 100ms opacity, 600ms transform;
+      transition: opacity 200ms $ease, transform 500ms $ease;
       pointer-events: all;
       cursor: pointer;
       transform-origin: bottom left;
@@ -57,11 +57,11 @@
             position: absolute;
             left: 0;
             opacity: 0;
-            transition: 150ms opacity;
+            transition: opacity 150ms 0 $ease;
           }
         }
         video.stack-img-active {
-          transition: 300ms opacity;
+          transition: opacity 300ms 0 $ease;
         }
       }
       &--active {
@@ -85,6 +85,19 @@
         &:hover {
           text-decoration: underline;
         }
+      }
+    }
+    &__arrow {
+      cursor: pointer;
+      opacity: 0.3;
+      width: 0;
+      position: relative;
+      left: 3%;
+      transition: all 200ms $ease;
+      transform: translateX(0);
+      &:hover {
+        opacity: 0.7;
+        transform: translateX(.4em);
       }
     }
   }

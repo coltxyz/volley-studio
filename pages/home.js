@@ -12,8 +12,6 @@ import ProjectDetail from '../components/project-detail';
 
 import "../styles/styles.scss";
 
-const activeClassName = 'module--active';
-
 export default class Home extends Page {
 
   static slug = 'home'

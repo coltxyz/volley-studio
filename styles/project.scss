@@ -39,14 +39,16 @@
   }
 }
 
+// Transitions
+//
 .project-detail {
   transition: opacity 200ms;
   &__inner {
     &__images {
-      transition: transform 400ms 50ms;
+      transition: transform 400ms $ease 50ms, opacity 800ms $ease;
     }
     &__content {
-      transition: transform 600ms 150ms, opacity 400ms 250ms;
+      transition: transform 600ms $ease 150ms, opacity 400ms $ease 250ms;
     }
   }
   &.transition {
@@ -55,9 +57,10 @@
       .project-detail__inner {
         &__images {
           transform: scale(0.9);
+          opacity: 0;
         }
         &__content {
-          transform: translateY(1em);
+          transform: translateX(2em);
           opacity: 0;
         }
       }
@@ -67,9 +70,10 @@
       .project-detail__inner {
         &__images {
           transform: scale(1);
+          opacity: 1;
         }
         &__content {
-          transform: translateY(0);
+          transform: translateX(0);
           opacity: 1;
         }
       }
