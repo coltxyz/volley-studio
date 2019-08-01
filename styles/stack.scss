@@ -27,6 +27,7 @@
     width: auto;
     pointer-events: none;
     position: relative;
+    transition: all 500ms;
     &__expand {
       position: absolute;
       right: -64px;
@@ -37,7 +38,7 @@
       bottom: 0;
       left: 0;
       z-index: 1;
-      transition: 100ms opacity, 400ms transform;
+      transition: 100ms opacity, 600ms transform;
       pointer-events: all;
       cursor: pointer;
       transform-origin: bottom left;
@@ -57,7 +58,7 @@
             position: absolute;
             left: 0;
             opacity: 0;
-            transition: 10ms opacity;
+            transition: 150ms opacity;
           }
         }
         video.stack-img-active {

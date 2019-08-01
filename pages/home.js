@@ -39,7 +39,8 @@ export default class Home extends Page {
       });
 
       this.setState({
-        noLogo: Boolean(activeChild.dataset.nologo)
+        noLogo: Boolean(activeChild.dataset.nologo),
+        activeFrameId: activeChild.dataset.frameid
       });
 
     } catch (e) {
@@ -65,7 +66,7 @@ export default class Home extends Page {
             in={ this.state.projectDetail }
             unmountOnExit
             classNames="transition"
-            timeout={300}
+            timeout={ 500 }
           >
             { state => (
               <ProjectDetail
@@ -74,9 +75,24 @@ export default class Home extends Page {
             )}
           </CSSTransition>
           <HomeHero />
-          <HomepageStack onDetailClick={ this.onDetailClick } />
-          <HomepageStack onDetailClick={ this.onDetailClick } />
-          <HomepageStack onDetailClick={ this.onDetailClick } />
+          <HomepageStack
+            frameId="1"
+            activeFrameId={ this.state.activeFrameId }
+            onDetailClick={ this.onDetailClick }
+            isProjectDetail={ this.state.projectDetail }
+          />
+          <HomepageStack
+            frameId="2"
+            activeFrameId={ this.state.activeFrameId }
+            onDetailClick={ this.onDetailClick }
+            isProjectDetail={ this.state.projectDetail }
+          />
+          <HomepageStack
+            frameId="3"
+            activeFrameId={ this.state.activeFrameId }
+            onDetailClick={ this.onDetailClick }
+            isProjectDetail={ this.state.projectDetail }
+          />
           <Contact />
           <About />
           <Fin />

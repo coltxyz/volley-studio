@@ -11,7 +11,9 @@ export default class Stack extends React.Component {
   static defaultProps = {
     imgWidth: 800,
     defaultHeight: 600,
-    isVisible: true
+    isVisible: true,
+    isExpanded: false,
+    isActiveFrame: false
   }
 
   constructor({ images }) {
@@ -67,7 +69,7 @@ export default class Stack extends React.Component {
     }, ANIMATION_TIME)
   }
 
-  getTransform({ id }) {
+  getTransform({ id, isExpanded }) {
     if (!this.imageTransforms) {
       return;
     }
@@ -82,15 +84,20 @@ export default class Stack extends React.Component {
 
   render() {
     return (
-      <div className={classnames("stack-wrapper", {
-        'stack--expanded': this.state.isExpanded
-      })}>
+      <div
+        data-frameid={ this.props.frameId }
+        className={classnames("stack-wrapper", {
+        'stack--expanded': this.props.isExpanded
+        })}
+      >
         <div
           ref="stackContainerRef"
           className={classnames('stack', this.props.className)}
           style={{
             width: this.props.imgWidth + (this.imageStack.length - 1) * UNIT,
-            height: this.props.defaultHeight
+            height: this.props.defaultHeight,
+            transform: `scale(${this.props.isExpanded ? '1.3' : '1'})`,
+            opacity: this.props.isExpanded ? '0' : '1'
           }}
         >
           {
@@ -102,7 +109,9 @@ export default class Stack extends React.Component {
                 key={ image.id }
                 className={ `stack__image ${ image.id === this.state.currentTargetId ? 'stack__image--active' : '' }` }
                 style={{
-                  transform: this.getTransform({ id: image.id }),
+                  transform: this.getTransform({
+                    id: image.id
+                  }),
                   zIndex: this.imageStack.indexOf(image.id) + 10,
                   opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0
                 }}

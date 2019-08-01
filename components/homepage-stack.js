@@ -6,7 +6,9 @@ import { mockStackImages } from '../lib/constants';
 
 export default props => (
   <Stack
-    arrow
+    frameId={ props.frameId }
+    isActiveFrame={ props.activeFrameId == props.frameId }
+    isExpanded={ props.isProjectDetail }
     images={ arrayShuffle(mockStackImages) }
   >
     <div className="stack__content">
