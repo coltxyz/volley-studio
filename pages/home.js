@@ -1,7 +1,8 @@
 import { throttle } from 'throttle-debounce';
+import { CSSTransition } from 'react-transition-group';
 
-import Page from '../components/Page'
-import Layout from '../components/Layout'
+import Page from '../components/Page';
+import Layout from '../components/Layout';
 import HomeHero from '../components/home-hero';
 import Contact from '../components/contact';
 import About from '../components/about';
@@ -9,7 +10,7 @@ import HomepageStack from '../components/homepage-stack';
 import Fin from '../components/fin';
 import ProjectDetail from '../components/project-detail';
 
-import "../styles/styles.scss"
+import "../styles/styles.scss";
 
 const activeClassName = 'module--active';
 
@@ -55,21 +56,23 @@ export default class Home extends Page {
   render() {
     return (
       <Layout { ...this.props } noLogo={ this.state.noLogo }>
-        <video
-          className="bg-video"
-          style={{ opacity: this.state.videoOpacity }}
-          src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
-          autoPlay loop muted
-        />
         <div
           className="content-main"
           ref="scrollContainer"
           onScroll={ throttle(300, this.updateScroll) }
         >
-          <ProjectDetail
-            isVisible={ this.state.projectDetail }
-            onCloseClick={ () => this.setState({ projectDetail: false })}
-          />
+          <CSSTransition
+            in={ this.state.projectDetail }
+            unmountOnExit
+            classNames="transition"
+            timeout={300}
+          >
+            { state => (
+              <ProjectDetail
+                onCloseClick={ () => this.setState({ projectDetail: false })}
+              />
+            )}
+          </CSSTransition>
           <HomeHero />
           <HomepageStack onDetailClick={ this.onDetailClick } />
           <HomepageStack onDetailClick={ this.onDetailClick } />

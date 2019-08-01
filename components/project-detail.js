@@ -5,7 +5,6 @@ import { mockStackImages } from '../lib/constants.js';
 export default props => (
   <div
     className="project-detail"
-    hidden={ !props.isVisible }
   >
     <span
       className="project-detail__close"
