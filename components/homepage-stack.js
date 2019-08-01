@@ -6,6 +6,7 @@ import { mockStackImages } from '../lib/constants';
 
 export default props => (
   <Stack
+    className={ props.className }
     frameId={ props.frameId }
     isActiveFrame={ props.activeFrameId == props.frameId }
     isExpanded={ props.isProjectDetail }

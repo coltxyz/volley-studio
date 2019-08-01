@@ -1,10 +1,6 @@
 
 .stack-wrapper {
-  position: relative;
-  scroll-snap-align: start;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
   background: white;
   .stack-btn {
@@ -108,9 +104,10 @@
 }
 
 .team-stack {
-  .stack-wrapper {
-    justify-content: flex-start;
-    padding-left: 25vw;
+  &.stack-wrapper {
+    padding-left: 25%;
+    align-items: baseline;
+    flex-direction: column;
   }
   &__content {
     position: absolute;

@@ -19,13 +19,17 @@ export default props => (
 
     <div className="project-detail__inner">
       <div className="project-detail__inner__images">
-        {
-          mockStackImages.map( image => (
-            image.activeVideoSrc
-              ? <video autoPlay muted loop src={ image.activeVideoSrc } />
-              : <img src={ image.activeSrc } />
-          ))
-        }
+        <div className="scroll-hider">
+          <div>
+            {
+              mockStackImages.map( image => (
+                image.activeVideoSrc
+                  ? <video autoPlay muted loop src={ image.activeVideoSrc } />
+                  : <img src={ image.activeSrc } />
+              ))
+            }
+          </div>
+        </div>
       </div>
       <div className="project-detail__inner__content">
         <p className="uppercase">

@@ -55,45 +55,47 @@ export default class Home extends Page {
   render() {
     return (
       <Layout { ...this.props } noLogo={ this.state.noLogo }>
-        <div
-          className="content-main"
-          ref="scrollContainer"
-          onScroll={ throttle(300, this.updateScroll) }
-        >
-          <CSSTransition
-            in={ this.state.projectDetail }
-            unmountOnExit
-            classNames="transition"
-            timeout={ 500 }
+        <div className="scroll-hider">
+          <div
+            className="content-main"
+            ref="scrollContainer"
+            onScroll={ throttle(300, this.updateScroll) }
           >
-            { state => (
-              <ProjectDetail
-                onCloseClick={ () => this.setState({ projectDetail: false })}
-              />
-            )}
-          </CSSTransition>
-          <HomeHero />
-          <HomepageStack
-            frameId="1"
-            activeFrameId={ this.state.activeFrameId }
-            onDetailClick={ this.onDetailClick }
-            isProjectDetail={ this.state.projectDetail }
-          />
-          <HomepageStack
-            frameId="2"
-            activeFrameId={ this.state.activeFrameId }
-            onDetailClick={ this.onDetailClick }
-            isProjectDetail={ this.state.projectDetail }
-          />
-          <HomepageStack
-            frameId="3"
-            activeFrameId={ this.state.activeFrameId }
-            onDetailClick={ this.onDetailClick }
-            isProjectDetail={ this.state.projectDetail }
-          />
-          <Contact />
-          <About />
-          <Fin />
+            <CSSTransition
+              in={ this.state.projectDetail }
+              unmountOnExit
+              classNames="transition"
+              timeout={ 500 }
+            >
+              { state => (
+                <ProjectDetail
+                  onCloseClick={ () => this.setState({ projectDetail: false })}
+                />
+              )}
+            </CSSTransition>
+            <HomeHero />
+            <HomepageStack
+              frameId="1"
+              activeFrameId={ this.state.activeFrameId }
+              onDetailClick={ this.onDetailClick }
+              isProjectDetail={ this.state.projectDetail }
+            />
+            <HomepageStack
+              frameId="2"
+              activeFrameId={ this.state.activeFrameId }
+              onDetailClick={ this.onDetailClick }
+              isProjectDetail={ this.state.projectDetail }
+            />
+            <HomepageStack
+              frameId="3"
+              activeFrameId={ this.state.activeFrameId }
+              onDetailClick={ this.onDetailClick }
+              isProjectDetail={ this.state.projectDetail }
+            />
+            <Contact />
+            <About />
+            <Fin />
+          </div>
         </div>
       </Layout>
     )

@@ -91,13 +91,17 @@ export default class Stack extends React.Component {
     return (
       <div
         data-frameid={ this.props.frameId }
-        className={classnames("stack-wrapper", {
-        'stack--expanded': this.props.isExpanded
-        })}
+        className={classnames(
+          "module stack-wrapper",
+          this.props.className,
+          {
+            'stack--expanded': this.props.isExpanded
+          }
+        )}
       >
         <div
           ref="stackContainerRef"
-          className={classnames('stack', this.props.className)}
+          className="stack"
           style={{
             width: this.props.imgWidth + (this.imageStack.length - 1) * UNIT,
             height: this.props.defaultHeight

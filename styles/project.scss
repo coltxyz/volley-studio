@@ -4,37 +4,41 @@
   width: 100%;
   height: 100vh;
   z-index: 100;
-  padding: 0 4em 0 0;
+  padding: 0 3em 0 0;
   box-sizing: border-box;
   &__close {
     cursor: pointer;
     position: absolute;
     right: 4em;
     top: 1em;
+    z-index: 100;
   }
   &__inner {
     width: 100%;
-    padding-left: 16.66%;
     display: flex;
     align-items: flex-end;
+    position: relative;
     &__images {
-      width: 70%;
-      padding-right: 3em;
-      overflow: scroll;
       height: 100vh;
-      scrollbar-width: none;
+      margin-left: 16.67%;
       img, video {
         width: 100%;
         padding: 1em 0;
       }
     }
     &__content {
-      width: 30%;
-      padding: 1em 1em 1em 0;
+      width: 25%;
+      position: absolute;
+      right: 0em;
+      bottom: 0;
+      padding: 1em;
       .project-buttons {
         float: right;
         padding: 1em 0;
       }
+    }
+    .scroll-hider > div {
+      padding-right: 35%;
     }
   }
 }
