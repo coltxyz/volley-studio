@@ -40,34 +40,38 @@
 }
 
 .project-detail {
-  transition: opacity 200ms ;
-  &__inner__images {
-    transform: scale(0.9);
-    transition: transform 400ms;
+  transition: opacity 200ms;
+  &__inner {
+    &__images {
+      transition: transform 400ms 50ms;
+    }
+    &__content {
+      transition: transform 600ms 150ms, opacity 400ms 250ms;
+    }
   }
   &.transition {
-    &-enter {
+    &-enter, &-exit-active, &-exit {
       opacity: 0;
-      .project-detail__inner__images {
-        transform: scale(0.9);
+      .project-detail__inner {
+        &__images {
+          transform: scale(0.9);
+        }
+        &__content {
+          transform: translateY(1em);
+          opacity: 0;
+        }
       }
     }
     &-enter-active, &-enter-done {
       opacity: 1;
-      .project-detail__inner__images {
-        transform: scale(1);
-      }
-    }
-    &-exit {
-      opacity: 1;
-      .project-detail__inner__images {
-        transform: scale(1);
-      }
-    }
-    &-exit-active {
-      opacity: 0;
-      .project-detail__inner__images {
-        transform: scale(0.9);
+      .project-detail__inner {
+        &__images {
+          transform: scale(1);
+        }
+        &__content {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
     }
   }
