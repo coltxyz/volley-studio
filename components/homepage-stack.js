@@ -9,7 +9,7 @@ export default props => (
     frameId={ props.frameId }
     isActiveFrame={ props.activeFrameId == props.frameId }
     isExpanded={ props.isProjectDetail }
-    images={ arrayShuffle(mockStackImages) }
+    images={ mockStackImages }
   >
     <div className="stack__content">
       <p className="stack__content__p" onClick={ e => { e.preventDefault(); props.onDetailClick(); }}>

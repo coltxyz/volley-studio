@@ -74,6 +74,9 @@ export default class Stack extends React.Component {
       return;
     }
     const { x, y, s } = this.imageTransforms[id];
+    if (isExpanded) {
+      return `scale(1.2)`;
+    }
     return `translate(${ x }px, ${ y }px) scale(${ s })`;
   }
 
@@ -95,9 +98,7 @@ export default class Stack extends React.Component {
           className={classnames('stack', this.props.className)}
           style={{
             width: this.props.imgWidth + (this.imageStack.length - 1) * UNIT,
-            height: this.props.defaultHeight,
-            transform: `scale(${this.props.isExpanded ? '1.3' : '1'})`,
-            opacity: this.props.isExpanded ? '0' : '1'
+            height: this.props.defaultHeight
           }}
         >
           {
@@ -110,7 +111,8 @@ export default class Stack extends React.Component {
                 className={ `stack__image ${ image.id === this.state.currentTargetId ? 'stack__image--active' : '' }` }
                 style={{
                   transform: this.getTransform({
-                    id: image.id
+                    id: image.id,
+                    isExpanded: this.props.isExpanded
                   }),
                   zIndex: this.imageStack.indexOf(image.id) + 10,
                   opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0

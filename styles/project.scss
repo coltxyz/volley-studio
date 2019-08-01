@@ -42,14 +42,14 @@
 .project-detail {
   transition: opacity 200ms ;
   &__inner__images {
-    transform: scale(0.5);
+    transform: scale(0.9);
     transition: transform 400ms;
   }
   &.transition {
     &-enter {
       opacity: 0;
       .project-detail__inner__images {
-        transform: scale(0.5);
+        transform: scale(0.9);
       }
     }
     &-enter-active, &-enter-done {
@@ -67,7 +67,7 @@
     &-exit-active {
       opacity: 0;
       .project-detail__inner__images {
-        transform: scale(0.5);
+        transform: scale(0.9);
       }
     }
   }
