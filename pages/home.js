@@ -26,6 +26,15 @@ export default class Home extends Page {
     }
   }
 
+  componentDidMount() {
+    window.setTimeout(() => {
+      const videos = document.getElementsByTagName('video');
+      for (let el of videos) {
+        el.play();
+      }
+    }, 650);
+  }
+
   updateScroll = () => {
     let activeChild;
     try {
@@ -76,11 +85,12 @@ export default class Home extends Page {
             </CSSTransition>
             <HomeHero />
             <HomepageStack
+              id="portfolio"
               frameId="1"
               images={ mockStackImages }
               activeFrameId={ this.state.activeFrameId }
               onDetailClick={ this.onDetailClick }
-              isProjectDetail={ this.state.projectDetail }
+              isExpanded={ this.state.projectDetail }
             />
             <HomepageStack
               frameId="2"

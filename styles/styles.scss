@@ -21,7 +21,7 @@ html {
 .content-main {
   height: 100%;
   overflow: scroll;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 .content-inner {
   height: 100%;
@@ -159,8 +159,11 @@ nav a {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  scroll-snap-align: start;
   padding-right: 3rem;
+}
+
+.scroll-snap {
+  scroll-snap-align: start;
 }
 
 .home-title {

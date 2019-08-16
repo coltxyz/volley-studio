@@ -1,33 +1,20 @@
-import { withRouter } from 'next/router'
-
-const ActiveLink = withRouter(({ href, router, children }) => {
-  const handleClick = e => {
-    e.preventDefault()
-    router.push(href)
-  }
-  return (
-    <a
-      href={href}
-      onClick={handleClick}
-      className={ router.pathname === href ? '' : '' }
-    >
-      {children}
-    </a>
-  );
-})
+const scrollTo = e => {
+  e.preventDefault;
+  console.log(e.target.href);
+}
 
 const Nav = props => (
   <div>
     <nav>
-      <ActiveLink href="/">
+      <a href="#portfolio" onClick={ scrollTo }>
         Portfolio
-      </ActiveLink>
-      <ActiveLink href="/">
+      </a>
+      <a href="#contact" onClick={ scrollTo }>
         Contact
-      </ActiveLink>
-      <ActiveLink href="/">
+      </a>
+      <a href="#about" onClick={ scrollTo }>
         About
-      </ActiveLink>
+      </a>
     </nav>
   </div>
 );

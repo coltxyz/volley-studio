@@ -1,11 +1,12 @@
 import Arrow from '../components/svg/arrow';
 
 export default props => (
-  <div className="home-title module" data-nologo={ true }>
+  <div className="home-title module scroll-snap" data-nologo={ true }>
     <div className="home-title__inner">
       <img src="/static/logo-lg.png"/>
       <h2>
-        We are a 3D visualization studio specializing in the creation of photorealistic animations, still imagery, and VR content
+      A studio for designing visual narratives
+      through computer-generated imagery.
       </h2>
     </div>
     <div className="home-title__content">

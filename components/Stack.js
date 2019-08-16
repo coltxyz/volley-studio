@@ -1,5 +1,6 @@
 import { DraggableCore } from 'react-draggable';
 import classnames from 'classnames';
+import ReactDOM from 'react-dom';
 
 import ArrowRight from './svg/arrow-right';
 
@@ -90,6 +91,7 @@ export default class Stack extends React.Component {
   render() {
     return (
       <div
+        id={ this.props.id }
         data-frameid={ this.props.frameId }
         className={classnames(
           "module stack-wrapper",
@@ -131,13 +133,13 @@ export default class Stack extends React.Component {
                         className="stack-img-active"
                         src={ image.activeVideoSrc }
                         style={{ maxWidth: this.props.imgWidth }}
-                        muted autoPlay loop
+                        muted loop
                       />
                       <video
                         className="stack-img-default"
                         src={ image.videoSrc }
                         style={{ maxWidth: this.props.imgWidth }}
-                        muted autoPlay loop
+                        muted loop
                       />
                     </div>
                   ) : (

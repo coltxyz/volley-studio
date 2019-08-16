@@ -37,17 +37,17 @@ const mockTeamImages = [
 
 export default props => (
   <Fragment>
-    <div className="flex-container module about-pg bg-white" data-nologo={ true }>
+    <div className="flex-container module about-pg bg-white " data-nologo={ true }>
       <div className="about-pg__inner">
         <img src="/static/logo-lg.png"/>
         <p>
-          <strong>Volley</strong> is an industry-leading architectural visualization and creative studio, specializing in the crafting of stunning imagery that evokes the best possibilities of our clients’ designs. We believe fundamentally in our ability to add value to our clients’ vision through a deep understanding of design intent, a project’s commercial potential, and refined art direction. Volley is led by Michael Klausmeier who has over a decade of experience in high-end architecture and visualization. The studio is located in the Dumbo area of Brooklyn, NY.
-        </p>
+          <strong>Volley</strong> is a Brooklyn-based visualization studio that designs digital imagery. Simply put, we believe in the power of immersive visual content to tell a compelling story. Since 2008, we have crafted the highest quality content to visualize our clients’ visions. As a team of designers, architects, photographers, and strategists, we excel in transforming ideas into cohesive, visual narratives. We have focused on building a body of knowledge that pushes the boundaries of digital imagery. As part of this, we are always exploring the newest technologies and constantly experimenting. We are committed to expanding our expertise and pushing the boundaries of our work.
+        </  p>
       </div>
     </div>
 
     <Stack
-      className="team-stack"
+      className="team-stack scroll-snap"
       imgWidth={ 250 }
       defaultHeight={ 470 }
       images={ mockTeamImages }
@@ -55,13 +55,13 @@ export default props => (
       { ({}) => (
         <div className="team-stack__content">
           <p>
-            Michael Klausmeier, Creative Director, is the founding member of Volley. After receiving his Bachelor of Science in Civil Engineering with a Certificate in Architecture from Princeton University, he moved to New York to develop his signature photography-based visualization aesthetic. With over a decade of professional experience in CG visualization,
+            <strong>Michael Klausmeier,</strong> is the Creative Director and founder of Volley. He created the studio in 2008, after graduating from Princeton University. With over a decade of professional experience in CG visualization, Michael has collaborated closely with architects and designers to translate their concepts into visual media.
           </p>
         </div>
       )}
     </Stack>
 
-    <div className="flex-container module bg-white">
+    <div className="flex-container module bg-white scroll-snap">
       <div>
         <div className="col-6"></div>
         <div className="col-6">

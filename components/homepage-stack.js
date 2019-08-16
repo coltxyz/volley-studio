@@ -5,12 +5,9 @@ import ArrowRight from './svg/arrow-right';
 
 export default props => (
   <Stack
-    className={ props.className }
-    frameId={ props.frameId }
+    {...props}
+    className="scroll-snap"
     isActiveFrame={ props.activeFrameId == props.frameId }
-    isExpanded={ props.isProjectDetail }
-    images={ props.images }
-    onDetailClick={ props.onDetailClick }
     arrow
   >
     {({ onDetailClick }) => (
