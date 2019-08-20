@@ -8,9 +8,9 @@ const title = '';
 const description = '';
 const ga_id = ''
 
-export default class Home extends React.Component {
+export default class Layout extends React.Component {
 
-  defaultProps = {
+  static defaultProps = {
     noLogo: true,
     srollPos: 0
   }

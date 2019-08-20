@@ -3,6 +3,8 @@
   flex-direction: row;
   align-items: center;
   background: white;
+  margin: 15% 0;
+
   .stack-btn {
     position: absolute;
     height: 100%;
@@ -33,7 +35,7 @@
       bottom: 0;
       left: 0;
       z-index: 1;
-      transition: opacity 200ms $ease, transform 500ms $ease;
+      transition: opacity 200ms $ease, transform 1000ms $ease;
       pointer-events: all;
       cursor: pointer;
       transform-origin: bottom left;
@@ -50,15 +52,16 @@
           -moz-user-select: none;
           -o-user-select: none;
           user-select: none;
+          transition: opacity 300ms $ease;
           &.stack-img-active {
             position: absolute;
             left: 0;
             opacity: 0;
-            transition: opacity 150ms 0 $ease;
+            transition: opacity 150ms $ease;
           }
         }
         video.stack-img-active {
-          transition: opacity 300ms 0 $ease;
+          transition: opacity 300ms $ease;
         }
       }
       &--active {

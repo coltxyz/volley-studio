@@ -37,7 +37,7 @@ const mockTeamImages = [
 
 export default props => (
   <Fragment>
-    <div className="flex-container module about-pg bg-white " data-nologo={ true }>
+    <div className="flex-container module about-pg bg-white scroll-snap" data-nologo={ true }>
       <div className="about-pg__inner">
         <img src="/static/logo-lg.png"/>
         <p>

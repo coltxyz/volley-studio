@@ -13,6 +13,8 @@ import { mockStackImages, tribuneImages, schermerhornImages } from '../lib/const
 
 import "../styles/styles.scss";
 
+const MAX_VIDEO_OPACITY = 0.4;
+
 export default class Home extends Page {
 
   static slug = 'home'
@@ -20,7 +22,7 @@ export default class Home extends Page {
   constructor() {
     super();
     this.state = {
-      videoOpacity: 0.4,
+      videoOpacity: MAX_VIDEO_OPACITY,
       noLogo: true,
       projectDetail: false
     }
@@ -33,6 +35,8 @@ export default class Home extends Page {
         el.play();
       }
     }, 650);
+
+    window.setInterval(this.updateScroll.bind(this), 100 );
   }
 
   updateScroll = () => {
@@ -46,9 +50,13 @@ export default class Home extends Page {
         }
       });
 
+      const scrollPcnt = 1 - scrollPosition / window.innerHeight;
+      const videoOpacity = MAX_VIDEO_OPACITY * (scrollPcnt > 0 ? scrollPcnt : 0);
+
       this.setState({
         noLogo: Boolean(activeChild.dataset.nologo),
-        activeFrameId: activeChild.dataset.frameid
+        activeFrameId: activeChild.dataset.frameid,
+        videoOpacity
       });
 
     } catch (e) {
@@ -65,11 +73,16 @@ export default class Home extends Page {
   render() {
     return (
       <Layout { ...this.props } noLogo={ this.state.noLogo }>
+        <video
+          className="bg-video"
+          style={{ opacity: this.state.videoOpacity }}
+          src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
+          autoPlay loop muted
+        />
         <div className="scroll-hider">
           <div
             className="content-main"
             ref="scrollContainer"
-            onScroll={ throttle(300, this.updateScroll) }
           >
             <CSSTransition
               in={ this.state.projectDetail }

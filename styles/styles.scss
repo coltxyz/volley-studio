@@ -22,7 +22,13 @@ html {
   height: 100%;
   overflow: scroll;
   scroll-snap-type: y proximity;
+  scroll-snap-stop: always;
+  -webkit-overflow-scrolling: touch;
 }
+.scroll-snap {
+  scroll-snap-align: center;
+}
+
 .content-inner {
   height: 100%;
   position: relative;
@@ -48,6 +54,7 @@ video.bg-video {
   position: absolute;
   z-index: -1;
   opacity: 0.5;
+  transition: 100ms opacity ;
 }
 nav {
   text-orientation: sideways;
@@ -160,10 +167,6 @@ nav a {
   justify-content: center;
   position: relative;
   padding-right: 3rem;
-}
-
-.scroll-snap {
-  scroll-snap-align: start;
 }
 
 .home-title {
