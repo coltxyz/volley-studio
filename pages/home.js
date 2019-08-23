@@ -119,8 +119,8 @@ export default class Home extends Page {
               onDetailClick={ this.onDetailClick }
               isProjectDetail={ this.state.projectDetail }
             />
-            <Contact />
             <About />
+            <Contact />
             <Fin />
           </div>
         </div>

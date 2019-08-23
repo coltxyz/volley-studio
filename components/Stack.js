@@ -97,7 +97,8 @@ export default class Stack extends React.Component {
           "module stack-wrapper",
           this.props.className,
           {
-            'stack--expanded': this.props.isExpanded
+            'stack--expanded': this.props.isExpanded,
+            'stack--unfocused': !this.props.isActiveFrame
           }
         )}
       >

@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   background: white;
-  margin: 15% 0;
+  margin: 5% 0;
 
   .stack-btn {
     position: absolute;
@@ -25,6 +25,11 @@
     width: auto;
     pointer-events: none;
     position: relative;
+    &--inactive {
+      .stack__image {
+        transform: ''
+      }
+    }
     &__expand {
       position: absolute;
       right: -64px;
@@ -74,7 +79,7 @@
     }
     &__content {
       position: absolute;
-      bottom: -6em;
+      bottom: -9em;
       text-align: center;
       width: 100%;
       height: 4em;
