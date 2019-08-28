@@ -1,5 +1,5 @@
 export default props => (
-  <div className="flex-container module bg-white scroll-snap" data-nologo={ true }>
+  <div className="flex-container module bg-white " data-nologo={ true }>
     <div className="contact-card">
       <div className="contact-card__bg-1" />
       <div className="contact-card__bg-2" />

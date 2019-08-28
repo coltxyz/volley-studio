@@ -9,11 +9,14 @@ import About from '../components/about';
 import HomepageStack from '../components/homepage-stack';
 import Fin from '../components/fin';
 import ProjectDetail from '../components/project-detail';
-import { mockStackImages, tribuneImages, schermerhornImages } from '../lib/constants';
+import { mockStackImages, tribuneImages, schermerhornImages, PropsForType } from '../lib/constants';
 
 import "../styles/styles.scss";
 
 const MAX_VIDEO_OPACITY = 0.4;
+const DISTANCE_THRESHOLD = 200;
+
+let activeChild;
 
 export default class Home extends Page {
 
@@ -24,7 +27,7 @@ export default class Home extends Page {
     this.state = {
       videoOpacity: MAX_VIDEO_OPACITY,
       noLogo: true,
-      projectDetail: false
+      isProjectDetail: false
     }
   }
 
@@ -40,23 +43,23 @@ export default class Home extends Page {
   }
 
   updateScroll = () => {
-    let activeChild;
+    activeChild = null;
     try {
-      const scrollContainer = this.refs.scrollContainer;
+      const scrollContainer = document.getElementById('scrollContainer');
       const scrollPosition = scrollContainer.scrollTop;
       [].forEach.call(scrollContainer.children, child => {
-        if (scrollPosition >= child.offsetTop) {
+        if (Math.abs(scrollPosition - child.offsetTop) < DISTANCE_THRESHOLD ) {
           activeChild = child;
         }
       });
 
-      const scrollPcnt = 1 - scrollPosition / window.innerHeight;
-      const videoOpacity = MAX_VIDEO_OPACITY * (scrollPcnt > 0 ? scrollPcnt : 0);
+
+      const propsForType = activeChild
+        ? PropsForType[activeChild.dataset.type]
+        : PropsForType['null']
 
       this.setState({
-        noLogo: Boolean(activeChild.dataset.nologo),
-        activeFrameId: activeChild.dataset.frameid,
-        videoOpacity
+        ...propsForType
       });
 
     } catch (e) {
@@ -66,14 +69,22 @@ export default class Home extends Page {
 
   onDetailClick = () => {
     this.setState({
-      projectDetail: true
+      isProjectDetail: true
     })
   }
 
   render() {
     return (
-      <Layout { ...this.props } noLogo={ this.state.noLogo }>
+      <Layout
+        { ...this.props }
+        logo={ this.state.logo }
+        controls={ this.state.controls }
+        inspect={ this.state.inspect }
+        text={ this.state.text }
+        onDetailClick={ this.onDetailClick }
+      >
         <video
+          hidden
           className="bg-video"
           style={{ opacity: this.state.videoOpacity }}
           src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
@@ -82,17 +93,17 @@ export default class Home extends Page {
         <div className="scroll-hider">
           <div
             className="content-main"
-            ref="scrollContainer"
+            id="scrollContainer"
           >
             <CSSTransition
-              in={ this.state.projectDetail }
+              in={ this.state.isProjectDetail }
               unmountOnExit
               classNames="transition"
               timeout={ 500 }
             >
               { state => (
                 <ProjectDetail
-                  onCloseClick={ () => this.setState({ projectDetail: false })}
+                  onCloseClick={ () => this.setState({ isProjectDetail: false })}
                 />
               )}
             </CSSTransition>
@@ -102,22 +113,20 @@ export default class Home extends Page {
               frameId="1"
               images={ mockStackImages }
               activeFrameId={ this.state.activeFrameId }
-              onDetailClick={ this.onDetailClick }
-              isExpanded={ this.state.projectDetail }
+              isExpanded={ this.state.isProjectDetail }
             />
             <HomepageStack
               frameId="2"
               images={ schermerhornImages }
               activeFrameId={ this.state.activeFrameId }
-              onDetailClick={ this.onDetailClick }
-              isProjectDetail={ this.state.projectDetail }
+              isExpanded={ this.state.isProjectDetail }
             />
             <HomepageStack
               frameId="3"
               images={ tribuneImages }
               activeFrameId={ this.state.activeFrameId }
               onDetailClick={ this.onDetailClick }
-              isProjectDetail={ this.state.projectDetail }
+              isExpanded={ this.state.isProjectDetail }
             />
             <About />
             <Contact />

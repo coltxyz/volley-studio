@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import Head from 'next/head'
 import Nav from './Nav.js';
 import Footer from './Footer.js';
+import Controls from './controls';
 
 const social_img_url = '';
 const title = '';
@@ -66,9 +66,7 @@ export default class Layout extends React.Component {
         </Head>
         <div id="main" className={ this.state.isNavOpen ? 'nav--open' : ''}>
           <Nav { ...this.props } />
-          <div className="logo" style={{ opacity: this.props.noLogo ? 0 : 1 }}>
-            <Link href="/"><a>VOLLEY STUDIO</a></Link>
-          </div>
+          <Controls { ...this.props }/>
           { this.props.children }
         </div>
       </div>

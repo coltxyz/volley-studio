@@ -1,0 +1,51 @@
+.controls {
+  position: absolute;
+  left: 0;
+  right: 3em;
+  bottom: 0;
+  top: 0;
+  &__item {
+    position: absolute;
+    z-index: 10;
+    opacity: 1;
+    transition: 600ms opacity;
+    &.hide {
+      opacity: 0;
+    }
+  }
+  .logo {
+    font-weight: 500;
+    top: 1em;
+    left: 1em;
+    transition: 200ms opacity;
+  }
+  .glasses {
+    bottom: 2.4em;
+    right: 2em;
+    transition: 800ms opacity 100ms;
+    svg {
+      height : 2em;
+    }
+  }
+  .up-down-toggle {
+    bottom: 2.4em;
+    left: 2.4em;
+    .up-arrow {
+      transform: rotate(180deg);
+      padding-top: 3em;
+    }
+    svg {
+      height : 1em;
+    }
+  }
+  .text {
+    z-index: 6;
+    bottom: 3em;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    p {
+      margin-bottom: 0.5em;
+    }
+  }
+}

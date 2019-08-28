@@ -37,7 +37,7 @@ const mockTeamImages = [
 
 export default props => (
   <Fragment>
-    <div className="flex-container module about-pg bg-white scroll-snap" data-nologo={ true }>
+    <div className="flex-container module about-pg bg-white " data-type="informational">
       <div className="about-pg__inner">
         <img src="/static/logo-lg.png"/>
         <p>
@@ -47,21 +47,19 @@ export default props => (
     </div>
 
     <Stack
-      className="team-stack scroll-snap"
+      className="team-stack "
       imgWidth={ 250 }
       defaultHeight={ 470 }
       images={ mockTeamImages }
     >
-      { ({}) => (
-        <div className="team-stack__content">
-          <p>
-            <strong>Michael Klausmeier,</strong> is the Creative Director and founder of Volley. He created the studio in 2008, after graduating from Princeton University. With over a decade of professional experience in CG visualization, Michael has collaborated closely with architects and designers to translate their concepts into visual media.
-          </p>
-        </div>
-      )}
+      <div className="team-stack__content">
+        <p>
+          <strong>Michael Klausmeier,</strong> is the Creative Director and founder of Volley. He created the studio in 2008, after graduating from Princeton University. With over a decade of professional experience in CG visualization, Michael has collaborated closely with architects and designers to translate their concepts into visual media.
+        </p>
+      </div>
     </Stack>
 
-    <div className="flex-container module bg-white scroll-snap">
+    <div className="flex-container module bg-white ">
       <div>
         <div className="col-6"></div>
         <div className="col-6">

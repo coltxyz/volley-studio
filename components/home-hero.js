@@ -1,7 +1,11 @@
 import Arrow from '../components/svg/arrow';
 
 export default props => (
-  <div className="home-title module module-lg scroll-snap" data-nologo={ true }>
+  <div
+    className="home-title module module-lg "
+    data-frameid={ 0 }
+    data-type="homeHero"
+  >
     <div className="home-title__inner">
       <img src="/static/logo-lg.png"/>
       <h2>

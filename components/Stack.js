@@ -92,13 +92,14 @@ export default class Stack extends React.Component {
     return (
       <div
         id={ this.props.id }
+        data-type={ this.props.type }
         data-frameid={ this.props.frameId }
         className={classnames(
           "module stack-wrapper",
           this.props.className,
           {
             'stack--expanded': this.props.isExpanded,
-            'stack--unfocused': !this.props.isActiveFrame
+            'stack--active': !this.props.isActiveFrame
           }
         )}
       >
@@ -161,13 +162,8 @@ export default class Stack extends React.Component {
               </div>
             ))
           }
-          { this.props.children({ onDetailClick: this.onDetailClick }) }
+          { this.props.children }
         </div>
-        { this.props.arrow && (
-          <div className="stack__arrow" onClick={ this.onDetailClick }>
-            <ArrowRight />
-          </div>
-        )}
       </div>
     )
   }

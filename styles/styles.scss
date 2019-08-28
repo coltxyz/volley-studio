@@ -4,7 +4,6 @@ $black-ln: #444;
 @import './typography';
 @import './grid';
 
-
 html {
   background: white;
   scroll-behavior: smooth;
@@ -22,14 +21,8 @@ html {
 .content-main {
   height: 100%;
   overflow: scroll;
-  // scroll-snap-type: y proximity;
-  scroll-snap-stop: always;
   -webkit-overflow-scrolling: touch;
 }
-.scroll-snap {
-  scroll-snap-align: center;
-}
-
 .content-inner {
   height: 100%;
   position: relative;
@@ -39,14 +32,6 @@ html {
 }
 .border-top {
   border-top: 1px solid #666;
-}
-.logo {
-  position: absolute;
-  font-weight: 500;
-  z-index: 200;
-  top: 1em;
-  left: 1em;
-  transition: 200ms opacity;
 }
 video.bg-video {
   object-fit: cover;
@@ -183,7 +168,8 @@ nav a {
     margin: 0 auto;
   }
   &__content {
-    position: absolute;
+    display: none;
+    position: fixed;
     bottom: 0;
     width: 100%;
     text-align: center;
@@ -217,3 +203,4 @@ nav a {
 @import './stack';
 @import './project';
 @import './contact';
+@import './controls';
