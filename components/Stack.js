@@ -89,14 +89,14 @@ export default class Stack extends React.Component {
     return (
       <div
         id={ this.props.id }
-        data-type={ this.props.type }
+        data-frametype={ this.props.frameType }
         data-frameid={ this.props.frameId }
         className={classnames(
           "module stack-wrapper",
           this.props.className,
           {
             'stack--expanded': this.props.isExpanded,
-            'stack--active': this.props.isActiveFrame
+            'module--active': this.props.isActiveFrame
           }
         )}
       >

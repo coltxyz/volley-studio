@@ -54,7 +54,7 @@ export default class Home extends Page {
       });
 
       let propsForType = activeChild
-        ? PropsForType[activeChild.dataset.type]
+        ? PropsForType[activeChild.dataset.frametype]
         : PropsForType['null']
 
       let activeFrameId = activeChild
@@ -121,25 +121,29 @@ export default class Home extends Page {
                 <ProjectDetail />
               )}
             </CSSTransition>
-            <HomeHero />
+            <HomeHero
+              isActiveFrame={ this.state.activeFrameId == "0" }
+              frameType="homeHero"
+              frameId={ 0 }
+            />
             <Stack
               id="portfolio"
               frameId={ 1 }
-              type="portfolioItem"
+              frameType="portfolioItem"
               images={ mockStackImages }
               isActiveFrame={ this.state.activeFrameId == "1" }
               isExpanded={ this.state.isProjectDetail }
             />
             <Stack
               frameId={ 2 }
-              type="portfolioItem"
+              frameType="portfolioItem"
               images={ schermerhornImages }
               isActiveFrame={ this.state.activeFrameId == "2" }
               isExpanded={ this.state.isProjectDetail }
             />
             <Stack
               frameId={ 3 }
-              type="portfolioItem"
+              frameType="portfolioItem"
               images={ tribuneImages }
               isActiveFrame={ this.state.activeFrameId == "3" }
               isExpanded={ this.state.isProjectDetail }

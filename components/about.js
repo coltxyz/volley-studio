@@ -40,18 +40,28 @@ export default props => (
 
     <div className="flex-container module about-pg bg-white " data-type="informational">
       <div className="about-pg__inner">
-        <p className="uppercase">
-          Services
-        </p>
-        <p>
-          Our work is more than a laundry list. What we do is create images of things that don’t (yet) exist. Give us the it-- any idea, sketch, model, text, phone call, whatever-- and we create the visuals. We make digital images to tell the story of that idea, before it is created. Or before it is realized, before it is prototyped, before it is funded, before it is approved, before it is published, before it is built... Which is to say, we’ve worked on lots of its in all stages of development.
-        </p>
+        <div className="about-pg__inner__left">
+          <p className="uppercase bold">
+            Services
+          </p>
+          <p>
+            Our work is more than a laundry list. What we do is create images of things that don’t (yet) exist. Give us the it-- any idea, sketch, model, text, phone call, whatever-- and we create the visuals. We make digital images to tell the story of that idea, before it is created. Or before it is realized, before it is prototyped, before it is funded, before it is approved, before it is published, before it is built... Which is to say, we’ve worked on lots of its in all stages of development.
+          </p>
+        </div>
+        <div className="about-pg__inner__right">
+          <h4>Visualization Consulting</h4>
+          <h4>Still Image Renders</h4>
+          <h4>Animations</h4>
+          <h4>Cinemagraphs</h4>
+          <h4>360° Interactive Experiences</h4>
+          <h4>Virtual Reality</h4>
+        </div>
       </div>
     </div>
 
     <div className="flex-container module about-pg bg-white " data-type="informational">
-      <div className="about-pg__inner">
-        <p className="uppercase">
+      <div className="about-pg__inner__left">
+        <p className="uppercase bold">
           About Us
         </p>
         <p>
@@ -77,7 +87,7 @@ export default props => (
       <div>
         <div className="col-6"></div>
         <div className="col-6">
-          <p className="uppercase">
+          <p className="uppercase bold">
             Select Clients
           </p>
         </div>

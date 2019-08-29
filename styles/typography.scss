@@ -24,7 +24,7 @@
 }
 
 html {
-  font-size: 14px;
+  font-size: 14.5px;
 }
 body {
   margin: 0;
@@ -38,7 +38,7 @@ h1, h2, h3, h4, p {
   line-height: 1.4em;
   font-weight: normal;
   margin: 0 0 0.6rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 h1 {
   font-size: 3.5rem;
@@ -58,15 +58,15 @@ h3 {
   letter-spacing: 0.03em;
 }
 h4 {
-  font-size: 1.5rem;
-  font-weight: regular;
-  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
 }
 p {
   font-size: 1rem;
   margin-top: 0;
   margin-bottom: 1em;
-  line-height: 1.4em;
+  line-height: 1.5em;
 }
 a {
   color: black;
@@ -79,13 +79,14 @@ sup {
   position: relative;
   bottom: -0.4em;
 }
-.bold {
-  font-weight: 600;
-}
 .uppercase {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.06em;
+}
+.bold {
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 .mono {
   font-family: 'Basis-Mono';
