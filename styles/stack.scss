@@ -25,10 +25,14 @@
     width: auto;
     pointer-events: none;
     position: relative;
+    transition: 300ms opacity;
     &--inactive {
       .stack__image {
         transform: ''
       }
+    }
+    &--expanded {
+      opacity: 0;
     }
     &__expand {
       position: absolute;

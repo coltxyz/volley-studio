@@ -121,8 +121,7 @@ export default class Stack extends React.Component {
                 className={ `stack__image ${ image.id === this.state.currentTargetId ? 'stack__image--active' : '' }` }
                 style={{
                   transform: this.getTransform({
-                    id: image.id,
-                    isExpanded: this.props.isExpanded
+                    id: image.id
                   }),
                   zIndex: this.imageStack.indexOf(image.id) + 10,
                   opacity: (this.state.isReady && this.props.isVisible) ? 1 : 0

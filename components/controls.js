@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Carat from  './svg/carat'
 import Glasses from  './svg/glasses'
+import Cross from './svg/cross'
 
 const Controls = props => {
 
@@ -18,6 +19,12 @@ const Controls = props => {
         <div className="down-arrow">
           <Carat />
         </div>
+      </div>
+      <div
+        className={ classname("controls__item close", { hide: !props.close }) }
+        onClick={ props.onCloseClick }
+      >
+        <Cross />
       </div>
       <div
         className={ classname("controls__item glasses", { hide: !props.inspect }) }

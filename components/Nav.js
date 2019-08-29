@@ -9,11 +9,11 @@ const Nav = props => (
       <a href="#portfolio" onClick={ scrollTo }>
         Portfolio
       </a>
-      <a href="#contact" onClick={ scrollTo }>
-        Contact
-      </a>
       <a href="#about" onClick={ scrollTo }>
         About
+      </a>
+      <a href="#contact" onClick={ scrollTo }>
+        Contact
       </a>
     </nav>
   </div>

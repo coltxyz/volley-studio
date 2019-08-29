@@ -37,12 +37,26 @@ const mockTeamImages = [
 
 export default props => (
   <Fragment>
+
     <div className="flex-container module about-pg bg-white " data-type="informational">
       <div className="about-pg__inner">
-        <img src="/static/logo-lg.png"/>
+        <p className="uppercase">
+          Services
+        </p>
         <p>
-          <strong>Volley</strong> is a Brooklyn-based visualization studio that designs digital imagery. Simply put, we believe in the power of immersive visual content to tell a compelling story. Since 2008, we have crafted the highest quality content to visualize our clients’ visions. As a team of designers, architects, photographers, and strategists, we excel in transforming ideas into cohesive, visual narratives. We have focused on building a body of knowledge that pushes the boundaries of digital imagery. As part of this, we are always exploring the newest technologies and constantly experimenting. We are committed to expanding our expertise and pushing the boundaries of our work.
-        </  p>
+          Our work is more than a laundry list. What we do is create images of things that don’t (yet) exist. Give us the it-- any idea, sketch, model, text, phone call, whatever-- and we create the visuals. We make digital images to tell the story of that idea, before it is created. Or before it is realized, before it is prototyped, before it is funded, before it is approved, before it is published, before it is built... Which is to say, we’ve worked on lots of its in all stages of development.
+        </p>
+      </div>
+    </div>
+
+    <div className="flex-container module about-pg bg-white " data-type="informational">
+      <div className="about-pg__inner">
+        <p className="uppercase">
+          About Us
+        </p>
+        <p>
+          Volley is a Brooklyn-based visualization studio that designs digital imagery. Simply put, we believe in the power of immersive visual content to tell a compelling story. Since 2008, we have crafted the highest quality content to visualize our clients’ visions. As a team of designers, architects, photographers, and strategists, we excel in transforming ideas into cohesive, visual narratives. We have focused on building a body of knowledge that pushes the boundaries of digital imagery. As part of this, we are always exploring the newest technologies and constantly experimenting. We are committed to expanding our expertise and pushing the boundaries of our work.
+        </p>
       </div>
     </div>
 
@@ -54,7 +68,7 @@ export default props => (
     >
       <div className="team-stack__content">
         <p>
-          <strong>Michael Klausmeier,</strong> is the Creative Director and founder of Volley. He created the studio in 2008, after graduating from Princeton University. With over a decade of professional experience in CG visualization, Michael has collaborated closely with architects and designers to translate their concepts into visual media.
+          <strong>Michael Klausmeier</strong> is the Creative Director and founder of Volley. He created the studio in 2008, after graduating from Princeton University. With over a decade of professional experience in CG visualization, Michael has collaborated closely with architects and designers to translate their concepts into visual media.
         </p>
       </div>
     </Stack>

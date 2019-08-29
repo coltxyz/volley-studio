@@ -2,51 +2,65 @@ import Cross from './svg/cross';
 
 import { mockStackImages } from '../lib/constants.js';
 
-export default props => (
-  <div
-    className="project-detail"
-  >
-    <span
-      className="project-detail__close"
-      onClick={ props.onCloseClick }
-    >
-      <Cross />
-    </span>
+export default class ProjectDetail extends React.Component {
 
-    <div className="logo">
-      <a href="/"><a>VOLLEY STUDIO</a></a>
-    </div>
+  constructor(props) {
+    super()
+    this.state = {
+      activeImageIndex: 0
+    }
+  }
 
-    <div className="project-detail__inner">
-      <div className="project-detail__inner__images">
-        <div className="scroll-hider">
-          <div>
+  onThumbnailClick = (index) => {
+    this.setState({
+      activeImageIndex: index
+    })
+  }
+
+  render() {
+    const activeImage = mockStackImages[this.state.activeImageIndex]
+    return (
+      <div className="project-detail">
+        <div className="project-detail__inner">
+          <div className="project-detail__main-photo">
             {
-              mockStackImages.map( image => (
-                image.activeVideoSrc
-                  ? <video autoPlay muted loop src={ image.activeVideoSrc } />
-                  : <img src={ image.activeSrc } />
-              ))
+              activeImage.activeVideoSrc
+                ? <video
+                    autoPlay muted loop
+                    src={ activeImage.activeVideoSrc }
+                  />
+                : <img src={ activeImage.activeSrc } />
             }
+          </div>
+          <div className="project-detail__side-panel">
+            <div className="project-detail__side-panel__thumbnails">
+              {
+                mockStackImages.map( (image, i) => (
+                  image.activeVideoSrc
+                    ? <video
+                        onClick={ () => this.onThumbnailClick(i) }
+                        autoPlay muted loop
+                        data-index={ i }
+                        key={ image.activeVideoSrc }
+                        src={ image.activeVideoSrc }
+                      />
+                    : <img
+                        onClick={ () => this.onThumbnailClick(i) }
+                        key={ image.activeSrc }
+                        src={ image.activeSrc }
+                      />
+                ))
+              }
+            </div>
+            <div className="project-detail__side-panel__description">
+              <p>
+                318 West 47 is a new build low-rise in Manhattan’s midtown west.  This boutique residence has 5 units including a ground floor unit with a backyard and personal garage, gracious balconies for all.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div className="project-detail__inner__content">
-        <p className="uppercase">
-          318 W 47TH ST
-        </p>
-        <p>
-          318 West 47 is a new build low-rise in Manhattan’s midtown west.  This boutique residence has 5 units including a ground floor unit with a backyard and personal garage, gracious balconies for all.
-        </p>
-        <div className="project-buttons">
-          <button className="action-button">
-            Previous
-          </button>
-          <button className="action-button">
-            Next
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+    );
+  }
+
+}

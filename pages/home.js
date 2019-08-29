@@ -53,10 +53,13 @@ export default class Home extends Page {
         }
       });
 
-
-      const propsForType = activeChild
+      let propsForType = activeChild
         ? PropsForType[activeChild.dataset.type]
         : PropsForType['null']
+
+      if (this.state.isProjectDetail) {
+        propsForType = PropsForType.projectDetail
+      }
 
       this.setState({
         ...propsForType
@@ -73,6 +76,12 @@ export default class Home extends Page {
     })
   }
 
+  onCloseClick = () => {
+    this.setState({
+      isProjectDetail: false
+    })
+  }
+
   render() {
     return (
       <Layout
@@ -81,7 +90,9 @@ export default class Home extends Page {
         controls={ this.state.controls }
         inspect={ this.state.inspect }
         text={ this.state.text }
+        close={ this.state.close }
         onDetailClick={ this.onDetailClick }
+        onCloseClick= { this.onCloseClick }
       >
         <video
           hidden
@@ -102,9 +113,7 @@ export default class Home extends Page {
               timeout={ 500 }
             >
               { state => (
-                <ProjectDetail
-                  onCloseClick={ () => this.setState({ isProjectDetail: false })}
-                />
+                <ProjectDetail />
               )}
             </CSSTransition>
             <HomeHero />
@@ -125,7 +134,6 @@ export default class Home extends Page {
               frameId="3"
               images={ tribuneImages }
               activeFrameId={ this.state.activeFrameId }
-              onDetailClick={ this.onDetailClick }
               isExpanded={ this.state.isProjectDetail }
             />
             <About />
