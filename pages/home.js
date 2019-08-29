@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 import HomeHero from '../components/home-hero';
 import Contact from '../components/contact';
 import About from '../components/about';
-import HomepageStack from '../components/homepage-stack';
+import Stack from '../components/Stack';
 import Fin from '../components/fin';
 import ProjectDetail from '../components/project-detail';
 import { mockStackImages, tribuneImages, schermerhornImages, PropsForType } from '../lib/constants';
@@ -57,12 +57,17 @@ export default class Home extends Page {
         ? PropsForType[activeChild.dataset.type]
         : PropsForType['null']
 
+      let activeFrameId = activeChild
+        ? activeChild.dataset.frameid
+        : null
+
       if (this.state.isProjectDetail) {
         propsForType = PropsForType.projectDetail
       }
 
       this.setState({
-        ...propsForType
+        ...propsForType,
+        activeFrameId
       });
 
     } catch (e) {
@@ -117,23 +122,26 @@ export default class Home extends Page {
               )}
             </CSSTransition>
             <HomeHero />
-            <HomepageStack
+            <Stack
               id="portfolio"
-              frameId="1"
+              frameId={ 1 }
+              type="portfolioItem"
               images={ mockStackImages }
-              activeFrameId={ this.state.activeFrameId }
+              isActiveFrame={ this.state.activeFrameId == "1" }
               isExpanded={ this.state.isProjectDetail }
             />
-            <HomepageStack
-              frameId="2"
+            <Stack
+              frameId={ 2 }
+              type="portfolioItem"
               images={ schermerhornImages }
-              activeFrameId={ this.state.activeFrameId }
+              isActiveFrame={ this.state.activeFrameId == "2" }
               isExpanded={ this.state.isProjectDetail }
             />
-            <HomepageStack
-              frameId="3"
+            <Stack
+              frameId={ 3 }
+              type="portfolioItem"
               images={ tribuneImages }
-              activeFrameId={ this.state.activeFrameId }
+              isActiveFrame={ this.state.activeFrameId == "3" }
               isExpanded={ this.state.isProjectDetail }
             />
             <About />

@@ -4,7 +4,6 @@
   align-items: center;
   background: white;
   margin: 10% 0;
-
   .stack-btn {
     position: absolute;
     height: 75%;
@@ -26,10 +25,8 @@
     pointer-events: none;
     position: relative;
     transition: 300ms opacity;
-    &--inactive {
-      .stack__image {
-        transform: ''
-      }
+    &--active {
+      opacity: 1;
     }
     &--expanded {
       opacity: 0;
