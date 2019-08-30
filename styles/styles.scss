@@ -21,8 +21,14 @@ html {
     opacity: 1;
     transition: 300ms opacity;
   }
-  &.content--transitioning .content-container {
-    opacity: 0;
+  &.content--transitioning {
+    .nav-trackbar {
+      opacity: 0;
+      transform: none;
+    }
+    .content-container {
+      opacity: 0;
+    }
   }
 }
 .content-main {
@@ -55,6 +61,17 @@ nav a {
     text-decoration: none;
     border-left: 1.2px solid black
   }
+}
+.nav-trackbar {
+  position: fixed;
+  right: 3.3rem;
+  top: 0;
+  margin-top: 0.3rem;
+  transition: 100ms top, 300ms opacity;
+  width: 10px;
+  height: 90px;
+  z-index: 30;
+  background: #cacaca;
 }
 
 .flex-container {

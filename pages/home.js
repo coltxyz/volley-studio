@@ -67,7 +67,8 @@ export default class Home extends Page {
 
       this.setState({
         ...propsForType,
-        activeFrameId
+        activeFrameId,
+        scrollPercentage: scrollPosition / scrollContainer.offsetHeight * scrollContainer.childNodes.length
       });
 
     } catch (e) {
@@ -127,6 +128,7 @@ export default class Home extends Page {
     return (
       <Layout
         { ...this.props }
+        scrollPercentage={ this.state.scrollPercentage }
         isTransitioning={ this.state.isTransitioning }
         logo={ this.state.logo }
         controls={ this.state.controls }
@@ -180,12 +182,12 @@ export default class Home extends Page {
               isExpanded={ this.state.isProjectDetail }
             />
             <About
-              frameId={ 4 }
               id="about"
+              frameId={ 4 }
             />
             <Contact
-              frameId={ 8 }
               id="contact"
+              frameId={ 8 }
             />
             <Fin
               frameId={ 9 }

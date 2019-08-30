@@ -5,6 +5,10 @@ const Nav = props => {
   }
   return (
     <div>
+      <div
+        style={{ top: `${ props.scrollPercentage }%` }}
+        className="nav-trackbar"
+      />
       <nav>
         <a
           href="#portfolio"
