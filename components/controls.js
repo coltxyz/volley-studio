@@ -10,13 +10,23 @@ const Controls = props => {
   return (
     <div className="controls">
       <div className={ classname("controls__item logo", { hide: !props.logo }) }>
-        <Link href="/"><a>VOLLEY STUDIO</a></Link>
+        <Link href="/">
+          <a onClick={ e => { e.preventDefault(); props.onScrollRequest({ id: 'home' })}}>
+            VOLLEY STUDIO
+          </a>
+        </Link>
       </div>
       <div className={ classname("controls__item up-down-toggle", { hide: !props.controls }) }>
-        <div className="up-arrow">
+        <div
+          className="up-arrow"
+          onClick={ () => props.onScrollRequest({ direction: 'up' })}
+        >
           <Carat />
         </div>
-        <div className="down-arrow">
+        <div
+          className="down-arrow"
+          onClick={ () => props.onScrollRequest({ direction: 'down' })}
+        >
           <Carat />
         </div>
       </div>

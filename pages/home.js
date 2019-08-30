@@ -15,6 +15,7 @@ import "../styles/styles.scss";
 
 const MAX_VIDEO_OPACITY = 0.4;
 const DISTANCE_THRESHOLD = 200;
+const TRANSITION_INTERVAL = 300;
 
 let activeChild;
 
@@ -25,9 +26,8 @@ export default class Home extends Page {
   constructor() {
     super();
     this.state = {
-      videoOpacity: MAX_VIDEO_OPACITY,
-      noLogo: true,
-      isProjectDetail: false
+      isProjectDetail: false,
+      activeFrameId: 0
     }
   }
 
@@ -39,7 +39,7 @@ export default class Home extends Page {
       }
     }, 650);
 
-    window.setInterval(this.updateScroll.bind(this), 100 );
+    window.setInterval(this.updateScroll.bind(this), 100);
   }
 
   updateScroll = () => {
@@ -58,7 +58,7 @@ export default class Home extends Page {
         : PropsForType['null']
 
       let activeFrameId = activeChild
-        ? activeChild.dataset.frameid
+        ? parseInt(activeChild.dataset.frameid)
         : null
 
       if (this.state.isProjectDetail) {
@@ -87,25 +87,56 @@ export default class Home extends Page {
     })
   }
 
+  onScrollRequest = ({ direction, id }) => {
+    let el;
+    if (direction === 'up') {
+      el = document.querySelector(`[data-frameid='${ this.state.activeFrameId - 1 }']`);
+    } else if (direction === 'down') {
+      el = document.querySelector(`[data-frameid='${ this.state.activeFrameId + 1 }']`);
+    } else if ( typeof id !== undefined) {
+      el = document.getElementById(id);
+    }
+
+    if (!el) {
+      return;
+    }
+
+    // Determine if we should do a scroll or fade animation
+    if (Math.abs(parseInt(el.dataset.frameid) - this.state.activeFrameId) <=  1) {
+      el.scrollIntoView({ behavior:'smooth' });
+    } else {
+      this.setState({
+        isTransitioning: true
+      });
+      window.setTimeout(() => {
+        el.scrollIntoView();
+        this.setState({
+          isTransitioning: false
+        });
+      }, TRANSITION_INTERVAL)
+    }
+
+    // update controls and detail overlay
+    this.setState({
+      isProjectDetail: false
+    });
+    this.updateScroll();
+  }
+
   render() {
     return (
       <Layout
         { ...this.props }
+        isTransitioning={ this.state.isTransitioning }
         logo={ this.state.logo }
         controls={ this.state.controls }
         inspect={ this.state.inspect }
         text={ this.state.text }
         close={ this.state.close }
         onDetailClick={ this.onDetailClick }
-        onCloseClick= { this.onCloseClick }
+        onCloseClick={ this.onCloseClick }
+        onScrollRequest={ this.onScrollRequest }
       >
-        <video
-          hidden
-          className="bg-video"
-          style={{ opacity: this.state.videoOpacity }}
-          src="https://volley-dev.s3.amazonaws.com/TerracelivingVignette_WonW.mp4"
-          autoPlay loop muted
-        />
         <div className="scroll-hider">
           <div
             className="content-main"
@@ -117,40 +148,49 @@ export default class Home extends Page {
               classNames="transition"
               timeout={ 500 }
             >
-              { state => (
-                <ProjectDetail />
-              )}
+              { state => <ProjectDetail /> }
             </CSSTransition>
             <HomeHero
-              isActiveFrame={ this.state.activeFrameId == "0" }
-              frameType="homeHero"
+              id="home"
               frameId={ 0 }
+              isActiveFrame={ this.state.activeFrameId == 0 }
+              frameType="homeHero"
+              onArrowClick={ () => this.onScrollRequest({ direction: 'down' })}
             />
             <Stack
               id="portfolio"
               frameId={ 1 }
               frameType="portfolioItem"
               images={ mockStackImages }
-              isActiveFrame={ this.state.activeFrameId == "1" }
+              isActiveFrame={ this.state.activeFrameId == 1 }
               isExpanded={ this.state.isProjectDetail }
             />
             <Stack
               frameId={ 2 }
               frameType="portfolioItem"
               images={ schermerhornImages }
-              isActiveFrame={ this.state.activeFrameId == "2" }
+              isActiveFrame={ this.state.activeFrameId == 2 }
               isExpanded={ this.state.isProjectDetail }
             />
             <Stack
               frameId={ 3 }
               frameType="portfolioItem"
               images={ tribuneImages }
-              isActiveFrame={ this.state.activeFrameId == "3" }
+              isActiveFrame={ this.state.activeFrameId == 3 }
               isExpanded={ this.state.isProjectDetail }
             />
-            <About />
-            <Contact />
-            <Fin />
+            <About
+              frameId={ 4 }
+              id="about"
+            />
+            <Contact
+              frameId={ 8 }
+              id="contact"
+            />
+            <Fin
+              frameId={ 9 }
+              id="fin"
+            />
           </div>
         </div>
       </Layout>

@@ -38,7 +38,12 @@ const mockTeamImages = [
 export default props => (
   <Fragment>
 
-    <div className="flex-container module about-pg bg-white " data-type="informational">
+    <div
+      id={ props.id }
+      className="flex-container module about-pg bg-white"
+      data-frametype="informational"
+      data-frameid={ props.frameId }
+    >
       <div className="about-pg__inner">
         <div className="about-pg__inner__left">
           <p className="uppercase bold">
@@ -59,7 +64,11 @@ export default props => (
       </div>
     </div>
 
-    <div className="flex-container module about-pg bg-white " data-type="informational">
+    <div
+      className="flex-container module about-pg bg-white"
+      data-frametype="informational"
+      data-frameid={ props.frameId + 1 }
+    >
       <div className="about-pg__inner__left">
         <p className="uppercase bold">
           About Us
@@ -75,6 +84,8 @@ export default props => (
       imgWidth={ 250 }
       defaultHeight={ 470 }
       images={ mockTeamImages }
+      frameType="informational"
+      frameId={ props.frameId + 2 }
     >
       <div className="team-stack__content">
         <p>
@@ -83,7 +94,11 @@ export default props => (
       </div>
     </Stack>
 
-    <div className="flex-container module bg-white ">
+    <div
+      className="flex-container module bg-white"
+      data-frametype="informational"
+      data-frameid={ props.frameId + 3 }
+    >
       <div>
         <div className="col-6"></div>
         <div className="col-6">

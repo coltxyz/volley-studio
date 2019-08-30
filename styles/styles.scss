@@ -17,6 +17,13 @@ html {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  .content-container {
+    opacity: 1;
+    transition: 300ms opacity;
+  }
+  &.content--transitioning .content-container {
+    opacity: 0;
+  }
 }
 .content-main {
   height: 100%;
@@ -26,21 +33,6 @@ html {
 .content-inner {
   height: 100%;
   position: relative;
-}
-.border-right {
-  border-right: 1px solid #666;
-}
-.border-top {
-  border-top: 1px solid #666;
-}
-video.bg-video {
-  object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  z-index: -1;
-  opacity: 0.5;
-  transition: 100ms opacity ;
 }
 nav {
   text-orientation: sideways;
@@ -69,61 +61,9 @@ nav a {
   display: flex;
   height: 100%;
 }
-.full {
-  height: 100%;
-  width: 100%;
-}
-.flex-1 {
-  flex: 1;
-}
-.flex-bottom {
-  align-items: end;
-}
-.flex-col {
-  flex-direction: column;
-}
-.pad {
-  padding: 1rem;
-}
-.pad-sides {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.pad-right {
-  padding-right: 2rem;
-}
-.cursor-pointer {
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-.inline-block {
-  display: inline-block;
-}
-.rel {
-  position: relative;
-}
-.topspc {
-  margin-top: 3rem;
-}
+
 .bg-white {
   background: white;
-}
-
-.action-button {
-  font-family: 'Basis-Mono';
-  border: 1px solid black;
-  padding: 1em 2em;
-  min-width: 8em;
-  cursor: pointer;
-  background: none;
-  &:hover {
-    text-decoration: underline;
-  }
-  & ~ .action-button {
-    border-left: none;
-  }
 }
 
 .module {
@@ -133,46 +73,6 @@ nav a {
   justify-content: center;
   position: relative;
   padding-right: 3rem;
-}
-
-.home-title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  img.logo {
-    height: 7rem;
-    padding-bottom: 2rem;
-  }
-  &__inner {
-    &__left {
-      width: percentage(4/12);
-      margin-left: percentage(1/12);
-    }
-    &__right {
-      margin-left: percentage(1/12);
-      width: percentage(5/10);
-      margin-right: percentage(1/12);
-      img, video {
-        width: 100%;
-        padding: 0 10%;
-      }
-    }
-  }
-  &__content {
-    opacity: 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 3rem;
-    padding-right: 3rem;
-    transition: 300ms opacity;
-  }
-  &.module--active {
-    .home-title__content {
-      opacity: 1;
-    }
-  }
 }
 
 .scroll-hider {
@@ -203,6 +103,7 @@ nav a {
 }
 
 
+@import './home-hero';
 @import './stack';
 @import './project';
 @import './contact';

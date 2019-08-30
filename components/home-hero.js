@@ -29,27 +29,28 @@ export default class HomeHero extends React.Component {
     const currentImg = mockStackImages[this.state.currentImageIndex];
     return (
       <div
-        className={ classname("home-title module module-lg", {
+        id={ props.id }
+        className={ classname("home-hero module module-lg", {
           'module--active': props.isActiveFrame
         })}
         data-frameid={ props.frameId }
         data-frametype={ props.frameType }
       >
-        <div className="home-title__inner__left">
+        <div className="home-hero__inner__left">
           <img className="logo" src="/static/logo-lg.png" />
           <h2>
             We are a 3D visualization studio specializing in the creation of photorealistic animations, still imagery, and VR content
           </h2>
         </div>
-        <div className="home-title__inner__right">
+        <div className="home-hero__inner__right">
           {
             currentImg.activeSrc
               ? <img src={ currentImg.activeSrc } />
               : <video autoPlay loop muted src={ currentImg.activeVideoSrc } />
           }
         </div>
-        <div className="home-title__content">
-          <Arrow />
+        <div className="home-hero__content">
+          <Arrow onClick={ props.onArrowClick }/>
         </div>
       </div>
     )

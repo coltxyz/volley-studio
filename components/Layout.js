@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import classname from 'classNames';
+import Head from 'next/head';
 import Nav from './Nav.js';
-import Footer from './Footer.js';
 import Controls from './controls';
 
 const social_img_url = '';
@@ -11,7 +11,6 @@ const ga_id = ''
 export default class Layout extends React.Component {
 
   static defaultProps = {
-    noLogo: true,
     srollPos: 0
   }
 
@@ -64,10 +63,18 @@ export default class Layout extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         </Head>
-        <div id="main" className={ this.state.isNavOpen ? 'nav--open' : ''}>
+        <div
+          id="main"
+          className={classname({
+            'nav--open': this.state.isNavOpen,
+            'content--transitioning': this.props.isTransitioning
+          })}
+        >
           <Nav { ...this.props } />
           <Controls { ...this.props }/>
-          { this.props.children }
+          <div className="content-container">
+            { this.props.children }
+          </div>
         </div>
       </div>
     )

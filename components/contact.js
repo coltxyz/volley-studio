@@ -1,5 +1,10 @@
 export default props => (
-  <div className="flex-container module bg-white " data-nologo={ true }>
+  <div
+    id={ props.id }
+    className="flex-container module bg-white"
+    data-frameid={ props.frameId }
+    data-frametype="informational"
+  >
     <div className="contact-card">
       <div className="contact-card__bg-1" />
       <div className="contact-card__bg-2" />

@@ -1,4 +1,9 @@
 export default props => (
-  <div className="module" data-nologo={ true }>
+  <div
+    id={ props.id }
+    className="module"
+    data-frameid={ props.frameId }
+    data-frametype="informational"
+  >
   </div>
 );

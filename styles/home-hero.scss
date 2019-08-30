@@ -1,0 +1,44 @@
+.home-hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img.logo {
+    height: 7rem;
+    padding-bottom: 2rem;
+  }
+  &__inner {
+    &__left {
+      width: percentage(4/12);
+      margin-left: percentage(1/12);
+    }
+    &__right {
+      margin-left: percentage(1/12);
+      width: percentage(5/10);
+      margin-right: percentage(1/12);
+      img, video {
+        width: 100%;
+        padding: 0 10%;
+      }
+    }
+  }
+  &__content {
+    opacity: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 3rem;
+    padding-right: 3rem;
+    transition: 300ms opacity;
+    pointer-events: none;
+    svg {
+      cursor: pointer;
+    }
+  }
+  &.module--active {
+    .home-hero__content {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
