@@ -39,19 +39,16 @@
       transform: scale(1.02);
     }
   }
-  .up-down-toggle {
+  .up-arrow, .down-arrow {
     bottom: 2.4em;
     left: 2.4em;
-    &:hover {
-      transform: scale(1.02);
-    }
-    .up-arrow {
-      transform: rotate(180deg);
-      padding-top: 3em;
-    }
     svg {
-      height : 1em;
+      height : 1.1em;
     }
+  }
+  .up-arrow {
+    transform: rotate(180deg);
+    padding-top: 5em;
   }
   .text {
     z-index: 6;

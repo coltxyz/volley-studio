@@ -40,9 +40,27 @@ export default props => (
 
     <div
       id={ props.id }
-      className="flex-container module about-pg bg-white"
+      className="flex-container module about-pg bg-gray"
       data-frametype="informational"
       data-frameid={ props.frameId }
+    >
+      <div className="about-pg__inner__left">
+        <p className="uppercase bold">
+          Firm Profile
+        </p>
+        <p>
+          Volley is a Brooklyn-based visualization studio that designs digital imagery. Simply put, we believe in the power of immersive visual content to tell a compelling story. Since 2008, we have crafted the highest quality content to visualize our clients’ visions. As a team of designers, architects, photographers, and strategists, we excel in transforming ideas into cohesive, visual narratives. We have focused on building a body of knowledge that pushes the boundaries of digital imagery. As part of this, we are always exploring the newest technologies and constantly experimenting. We are committed to expanding our expertise and pushing the boundaries of our work.
+        </p>
+      </div>
+      <div className="margin-copy mono">
+        <p>about us</p>
+      </div>
+    </div>
+
+    <div
+      className="flex-container module about-pg bg-gray"
+      data-frametype="informational"
+      data-frameid={ props.frameId + 1 }
     >
       <div className="about-pg__inner">
         <div className="about-pg__inner__left">
@@ -64,23 +82,8 @@ export default props => (
       </div>
     </div>
 
-    <div
-      className="flex-container module about-pg bg-white"
-      data-frametype="informational"
-      data-frameid={ props.frameId + 1 }
-    >
-      <div className="about-pg__inner__left">
-        <p className="uppercase bold">
-          About Us
-        </p>
-        <p>
-          Volley is a Brooklyn-based visualization studio that designs digital imagery. Simply put, we believe in the power of immersive visual content to tell a compelling story. Since 2008, we have crafted the highest quality content to visualize our clients’ visions. As a team of designers, architects, photographers, and strategists, we excel in transforming ideas into cohesive, visual narratives. We have focused on building a body of knowledge that pushes the boundaries of digital imagery. As part of this, we are always exploring the newest technologies and constantly experimenting. We are committed to expanding our expertise and pushing the boundaries of our work.
-        </p>
-      </div>
-    </div>
-
     <Stack
-      className="team-stack "
+      className="team-stack bg-gray"
       imgWidth={ 250 }
       defaultHeight={ 470 }
       images={ mockTeamImages }
@@ -95,7 +98,7 @@ export default props => (
     </Stack>
 
     <div
-      className="flex-container module bg-white"
+      className="flex-container module bg-gray"
       data-frametype="informational"
       data-frameid={ props.frameId + 3 }
     >

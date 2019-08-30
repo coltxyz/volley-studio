@@ -3,7 +3,7 @@ export default props => (
     id={ props.id }
     className="module"
     data-frameid={ props.frameId }
-    data-frametype="informational"
+    data-frametype="fin"
   >
   </div>
 );

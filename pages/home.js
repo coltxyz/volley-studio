@@ -141,7 +141,8 @@ export default class Home extends Page {
         onScrollbarDrag={ this.handleScrollbarDrag }
         isTransitioning={ this.state.isTransitioning }
         logo={ this.state.logo }
-        controls={ this.state.controls }
+        upArrow={ this.state.upArrow }
+        downArrow={ this.state.downArrow }
         inspect={ this.state.inspect }
         text={ this.state.text }
         close={ this.state.close }
@@ -198,10 +199,6 @@ export default class Home extends Page {
             <Contact
               id="contact"
               frameId={ 8 }
-            />
-            <Fin
-              frameId={ 9 }
-              id="fin"
             />
           </div>
         </div>

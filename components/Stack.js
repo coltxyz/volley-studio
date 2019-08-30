@@ -100,6 +100,13 @@ export default class Stack extends React.Component {
           }
         )}
       >
+        {
+          this.props.marginCopy && (
+            <div className="margin-copy mono">
+              <p>{ this.props.marginCopy }</p>
+            </div>
+          )
+        }
         <div
           ref="stackContainerRef"
           className="stack"

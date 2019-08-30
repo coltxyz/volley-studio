@@ -2,7 +2,6 @@
 .stack-wrapper {
   flex-direction: row;
   align-items: center;
-  background: white;
   margin: 10% 0;
   .stack-btn {
     position: absolute;
@@ -19,15 +18,17 @@
       display: none;
     }
   }
+  &.module--active {
+    .margin-copy {
+      opacity: 1;
+    }
+  }
   .stack {
     height: 100%;
     width: auto;
     pointer-events: none;
     position: relative;
     transition: 300ms opacity;
-    &.module--active {
-      opacity: 1;
-    }
     &--expanded {
       opacity: 0;
     }
@@ -116,6 +117,7 @@
 .team-stack {
   &.stack-wrapper {
     padding-left: 25%;
+    margin: 0;
     align-items: baseline;
     flex-direction: column;
   }

@@ -5,6 +5,9 @@ export default props => (
     data-frameid={ props.frameId }
     data-frametype="informational"
   >
+    <div className="margin-copy mono">
+      <p>contact</p>
+    </div>
     <div className="contact-card">
       <div className="contact-card__bg-1" />
       <div className="contact-card__bg-2" />

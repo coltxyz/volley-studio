@@ -49,8 +49,8 @@ export default class HomeHero extends React.Component {
               : <video autoPlay loop muted src={ currentImg.activeVideoSrc } />
           }
         </div>
-        <div className="home-hero__content">
-          <Arrow onClick={ props.onArrowClick }/>
+        <div className="margin-copy mono">
+          <p>view our latest projects</p>
         </div>
       </div>
     )

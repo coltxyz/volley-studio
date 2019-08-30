@@ -16,19 +16,18 @@ const Controls = props => {
           </a>
         </Link>
       </div>
-      <div className={ classname("controls__item up-down-toggle", { hide: !props.controls }) }>
-        <div
-          className="up-arrow"
-          onClick={ () => props.onScrollRequest({ direction: 'up' })}
-        >
-          <Carat />
-        </div>
-        <div
-          className="down-arrow"
-          onClick={ () => props.onScrollRequest({ direction: 'down' })}
-        >
-          <Carat />
-        </div>
+      <div
+        className="controls__item up-arrow"
+        className={ classname("controls__item up-arrow", { hide: !props.upArrow }) }
+        onClick={ () => props.onScrollRequest({ direction: 'up' })}
+      >
+        <Carat />
+      </div>
+      <div
+        className={ classname("controls__item down-arrow", { hide: !props.downArrow }) }
+        onClick={ () => props.onScrollRequest({ direction: 'down' })}
+      >
+        <Carat />
       </div>
       <div
         className={ classname("controls__item close", { hide: !props.close }) }
