@@ -30,7 +30,7 @@
     display: flex;
     img, video {
       max-height: 100%;
-      width: 100%;
+      max-width: 100%;
     }
   }
   &__side-panel {
@@ -44,6 +44,7 @@
       position: relative;
       display: flex;
       flex-wrap: wrap;
+      align-items: flex-start;
       img, video {
         cursor: pointer;
         padding: 7% 10% 7% 0;

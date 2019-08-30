@@ -1,4 +1,4 @@
-import classname from 'classNames';
+import classname from 'classnames';
 import Head from 'next/head';
 import Nav from './Nav.js';
 import Controls from './controls';

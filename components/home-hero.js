@@ -1,4 +1,4 @@
-import classname from 'classNames';
+import classname from 'classnames';
 import { mockStackImages } from '../lib/constants';
 import { CSSTransition } from 'react-transition-group';
 

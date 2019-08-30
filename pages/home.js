@@ -1,4 +1,3 @@
-import { throttle } from 'throttle-debounce';
 import { CSSTransition } from 'react-transition-group';
 
 import Page from '../components/Page';

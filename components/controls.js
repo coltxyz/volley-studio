@@ -1,4 +1,4 @@
-import classname from 'classNames';
+import classname from 'classnames';
 import Link from 'next/link'
 
 import Carat from  './svg/carat'
