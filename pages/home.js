@@ -39,15 +39,15 @@ export default class Home extends Page {
       }
     }, 650);
 
+    this.scrollContainer = document.getElementById('scrollContainer');
     window.setInterval(this.updateScroll.bind(this), 100);
   }
 
   updateScroll = () => {
     activeChild = null;
     try {
-      const scrollContainer = document.getElementById('scrollContainer');
-      const scrollPosition = scrollContainer.scrollTop;
-      [].forEach.call(scrollContainer.children, child => {
+      const scrollPosition = this.scrollContainer.scrollTop;
+      [].forEach.call(this.scrollContainer.children, child => {
         if (Math.abs(scrollPosition - child.offsetTop) < DISTANCE_THRESHOLD ) {
           activeChild = child;
         }
@@ -68,7 +68,7 @@ export default class Home extends Page {
       this.setState({
         ...propsForType,
         activeFrameId,
-        scrollPercentage: scrollPosition / scrollContainer.offsetHeight * scrollContainer.childNodes.length
+        scrollBarPosition: scrollPosition / this.scrollContainer.childNodes.length
       });
 
     } catch (e) {
@@ -86,6 +86,12 @@ export default class Home extends Page {
     this.setState({
       isProjectDetail: false
     })
+  }
+
+  handleScrollbarDrag = (e, data) => {
+    const { y } = data;
+    const scrollPosition = y * this.scrollContainer.childNodes.length;
+    this.scrollContainer.scrollTo(0, scrollPosition );
   }
 
   onScrollRequest = ({ direction, id }) => {
@@ -128,7 +134,8 @@ export default class Home extends Page {
     return (
       <Layout
         { ...this.props }
-        scrollPercentage={ this.state.scrollPercentage }
+        scrollBarPosition={ this.state.scrollBarPosition }
+        onScrollbarDrag={ this.handleScrollbarDrag }
         isTransitioning={ this.state.isTransitioning }
         logo={ this.state.logo }
         controls={ this.state.controls }

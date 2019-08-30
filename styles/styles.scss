@@ -67,11 +67,12 @@ nav a {
   right: 3.3rem;
   top: 0;
   margin-top: 0.3rem;
-  transition: 100ms top, 300ms opacity;
+  transition: 100ms transform, 300ms opacity;
   width: 10px;
   height: 90px;
   z-index: 30;
   background: #cacaca;
+  cursor: grab;
 }
 
 .flex-container {

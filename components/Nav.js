@@ -1,3 +1,5 @@
+import Draggable from 'react-draggable';
+
 const Nav = props => {
   const triggerScroll = id => e => {
     e.preventDefault();
@@ -5,10 +7,13 @@ const Nav = props => {
   }
   return (
     <div>
-      <div
-        style={{ top: `${ props.scrollPercentage }%` }}
-        className="nav-trackbar"
-      />
+      <Draggable
+        axis="y"
+        position={{ y: props.scrollBarPosition, x: 0 }}
+        onDrag={ props.onScrollbarDrag }
+      >
+        <div className="nav-trackbar" />
+      </Draggable>
       <nav>
         <a
           href="#portfolio"
