@@ -83,6 +83,7 @@ export default class Home extends Page {
   }
 
   onCloseClick = () => {
+    this.onScrollRequest({ direction: 'center', smooth: false });
     this.setState({
       isProjectDetail: false
     })
@@ -94,12 +95,14 @@ export default class Home extends Page {
     this.scrollContainer.scrollTo(0, scrollPosition );
   }
 
-  onScrollRequest = ({ direction, id }) => {
+  onScrollRequest = ({ direction, id, smooth }) => {
     let el;
     if (direction === 'up') {
       el = document.querySelector(`[data-frameid='${ this.state.activeFrameId - 1 }']`);
     } else if (direction === 'down') {
       el = document.querySelector(`[data-frameid='${ this.state.activeFrameId + 1 }']`);
+    } else if (direction === 'center') {
+      el = document.querySelector(`[data-frameid='${ this.state.activeFrameId }']`);
     } else if ( typeof id !== undefined) {
       el = document.getElementById(id);
     }
@@ -109,7 +112,7 @@ export default class Home extends Page {
     }
 
     // Determine if we should do a scroll or fade animation
-    if (Math.abs(parseInt(el.dataset.frameid) - this.state.activeFrameId) <=  1) {
+    if (smooth !== false && Math.abs(parseInt(el.dataset.frameid) - this.state.activeFrameId) <=  1) {
       el.scrollIntoView({ behavior:'smooth' });
     } else {
       this.setState({
