@@ -113,6 +113,16 @@ nav a {
   pointer-events: none;
 }
 
+.module {
+  .margin-copy {
+    opacity: 0;
+    transition: 300ms opacity;
+  }
+  &--active .margin-copy {
+    opacity: 1;
+  }
+}
+
 .about-pg {
   &__inner {
     display: flex;

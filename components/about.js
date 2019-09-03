@@ -1,3 +1,4 @@
+import classname from 'classNames';
 import { Fragment } from 'react';
 
 import Stack from './Stack';
@@ -40,7 +41,9 @@ export default props => (
 
     <div
       id={ props.id }
-      className="flex-container module about-pg bg-gray"
+      className={classname("flex-container module about-pg bg-gray", {
+        'module--active': props.isActiveFrame
+      })}
       data-frametype="informational"
       data-frameid={ props.frameId }
     >

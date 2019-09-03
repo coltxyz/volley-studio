@@ -1,7 +1,11 @@
+import classname from 'classNames';
+
 export default props => (
   <div
     id={ props.id }
-    className="flex-container module bg-white"
+    className={classname("flex-container module bg-white", {
+      'module--active': props.isActiveFrame
+    })}
     data-frameid={ props.frameId }
     data-frametype="informational"
   >
