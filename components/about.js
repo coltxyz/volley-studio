@@ -42,7 +42,7 @@ export default props => (
     <div
       id={ props.id }
       className={classname("flex-container module about-pg bg-gray", {
-        'module--active': props.isActiveFrame
+        'module--active': props.activeFrameId === props.frameId
       })}
       data-frametype="informational"
       data-frameid={ props.frameId }
@@ -86,12 +86,15 @@ export default props => (
     </div>
 
     <Stack
-      className="team-stack bg-gray"
+      className={classname("team-stack bg-gray", {
+        'module--active': props.activeFrameId  === props.frameId + 2
+      })}
       imgWidth={ 250 }
       defaultHeight={ 470 }
       images={ mockTeamImages }
       frameType="informational"
       frameId={ props.frameId + 2 }
+      marginCopy="team"
     >
       <div className="team-stack__content">
         <p>

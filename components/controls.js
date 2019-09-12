@@ -2,7 +2,7 @@ import classname from 'classnames';
 import Link from 'next/link'
 
 import Carat from  './svg/carat'
-import Glasses from  './svg/glasses'
+import Glasses from  './svg/glasses-w-text'
 import Cross from './svg/cross'
 
 const Controls = props => {

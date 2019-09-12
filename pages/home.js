@@ -194,7 +194,7 @@ export default class Home extends Page {
             <About
               id="about"
               frameId={ 4 }
-              isActiveFrame={ this.state.activeFrameId == 4 }
+              activeFrameId={ this.state.activeFrameId }
             />
             <Contact
               id="contact"
