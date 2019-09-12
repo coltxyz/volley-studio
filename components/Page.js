@@ -7,33 +7,23 @@ import sanity from '../lib/sanity'
 import sanityClient from '../lib/sanity'
 const imageBuilder = imageUrlBuilder(sanityClient)
 
-const contentQuery = slug => `*[_type == "pages" && slug.current == "${ slug }"] {
-  _id,
-  title,
-  textblocks,
-  images
-}[0...1]`;
-const globalQuery = `*[_type == "global"] {
-  _id,
-  text,
-  title
-}`;
-const navQuery = `*[_type == "pages"] {
-  _id,
-  title,
-  slug
-}`
+const portfolio = `* | [_type == 'portfolio-item']`;
+const about =  `* | [_type == 'about-pages']`;
 
 export default class Page extends React.Component {
 
   static async getInitialProps() {
-    return {}
+    const allContent = await sanity.fetch('*');
+    return {
+      portfolio: allContent.filter( item => item._type === 'portfolio-item'),
+      about: allContent.filter( item => item._type === 'about-pages'),
+      team: allContent.filter( item => item._type === 'team-member')
+    }
   }
 
-  getImage(tagName) {
+  getImageUrl(source) {
     try {
-      const img = this.props.content[0].images.find( img => tagName === img.tag );
-      return imageBuilder.image(img.image);
+      return imageBuilder.image(source).width(800).url();
     } catch (e) {
       return;
     }

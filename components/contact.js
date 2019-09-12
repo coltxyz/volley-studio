@@ -4,7 +4,7 @@ export default props => (
   <div
     id={ props.id }
     className={classname("flex-container module bg-white", {
-      'module--active': props.isActiveFrame
+      'module--active': props.activeFrameId === props.frameId
     })}
     data-frameid={ props.frameId }
     data-frametype="informational"
@@ -20,18 +20,17 @@ export default props => (
           <img src="/static/logo-black.png"/>
           <div className="info">
             <p style={{ marginBottom: '0.4rem'}}>
-              <strong>hello@volleystudio.us</strong>
+              <strong>{ props.content.contactEmail }</strong>
             </p>
             <p>
-              45 Main Street, Suite 516<br/>
-              Brooklyn, NY 11201<br/>
-              info@volleystudio.us<br/>
-              718.801.8890<br/>
+              { props.content.contactAddress1 }<br/>
+              { props.content.contactAddress2 }<br/>
+              { props.content.contactPhone }<br/>
             </p>
           </div>
         </div>
         <div className="contact-card__body">
-          <textarea placeholder="drop us a line"/>
+          <textarea placeholder={ props.content.contactPrompt }/>
         </div>
         <div className="contact-card__footer">
           <input placeholder="your email"/>

@@ -49,10 +49,10 @@ export default props => (
     >
       <div className="about-pg__inner__left">
         <p className="uppercase bold">
-          Firm Profile
+          { props.content.firmProfileTitle }
         </p>
         <p>
-          Volley is a Brooklyn-based visualization studio that designs digital imagery. Simply put, we believe in the power of immersive visual content to tell a compelling story. Since 2008, we have crafted the highest quality content to visualize our clients’ visions. As a team of designers, architects, photographers, and strategists, we excel in transforming ideas into cohesive, visual narratives. We have focused on building a body of knowledge that pushes the boundaries of digital imagery. As part of this, we are always exploring the newest technologies and constantly experimenting. We are committed to expanding our expertise and pushing the boundaries of our work.
+          { props.content.firmProfileBody }
         </p>
       </div>
       <div className="margin-copy mono">
@@ -68,19 +68,18 @@ export default props => (
       <div className="about-pg__inner">
         <div className="about-pg__inner__left">
           <p className="uppercase bold">
-            Services
+            { props.content.servicesTitle }
           </p>
           <p>
-            Our work is more than a laundry list. What we do is create images of things that don’t (yet) exist. Give us the it-- any idea, sketch, model, text, phone call, whatever-- and we create the visuals. We make digital images to tell the story of that idea, before it is created. Or before it is realized, before it is prototyped, before it is funded, before it is approved, before it is published, before it is built... Which is to say, we’ve worked on lots of its in all stages of development.
+            { props.content.servicesBody }
           </p>
         </div>
         <div className="about-pg__inner__right">
-          <h4>Visualization Consulting</h4>
-          <h4>Still Image Renders</h4>
-          <h4>Animations</h4>
-          <h4>Cinemagraphs</h4>
-          <h4>360° Interactive Experiences</h4>
-          <h4>Virtual Reality</h4>
+          {
+            props.content.servicesList.map(service => (
+              <h4>{ service }</h4>
+            ))
+          }
         </div>
       </div>
     </div>

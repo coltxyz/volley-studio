@@ -39,7 +39,7 @@ export default class HomeHero extends React.Component {
         <div className="home-hero__inner__left">
           <img className="logo" src="/static/logo-lg.png" />
           <h2>
-            We are a 3D visualization studio specializing in the creation of photorealistic animations, still imagery, and VR content
+            { props.blurb }
           </h2>
         </div>
         <div className="home-hero__inner__right">

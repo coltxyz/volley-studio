@@ -8,7 +8,7 @@ import About from '../components/about';
 import Stack from '../components/Stack';
 import Fin from '../components/fin';
 import ProjectDetail from '../components/project-detail';
-import { mockStackImages, tribuneImages, schermerhornImages, PropsForType } from '../lib/constants';
+import { PropsForType, processSanityPortfolioItem } from '../lib/constants';
 
 import "../styles/styles.scss";
 
@@ -20,8 +20,6 @@ let activeChild;
 
 export default class Home extends Page {
 
-  static slug = 'home'
-
   constructor() {
     super();
     this.state = {
@@ -31,12 +29,12 @@ export default class Home extends Page {
   }
 
   componentDidMount() {
-    window.setTimeout(() => {
-      const videos = document.getElementsByTagName('video');
-      for (let el of videos) {
-        el.play();
-      }
-    }, 650);
+    // window.setTimeout(() => {
+    //   const videos = document.getElementsByTagName('video');
+    //   for (let el of videos) {
+    //     el.play();
+    //   }
+    // }, 650);
 
     this.scrollContainer = document.getElementById('scrollContainer');
     window.setInterval(this.updateScroll.bind(this), 100);
@@ -133,6 +131,8 @@ export default class Home extends Page {
   }
 
   render() {
+    const portfolioItems = this.props.portfolio
+      .map(processSanityPortfolioItem(this.getImageUrl));
     return (
       <Layout
         { ...this.props }
@@ -167,39 +167,32 @@ export default class Home extends Page {
               frameId={ 0 }
               isActiveFrame={ this.state.activeFrameId == 0 }
               frameType="homeHero"
-              onArrowClick={ () => this.onScrollRequest({ direction: 'down' })}
+              blurb={ this.props.about[0].homepageBlurb }
             />
-            <Stack
-              id="portfolio"
-              frameId={ 1 }
-              frameType="portfolioItem"
-              images={ mockStackImages }
-              isActiveFrame={ this.state.activeFrameId == 1 }
-              isExpanded={ this.state.isProjectDetail }
-            />
-            <Stack
-              frameId={ 2 }
-              frameType="portfolioItem"
-              images={ schermerhornImages }
-              isActiveFrame={ this.state.activeFrameId == 2 }
-              isExpanded={ this.state.isProjectDetail }
-            />
-            <Stack
-              frameId={ 3 }
-              frameType="portfolioItem"
-              images={ tribuneImages }
-              isActiveFrame={ this.state.activeFrameId == 3 }
-              isExpanded={ this.state.isProjectDetail }
-            />
+            {
+              portfolioItems.map( (portfolioItem, i) => (
+                <Stack
+                  id={ i == 0 ? "portfolio" : ''}
+                  frameId={ i + 1 }
+                  frameType="portfolioItem"
+                  images={ portfolioItem.media }
+                  isActiveFrame={ this.state.activeFrameId == i+1}
+                  isExpanded={ this.state.isProjectDetail }
+                />
+              ))
+            }
             <About
               id="about"
-              frameId={ 4 }
+              content={ this.props.about[0] }
+              team={ this.props.team }
+              frameId={ portfolioItems.length + 1 }
               activeFrameId={ this.state.activeFrameId }
             />
             <Contact
               id="contact"
-              frameId={ 8 }
-              isActiveFrame={ this.state.activeFrameId == 8 }
+              content={ this.props.about[0] }
+              frameId={ portfolioItems.length + 5 }
+              activeFrameId={ this.state.activeFrameId }
             />
           </div>
         </div>
