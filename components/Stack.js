@@ -1,11 +1,20 @@
 import { DraggableCore } from 'react-draggable';
 import classnames from 'classnames';
 import ReactDOM from 'react-dom';
+import imageUrlBuilder from '@sanity/image-url';
+import SanityMuxPlayer from 'sanity-mux-player';
+import { get } from 'dotty';
 
+import sanity from '../lib/sanity';
 import ArrowRight from './svg/arrow-right';
 
-const maxMagnitude = (a, b) => Math.abs(a) > Math.abs(b) ? a : b;
-
+const urlFor = image => {
+  if (!image || !image.asset) {
+    return ''
+  }
+  const builder = imageUrlBuilder(sanity);
+  return builder.image(image.asset).width(800).url();
+}
 const UNIT = 30;
 const ANIMATION_TIME = 200;
 
@@ -86,6 +95,7 @@ export default class Stack extends React.Component {
   }
 
   render() {
+    console.log(this.props.images)
     return (
       <div
         id={ this.props.id }
@@ -122,7 +132,9 @@ export default class Stack extends React.Component {
                 onMouseLeave={ this.onMouseLeave }
                 onClick={ this.onStackClick }
                 key={ image.id }
-                className={ `stack__image ${ image.id === this.state.currentTargetId ? 'stack__image--active' : '' }` }
+                className={classnames('stack__image', {
+                  'stack__image--active': image.id === this.state.currentTargetId
+                })}
                 style={{
                   transform: this.getTransform({
                     id: image.id,
@@ -132,31 +144,41 @@ export default class Stack extends React.Component {
                 }}
               >
                 {
-                  image.videoSrc ? (
+                  image.activeVideoSrc ? (
                     <div className="stack__image__inner">
-                      <video
+                      <SanityMuxPlayer
+                        assetDocument={get(image, 'activeVideoSrc.asset')}
+                        autoload={false}
+                        autoplay={false}
                         className="stack-img-active"
-                        src={ image.activeVideoSrc }
+                        loop={true}
+                        muted={true}
+                        showControls={false}
                         style={{ maxWidth: this.props.imgWidth }}
-                        muted loop
+                        width={ 800 }
                       />
-                      <video
+                      <SanityMuxPlayer
+                        assetDocument={get(image, 'videoSrc.asset') || get(image, 'activeVideoSrc.asset')}
+                        autoload={false}
+                        autoplay={false}
                         className="stack-img-default"
-                        src={ image.videoSrc }
+                        loop={true}
+                        muted={true}
+                        showControls={false}
                         style={{ maxWidth: this.props.imgWidth }}
-                        muted loop
+                        width={ 800 }
                       />
                     </div>
                   ) : (
                     <div className="stack__image__inner">
                       <img
                         className="stack-img-active"
-                        src={ image.activeSrc }
+                        src={ urlFor(image.activeSrc) }
                         style={{ maxWidth: this.props.imgWidth }}
                       />
                       <img
                         className="stack-img-default"
-                        src={ image.src }
+                        src={ urlFor(image.src) || urlFor(image.activeSrc) }
                         style={{ maxWidth: this.props.imgWidth }}
                       />
                     </div>

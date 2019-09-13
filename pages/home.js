@@ -131,8 +131,7 @@ export default class Home extends Page {
   }
 
   render() {
-    const portfolioItems = this.props.portfolio
-      .map(processSanityPortfolioItem(this.getImageUrl));
+    const portfolioItems = this.props.portfolio.map(processSanityPortfolioItem);
     return (
       <Layout
         { ...this.props }

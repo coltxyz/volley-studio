@@ -60,15 +60,15 @@
           -o-user-select: none;
           user-select: none;
           transition: opacity 300ms $ease;
-          &.stack-img-active {
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            transition: opacity 150ms $ease;
-          }
         }
         video.stack-img-active {
           transition: opacity 300ms $ease;
+        }
+        .stack-img-active {
+          position: absolute;
+          left: 0;
+          opacity: 0;
+          transition: opacity 150ms $ease;
         }
       }
       &--active {
