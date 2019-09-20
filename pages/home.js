@@ -1,4 +1,5 @@
 import { CSSTransition } from 'react-transition-group';
+import { get } from 'dotty';
 
 import "../styles/styles.scss";
 import { ControlSettingsForFrameType, processSanityPortfolioItem } from '../lib/util';
@@ -156,11 +157,11 @@ export default class Home extends React.Component {
 
   render() {
     const portfolioItems = this.props.portfolio.map(processSanityPortfolioItem);
+    const activePortfolioItem = portfolioItems.find( item => item.id === this.state.activeDataSrcId );
     return (
       <Layout
         { ...this.props }
         scrollBarPosition={ this.state.scrollBarPosition }
-        onScrollbarDrag={ this.handleScrollbarDrag }
         isTransitioning={ this.state.isTransitioning }
         logo={ this.state.logo }
         upArrow={ this.state.upArrow }
@@ -168,6 +169,9 @@ export default class Home extends React.Component {
         inspect={ this.state.inspect }
         text={ this.state.text }
         close={ this.state.close }
+        titleText={ get(activePortfolioItem, 'title') }
+        subtitleText={ get(activePortfolioItem, 'year') }
+        onScrollbarDrag={ this.handleScrollbarDrag }
         onDetailClick={ this.onDetailClick }
         onCloseClick={ this.onCloseClick }
         onScrollRequest={ this.onScrollRequest }
@@ -185,7 +189,7 @@ export default class Home extends React.Component {
             >
               { state => (
                 <ProjectDetail
-                  data={ portfolioItems.find( item => item.id === this.state.activeDataSrcId ) }
+                  data={ activePortfolioItem }
                 />
               )}
             </CSSTransition>

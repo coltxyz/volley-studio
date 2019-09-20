@@ -42,8 +42,8 @@ const Controls = props => {
         <Glasses />
       </div>
       <div className={ classname("controls__item text", { hide: !props.text }) }>
-        <p><strong>47 W 47th Street</strong></p>
-        <div className="mono">2016</div>
+        <p><strong>{ props.titleText }</strong></p>
+        <div className="mono">{ props.subtitleText }</div>
       </div>
     </div>
   )
