@@ -1,16 +1,18 @@
 import { CSSTransition } from 'react-transition-group';
 
-import Page from '../components/Page';
-import Layout from '../components/Layout';
-import HomeHero from '../components/home-hero';
-import Contact from '../components/contact';
-import About from '../components/about';
-import Stack from '../components/Stack';
-import Fin from '../components/fin';
-import ProjectDetail from '../components/project-detail';
-import { PropsForType, processSanityPortfolioItem } from '../lib/constants';
-
 import "../styles/styles.scss";
+import { PropsForType, processSanityPortfolioItem } from '../lib/util';
+import { portfolioQuery } from '../lib/queries';
+import Contact from '../components/contact';
+import FirmProfile from '../components/firm-profile';
+import HomeHero from '../components/home-hero';
+import Layout from '../components/layout';
+import ProjectDetail from '../components/project-detail';
+import sanity from '../lib/sanity'
+import Stack from '../components/stack';
+import Services from '../components/services';
+import SelectClients from '../components/select-clients';
+import Team from '../components/team';
 
 const MAX_VIDEO_OPACITY = 0.4;
 const DISTANCE_THRESHOLD = 200;
@@ -18,13 +20,23 @@ const TRANSITION_INTERVAL = 300;
 
 let activeChild;
 
-export default class Home extends Page {
+export default class Home extends React.Component {
 
   constructor() {
     super();
     this.state = {
       isProjectDetail: false,
       activeFrameId: 0
+    }
+  }
+
+  static async getInitialProps() {
+    const allContent = await sanity.fetch('*');
+    const portfolio = await sanity.fetch(portfolioQuery);
+    return {
+      portfolio,
+      about: allContent.filter( item => item._type === 'about-pages'),
+      team: allContent.filter( item => item._type === 'team-member')
     }
   }
 
@@ -175,16 +187,29 @@ export default class Home extends Page {
                   frameId={ i + 1 }
                   frameType="portfolioItem"
                   images={ portfolioItem.media }
-                  isActiveFrame={ this.state.activeFrameId == i+1}
+                  isActiveFrame={ this.state.activeFrameId == i+1 }
                   isExpanded={ this.state.isProjectDetail }
                 />
               ))
             }
-            <About
-              id="about"
+            <FirmProfile
               content={ this.props.about[0] }
-              team={ this.props.team }
               frameId={ portfolioItems.length + 1 }
+              activeFrameId={ this.state.activeFrameId }
+            />
+            <Services
+              content={ this.props.about[0] }
+              frameId={ portfolioItems.length + 2 }
+              activeFrameId={ this.state.activeFrameId }
+            />
+            <Team
+              images={[]}
+              frameId={ portfolioItems.length + 3 }
+              activeFrameId={ this.state.activeFrameId }
+            />
+            <SelectClients
+              content={ this.props.about[0] }
+              frameId={ portfolioItems.length + 4 }
               activeFrameId={ this.state.activeFrameId }
             />
             <Contact

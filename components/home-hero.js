@@ -1,5 +1,4 @@
 import classname from 'classnames';
-import { mockStackImages } from '../lib/constants';
 import { CSSTransition } from 'react-transition-group';
 
 import Arrow from '../components/svg/arrow';
@@ -15,18 +14,11 @@ export default class HomeHero extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // setInterval(() => {
-    //   const randIndex = Math.floor(Math.random() * mockStackImages.length );
-    //   this.setState({
-    //     currentImageIndex: randIndex
-    //   })
-    // }, TIME_INTERVAL)
-  }
-
   render() {
     const props = this.props;
-    const currentImg = mockStackImages[this.state.currentImageIndex];
+    const currentImg = {
+      activeSrc: '/static/demo-images/03_couch.jpg'
+    }
     return (
       <div
         id={ props.id }

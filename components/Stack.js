@@ -95,7 +95,6 @@ export default class Stack extends React.Component {
   }
 
   render() {
-    console.log(this.props.images)
     return (
       <div
         id={ this.props.id }
@@ -148,8 +147,8 @@ export default class Stack extends React.Component {
                     <div className="stack__image__inner">
                       <SanityMuxPlayer
                         assetDocument={get(image, 'activeVideoSrc.asset')}
-                        autoload={false}
-                        autoplay={false}
+                        autoload={true}
+                        autoplay={true}
                         className="stack-img-active"
                         loop={true}
                         muted={true}
@@ -159,8 +158,8 @@ export default class Stack extends React.Component {
                       />
                       <SanityMuxPlayer
                         assetDocument={get(image, 'videoSrc.asset') || get(image, 'activeVideoSrc.asset')}
-                        autoload={false}
-                        autoplay={false}
+                        autoload={true}
+                        autoplay={true}
                         className="stack-img-default"
                         loop={true}
                         muted={true}
