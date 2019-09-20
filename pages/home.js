@@ -1,7 +1,7 @@
 import { CSSTransition } from 'react-transition-group';
 
 import "../styles/styles.scss";
-import { PropsForType, processSanityPortfolioItem } from '../lib/util';
+import { ControlSettingsForFrameType, processSanityPortfolioItem } from '../lib/util';
 import { portfolioQuery, teamQuery, aboutQuery } from '../lib/queries';
 import Contact from '../components/contact';
 import FirmProfile from '../components/firm-profile';
@@ -36,7 +36,7 @@ export default class Home extends React.Component {
     const about = await sanity.fetch(aboutQuery);
     return {
       portfolio,
-      team, 
+      team,
       about
     }
   }
@@ -50,7 +50,13 @@ export default class Home extends React.Component {
     // }, 650);
 
     this.scrollContainer = document.getElementById('scrollContainer');
-    window.setInterval(this.updateScroll.bind(this), 100);
+    this.interval = window.setInterval(this.updateScroll.bind(this), 100);
+  }
+
+  componentWillUnmount() {
+    if (this.interval) {
+      window.clearInterval(this.interval);
+    }
   }
 
   updateScroll = () => {
@@ -63,21 +69,26 @@ export default class Home extends React.Component {
         }
       });
 
-      let propsForType = activeChild
-        ? PropsForType[activeChild.dataset.frametype]
-        : PropsForType['null']
+      let controlProps = activeChild
+        ? ControlSettingsForFrameType[activeChild.dataset.frametype]
+        : ControlSettingsForFrameType['null']
 
       let activeFrameId = activeChild
         ? parseInt(activeChild.dataset.frameid)
         : null
 
+      let activeDataSrcId = activeChild
+        ? activeChild.dataset.sourceid
+        : null
+
       if (this.state.isProjectDetail) {
-        propsForType = PropsForType.projectDetail
+        controlProps = ControlSettingsForFrameType.projectDetail
       }
 
       this.setState({
-        ...propsForType,
+        ...controlProps,
         activeFrameId,
+        activeDataSrcId,
         scrollBarPosition: scrollPosition / this.scrollContainer.childNodes.length
       });
 
@@ -172,7 +183,11 @@ export default class Home extends React.Component {
               classNames="transition"
               timeout={ 500 }
             >
-              { state => <ProjectDetail /> }
+              { state => (
+                <ProjectDetail
+                  data={ portfolioItems.find( item => item.id === this.state.activeDataSrcId ) }
+                />
+              )}
             </CSSTransition>
             <HomeHero
               id="home"
@@ -184,9 +199,11 @@ export default class Home extends React.Component {
             {
               portfolioItems.map( (portfolioItem, i) => (
                 <Stack
+                  key={ i }
                   id={ i == 0 ? "portfolio" : ''}
                   frameId={ i + 1 }
                   frameType="portfolioItem"
+                  dataSourceId={ portfolioItem.id }
                   images={ portfolioItem.media }
                   isActiveFrame={ this.state.activeFrameId == i+1 }
                   isExpanded={ this.state.isProjectDetail }

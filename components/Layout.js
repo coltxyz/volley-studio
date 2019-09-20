@@ -44,9 +44,9 @@ export default class Layout extends React.Component {
           }}/>
 
           <meta name="description" content={ description } />
-          <meta itemprop="name" content={ title } />
-          <meta itemprop="description" content={ description } />
-          <meta itemprop="image" content={ social_img_url } />
+          <meta itemProp="name" content={ title } />
+          <meta itemProp="description" content={ description } />
+          <meta itemProp="image" content={ social_img_url } />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="" />
           <meta name="twitter:title" content={ title } />

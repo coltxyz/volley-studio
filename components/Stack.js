@@ -1,11 +1,5 @@
-import { DraggableCore } from 'react-draggable';
 import classname from 'classnames';
-import ReactDOM from 'react-dom';
-import SanityMuxPlayer from 'sanity-mux-player';
-import { get } from 'dotty';
-
-import { urlFor } from '../lib/util';
-import ArrowRight from './svg/arrow-right';
+import MediaPlayer from './media-player';
 
 const UNIT = 30;
 const ANIMATION_TIME = 200;
@@ -100,6 +94,7 @@ export default class Stack extends React.Component {
         id={ this.props.id }
         data-frametype={ this.props.frameType }
         data-frameid={ this.props.frameId }
+        data-sourceid={ this.props.dataSourceId }
         className={classname(
           "module stack-wrapper",
           this.props.className,
@@ -142,47 +137,13 @@ export default class Stack extends React.Component {
                   zIndex: this.imageStack.indexOf(image.id) + 10
                 }}
               >
-                {
-                  image.activeVideoSrc ? (
-                    <div className="stack__image__inner">
-                      <SanityMuxPlayer
-                        assetDocument={get(image, 'activeVideoSrc.asset')}
-                        autoload={true}
-                        autoplay={true}
-                        className="stack-img-active"
-                        loop={true}
-                        muted={true}
-                        showControls={false}
-                        style={{ maxWidth: this.props.imgWidth }}
-                        width={ 800 }
-                      />
-                      <SanityMuxPlayer
-                        assetDocument={get(image, 'videoSrc.asset') || get(image, 'activeVideoSrc.asset')}
-                        autoload={true}
-                        autoplay={true}
-                        className="stack-img-default"
-                        loop={true}
-                        muted={true}
-                        showControls={false}
-                        style={{ maxWidth: this.props.imgWidth }}
-                        width={ 800 }
-                      />
-                    </div>
-                  ) : (
-                    <div className="stack__image__inner">
-                      <img
-                        className="stack-img-active"
-                        src={ urlFor(image.activeSrc) }
-                        style={{ maxWidth: this.props.imgWidth }}
-                      />
-                      <img
-                        className="stack-img-default"
-                        src={ urlFor(image.src) || urlFor(image.activeSrc) }
-                        style={{ maxWidth: this.props.imgWidth }}
-                      />
-                    </div>
-                  )
-                }
+                <MediaPlayer
+                  image={ image }
+                  className="stack__image__inner"
+                  activeClassName="stack-img-active"
+                  inactiveClassName="stack-img-default"
+                  width={ this.props.imgWidth }
+                />
               </div>
             ))
           }

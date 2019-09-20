@@ -18,7 +18,7 @@ const SelectClients = (props) => {
         <div className="col-3-2 select-clients-column">
           {
             props.content.selectClients.map( ({clientName, url}) => (
-              <div>{ clientName }</div>
+              <div key={clientName}>{ clientName }</div>
             ))
           }
         </div>

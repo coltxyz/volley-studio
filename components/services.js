@@ -16,7 +16,7 @@ const Services = props => (
       <div className="about-pg__inner__right">
         {
           props.content.servicesList.map(service => (
-            <h4>{ service }</h4>
+            <h4 key={service}>{ service }</h4>
           ))
         }
       </div>

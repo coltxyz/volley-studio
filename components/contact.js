@@ -1,4 +1,4 @@
-import classname from 'classNames';
+import classname from 'classnames';
 
 export default props => (
   <div
