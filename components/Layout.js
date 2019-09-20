@@ -1,6 +1,6 @@
 import classname from 'classnames';
 import Head from 'next/head';
-import Nav from './Nav.js';
+import Nav from './nav.js';
 import Controls from './controls';
 
 const social_img_url = '';
