@@ -1,20 +1,12 @@
 import { DraggableCore } from 'react-draggable';
-import classnames from 'classnames';
+import classname from 'classnames';
 import ReactDOM from 'react-dom';
-import imageUrlBuilder from '@sanity/image-url';
 import SanityMuxPlayer from 'sanity-mux-player';
 import { get } from 'dotty';
 
-import sanity from '../lib/sanity';
+import { urlFor } from '../lib/util';
 import ArrowRight from './svg/arrow-right';
 
-const urlFor = image => {
-  if (!image || !image.asset) {
-    return ''
-  }
-  const builder = imageUrlBuilder(sanity);
-  return builder.image(image.asset).width(800).url();
-}
 const UNIT = 30;
 const ANIMATION_TIME = 200;
 
@@ -67,15 +59,23 @@ export default class Stack extends React.Component {
     });
   }
 
+  updateState = state => {
+    if (this.props.onChange) {
+      this.props.onChange(state)
+    }
+    this.setState(state)
+  }
+
   onStackClick = () => {
     this.imageStack.unshift(this.imageStack.pop())
+    const currentTargetId = this.imageStack[this.imageStack.length - 1];
     this.computeTransforms();
-    this.setState({
-      currentTargetId: this.imageStack[this.imageStack.length - 1],
+    this.updateState({
+      currentTargetId,
       isAnimating: true
-    });
+    })
     window.setTimeout(() => {
-      this.setState({
+      this.updateState({
         isAnimating: false
       })
     }, ANIMATION_TIME)
@@ -100,7 +100,7 @@ export default class Stack extends React.Component {
         id={ this.props.id }
         data-frametype={ this.props.frameType }
         data-frameid={ this.props.frameId }
-        className={classnames(
+        className={classname(
           "module stack-wrapper",
           this.props.className,
           {
@@ -131,7 +131,7 @@ export default class Stack extends React.Component {
                 onMouseLeave={ this.onMouseLeave }
                 onClick={ this.onStackClick }
                 key={ image.id }
-                className={classnames('stack__image', {
+                className={classname('stack__image', {
                   'stack__image--active': image.id === this.state.currentTargetId
                 })}
                 style={{

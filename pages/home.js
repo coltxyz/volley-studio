@@ -2,7 +2,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import "../styles/styles.scss";
 import { PropsForType, processSanityPortfolioItem } from '../lib/util';
-import { portfolioQuery } from '../lib/queries';
+import { portfolioQuery, teamQuery, aboutQuery } from '../lib/queries';
 import Contact from '../components/contact';
 import FirmProfile from '../components/firm-profile';
 import HomeHero from '../components/home-hero';
@@ -31,12 +31,13 @@ export default class Home extends React.Component {
   }
 
   static async getInitialProps() {
-    const allContent = await sanity.fetch('*');
     const portfolio = await sanity.fetch(portfolioQuery);
+    const team = await sanity.fetch(teamQuery);
+    const about = await sanity.fetch(aboutQuery);
     return {
       portfolio,
-      about: allContent.filter( item => item._type === 'about-pages'),
-      team: allContent.filter( item => item._type === 'team-member')
+      team, 
+      about
     }
   }
 
@@ -204,7 +205,7 @@ export default class Home extends React.Component {
               activeFrameId={ this.state.activeFrameId }
             />
             <Team
-              images={[]}
+              content={ this.props.team }
               frameId={ portfolioItems.length + 3 }
               activeFrameId={ this.state.activeFrameId }
             />
