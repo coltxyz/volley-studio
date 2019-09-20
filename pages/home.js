@@ -193,6 +193,7 @@ export default class Home extends React.Component {
               ))
             }
             <FirmProfile
+              id="about"
               content={ this.props.about[0] }
               frameId={ portfolioItems.length + 1 }
               activeFrameId={ this.state.activeFrameId }

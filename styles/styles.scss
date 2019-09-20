@@ -139,6 +139,10 @@ nav a {
   }
 }
 
+.select-clients-column {
+  columns: 4;
+  line-height: 1.5em;
+}
 
 @import './home-hero';
 @import './stack';
