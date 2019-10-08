@@ -16,8 +16,20 @@ const Controls = props => {
           </a>
         </Link>
       </div>
+
       <div
-        className="controls__item up-arrow"
+        className={ classname("controls__item project-nav__left", { hide: !props.projectNav })}
+        onClick={ () => props.onProjectChange({ direction: 'left'}) }
+      >
+        <Carat />
+      </div>
+      <div
+        className={ classname("controls__item project-nav__right", { hide: !props.projectNav })}
+        onClick={ () => props.onProjectChange({ direction: 'right'}) }
+      >
+        <Carat />
+      </div>
+      <div
         className={ classname("controls__item up-arrow", { hide: !props.upArrow }) }
         onClick={ () => props.onScrollRequest({ direction: 'up' })}
       >

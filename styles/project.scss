@@ -18,19 +18,25 @@
     display: flex;
     align-items: flex-end;
     position: relative;
-    height: 65vh;
+    height: 70vh;
   }
   &__main-photo {
     width: percentage(8/12);
     margin-left: percentage(1/12);
     height: 100%;
-    text-align: left;
-    padding-right: 2em;
-    text-align: center;
-    display: flex;
+    padding-right: 3em;
     img, video {
-      max-height: 100%;
-      max-width: 100%;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+    .main-photo--active, .main-photo--inactive {
+      height: 100%;
+      width: 100%;
+      > div {
+        height: 100%;
+        width: 100%;
+      }
     }
     .main-photo--inactive {
       display: none;
@@ -38,9 +44,9 @@
   }
   &__side-panel {
     width: percentage(3/12);
-    padding-left: 2em;
     height: 100%;
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-between;
     &__thumbnails {
@@ -50,24 +56,20 @@
       align-items: flex-start;
       .thumbnail {
         cursor: pointer;
-        margin: 7% 10% 7% 0;
-        height: 2rem;
-        width: 16%;
-        box-sizing: content-box;
-        position: relative;
+        width: 33.3333%;
+        height: 8rem;
+        padding: 0 12% 12% 0;
         &--active {
           display: none;
         }
       }
       img, video {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
     &__description {
-      align-self: flex-end;
       p {
         padding-right: 5em;
         &:last-of-type {
