@@ -26,6 +26,7 @@ export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
+      controlProps: {},
       isProjectDetail: false,
       activeFrameId: 0
     }
@@ -87,7 +88,7 @@ export default class Home extends React.Component {
       }
 
       this.setState({
-        ...controlProps,
+        controlProps,
         activeFrameId,
         activeDataSrcId,
         scrollBarPosition: scrollPosition / this.scrollContainer.childNodes.length
@@ -109,6 +110,12 @@ export default class Home extends React.Component {
     this.setState({
       isProjectDetail: false
     })
+  }
+
+  onProjectChange = ({direction}) => {
+    if (direction === 'left') {
+
+    }
   }
 
   handleScrollbarDrag = (e, data) => {
@@ -161,19 +168,17 @@ export default class Home extends React.Component {
     return (
       <Layout
         { ...this.props }
-        scrollBarPosition={ this.state.scrollBarPosition }
         isTransitioning={ this.state.isTransitioning }
-        logo={ this.state.logo }
-        upArrow={ this.state.upArrow }
-        downArrow={ this.state.downArrow }
-        inspect={ this.state.inspect }
-        text={ this.state.text }
-        close={ this.state.close }
+        controlProps={ this.state.controlProps }
         titleText={ get(activePortfolioItem, 'title') }
         subtitleText={ get(activePortfolioItem, 'year') }
+        portfolioItems={ portfolioItems }
+        activePortfolioItem={ activePortfolioItem }
+        scrollBarPosition={ this.state.scrollBarPosition }
         onScrollbarDrag={ this.handleScrollbarDrag }
         onDetailClick={ this.onDetailClick }
         onCloseClick={ this.onCloseClick }
+        onProjectChange={ this.onProjectChange }
         onScrollRequest={ this.onScrollRequest }
       >
         <div className="scroll-hider">

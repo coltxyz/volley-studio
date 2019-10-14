@@ -127,7 +127,7 @@ export default class Stack extends React.Component {
                 onClick={ this.onStackClick }
                 key={ image.id }
                 className={classname('stack__image', {
-                  'stack__image--active': image.id === this.state.currentTargetId
+                  'stack__image--active': this.props.isActiveFrame && image.id === this.imageStack[this.imageStack.length - 1]
                 })}
                 style={{
                   transform: this.getTransform({

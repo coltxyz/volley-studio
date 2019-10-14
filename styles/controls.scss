@@ -17,11 +17,16 @@
     }
   }
   .logo {
-    font-weight: 500;
+    font-weight: 400;
     top: 1em;
     left: 1em;
     transition: 200ms opacity;
     z-index: 101;
+  }
+  .project-selector-control {
+    z-index: 101;
+    top: 1em;
+    left: 11em;
   }
   .close {
     top: 1em;
@@ -34,9 +39,6 @@
     transition: 800ms opacity 100ms;
     svg {
       width : 8em;
-    }
-    &:hover {
-      transform: scale(1.02);
     }
   }
   .up-arrow, .down-arrow {
@@ -60,6 +62,21 @@
     pointer-events: none;
     p {
       margin-bottom: 0.5em;
+    }
+  }
+  .project-nav--left, .project-nav--right {
+    bottom: 3em;
+    left: 2em;
+    z-index: 110;
+    svg {
+      height: 1.1em;
+      transform: rotate(90deg);
+    }
+  }
+  .project-nav--right {
+    left: 7.5em;
+    svg {
+      transform: rotate(-90deg);
     }
   }
 }
