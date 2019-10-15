@@ -28,18 +28,11 @@ export default class HomeHero extends React.Component {
         data-frameid={ props.frameId }
         data-frametype={ props.frameType }
       >
-        <div className="home-hero__inner__left">
+        <div>
           <img className="logo" src="/static/logo-lg.png" />
           <h2>
             { props.blurb }
           </h2>
-        </div>
-        <div className="home-hero__inner__right">
-          {
-            currentImg.imageColor
-              ? <img src={ currentImg.imageColor } />
-              : <video autoPlay loop muted src={ currentImg.videoColor } />
-          }
         </div>
         <div className="margin-copy mono">
           <p>view our latest projects</p>

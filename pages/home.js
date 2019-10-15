@@ -16,9 +16,8 @@ import Services from '../components/services';
 import SelectClients from '../components/select-clients';
 import Team from '../components/team';
 
-const MAX_VIDEO_OPACITY = 0.4;
-const DISTANCE_THRESHOLD = 200;
-const TRANSITION_INTERVAL = 300;
+const DISTANCE_THRESHOLD = 150;
+const TRANSITION_INTERVAL = 1000;
 const SCROLL_UPDATE_INTERVAL = 100;
 
 let activeChild;
@@ -212,6 +211,11 @@ export default class Home extends React.Component {
     }
 
     // update controls and detail overlay
+    this.setState({
+      isProjectDetail: false,
+      currentSlug: null
+    });
+    window.history.replaceState({}, null, '/');
     this.updateScroll();
   }
 
@@ -277,7 +281,6 @@ export default class Home extends React.Component {
                   dataSourceId={ portfolioItem._id }
                   images={ portfolioItem.images }
                   isActiveFrame={ this.state.activeFrameId == i+1 }
-                  isExpanded={ this.state.isProjectDetail }
                   onStackClick={ this.onStackClick }
                 />
               ))

@@ -8,7 +8,6 @@ export default class ProjectDetail extends React.Component {
     const index = data.images.findIndex(
       img => img._key === activeImageId
     )
-    console.log(index);
     this.state = {
       activeImageIndex: index >= 0 ? index : 0
     }

@@ -83,7 +83,7 @@
 // Transitions
 //
 .project-detail {
-  transition: 600ms opacity;
+  transition: 1000ms opacity;
   &.transition {
     &-enter, &-exit-active, &-exit {
       opacity: 0;

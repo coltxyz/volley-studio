@@ -60,6 +60,7 @@
     text-align: center;
     cursor: default;
     pointer-events: none;
+    transition: 800ms opacity 100ms;
     p {
       margin-bottom: 0.5em;
     }
