@@ -4,7 +4,7 @@
   width: 100%;
   height: 100vh;
   z-index: 100;
-  padding: 0 3em 0 0;
+  padding: 0 3em 1rem 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -21,10 +21,9 @@
     height: 70vh;
   }
   &__main-photo {
-    width: percentage(8/12);
-    margin-left: percentage(1/12);
+    width: percentage(9/12);
     height: 100%;
-    padding-right: 3em;
+    padding: 0 4em;
     img, video {
       height: 100%;
       width: 100%;
@@ -56,11 +55,19 @@
       align-items: flex-start;
       .thumbnail {
         cursor: pointer;
-        width: 33.3333%;
-        height: 8rem;
-        padding: 0 12% 12% 0;
+        height: 9rem;
+        flex-basis: calc(1/3 * 100%);
+        padding: 3rem 4rem 0rem 0;
         &--active {
           display: none;
+        }
+        > div {
+          height: 100%;
+          width: 100%;
+          > div {
+            height: 100%;
+            height: 100%;
+          }
         }
       }
       img, video {
