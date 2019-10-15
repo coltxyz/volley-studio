@@ -73,6 +73,12 @@ export default class Stack extends React.Component {
         isAnimating: false
       })
     }, ANIMATION_TIME)
+    if (this.props.onStackClick) {
+      this.props.onStackClick({
+        topMostImageId: currentTargetId,
+        dataSourceId: this.props.dataSourceId
+      })
+    }
   }
 
   getTransform({ id, isActiveFrame }) {

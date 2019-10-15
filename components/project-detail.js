@@ -3,10 +3,14 @@ import MediaPlayer from './media-player';
 
 export default class ProjectDetail extends React.Component {
 
-  constructor(props) {
+  constructor({ data, activeImageId }) {
     super()
+    const index = data.images.findIndex(
+      img => img._key === activeImageId
+    )
+    console.log(index);
     this.state = {
-      activeImageIndex: 0
+      activeImageIndex: index >= 0 ? index : 0
     }
   }
 
@@ -17,6 +21,9 @@ export default class ProjectDetail extends React.Component {
   }
 
   render() {
+    if (!this.props.data) {
+      return <div />;
+    }
     const projectImages = this.props.data.images;
     const activeImage = projectImages[this.state.activeImageIndex]
     return (

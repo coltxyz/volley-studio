@@ -34,12 +34,14 @@ export default class Home extends React.Component {
       activeDataSrcId: null,
       currentSlug: null
     }
+    this.topMostImageForStack = {};
   }
 
   static async getInitialProps() {
     const portfolio = await sanity.fetch(portfolioQuery);
     const team = await sanity.fetch(teamQuery);
     const about = await sanity.fetch(aboutQuery);
+
     return {
       portfolio,
       team,
@@ -54,6 +56,11 @@ export default class Home extends React.Component {
     //     el.play();
     //   }
     // }, 650);
+
+    this.topMostImageForStack = this.props.portfolio.reduce((acc, item) => {
+      acc[item._id] = item.images[ item.images.length - 1]._key;
+      return acc;
+    }, {})
 
     const currentSlug = get(Router, 'router.query.slug');
     if (currentSlug) {
@@ -120,6 +127,10 @@ export default class Home extends React.Component {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  onStackClick = ({ dataSourceId, topMostImageId }) => {
+    this.topMostImageForStack[ dataSourceId ] = topMostImageId
   }
 
   onDetailClick = () => {
@@ -214,6 +225,7 @@ export default class Home extends React.Component {
   render() {
     const portfolioItems = this.props.portfolio;
     const activePortfolioItem = this.getActivePortfolioItem();
+
     return (
       <Layout
         { ...this.props }
@@ -244,6 +256,7 @@ export default class Home extends React.Component {
               { state => (
                 <ProjectDetail
                   data={ activePortfolioItem }
+                  activeImageId={ get(this.topMostImageForStack, get(activePortfolioItem, '_id')) }
                 />
               )}
             </CSSTransition>
@@ -265,6 +278,7 @@ export default class Home extends React.Component {
                   images={ portfolioItem.images }
                   isActiveFrame={ this.state.activeFrameId == i+1 }
                   isExpanded={ this.state.isProjectDetail }
+                  onStackClick={ this.onStackClick }
                 />
               ))
             }
