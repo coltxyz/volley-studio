@@ -1,8 +1,9 @@
+import Router from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 import { get } from 'dotty';
 
 import "../styles/styles.scss";
-import { ControlSettingsForFrameType, processSanityPortfolioItem } from '../lib/util';
+import { ControlSettingsForFrameType } from '../lib/util';
 import { portfolioQuery, teamQuery, aboutQuery } from '../lib/queries';
 import Contact from '../components/contact';
 import FirmProfile from '../components/firm-profile';
@@ -18,6 +19,7 @@ import Team from '../components/team';
 const MAX_VIDEO_OPACITY = 0.4;
 const DISTANCE_THRESHOLD = 200;
 const TRANSITION_INTERVAL = 300;
+const SCROLL_UPDATE_INTERVAL = 100;
 
 let activeChild;
 
@@ -28,7 +30,9 @@ export default class Home extends React.Component {
     this.state = {
       controlProps: {},
       isProjectDetail: false,
-      activeFrameId: 0
+      activeFrameId: 0,
+      activeDataSrcId: null,
+      currentSlug: null
     }
   }
 
@@ -51,8 +55,27 @@ export default class Home extends React.Component {
     //   }
     // }, 650);
 
+    const currentSlug = get(Router, 'router.query.slug');
+    if (currentSlug) {
+      const slugItem = this.props.portfolio.find( item =>
+        get(item, 'slug.current') === currentSlug
+      );
+
+      if (!slugItem) {
+        throw new Error('404')
+      }
+
+      this.setState({
+        isProjectDetail: true,
+        currentSlug
+      })
+    }
+
     this.scrollContainer = document.getElementById('scrollContainer');
-    this.interval = window.setInterval(this.updateScroll.bind(this), 100);
+    this.interval = window.setInterval(
+      this.updateScroll.bind(this),
+      SCROLL_UPDATE_INTERVAL
+    );
   }
 
   componentWillUnmount() {
@@ -100,28 +123,50 @@ export default class Home extends React.Component {
   }
 
   onDetailClick = () => {
+    const project = this.getActivePortfolioItem();
+    const currentSlug = get(project, 'slug.current');
+    window.history.replaceState({}, null, `/${ currentSlug }` );
     this.setState({
-      isProjectDetail: true
+      isProjectDetail: true,
+      currentSlug
     })
   }
 
   onCloseClick = () => {
     this.onScrollRequest({ direction: 'center', smooth: false });
     this.setState({
-      isProjectDetail: false
+      isProjectDetail: false,
+      currentSlug: null
     })
-  }
-
-  onProjectChange = ({direction}) => {
-    if (direction === 'left') {
-
-    }
+    window.history.replaceState({}, null, '/')
   }
 
   handleScrollbarDrag = (e, data) => {
     const { y } = data;
     const scrollPosition = y * this.scrollContainer.childNodes.length;
     this.scrollContainer.scrollTo(0, scrollPosition );
+  }
+
+  onProjectChange = ({ direction, slug }) => {
+    let newProject, newIndex;
+    const projects = this.props.portfolio;
+    const index = projects.findIndex(p => get(p, 'slug.current') === this.state.currentSlug);
+
+    if (direction === 'left') {
+      newIndex = index <= 0 ? projects.length - 1 : index - 1;
+      newProject = projects[newIndex];
+    } else if (direction === 'right') {
+      newIndex = index >= projects.length - 1 ? 0 : index + 1;
+      newProject = projects[newIndex];
+    } else if (slug) {
+      newProject = projects.find( p => get(p, 'slug.current') === slug)
+    }
+
+    const [currentSlug, activeDataSrcId] = [get(newProject, 'slug.current'), newProject._id];
+    this.setState({
+      currentSlug
+    });
+    window.history.replaceState({}, null, `/${ currentSlug }`);
   }
 
   onScrollRequest = ({ direction, id, smooth }) => {
@@ -156,15 +201,19 @@ export default class Home extends React.Component {
     }
 
     // update controls and detail overlay
-    this.setState({
-      isProjectDetail: false
-    });
     this.updateScroll();
   }
 
+  getActivePortfolioItem = () => {
+    const portfolioItems = this.props.portfolio;
+    const currentViewedItem = portfolioItems.find(item => item._id === this.state.activeDataSrcId);
+    const activeSlugItem = portfolioItems.find(item => get(item, 'slug.current') === this.state.currentSlug);
+    return activeSlugItem || currentViewedItem;
+  }
+
   render() {
-    const portfolioItems = this.props.portfolio.map(processSanityPortfolioItem);
-    const activePortfolioItem = portfolioItems.find( item => item.id === this.state.activeDataSrcId );
+    const portfolioItems = this.props.portfolio;
+    const activePortfolioItem = this.getActivePortfolioItem();
     return (
       <Layout
         { ...this.props }
@@ -212,8 +261,8 @@ export default class Home extends React.Component {
                   id={ i == 0 ? "portfolio" : ''}
                   frameId={ i + 1 }
                   frameType="portfolioItem"
-                  dataSourceId={ portfolioItem.id }
-                  images={ portfolioItem.media }
+                  dataSourceId={ portfolioItem._id }
+                  images={ portfolioItem.images }
                   isActiveFrame={ this.state.activeFrameId == i+1 }
                   isExpanded={ this.state.isProjectDetail }
                 />

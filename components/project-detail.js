@@ -17,7 +17,7 @@ export default class ProjectDetail extends React.Component {
   }
 
   render() {
-    const projectImages = this.props.data.media;
+    const projectImages = this.props.data.images;
     const activeImage = projectImages[this.state.activeImageIndex]
     return (
       <div className="project-detail">
@@ -33,7 +33,7 @@ export default class ProjectDetail extends React.Component {
               {
                 projectImages.map( (image, i) => (
                   <MediaPlayer
-                    key={ image.id }
+                    key={ image._key }
                     onClick={ () => this.onThumbnailClick(i) }
                     className="thumbnail"
                     activeClassName="thumbnail--active"

@@ -10,10 +10,10 @@ const MediaPlayer = ({
   inactiveClassName,
   onClick
 }) =>
-  image.activeVideoSrc ? (
+  image.videoColor ? (
     <div className={ className } onClick={ onClick }>
       <SanityMuxPlayer
-        assetDocument={get(image, 'activeVideoSrc.asset')}
+        assetDocument={get(image, 'videoColor.asset')}
         autoload={true}
         autoplay={true}
         className={ activeClassName }
@@ -24,7 +24,7 @@ const MediaPlayer = ({
         width={ width }
       />
       <SanityMuxPlayer
-        assetDocument={get(image, 'videoSrc.asset') || get(image, 'activeVideoSrc.asset')}
+        assetDocument={get(image, 'videoMono.asset') || get(image, 'videoColor.asset')}
         autoload={true}
         autoplay={true}
         className={ inactiveClassName }
@@ -39,12 +39,12 @@ const MediaPlayer = ({
     <div className={ className } onClick={ onClick }>
       <img
         className={ activeClassName }
-        src={ urlFor(image.activeSrc) }
+        src={ urlFor(image.imageColor) }
         style={{ maxWidth: width }}
       />
       <img
         className={ inactiveClassName }
-        src={ urlFor(image.src) || urlFor(image.activeSrc) }
+        src={ urlFor(image.imageMono) || urlFor(image.imageColor) }
         style={{ maxWidth: width }}
       />
     </div>

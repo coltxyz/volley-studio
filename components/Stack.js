@@ -24,7 +24,7 @@ export default class Stack extends React.Component {
     };
     this.target = null;
     this.imageTransforms = null;
-    this.imageStack = images.map( image => (image.id) );
+    this.imageStack = images.map( image => (image._key) );
   }
 
   componentDidMount() {
@@ -125,16 +125,16 @@ export default class Stack extends React.Component {
                 onMouseEnter={ this.onMouseEnter }
                 onMouseLeave={ this.onMouseLeave }
                 onClick={ this.onStackClick }
-                key={ image.id }
+                key={ image._key }
                 className={classname('stack__image', {
-                  'stack__image--active': this.props.isActiveFrame && image.id === this.imageStack[this.imageStack.length - 1]
+                  'stack__image--active': this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1]
                 })}
                 style={{
                   transform: this.getTransform({
-                    id: image.id,
+                    id: image._key,
                     isActiveFrame: this.props.isActiveFrame
                   }),
-                  zIndex: this.imageStack.indexOf(image.id) + 10
+                  zIndex: this.imageStack.indexOf(image._key) + 10
                 }}
               >
                 <MediaPlayer

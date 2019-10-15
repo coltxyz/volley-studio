@@ -22,6 +22,7 @@ const Controls = props => {
         <ProjectSelector
           activeItem={ props.activePortfolioItem }
           items={ props.portfolioItems }
+          onProjectChange={ props.onProjectChange }
         />
       </div>
 

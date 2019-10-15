@@ -1,6 +1,8 @@
-import classname from 'classNames';
+import classname from 'classnames';
+import Link from 'next/link';
+import { get } from 'dotty';
 
-class projectSelect extends React.Component {
+class ProjectSelector extends React.Component {
 
   constructor() {
     super();
@@ -21,12 +23,22 @@ class projectSelect extends React.Component {
     })
   }
 
+  onLinkClick = (e, item) => {
+    e.preventDefault();
+    this.setState({
+      isMenuOpen: false
+    });
+    this.props.onProjectChange({
+      slug: get(item, 'slug.current')
+    });
+  }
+
   render() {
     const {items, activeItem, onChange} = this.props;
     if (!items || !activeItem) {
       return <span />
     }
-    const menuItems = items.filter( item => item.id !== activeItem.id )
+    const menuItems = items.filter( item => item._id !== activeItem._id )
     return (
       <div
         className={ classname("project-selector", {
@@ -40,8 +52,15 @@ class projectSelect extends React.Component {
         <div className="project-selector__menu">
           {
             menuItems.map( item => (
-              <div className="project-selector__menu-item">
-                { item.title }
+              <div
+                key={ item._id }
+                className="project-selector__menu-item"
+              >
+                <Link href={`/${ get(item, 'slug.current') }`}>
+                  <a onClick={ (e) => this.onLinkClick( e, item )}>
+                    { item.title }
+                  </a>
+                </Link>
               </div>
             ))
           }
@@ -51,4 +70,4 @@ class projectSelect extends React.Component {
   }
 }
 
-export default projectSelect
+export default ProjectSelector

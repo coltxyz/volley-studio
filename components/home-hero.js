@@ -17,7 +17,7 @@ export default class HomeHero extends React.Component {
   render() {
     const props = this.props;
     const currentImg = {
-      activeSrc: '/static/demo-images/03_couch.jpg'
+      imageColor: '/static/demo-images/03_couch.jpg'
     }
     return (
       <div
@@ -36,9 +36,9 @@ export default class HomeHero extends React.Component {
         </div>
         <div className="home-hero__inner__right">
           {
-            currentImg.activeSrc
-              ? <img src={ currentImg.activeSrc } />
-              : <video autoPlay loop muted src={ currentImg.activeVideoSrc } />
+            currentImg.imageColor
+              ? <img src={ currentImg.imageColor } />
+              : <video autoPlay loop muted src={ currentImg.videoColor } />
           }
         </div>
         <div className="margin-copy mono">
