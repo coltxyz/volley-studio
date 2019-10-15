@@ -54,6 +54,12 @@ export default class ProjectDetail extends React.Component {
               <p>
                 { this.props.data.description }
               </p>
+              <p className="mono">
+                <div>Completed: { this.props.data.month } { this.props.data.year }</div>
+                { this.props.location &&
+                  <div>Location: { this.props.location }</div>
+                }
+              </p>
             </div>
           </div>
         </div>

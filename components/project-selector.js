@@ -55,12 +55,9 @@ class ProjectSelector extends React.Component {
               <div
                 key={ item._id }
                 className="project-selector__menu-item"
+                onClick={ (e) => this.onLinkClick( e, item )}
               >
-                <Link href={`/${ get(item, 'slug.current') }`}>
-                  <a onClick={ (e) => this.onLinkClick( e, item )}>
-                    { item.title }
-                  </a>
-                </Link>
+                { item.title }
               </div>
             ))
           }
