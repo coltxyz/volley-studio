@@ -100,7 +100,7 @@ export default class Home extends React.Component {
         }
       });
 
-      let controlProps = activeChild
+      let controlProps = (activeChild && activeChild.dataset.frametype)
         ? ControlSettingsForFrameType[activeChild.dataset.frametype]
         : ControlSettingsForFrameType['null']
 
@@ -113,7 +113,7 @@ export default class Home extends React.Component {
         : null
 
       if (this.state.isProjectDetail) {
-        controlProps = ControlSettingsForFrameType.projectDetail
+        controlProps = ControlSettingsForFrameType['projectDetail']
       }
 
       this.setState({
@@ -277,6 +277,7 @@ export default class Home extends React.Component {
                   key={ i }
                   id={ i == 0 ? "portfolio" : ''}
                   frameId={ i + 1 }
+                  className="module"
                   frameType="portfolioItem"
                   dataSourceId={ portfolioItem._id }
                   images={ portfolioItem.images }

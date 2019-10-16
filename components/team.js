@@ -29,23 +29,30 @@ class Team extends React.Component {
     const teamMemberName = props.content[ this.state.activeTeamMemberIndex ].name;
     const teamMemberBio = props.content[ this.state.activeTeamMemberIndex ].bio;
     return (
-      <Stack
-        className="team-stack bg-gray"
-        isActiveFrame={ props.activeFrameId  === props.frameId }
-        imgWidth={ 250 }
-        defaultHeight={ 470 }
-        images={ props.content.map( processTeamImages ) }
-        frameType="informational"
-        frameId={ props.frameId }
-        marginCopy="team"
-        onChange={ this.onStackItemChange }
+      <div
+        className="module bg-gray"
+        data-frametype="informational"
+        data-frameid={ props.frameId }
       >
-        <div className="team-stack__content">
-          <p>
-            <strong>{ teamMemberName }</strong> { teamMemberBio }
-          </p>
+        <div className="about-pg__inner">
+          <div className="about-pg__inner__left">
+            <Stack
+              className="team-stack"
+              isActiveFrame={ props.activeFrameId  === props.frameId }
+              imgWidth={ 250 }
+              defaultHeight={ 470 }
+              images={ props.content.map( processTeamImages ) }
+              marginCopy="team"
+              onChange={ this.onStackItemChange }
+            />
+          </div>
+          <div className="about-pg__inner__right team-bio">
+            <p>
+              <strong>{ teamMemberName }</strong> { teamMemberBio }
+            </p>
+          </div>
         </div>
-      </Stack>
+      </div>
     );
   }
 }

@@ -102,7 +102,7 @@ export default class Stack extends React.Component {
         data-frameid={ this.props.frameId }
         data-sourceid={ this.props.dataSourceId }
         className={classname(
-          "module stack-wrapper",
+          "stack-wrapper",
           this.props.className,
           {
             'stack--expanded': this.props.isExpanded,
@@ -153,7 +153,6 @@ export default class Stack extends React.Component {
               </div>
             ))
           }
-          { this.props.children }
         </div>
       </div>
     )
