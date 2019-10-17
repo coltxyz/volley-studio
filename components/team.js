@@ -41,7 +41,7 @@ class Team extends React.Component {
               isActiveFrame={ props.activeFrameId  === props.frameId }
               imgWidth={ 250 }
               defaultHeight={ 470 }
-              images={ props.content.map( processTeamImages ) }
+              images={ props.content.map( processTeamImages ).reverse() }
               marginCopy="team"
               onChange={ this.onStackItemChange }
             />

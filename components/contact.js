@@ -7,7 +7,7 @@ export default props => (
       'module--active': props.activeFrameId === props.frameId
     })}
     data-frameid={ props.frameId }
-    data-frametype="informational"
+    data-frametype="fin"
   >
     <div className="margin-copy mono">
       <p>contact</p>

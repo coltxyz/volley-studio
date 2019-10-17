@@ -4,7 +4,7 @@ import { get } from 'dotty';
 
 import "../styles/styles.scss";
 import { ControlSettingsForFrameType } from '../lib/util';
-import { portfolioQuery, teamQuery, aboutQuery } from '../lib/queries';
+import { projectsQuery, teamQuery, aboutQuery, featuredContent } from '../lib/queries';
 import Contact from '../components/contact';
 import FirmProfile from '../components/firm-profile';
 import HomeHero from '../components/home-hero';
@@ -19,6 +19,8 @@ import Team from '../components/team';
 const DISTANCE_THRESHOLD = 150;
 const TRANSITION_INTERVAL = 1000;
 const SCROLL_UPDATE_INTERVAL = 100;
+const PORTFOLIO_ITEM_LIST_TYPE = 'portfolio-item-list';
+const TEAM_MEMBER_LIST_TYPE = 'team-member-list'
 
 let activeChild;
 
@@ -37,14 +39,21 @@ export default class Home extends React.Component {
   }
 
   static async getInitialProps() {
-    const portfolio = await sanity.fetch(portfolioQuery);
+    const projects = await sanity.fetch(projectsQuery);
     const team = await sanity.fetch(teamQuery);
     const about = await sanity.fetch(aboutQuery);
+    const featured = await sanity.fetch(featuredContent);
+
+    const featuredProjects = featured
+      .find(l => l._type === PORTFOLIO_ITEM_LIST_TYPE)
+      .items
+      .map(l => projects.find( m => m._id === l._ref));
 
     return {
-      portfolio,
+      projects,
+      featuredProjects,
       team,
-      about
+      about,
     }
   }
 
@@ -56,14 +65,14 @@ export default class Home extends React.Component {
     //   }
     // }, 650);
 
-    this.topMostImageForStack = this.props.portfolio.reduce((acc, item) => {
+    this.topMostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = item.images[ item.images.length - 1]._key;
       return acc;
     }, {})
 
     const currentSlug = get(Router, 'router.query.slug');
     if (currentSlug) {
-      const slugItem = this.props.portfolio.find( item =>
+      const slugItem = this.props.projects.find( item =>
         get(item, 'slug.current') === currentSlug
       );
 
@@ -159,7 +168,7 @@ export default class Home extends React.Component {
 
   onProjectChange = ({ direction, slug }) => {
     let newProject, newIndex;
-    const projects = this.props.portfolio;
+    const projects = this.props.projects;
     const index = projects.findIndex(p => get(p, 'slug.current') === this.state.currentSlug);
 
     if (direction === 'left') {
@@ -220,15 +229,18 @@ export default class Home extends React.Component {
   }
 
   getActivePortfolioItem = () => {
-    const portfolioItems = this.props.portfolio;
+    const portfolioItems = this.props.projects;
     const currentViewedItem = portfolioItems.find(item => item._id === this.state.activeDataSrcId);
     const activeSlugItem = portfolioItems.find(item => get(item, 'slug.current') === this.state.currentSlug);
     return activeSlugItem || currentViewedItem;
   }
 
   render() {
-    const portfolioItems = this.props.portfolio;
+    const portfolioItems = this.props.projects;
+    const featuredProjects = this.props.featuredProjects;
     const activePortfolioItem = this.getActivePortfolioItem();
+
+    console.log(this.state.activeFrameId)
 
     return (
       <Layout
@@ -272,7 +284,7 @@ export default class Home extends React.Component {
               blurb={ this.props.about[0].homepageBlurb }
             />
             {
-              portfolioItems.map( (portfolioItem, i) => (
+              featuredProjects.map( (portfolioItem, i) => (
                 <Stack
                   key={ i }
                   id={ i == 0 ? "portfolio" : ''}
@@ -289,28 +301,28 @@ export default class Home extends React.Component {
             <FirmProfile
               id="about"
               content={ this.props.about[0] }
-              frameId={ portfolioItems.length + 1 }
+              frameId={ featuredProjects.length + 1 }
               activeFrameId={ this.state.activeFrameId }
             />
             <Services
               content={ this.props.about[0] }
-              frameId={ portfolioItems.length + 2 }
+              frameId={ featuredProjects.length + 2 }
               activeFrameId={ this.state.activeFrameId }
             />
             <Team
-              content={ this.props.team }
-              frameId={ portfolioItems.length + 3 }
+              content={ get(this.props.team, '0.members') }
+              frameId={ featuredProjects.length + 3 }
               activeFrameId={ this.state.activeFrameId }
             />
             <SelectClients
               content={ this.props.about[0] }
-              frameId={ portfolioItems.length + 4 }
+              frameId={ featuredProjects.length + 4 }
               activeFrameId={ this.state.activeFrameId }
             />
             <Contact
               id="contact"
               content={ this.props.about[0] }
-              frameId={ portfolioItems.length + 5 }
+              frameId={ featuredProjects.length + 5 }
               activeFrameId={ this.state.activeFrameId }
             />
           </div>
