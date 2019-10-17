@@ -1,4 +1,4 @@
-import Cross from './svg/cross';
+import { get } from 'dotty';
 import MediaPlayer from './media-player';
 
 export default class ProjectDetail extends React.Component {
@@ -13,14 +13,14 @@ export default class ProjectDetail extends React.Component {
     }
   }
 
-  onThumbnailClick = (index) => {
+  onThumbnailClick = index => {
     this.setState({
       activeImageIndex: index
     })
   }
 
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
-    if (nextProps.data._id !== this.props.data._id) {
+  UNSAFE_componentWillReceiveProps = nextProps => {
+    if (get(nextProps, 'data._id') !== get(this, 'props.data._id')) {
       this.setState({
         activeImageIndex: 0
       })
