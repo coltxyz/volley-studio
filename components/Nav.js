@@ -3,7 +3,7 @@ import Draggable from 'react-draggable';
 const Nav = props => {
   const triggerScroll = id => e => {
     e.preventDefault();
-    props.onScrollRequest({ id: id });
+    props.onScrollNavRequest({ id: id });
   }
   return (
     <div>

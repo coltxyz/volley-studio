@@ -43,6 +43,8 @@ export default class Layout extends React.Component {
             `
           }}/>
 
+          <link rel="shortcut icon" href="/static/logo-black.png" />
+
           <meta name="description" content={ description } />
           <meta itemProp="name" content={ title } />
           <meta itemProp="description" content={ description } />

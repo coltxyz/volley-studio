@@ -3,7 +3,6 @@ import { CSSTransition } from 'react-transition-group';
 import { get } from 'dotty';
 
 import "../styles/styles.scss";
-import { ControlSettingsForFrameType } from '../lib/util';
 import { projectsQuery, teamQuery, aboutQuery, featuredContent } from '../lib/queries';
 import Contact from '../components/contact';
 import FirmProfile from '../components/firm-profile';
@@ -22,38 +21,34 @@ const SCROLL_UPDATE_INTERVAL = 100;
 const PORTFOLIO_ITEM_LIST_TYPE = 'portfolio-item-list';
 const TEAM_MEMBER_LIST_TYPE = 'team-member-list'
 
-let activeChild;
-
 export default class Home extends React.Component {
 
-  constructor() {
+  topMostImageForStack = {}
+  scrollContainerChildren = []
+
+  constructor({ activeSlug }) {
     super();
     this.state = {
-      controlProps: {},
-      isProjectDetail: false,
       activeFrameId: 0,
       activeDataSrcId: null,
-      currentSlug: null
+      activeSlug,
+      isProjectDetail: Boolean(activeSlug),
+      isFocus: true
     }
-    this.topMostImageForStack = {};
   }
 
-  static async getInitialProps() {
+  static async getInitialProps({ req }) {
+    const about = await sanity.fetch(aboutQuery);
+    const activeSlug = req.url.replace("/", "") || null;
+    const featured = await sanity.fetch(featuredContent);
     const projects = await sanity.fetch(projectsQuery);
     const team = await sanity.fetch(teamQuery);
-    const about = await sanity.fetch(aboutQuery);
-    const featured = await sanity.fetch(featuredContent);
-
-    const featuredProjects = featured
-      .find(l => l._type === PORTFOLIO_ITEM_LIST_TYPE)
-      .items
-      .map(l => projects.find( m => m._id === l._ref));
-
     return {
-      projects,
-      featuredProjects,
-      team,
       about,
+      activeSlug,
+      featured,
+      projects,
+      team
     }
   }
 
@@ -64,29 +59,15 @@ export default class Home extends React.Component {
     //     el.play();
     //   }
     // }, 650);
-
+    this.scrollContainer = document.getElementById('scrollContainer');
+    this.scrollContainerChildren = [].map.call(this.scrollContainer.children, c => ({
+      offsetTop: c.offsetTop,
+      dataset: c.dataset || {}
+    }))
     this.topMostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = item.images[ item.images.length - 1]._key;
       return acc;
     }, {})
-
-    const currentSlug = get(Router, 'router.query.slug');
-    if (currentSlug) {
-      const slugItem = this.props.projects.find( item =>
-        get(item, 'slug.current') === currentSlug
-      );
-
-      if (!slugItem) {
-        throw new Error('404')
-      }
-
-      this.setState({
-        isProjectDetail: true,
-        currentSlug
-      })
-    }
-
-    this.scrollContainer = document.getElementById('scrollContainer');
     this.interval = window.setInterval(
       this.updateScroll.bind(this),
       SCROLL_UPDATE_INTERVAL
@@ -100,36 +81,32 @@ export default class Home extends React.Component {
   }
 
   updateScroll = () => {
-    activeChild = null;
     try {
-      const scrollPosition = this.scrollContainer.scrollTop;
-      [].forEach.call(this.scrollContainer.children, child => {
-        if (Math.abs(scrollPosition - child.offsetTop) < DISTANCE_THRESHOLD ) {
-          activeChild = child;
-        }
-      });
+      const getScrollDistance = child => (
+        Math.abs(this.scrollContainer.scrollTop - child.offsetTop)
+      )
+      const closestChild = this.scrollContainerChildren.reduce((acc, child) => {
+        const distance = getScrollDistance(child);
+        const bestDistance = getScrollDistance(acc);
+        return distance < bestDistance ? child : acc;
+      })
+      const isFocus = getScrollDistance(closestChild) < DISTANCE_THRESHOLD;
 
-      let controlProps = (activeChild && activeChild.dataset.frametype)
-        ? ControlSettingsForFrameType[activeChild.dataset.frametype]
-        : ControlSettingsForFrameType['null']
-
-      let activeFrameId = activeChild
-        ? parseInt(activeChild.dataset.frameid)
-        : null
-
-      let activeDataSrcId = activeChild
-        ? activeChild.dataset.sourceid
-        : null
-
+      let activeFrameType = null;
       if (this.state.isProjectDetail) {
-        controlProps = ControlSettingsForFrameType['projectDetail']
+        activeFrameType = 'projectDetail'
+      } else if (isFocus) {
+        activeFrameType = closestChild.dataset.frametype;
       }
 
+      console.log(closestChild)
+
       this.setState({
-        controlProps,
-        activeFrameId,
-        activeDataSrcId,
-        scrollBarPosition: scrollPosition / this.scrollContainer.childNodes.length
+        activeFrameType,
+        activeFrameId: parseInt(closestChild.dataset.frameid),
+        activeDataSrcId: closestChild.dataset.sourceid,
+        isFocus,
+        scrollBarPosition: this.scrollContainer.scrollTop / this.scrollContainerChildren.length
       });
 
     } catch (e) {
@@ -143,21 +120,29 @@ export default class Home extends React.Component {
 
   onDetailClick = () => {
     const project = this.getActivePortfolioItem();
-    const currentSlug = get(project, 'slug.current');
-    window.history.replaceState({}, null, `/${ currentSlug }` );
+    this.showProjectDetail({ project });
+  }
+
+  showProjectDetail = ({ project }) => {
+    const activeSlug = get(project, 'slug.current');
+    window.history.replaceState({}, null, `/${ activeSlug }` );
     this.setState({
       isProjectDetail: true,
-      currentSlug
+      activeSlug
+    })
+  }
+
+  hideProjectDetail = () => {
+    window.history.replaceState({}, null, '/')
+    this.setState({
+      isProjectDetail: false,
+      activeSlug: null
     })
   }
 
   onCloseClick = () => {
-    this.onScrollRequest({ direction: 'center', smooth: false });
-    this.setState({
-      isProjectDetail: false,
-      currentSlug: null
-    })
-    window.history.replaceState({}, null, '/')
+    this.onScrollNavRequest({ direction: 'center', smooth: false });
+    this.hideProjectDetail();
   }
 
   handleScrollbarDrag = (e, data) => {
@@ -169,7 +154,7 @@ export default class Home extends React.Component {
   onProjectChange = ({ direction, slug }) => {
     let newProject, newIndex;
     const projects = this.props.projects;
-    const index = projects.findIndex(p => get(p, 'slug.current') === this.state.currentSlug);
+    const index = projects.findIndex(p => get(p, 'slug.current') === this.state.activeSlug);
 
     if (direction === 'left') {
       newIndex = index <= 0 ? projects.length - 1 : index - 1;
@@ -181,14 +166,10 @@ export default class Home extends React.Component {
       newProject = projects.find( p => get(p, 'slug.current') === slug)
     }
 
-    const [currentSlug, activeDataSrcId] = [get(newProject, 'slug.current'), newProject._id];
-    this.setState({
-      currentSlug
-    });
-    window.history.replaceState({}, null, `/${ currentSlug }`);
+    this.showProjectDetail({ project: newProject })
   }
 
-  onScrollRequest = ({ direction, id, smooth }) => {
+  onScrollNavRequest = ({ direction, id, smooth }) => {
     let el;
     if (direction === 'up') {
       el = document.querySelector(`[data-frameid='${ this.state.activeFrameId - 1 }']`);
@@ -220,62 +201,66 @@ export default class Home extends React.Component {
     }
 
     // update controls and detail overlay
-    this.setState({
-      isProjectDetail: false,
-      currentSlug: null
-    });
-    window.history.replaceState({}, null, '/');
+    this.hideProjectDetail();
     this.updateScroll();
   }
 
   getActivePortfolioItem = () => {
     const portfolioItems = this.props.projects;
-    const currentViewedItem = portfolioItems.find(item => item._id === this.state.activeDataSrcId);
-    const activeSlugItem = portfolioItems.find(item => get(item, 'slug.current') === this.state.currentSlug);
+    const currentViewedItem = portfolioItems
+      .find(item => item._id === this.state.activeDataSrcId);
+    const activeSlugItem = portfolioItems
+      .find(item => get(item, 'slug.current') === this.state.activeSlug);
     return activeSlugItem || currentViewedItem;
+  }
+
+  getFeaturedProjects = () => {
+    const { featured, projects } = this.props
+    return featured
+      .find(l => l._type === PORTFOLIO_ITEM_LIST_TYPE)
+      .items
+      .map(l => projects.find( m => m._id === l._ref));
   }
 
   render() {
     const portfolioItems = this.props.projects;
-    const featuredProjects = this.props.featuredProjects;
+    const featuredProjects = this.getFeaturedProjects();
     const activePortfolioItem = this.getActivePortfolioItem();
-
-    console.log(this.state.activeFrameId)
 
     return (
       <Layout
         { ...this.props }
         isTransitioning={ this.state.isTransitioning }
-        controlProps={ this.state.controlProps }
-        titleText={ get(activePortfolioItem, 'title') }
-        subtitleText={ get(activePortfolioItem, 'year') }
-        portfolioItems={ portfolioItems }
+        activeFrameType={ this.state.activeFrameType }
         activePortfolioItem={ activePortfolioItem }
+        portfolioItems={ portfolioItems }
+        subtitleText={ get(activePortfolioItem, 'year') }
         scrollBarPosition={ this.state.scrollBarPosition }
+        titleText={ get(activePortfolioItem, 'title') }
         onScrollbarDrag={ this.handleScrollbarDrag }
         onDetailClick={ this.onDetailClick }
         onCloseClick={ this.onCloseClick }
         onProjectChange={ this.onProjectChange }
-        onScrollRequest={ this.onScrollRequest }
+        onScrollNavRequest={ this.onScrollNavRequest }
       >
+        <CSSTransition
+          in={ this.state.isProjectDetail }
+          unmountOnExit
+          classNames="transition"
+          timeout={ 500 }
+        >
+          { state => (
+            <ProjectDetail
+              data={ activePortfolioItem }
+              activeImageId={ get(this.topMostImageForStack, get(activePortfolioItem, '_id')) }
+            />
+          )}
+        </CSSTransition>
         <div className="scroll-hider">
           <div
             className="content-main"
             id="scrollContainer"
           >
-            <CSSTransition
-              in={ this.state.isProjectDetail }
-              unmountOnExit
-              classNames="transition"
-              timeout={ 500 }
-            >
-              { state => (
-                <ProjectDetail
-                  data={ activePortfolioItem }
-                  activeImageId={ get(this.topMostImageForStack, get(activePortfolioItem, '_id')) }
-                />
-              )}
-            </CSSTransition>
             <HomeHero
               id="home"
               frameId={ 0 }
@@ -293,7 +278,7 @@ export default class Home extends React.Component {
                   frameType="portfolioItem"
                   dataSourceId={ portfolioItem._id }
                   images={ portfolioItem.images }
-                  isActiveFrame={ this.state.activeFrameId == i+1 }
+                  isActiveFrame={ this.state.isFocus && this.state.activeFrameId == i+1 }
                   onStackClick={ this.onStackClick }
                 />
               ))

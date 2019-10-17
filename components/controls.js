@@ -5,20 +5,32 @@ import Carat from  './svg/carat'
 import Glasses from  './svg/glasses-w-text'
 import Cross from './svg/cross'
 import ProjectSelector from './project-selector'
+import { ControlSettingsForFrameType } from '../lib/util';
 
 const Controls = props => {
 
+  const {
+    logo,
+    projectSelect,
+    projectNav,
+    upArrow,
+    downArrow,
+    close,
+    inspect,
+    text
+  } = ControlSettingsForFrameType[ props.activeFrameType ] || {};
+
   return (
     <div className="controls">
-      <div className={ classname("controls__item logo", { hide: !props.controlProps.logo }) }>
+      <div className={ classname("controls__item logo", { hide: !logo }) }>
         <Link href="/">
-          <a onClick={ e => { e.preventDefault(); props.onScrollRequest({ id: 'home' })}}>
+          <a onClick={ e => { e.preventDefault(); props.onScrollNavRequest({ id: 'home' })}}>
             VOLLEY STUDIO
           </a>
         </Link>
       </div>
 
-      <div className={ classname("controls__item project-selector-control", { hide: !props.controlProps.projectSelect })}>
+      <div className={ classname("controls__item project-selector-control", { hide: !projectSelect })}>
         <ProjectSelector
           activeItem={ props.activePortfolioItem }
           items={ props.portfolioItems }
@@ -27,42 +39,42 @@ const Controls = props => {
       </div>
 
       <div
-        className={ classname("controls__item project-nav--left", { hide: !props.controlProps.projectNav })}
+        className={ classname("controls__item project-nav--left", { hide: !projectNav })}
         onClick={ () => props.onProjectChange({ direction: 'left'}) }
       >
         <Carat />
       </div>
       <div
-        className={ classname("controls__item project-nav--right", { hide: !props.controlProps.projectNav })}
+        className={ classname("controls__item project-nav--right", { hide: !projectNav })}
         onClick={ () => props.onProjectChange({ direction: 'right'}) }
       >
         <Carat />
       </div>
       <div
-        className={ classname("controls__item up-arrow", { hide: !props.controlProps.upArrow }) }
-        onClick={ () => props.onScrollRequest({ direction: 'up' })}
+        className={ classname("controls__item up-arrow", { hide: !upArrow }) }
+        onClick={ () => props.onScrollNavRequest({ direction: 'up' })}
       >
         <Carat />
       </div>
       <div
-        className={ classname("controls__item down-arrow", { hide: !props.controlProps.downArrow }) }
-        onClick={ () => props.onScrollRequest({ direction: 'down' })}
+        className={ classname("controls__item down-arrow", { hide: !downArrow }) }
+        onClick={ () => props.onScrollNavRequest({ direction: 'down' })}
       >
         <Carat />
       </div>
       <div
-        className={ classname("controls__item close", { hide: !props.controlProps.close }) }
+        className={ classname("controls__item close", { hide: !close }) }
         onClick={ props.onCloseClick }
       >
         <Cross />
       </div>
       <div
-        className={ classname("controls__item glasses", { hide: !props.controlProps.inspect }) }
+        className={ classname("controls__item glasses", { hide: !inspect }) }
         onClick={ props.onDetailClick }
       >
         <Glasses />
       </div>
-      <div className={ classname("controls__item text", { hide: !props.controlProps.text }) }>
+      <div className={ classname("controls__item text", { hide: !text }) }>
         <p><strong>{ props.titleText }</strong></p>
         <div className="mono">{ props.subtitleText }</div>
       </div>

@@ -7,7 +7,7 @@ class Team extends React.Component {
     super()
     this.state = {
       isAnimating: false,
-      activeTeamMemberIndex: props.content.length - 1
+      activeTeamMemberIndex: 0
     }
   }
 
