@@ -19,12 +19,20 @@ export default class ProjectDetail extends React.Component {
     })
   }
 
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
+    if (nextProps.data._id !== this.props.data._id) {
+      this.setState({
+        activeImageIndex: 0
+      })
+    }
+  }
+
   render() {
     if (!this.props.data) {
       return <div />;
     }
     const projectImages = this.props.data.images;
-    const activeImage = projectImages[this.state.activeImageIndex]
+    let activeImage = projectImages[this.state.activeImageIndex]
     return (
       <div className="project-detail">
         <div className="project-detail__inner">

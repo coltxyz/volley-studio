@@ -99,8 +99,6 @@ export default class Home extends React.Component {
         activeFrameType = closestChild.dataset.frametype;
       }
 
-      console.log(closestChild)
-
       this.setState({
         activeFrameType,
         activeFrameId: parseInt(closestChild.dataset.frameid),
