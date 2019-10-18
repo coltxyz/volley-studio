@@ -33,7 +33,8 @@ export default class Home extends React.Component {
       activeDataSrcId: null,
       activeSlug,
       isProjectDetail: Boolean(activeSlug),
-      isFocus: true
+      isFocus: true,
+      isTransitioning: true
     }
   }
 
@@ -72,6 +73,7 @@ export default class Home extends React.Component {
       this.updateScroll.bind(this),
       SCROLL_UPDATE_INTERVAL
     );
+    this.doTransition(() => {})
   }
 
   componentWillUnmount() {
@@ -79,6 +81,19 @@ export default class Home extends React.Component {
       window.clearInterval(this.interval);
     }
   }
+
+  doTransition = fn => {
+    this.setState({
+      isTransitioning: true
+    });
+    window.setTimeout(() => {
+     fn();
+     this.setState({
+       isTransitioning: false
+     });
+    }, TRANSITION_INTERVAL)
+  }
+
 
   updateScroll = () => {
     try {
@@ -118,7 +133,9 @@ export default class Home extends React.Component {
 
   onDetailClick = () => {
     const project = this.getActivePortfolioItem();
-    this.showProjectDetail({ project });
+    this.doTransition(() => {
+      this.showProjectDetail({ project })
+    })
   }
 
   showProjectDetail = ({ project }) => {
@@ -139,8 +156,10 @@ export default class Home extends React.Component {
   }
 
   onCloseClick = () => {
-    this.onScrollNavRequest({ direction: 'center', smooth: false });
-    this.hideProjectDetail();
+    this.doTransition(() => {
+      this.onScrollNavRequest({ direction: 'center', scroll: true })
+      this.hideProjectDetail()
+    })
   }
 
   handleScrollbarDrag = (e, data) => {
@@ -164,10 +183,12 @@ export default class Home extends React.Component {
       newProject = projects.find( p => get(p, 'slug.current') === slug)
     }
 
-    this.showProjectDetail({ project: newProject })
+    this.doTransition(() => {
+      this.showProjectDetail({ project: newProject })
+    })
   }
 
-  onScrollNavRequest = ({ direction, id, smooth }) => {
+  onScrollNavRequest = ({ direction, id, scroll }) => {
     let el;
     if (direction === 'up') {
       el = document.querySelector(`[data-frameid='${ this.state.activeFrameId - 1 }']`);
@@ -184,23 +205,18 @@ export default class Home extends React.Component {
     }
 
     // Determine if we should do a scroll or fade animation
-    if (smooth !== false && Math.abs(parseInt(el.dataset.frameid) - this.state.activeFrameId) <=  1) {
-      el.scrollIntoView({ behavior:'smooth' });
+    if (scroll !== false && Math.abs(parseInt(el.dataset.frameid) - this.state.activeFrameId) <=  1) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      this.hideProjectDetail();
+      this.updateScroll();
     } else {
-      this.setState({
-        isTransitioning: true
-      });
-      window.setTimeout(() => {
-        el.scrollIntoView();
-        this.setState({
-          isTransitioning: false
-        });
-      }, TRANSITION_INTERVAL)
+      this.doTransition(() => {
+        el.scrollIntoView()
+        this.hideProjectDetail();
+        this.updateScroll();
+      })
     }
 
-    // update controls and detail overlay
-    this.hideProjectDetail();
-    this.updateScroll();
   }
 
   getActivePortfolioItem = () => {
@@ -241,19 +257,12 @@ export default class Home extends React.Component {
         onProjectChange={ this.onProjectChange }
         onScrollNavRequest={ this.onScrollNavRequest }
       >
-        <CSSTransition
-          in={ this.state.isProjectDetail }
-          unmountOnExit
-          classNames="transition"
-          timeout={ 500 }
-        >
-          { state => (
-            <ProjectDetail
-              data={ activePortfolioItem }
-              activeImageId={ get(this.topMostImageForStack, get(activePortfolioItem, '_id')) }
-            />
-          )}
-        </CSSTransition>
+        { this.state.isProjectDetail && (
+          <ProjectDetail
+            data={ activePortfolioItem }
+            activeImageId={ get(this.topMostImageForStack, get(activePortfolioItem, '_id')) }
+          />
+        )}
         <div className="scroll-hider">
           <div
             className="content-main"

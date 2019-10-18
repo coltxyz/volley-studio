@@ -28,7 +28,7 @@ export default class HomeHero extends React.Component {
         data-frameid={ props.frameId }
         data-frametype={ props.frameType }
       >
-        <div>
+        <div className="text-center">
           <img className="logo" src="/static/logo-lg.png" />
           <h2>
             { props.blurb }
