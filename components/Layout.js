@@ -2,6 +2,10 @@ import classname from 'classnames';
 import Head from 'next/head';
 import Nav from './nav.js';
 import Controls from './controls';
+import {
+  TRANSITION_ENTERING,
+  TRANSITION_EXITING
+} from '../lib/util';
 
 const social_img_url = '';
 const title = '';
@@ -68,8 +72,12 @@ export default class Layout extends React.Component {
         <div
           id="main"
           className={classname({
-            'nav--open': this.state.isNavOpen,
-            'content--transitioning': this.props.isTransitioning
+            'content--transition--entering': (
+              this.props.transitionState === TRANSITION_ENTERING
+            ),
+            'content--transition--exiting': (
+              this.props.transitionState === TRANSITION_EXITING
+            )
           })}
         >
           <Nav { ...this.props } />

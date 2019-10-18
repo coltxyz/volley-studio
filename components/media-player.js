@@ -38,11 +38,13 @@ const MediaPlayer = ({
   ) : (
     <div className={ className } onClick={ onClick }>
       <img
+        key={ image.imageColor._id }
         className={ activeClassName }
         src={ urlFor(image.imageColor) }
         style={{ maxWidth: width }}
       />
       <img
+        key={ image.imageMono._id || 'abc123'}
         className={ inactiveClassName }
         src={ urlFor(image.imageMono) || urlFor(image.imageColor) }
         style={{ maxWidth: width }}

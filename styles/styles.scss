@@ -23,7 +23,7 @@ html {
     opacity: 1;
     transition: 500ms opacity;
   }
-  &.content--transitioning {
+  &.content--transition--entering, &.content--transition--exiting {
     .nav-trackbar {
       opacity: 0;
       transform: none;

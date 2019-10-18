@@ -14,12 +14,18 @@ import Stack from '../components/stack';
 import Services from '../components/services';
 import SelectClients from '../components/select-clients';
 import Team from '../components/team';
-
-const DISTANCE_THRESHOLD = 150;
-const TRANSITION_INTERVAL = 1000;
-const SCROLL_UPDATE_INTERVAL = 100;
-const PORTFOLIO_ITEM_LIST_TYPE = 'portfolio-item-list';
-const TEAM_MEMBER_LIST_TYPE = 'team-member-list'
+import {
+  TRANSITION_ENTERING,
+  TRANSITION_EXITING,
+  TRANSITION_INTERVAL_ENTER,
+  TRANSITION_INTERVAL_EXIT,
+  PORTFOLIO_ITEM_LIST_TYPE,
+  TEAM_MEMBER_LIST_TYPE,
+  DISTANCE_THRESHOLD,
+  SCROLL_UPDATE_INTERVAL,
+  checkOnInterval,
+  getDocumentImages
+} from '../lib/util';
 
 export default class Home extends React.Component {
 
@@ -34,7 +40,7 @@ export default class Home extends React.Component {
       activeSlug,
       isProjectDetail: Boolean(activeSlug),
       isFocus: true,
-      isTransitioning: true
+      transitionState: TRANSITION_ENTERING
     }
   }
 
@@ -73,7 +79,7 @@ export default class Home extends React.Component {
       this.updateScroll.bind(this),
       SCROLL_UPDATE_INTERVAL
     );
-    this.doTransition(() => {})
+    this.transitionIn(() => {})
   }
 
   componentWillUnmount() {
@@ -82,20 +88,33 @@ export default class Home extends React.Component {
     }
   }
 
-  doTransition = fn => {
+  transition(fn, transitionState, interval) {
     this.setState({
-      isTransitioning: true
-    });
+      transitionState: transitionState
+    })
     window.setTimeout(() => {
-     fn();
-     this.setState({
-       isTransitioning: false
-     });
-    }, TRANSITION_INTERVAL)
+      fn();
+      const images = getDocumentImages();
+      checkOnInterval({
+        every: SCROLL_UPDATE_INTERVAL,
+        ifCond: () => images.every(img => img.complete),
+        then: () => this.setState({ transitionState: null }),
+      })
+    }, interval);
   }
 
+  transitionIn = fn => {
+    this.transition(fn, TRANSITION_ENTERING, TRANSITION_INTERVAL_ENTER)
+  }
+
+  transitionOut = fn => {
+    this.transition(fn, TRANSITION_EXITING, TRANSITION_INTERVAL_EXIT)
+  }
 
   updateScroll = () => {
+
+    if (this.state.transitionState) { return }
+
     try {
       const getScrollDistance = child => (
         Math.abs(this.scrollContainer.scrollTop - child.offsetTop)
@@ -133,7 +152,7 @@ export default class Home extends React.Component {
 
   onDetailClick = () => {
     const project = this.getActivePortfolioItem();
-    this.doTransition(() => {
+    this.transitionIn(() => {
       this.showProjectDetail({ project })
     })
   }
@@ -156,7 +175,7 @@ export default class Home extends React.Component {
   }
 
   onCloseClick = () => {
-    this.doTransition(() => {
+    this.transitionOut(() => {
       this.onScrollNavRequest({ direction: 'center', scroll: true })
       this.hideProjectDetail()
     })
@@ -183,7 +202,7 @@ export default class Home extends React.Component {
       newProject = projects.find( p => get(p, 'slug.current') === slug)
     }
 
-    this.doTransition(() => {
+    this.transitionIn(() => {
       this.showProjectDetail({ project: newProject })
     })
   }
@@ -210,7 +229,7 @@ export default class Home extends React.Component {
       this.hideProjectDetail();
       this.updateScroll();
     } else {
-      this.doTransition(() => {
+      this.transitionIn(() => {
         el.scrollIntoView()
         this.hideProjectDetail();
         this.updateScroll();
@@ -245,6 +264,7 @@ export default class Home extends React.Component {
       <Layout
         { ...this.props }
         isTransitioning={ this.state.isTransitioning }
+        transitionState={ this.state.transitionState }
         activeFrameType={ this.state.activeFrameType }
         activePortfolioItem={ activePortfolioItem }
         portfolioItems={ portfolioItems }
