@@ -45,5 +45,10 @@
     bottom: 5rem;
     top: unset;
     width: 8rem;
+    cursor: pointer;
+    pointer-events: all;
+    &:hover p {
+      text-decoration: underline;
+    }
   }
 }

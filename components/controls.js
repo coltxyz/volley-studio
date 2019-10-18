@@ -5,7 +5,8 @@ import Carat from  './svg/carat'
 import Glasses from  './svg/glasses-w-text'
 import Cross from './svg/cross'
 import ProjectSelector from './project-selector'
-import { ControlSettingsForFrameType } from '../lib/util';
+import Loading from './loading';
+import { ControlSettingsForFrameType, TRANSITION_ENTERING } from '../lib/util';
 
 const Controls = props => {
 
@@ -30,7 +31,7 @@ const Controls = props => {
         </Link>
       </div>
 
-      <div className={ classname("controls__item project-selector-control", { hide: !projectSelect })}>
+      <div className={ classname("controls__item project-selector-control", { hide: !projectSelect || props.transitionState === TRANSITION_ENTERING })}>
         <ProjectSelector
           activeItem={ props.activePortfolioItem }
           items={ props.portfolioItems }
@@ -63,10 +64,16 @@ const Controls = props => {
         <Carat />
       </div>
       <div
-        className={ classname("controls__item close", { hide: !close }) }
+        className={ classname("controls__item close", { hide: !close || props.transitionState === TRANSITION_ENTERING }) }
         onClick={ props.onCloseClick }
       >
         <Cross />
+      </div>
+      <div
+        className={ classname("controls__item loading", { hide: props.transitionState !== TRANSITION_ENTERING }) }
+        onClick={ props.onCloseClick }
+      >
+        <Loading />
       </div>
       <div
         className={ classname("controls__item glasses", { hide: !inspect }) }
@@ -74,7 +81,7 @@ const Controls = props => {
       >
         <Glasses />
       </div>
-      <div className={ classname("controls__item text", { hide: !text }) }>
+      <div className={ classname("controls__item text", { hide: !text || props.transitionState === TRANSITION_ENTERING }) }>
         <p><strong>{ props.titleText }</strong></p>
         <div className="mono">{ props.subtitleText }</div>
       </div>

@@ -34,7 +34,10 @@ export default class HomeHero extends React.Component {
             { props.blurb }
           </h2>
         </div>
-        <div className="margin-copy mono">
+        <div
+          className="margin-copy mono"
+          onClick={ props.onLatestProjectsClick }
+        >
           <p>view our latest projects</p>
         </div>
       </div>

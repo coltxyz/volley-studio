@@ -88,13 +88,16 @@ export default class Home extends React.Component {
     }
   }
 
-  transition(fn, transitionState, interval) {
+  transition(transitionState, interval, fn, checkLoad) {
     this.setState({
       transitionState: transitionState
     })
     window.setTimeout(() => {
       fn();
       const images = getDocumentImages();
+      if (!checkLoad) {
+        return this.setState({ transitionState: null })
+      }
       checkOnInterval({
         every: SCROLL_UPDATE_INTERVAL,
         ifCond: () => images.every(img => img.complete),
@@ -104,11 +107,11 @@ export default class Home extends React.Component {
   }
 
   transitionIn = fn => {
-    this.transition(fn, TRANSITION_ENTERING, TRANSITION_INTERVAL_ENTER)
+    this.transition(TRANSITION_ENTERING, TRANSITION_INTERVAL_ENTER, fn, true)
   }
 
   transitionOut = fn => {
-    this.transition(fn, TRANSITION_EXITING, TRANSITION_INTERVAL_EXIT)
+    this.transition(TRANSITION_EXITING, TRANSITION_INTERVAL_EXIT, fn, false)
   }
 
   updateScroll = () => {
@@ -229,7 +232,7 @@ export default class Home extends React.Component {
       this.hideProjectDetail();
       this.updateScroll();
     } else {
-      this.transitionIn(() => {
+      this.transitionOut(() => {
         el.scrollIntoView()
         this.hideProjectDetail();
         this.updateScroll();
@@ -294,6 +297,7 @@ export default class Home extends React.Component {
               isActiveFrame={ this.state.activeFrameId == 0 }
               frameType="homeHero"
               blurb={ this.props.about[0].homepageBlurb }
+              onLatestProjectsClick={ () => this.onScrollNavRequest({ direction: 'down'})}
             />
             {
               featuredProjects.map( (portfolioItem, i) => (
