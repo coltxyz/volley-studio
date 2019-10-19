@@ -23,7 +23,7 @@ const Controls = props => {
 
   return (
     <div className="controls">
-      <div className={ classname("controls__item logo", { hide: !logo }) }>
+      <div className={ classname("controls__item logo", { hide: !logo && props.transitionState !== TRANSITION_ENTERING }) }>
         <Link href="/">
           <a onClick={ e => { e.preventDefault(); props.onScrollNavRequest({ id: 'home' })}}>
             VOLLEY STUDIO

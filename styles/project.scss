@@ -24,7 +24,7 @@
     width: percentage(9/12);
     height: 100%;
     padding: 0 4em;
-    img, video {
+    img, video, > div {
       height: 100%;
       width: 100%;
       object-fit: contain;
@@ -39,6 +39,10 @@
     }
     .main-photo--inactive {
       display: none;
+    }
+    &__title {
+      text-align: center;
+      padding-top: 1em;
     }
   }
   &__side-panel {

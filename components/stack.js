@@ -1,5 +1,6 @@
 import classname from 'classnames';
 import MediaPlayer from './media-player';
+import { getBucketedWindowWidth } from '../lib/util';
 
 const UNIT = 30;
 const ANIMATION_TIME = 200;
@@ -7,8 +8,8 @@ const ANIMATION_TIME = 200;
 export default class Stack extends React.Component {
 
   static defaultProps = {
-    imgWidth: 800,
-    defaultHeight: 600,
+    imgWidthRatio: 1/2,
+    imgAspectRatio: 3/4,
     isVisible: true,
     isExpanded: false,
     isActiveFrame: false
@@ -95,6 +96,15 @@ export default class Stack extends React.Component {
   }
 
   render() {
+
+    if (!this.state.isReady) {
+      return <div className={ classname("stack-wrapper", this.props.className)} />
+    }
+
+
+    const imgWidth = getBucketedWindowWidth() * this.props.imgWidthRatio;
+    const imgHeight = imgWidth * this.props.imgAspectRatio;
+
     return (
       <div
         id={ this.props.id }
@@ -121,8 +131,8 @@ export default class Stack extends React.Component {
           ref="stackContainerRef"
           className="stack"
           style={{
-            width: this.props.imgWidth + (this.imageStack.length - 1) * UNIT,
-            height: this.props.defaultHeight
+            width: imgWidth + (this.imageStack.length - 1) * UNIT,
+            height: imgHeight
           }}
         >
           {
@@ -148,7 +158,7 @@ export default class Stack extends React.Component {
                   className="stack__image__inner"
                   activeClassName="stack-img-active"
                   inactiveClassName="stack-img-default"
-                  width={ this.props.imgWidth }
+                  width={ imgWidth }
                 />
               </div>
             ))

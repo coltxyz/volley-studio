@@ -36,12 +36,16 @@ export default class ProjectDetail extends React.Component {
     return (
       <div className="project-detail">
         <div className="project-detail__inner">
-          <MediaPlayer
-            image={ activeImage }
-            className="project-detail__main-photo"
-            activeClassName="main-photo--active"
-            inactiveClassName="main-photo--inactive"
-          />
+          <div className="project-detail__main-photo">
+            <MediaPlayer
+              image={ activeImage }
+              activeClassName="main-photo--active"
+              inactiveClassName="main-photo--inactive"
+            />
+            <div className="project-detail__main-photo__title">
+              { activeImage.title }
+            </div>
+          </div>
           <div className="project-detail__side-panel">
             <div className="project-detail__side-panel__thumbnails">
               {

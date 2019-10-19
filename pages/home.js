@@ -66,11 +66,6 @@ export default class Home extends React.Component {
     //     el.play();
     //   }
     // }, 650);
-    this.scrollContainer = document.getElementById('scrollContainer');
-    this.scrollContainerChildren = [].map.call(this.scrollContainer.children, c => ({
-      offsetTop: c.offsetTop,
-      dataset: c.dataset || {}
-    }))
     this.topMostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = item.images[ item.images.length - 1]._key;
       return acc;
@@ -79,6 +74,8 @@ export default class Home extends React.Component {
       this.updateScroll.bind(this),
       SCROLL_UPDATE_INTERVAL
     );
+    window.addEventListener('resize', this.populateCachedData)
+    this.populateCachedData();
     this.transitionIn(() => {})
   }
 
@@ -86,6 +83,14 @@ export default class Home extends React.Component {
     if (this.interval) {
       window.clearInterval(this.interval);
     }
+  }
+
+  populateCachedData = () => {
+    this.scrollContainer = document.getElementById('scrollContainer');
+    this.scrollContainerChildren = [].map.call(this.scrollContainer.children, c => ({
+      offsetTop: c.offsetTop,
+      dataset: c.dataset || {}
+    }))
   }
 
   transition(transitionState, interval, fn, checkLoad) {
