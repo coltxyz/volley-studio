@@ -1,5 +1,4 @@
 $ease: cubic-bezier(0.23, 1, 0.32, 1);
-
 $timing_themechange: 600ms;
 $delay_themechange: 300ms;
 $timing_controls: 1200ms;
@@ -7,11 +6,14 @@ $delay_controls: 150ms;
 $timing_dropdown: 600ms;
 $timing_homehero: 2000ms;
 $delay_homehero: 200ms;
-$timing_contenttransition: 600ms;
-$delay_contenttransition: 0ms;
+$timing_contenttransition: 800ms;
+$delay_contenttransition: 100ms;
 $timing_stackshuffle: 1000ms;
 $timing_stackfade: 2000ms;
 $delay_stackfade: 100ms;
+$timing_hover: 300ms;
+$timing_trackbar: 150ms;
+$theme_switch_default_opacity: 0.15;
 
 $break_lg: 1200px;
 $break_med: 900px;
@@ -69,59 +71,6 @@ svg {
   height: 100%;
   position: relative;
 }
-nav {
-  text-orientation: sideways;
-  writing-mode: vertical-lr;
-  height: 100vh;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 3rem;
-  border-left: 1px solid var(--black-ln);
-  padding-left: .3em;
-  padding-right: 1.6em;
-  z-index: 200;
-  font-weight: 500;
-  a {
-    margin: 2em 0;
-    padding: 0.2em 0;
-  }
-  .theme-toggle {
-    position: absolute;
-    bottom: 1rem;
-    left: 0;
-    padding: 0.5em;
-    height: 2.5em;
-    opacity: 0.1;
-    cursor: pointer;
-    transition: opacity $timing_themechange $ease $delay_themechange;
-    &:hover {
-      opacity: 1;
-    }
-    svg {
-      height: 100%;
-    }
-  }
-}
-.nav-trackbar {
-  position: fixed;
-  right: 3.3rem;
-  top: 0;
-  margin-top: 0.3rem;
-  transition:
-    transform 100ms,
-    background $timing_themechange $ease $delay_themechange,
-    opacity $timing_themechange $ease $delay_themechange;
-  width: 10px;
-  height: 90px;
-  z-index: 30;
-  background: var(--trackbar);
-  cursor: grab;
-  @media (max-width: $break_sm) {
-    display: none;
-  }
-}
-
 .flex-container {
   display: flex;
   height: 100%;
@@ -258,4 +207,5 @@ nav {
 @import './project';
 @import './contact';
 @import './controls';
+@import './navigation';
 @import './project-selector';
