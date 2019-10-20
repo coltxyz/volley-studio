@@ -1,6 +1,6 @@
 const Services = props => (
   <div
-    className="flex-container module about-pg bg-gray"
+    className="flex-container module about-pg about-pg--services bg-gray"
     data-frametype="informational"
     data-frameid={ props.frameId }
   >

@@ -1,6 +1,7 @@
 import Router from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 import { get } from 'dotty';
+import { debounce } from 'throttle-debounce'
 
 import "../styles/styles.scss";
 import { projectsQuery, teamQuery, aboutQuery, featuredContent } from '../lib/queries';
@@ -74,7 +75,7 @@ export default class Home extends React.Component {
       this.updateScroll.bind(this),
       SCROLL_UPDATE_INTERVAL
     );
-    window.addEventListener('resize', this.populateCachedData)
+    window.addEventListener('resize', debounce(300, this.populateCachedData))
     this.populateCachedData();
     this.transitionIn(() => {})
   }

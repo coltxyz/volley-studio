@@ -45,12 +45,19 @@
     svg {
       width : 8em;
     }
+    @media (max-width: $break_sm) {
+      right: 1em;
+      bottom: 1em;
+    }
   }
   .up-arrow, .down-arrow {
     bottom: 2.4em;
     left: 2.4em;
     svg {
       height : 1.1em;
+    }
+    @media (max-width: $break_sm) {
+      display: none;
     }
   }
   .up-arrow {
@@ -66,8 +73,10 @@
     cursor: default;
     pointer-events: none;
     transition: 800ms opacity 100ms;
-    p {
-      margin-bottom: 0.5em;
+    @media (max-width: $break_sm) {
+      text-align: left;
+      padding: 0 2rem;
+      bottom: 1.4em;
     }
   }
   .project-nav--left, .project-nav--right {

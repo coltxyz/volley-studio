@@ -1,9 +1,11 @@
 import classname from 'classnames';
-import MediaPlayer from './media-player';
-import { getBucketedWindowWidth } from '../lib/util';
+import { debounce } from 'throttle-debounce';
 
-const UNIT = 30;
-const ANIMATION_TIME = 200;
+import MediaPlayer from './media-player';
+import {
+  calcDimensions,
+  STACK_SHUFFLE_ANIMATION_TIME
+} from '../lib/util';
 
 export default class Stack extends React.Component {
 
@@ -20,7 +22,6 @@ export default class Stack extends React.Component {
     this.state = {
       isReady: false,
       currentTargetId: null,
-      isResize: false,
       isAnimating: false
     };
     this.target = null;
@@ -33,11 +34,13 @@ export default class Stack extends React.Component {
     this.setState({
       isReady: true
     });
+    window.addEventListener('resize', debounce(300, this.computeTransforms.bind(this)))
   }
 
   computeTransforms() {
+    const { unit } = calcDimensions()
     this.imageTransforms = this.imageStack.reduce((acc, imgId, i) => {
-      acc[imgId] = { x:UNIT*i , y: -UNIT*i , s: 1};
+      acc[imgId] = { x:unit*i , y: -unit*i , s: 1};
       return acc;
     }, {});
   }
@@ -73,7 +76,7 @@ export default class Stack extends React.Component {
       this.updateState({
         isAnimating: false
       })
-    }, ANIMATION_TIME)
+    }, STACK_SHUFFLE_ANIMATION_TIME)
     if (this.props.onStackClick) {
       this.props.onStackClick({
         topMostImageId: currentTargetId,
@@ -101,9 +104,17 @@ export default class Stack extends React.Component {
       return <div className={ classname("stack-wrapper", this.props.className)} />
     }
 
+    const {windowWidth, unit, actualWidth} = calcDimensions();
+    let imgWidth = windowWidth * this.props.imgWidthRatio;
+    let stackWidth = imgWidth + (this.imageStack.length - 1) * unit;
+    let imgHeight = imgWidth * this.props.imgAspectRatio;
 
-    const imgWidth = getBucketedWindowWidth() * this.props.imgWidthRatio;
-    const imgHeight = imgWidth * this.props.imgAspectRatio;
+    if (actualWidth < 400) {
+      const baseWidth = '120vw';
+      imgWidth = `calc(${ baseWidth } * ${ this.props.imgWidthRatio })`
+      stackWidth = `calc(${ imgWidth } + ${ (this.props.images.length - 1) * unit }px)`
+      imgHeight = `calc(${ imgWidth } * ${ this.props.imgAspectRatio} )`
+    }
 
     return (
       <div
@@ -131,7 +142,7 @@ export default class Stack extends React.Component {
           ref="stackContainerRef"
           className="stack"
           style={{
-            width: imgWidth + (this.imageStack.length - 1) * UNIT,
+            width: stackWidth,
             height: imgHeight
           }}
         >
