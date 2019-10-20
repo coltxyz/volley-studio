@@ -1,6 +1,6 @@
 .project-detail {
   position: fixed;
-  background: $white;
+  background: var(--white);
   width: 100%;
   height: 100vh;
   z-index: 100;
@@ -83,24 +83,11 @@
     &__description {
       p {
         padding-right: 5em;
+        padding-bottom: 1rem;
         &:last-of-type {
           margin-bottom: 0;
         }
       }
-    }
-  }
-}
-
-// Transitions
-//
-.project-detail {
-  transition: 1000ms opacity;
-  &.transition {
-    &-enter, &-exit-active, &-exit {
-      opacity: 0;
-    }
-    &-enter-active, &-enter-done {
-      opacity: 1;
     }
   }
 }

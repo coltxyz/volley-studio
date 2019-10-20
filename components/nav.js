@@ -1,4 +1,10 @@
 import Draggable from 'react-draggable';
+import Sun from './svg/sun';
+import Moon from './svg/moon';
+import {
+  THEME_DARK,
+  THEME_LIGHT
+} from '../lib/util';
 
 const Nav = props => {
   const triggerScroll = id => e => {
@@ -33,6 +39,16 @@ const Nav = props => {
         >
           Contact
         </a>
+        <div
+          className="theme-toggle"
+          onClick={ props.onToggleTheme }
+        >
+          {
+            props.theme === THEME_LIGHT
+              ? <Moon color="var(--black-ln)" />
+              : <Sun color="var(--black-ln)" />
+          }
+        </div>
       </nav>
     </div>
   )

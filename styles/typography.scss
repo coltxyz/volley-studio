@@ -1,30 +1,31 @@
 @font-face {
   font-family: 'Basis';
   font-weight: 400;
-  src: url('/static/fonts/BasisGrotesque-Regular.ttf')  format('truetype');
+  src: url('/fonts/BasisGrotesque-Regular.ttf')  format('truetype');
 }
 @font-face {
   font-family: 'Basis';
   font-weight: 300;
-  src: url('/static/fonts/BasisGrotesque-Light.ttf')  format('truetype');
+  src: url('/fonts/BasisGrotesque-Light.ttf')  format('truetype');
 }
 @font-face {
   font-family: 'Basis';
   font-weight: 600;
-  src: url('/static/fonts/BasisGrotesque-Bold.ttf')  format('truetype');
+  src: url('/fonts/BasisGrotesque-Bold.ttf')  format('truetype');
 }
 @font-face {
   font-family: 'Basis';
   font-weight: 500;
-  src: url('/static/fonts/BasisGrotesque-Medium.ttf')  format('truetype');
+  src: url('/fonts/BasisGrotesque-Medium.ttf')  format('truetype');
 }
 @font-face {
   font-family: 'Basis-Mono';
-  src: url('/static/fonts/BasisGrotesque-Mono.ttf')  format('truetype');
+  src: url('/fonts/BasisGrotesque-Mono.ttf')  format('truetype');
 }
 
 html {
   font-size: 14.5px;
+  color: var(--black-ln);
   @media (max-width: $break_lg) {
     font-size: 13px;
   }
@@ -53,7 +54,7 @@ h1 {
 }
 h2 {
   font-size: 2.2rem;
-  font-weight: 100;
+  font-weight: 400;
   line-height: 1.2em;
   letter-spacing: 0.03em;
 }
@@ -75,7 +76,7 @@ p {
   line-height: 1.5em;
 }
 a {
-  color: black;
+  color: var(--black-ln);
   text-decoration: none;
 }
 .uppercase {

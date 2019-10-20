@@ -1,7 +1,17 @@
 $ease: cubic-bezier(0.23, 1, 0.32, 1);
-$black-ln: #444;
-$white: #fff;
-$gray: #fafafa;
+
+$timing_themechange: 600ms;
+$delay_themechange: 300ms;
+$timing_controls: 1200ms;
+$delay_controls: 150ms;
+$timing_dropdown: 600ms;
+$timing_homehero: 2000ms;
+$delay_homehero: 200ms;
+$timing_contenttransition: 600ms;
+$delay_contenttransition: 0ms;
+$timing_stackshuffle: 1000ms;
+$timing_stackfade: 2000ms;
+$delay_stackfade: 100ms;
 
 $break_lg: 1200px;
 $break_med: 900px;
@@ -10,12 +20,21 @@ $break_sm: 600px;
 @import './typography';
 
 html {
-  background: $white;
+  background: var(--white);
   scroll-behavior: smooth;
 }
 
 * {
   box-sizing: border-box;
+  transition:
+    background $timing_themechange $ease $delay_themechange,
+    color $timing_themechange $ease $delay_themechange;
+}
+
+svg {
+  transition:
+    fill $timing_themechange $ease $delay_themechange,
+    stroke $timing_themechange $ease $delay_themechange;
 }
 
 #main {
@@ -24,7 +43,7 @@ html {
   overflow: hidden;
   .content-container {
     opacity: 1;
-    transition: 500ms opacity;
+    transition: opacity $timing_contenttransition $ease $delay_contenttransition;
   }
   &.content--transition--entering, &.content--transition--exiting {
     .nav-trackbar {
@@ -32,6 +51,11 @@ html {
       transform: none;
     }
     .content-container {
+      opacity: 0;
+    }
+  }
+  &.content--project-detail {
+    .nav-trackbar {
       opacity: 0;
     }
   }
@@ -53,26 +77,45 @@ nav {
   right: 0;
   top: 0;
   width: 3rem;
-  border-left: 1px solid $black-ln;
+  border-left: 1px solid var(--black-ln);
   padding-left: .3em;
   padding-right: 1.6em;
   z-index: 200;
   font-weight: 500;
-}
-nav a {
-  margin: 2em 0;
-  padding: 0.2em 0;
+  a {
+    margin: 2em 0;
+    padding: 0.2em 0;
+  }
+  .theme-toggle {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    padding: 0.5em;
+    height: 2.5em;
+    opacity: 0.1;
+    cursor: pointer;
+    transition: opacity $timing_themechange $ease $delay_themechange;
+    &:hover {
+      opacity: 1;
+    }
+    svg {
+      height: 100%;
+    }
+  }
 }
 .nav-trackbar {
   position: fixed;
   right: 3.3rem;
   top: 0;
   margin-top: 0.3rem;
-  transition: 100ms transform, 300ms opacity;
+  transition:
+    transform 100ms,
+    background $timing_themechange $ease $delay_themechange,
+    opacity $timing_themechange $ease $delay_themechange;
   width: 10px;
   height: 90px;
   z-index: 30;
-  background: #cacaca;
+  background: var(--trackbar);
   cursor: grab;
   @media (max-width: $break_sm) {
     display: none;
@@ -85,10 +128,10 @@ nav a {
 }
 
 .bg-gray {
-  background: $gray;
+  background: var(--gray);
 }
 .bg-white {
-  background: $white;
+  background: var(--white);
 }
 
 .module {
@@ -114,7 +157,7 @@ nav a {
 .margin-copy {
   position: absolute;
   top: 3em;
-  left: 2.5em;
+  left: 3em;
   width: 8em;
   pointer-events: none;
 }
@@ -122,7 +165,7 @@ nav a {
 .module {
   .margin-copy {
     opacity: 0;
-    transition: 300ms opacity;
+    transition: opacity $timing_controls $ease $delay_controls;
   }
   &--active .margin-copy {
     opacity: 1;

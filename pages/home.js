@@ -1,5 +1,4 @@
 import Router from 'next/router';
-import { CSSTransition } from 'react-transition-group';
 import { get } from 'dotty';
 import { debounce } from 'throttle-debounce'
 
@@ -24,6 +23,8 @@ import {
   TEAM_MEMBER_LIST_TYPE,
   DISTANCE_THRESHOLD,
   SCROLL_UPDATE_INTERVAL,
+  THEME_DARK,
+  THEME_LIGHT,
   checkOnInterval,
   getDocumentImages
 } from '../lib/util';
@@ -41,7 +42,8 @@ export default class Home extends React.Component {
       activeSlug,
       isProjectDetail: Boolean(activeSlug),
       isFocus: true,
-      transitionState: TRANSITION_ENTERING
+      transitionState: TRANSITION_ENTERING,
+      theme: THEME_LIGHT
     }
   }
 
@@ -190,6 +192,12 @@ export default class Home extends React.Component {
     })
   }
 
+  onToggleTheme = () => {
+    this.setState({
+      theme: this.state.theme === THEME_DARK ? THEME_LIGHT : THEME_DARK
+    })
+  }
+
   handleScrollbarDrag = (e, data) => {
     const { y } = data;
     const scrollPosition = y * this.scrollContainer.childNodes.length;
@@ -273,6 +281,7 @@ export default class Home extends React.Component {
       <Layout
         { ...this.props }
         isTransitioning={ this.state.isTransitioning }
+        isProjectDetail={ this.state.isProjectDetail }
         transitionState={ this.state.transitionState }
         activeFrameType={ this.state.activeFrameType }
         activePortfolioItem={ activePortfolioItem }
@@ -285,6 +294,8 @@ export default class Home extends React.Component {
         onCloseClick={ this.onCloseClick }
         onProjectChange={ this.onProjectChange }
         onScrollNavRequest={ this.onScrollNavRequest }
+        onToggleTheme={ this.onToggleTheme }
+        theme={ this.state.theme }
       >
         { this.state.isProjectDetail && (
           <ProjectDetail

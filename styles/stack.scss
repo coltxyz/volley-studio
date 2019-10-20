@@ -28,10 +28,6 @@
     width: auto;
     pointer-events: none;
     position: relative;
-    transition: 300ms opacity;
-    &--expanded {
-      opacity: 0;
-    }
     &__expand {
       position: absolute;
       right: -64px;
@@ -42,14 +38,14 @@
       bottom: 0;
       left: 0;
       z-index: 1;
-      transition: opacity 2000ms $ease, transform 1000ms $ease;
+      transition: opacity $timing_stackfade $ease, transform $timing_stackshuffle $ease;
       pointer-events: all;
       cursor: pointer;
       transform-origin: bottom left;
       &__inner {
         pointer-events: none;
         img, video {
-          outline: 1px solid white;
+          outline: 1px solid var(--white);
           height: auto;
           max-width: 100%;
           max-height: 60vh;
@@ -59,16 +55,12 @@
           -moz-user-select: none;
           -o-user-select: none;
           user-select: none;
-          transition: opacity 2000ms $ease 100ms;
-        }
-        video.stack-img-active {
-          transition: opacity 2000ms $ease 100ms;
+          transition: opacity $timing_stackfade $ease $delay_stackfade, outline $timing_themechange $ease $delay_themechange;
         }
         .stack-img-active {
           position: absolute;
           left: 0;
           opacity: 0;
-          transition: opacity 2000ms $ease 100ms;
         }
       }
       &--active {
@@ -102,4 +94,7 @@
 }
 .team-stack .stack {
   margin: 0 auto;
+  &__image__inner img, video {
+    outline: 1px solid var(--white-permanent);
+  }
 }

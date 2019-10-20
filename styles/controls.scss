@@ -8,7 +8,7 @@
     position: absolute;
     z-index: 10;
     opacity: 1;
-    transition: 600ms opacity, 200ms transform;
+    transition: opacity $timing_controls $ease $delay_controls;
     cursor: pointer;
     &.hide {
       opacity: 0;
@@ -17,10 +17,10 @@
     }
   }
   .logo {
-    font-weight: 400;
+    font-weight: 500;
     top: 1em;
     left: 1em;
-    transition: 200ms opacity;
+    transition: opacity $timing_controls $ease $delay_controls;
     z-index: 101;
   }
   .project-selector-control {
@@ -37,11 +37,12 @@
     top: 1em;
     left: 11em;
     z-index: 101;
+    padding: 0 1rem;
   }
   .glasses {
     bottom: 2.4em;
     right: 2em;
-    transition: 800ms opacity 100ms;
+    transition: opacity $timing_controls $ease;
     svg {
       width : 8em;
     }
@@ -72,7 +73,7 @@
     text-align: center;
     cursor: default;
     pointer-events: none;
-    transition: 800ms opacity 100ms;
+    transition: opacity $timing_controls $ease $delay_controls;
     @media (max-width: $break_sm) {
       text-align: left;
       padding: 0 2rem;

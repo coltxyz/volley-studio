@@ -17,9 +17,9 @@ export default props => (
       <div className="contact-card__bg-2" />
       <div className="contact-card__bg-0">
         <div className="contact-card__header">
-          <img src="/static/logo-black.png"/>
+          <img src="/logo-black.png"/>
           <div className="info">
-            <p style={{ marginBottom: '0.4rem'}}>
+            <p>
               <strong>{ props.content.contactEmail }</strong>
             </p>
             <p>

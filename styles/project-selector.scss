@@ -4,17 +4,17 @@
   height: 0.33em;
   width: 0.33em;
   border-radius: 50%;
-  background: $black-ln;
+  background: var(--black-ln);
   right: 0;
   top: 0.33em;
-  transition: all 200ms $ease;
 }
 
 .project-selector {
-  color: $black-ln;
-  outline: 1px solid $black-ln;
+  color: var(--black-ln);
+  outline: 1px solid var(--black-ln);
+  transition: outline-color $timing_dropdown $ease;
   &__selected {
-    font-weight: 600;
+    font-weight: 500;
     position: relative;
     display: inline-block;
     padding: 0 1rem;
@@ -29,13 +29,13 @@
       visibility: hidden;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 600ms $ease;
     }
   }
   &__menu {
     padding: 0 2rem 1rem 1rem;
-    background: white;
-    transition: opacity 600ms $ease;
+    background: var(--white);
+    transition: opacity $timing_dropdown $ease;
+    opacity: 1;
   }
   &__menu-item {
     padding-top: 1rem;

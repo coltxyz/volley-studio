@@ -43,31 +43,31 @@ const Controls = props => {
         className={ classname("controls__item project-nav--left", { hide: !projectNav })}
         onClick={ () => props.onProjectChange({ direction: 'left'}) }
       >
-        <Carat />
+        <Carat color="var(--black-ln)" />
       </div>
       <div
         className={ classname("controls__item project-nav--right", { hide: !projectNav })}
         onClick={ () => props.onProjectChange({ direction: 'right'}) }
       >
-        <Carat />
+        <Carat color="var(--black-ln)" />
       </div>
       <div
         className={ classname("controls__item up-arrow", { hide: !upArrow }) }
         onClick={ () => props.onScrollNavRequest({ direction: 'up' })}
       >
-        <Carat />
+        <Carat color="var(--black-ln)" />
       </div>
       <div
         className={ classname("controls__item down-arrow", { hide: !downArrow }) }
         onClick={ () => props.onScrollNavRequest({ direction: 'down' })}
       >
-        <Carat />
+        <Carat color="var(--black-ln)" />
       </div>
       <div
         className={ classname("controls__item close", { hide: !close || props.transitionState === TRANSITION_ENTERING }) }
         onClick={ props.onCloseClick }
       >
-        <Cross />
+        <Cross color="var(--black-ln)"/>
       </div>
       <div
         className={ classname("controls__item loading", { hide: props.transitionState !== TRANSITION_ENTERING }) }
@@ -79,7 +79,7 @@ const Controls = props => {
         className={ classname("controls__item glasses", { hide: !inspect }) }
         onClick={ props.onDetailClick }
       >
-        <Glasses />
+        <Glasses color="var(--black-ln)"/>
       </div>
       <div className={ classname("controls__item text", { hide: !text || props.transitionState === TRANSITION_ENTERING }) }>
         <p><strong>{ props.titleText }</strong></p>
