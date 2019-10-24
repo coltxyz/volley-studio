@@ -58,13 +58,13 @@ class MediaPlayer extends React.Component {
       ) : (
         <div className={ className } onClick={ onClick }>
           <img
-            key={ image.imageColor._id }
+            key={ get(image,'imageColor._id') || 'xyz456'}
             className={ activeClassName }
             src={ urlFor(image.imageColor) }
             style={{ maxWidth: width }}
           />
           <img
-            key={ image.imageMono._id || 'abc123'}
+            key={ get(image,'imageMono._id') || 'abc123'}
             className={ inactiveClassName }
             src={ urlFor(image.imageMono) || urlFor(image.imageColor) }
             style={{ maxWidth: width }}
