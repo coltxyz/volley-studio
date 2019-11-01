@@ -22,17 +22,21 @@ import {
   PORTFOLIO_ITEM_LIST_TYPE,
   TEAM_MEMBER_LIST_TYPE,
   DISTANCE_THRESHOLD,
+  RESIZE_DEBOUNCE_TIME,
   SCROLL_UPDATE_INTERVAL,
   THEME_DARK,
   THEME_LIGHT,
+  TRACKBAR_HEIGHT,
   checkOnInterval,
   getDocumentImages
 } from '../lib/util';
 
 export default class Home extends React.Component {
 
-  topMostImageForStack = {}
+  topmostImageForStack = {}
   scrollContainerChildren = []
+  scrollableHeight = 0
+  windowHeight = 0
 
   constructor({ activeSlug }) {
     super();
@@ -63,21 +67,24 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    // window.setTimeout(() => {
-    //   const videos = document.getElementsByTagName('video');
-    //   for (let el of videos) {
-    //     el.play();
-    //   }
-    // }, 650);
-    this.topMostImageForStack = this.props.projects.reduce((acc, item) => {
-      acc[item._id] = item.images[ item.images.length - 1]._key;
+    window.setTimeout(() => {
+      const videos = document.getElementsByTagName('video');
+      for (let el of videos) {
+        el.play();
+      }
+    }, 3000);
+    this.topmostImageForStack = this.props.projects.reduce((acc, item) => {
+      acc[item._id] = get(item, ['images', item.images.length - 1, '_key']);
       return acc;
     }, {})
     this.interval = window.setInterval(
       this.updateScroll.bind(this),
       SCROLL_UPDATE_INTERVAL
     );
-    window.addEventListener('resize', debounce(300, this.populateCachedData))
+    window.addEventListener(
+      'resize',
+      debounce(RESIZE_DEBOUNCE_TIME, this.populateCachedData)
+    )
     this.populateCachedData();
     this.transitionIn(() => {})
   }
@@ -92,8 +99,12 @@ export default class Home extends React.Component {
     this.scrollContainer = document.getElementById('scrollContainer');
     this.scrollContainerChildren = [].map.call(this.scrollContainer.children, c => ({
       offsetTop: c.offsetTop,
-      dataset: c.dataset || {}
+      dataset: c.dataset || {},
+      height: c.clientHeight
     }))
+    this.scrollableHeight = this.scrollContainerChildren.reduce((acc, c) => acc + c.height, 0);
+    this.scrollBarCoefficient = (this.windowHeight - (TRACKBAR_HEIGHT + 10)) / (this.scrollableHeight - this.windowHeight)
+    this.windowHeight = window.innerHeight;
   }
 
   transition(transitionState, interval, fn, checkLoad) {
@@ -144,12 +155,14 @@ export default class Home extends React.Component {
         activeFrameType = closestChild.dataset.frametype;
       }
 
+      const scrollBarPosition = Math.floor(this.scrollContainer.scrollTop) * (this.windowHeight - (TRACKBAR_HEIGHT + 10)) / (this.scrollableHeight - this.windowHeight)
+
       this.setState({
         activeFrameType,
         activeFrameId: parseInt(closestChild.dataset.frameid),
         activeDataSrcId: closestChild.dataset.sourceid,
         isFocus,
-        scrollBarPosition: this.scrollContainer.scrollTop / this.scrollContainerChildren.length
+        scrollBarPosition
       });
 
     } catch (e) {
@@ -158,7 +171,7 @@ export default class Home extends React.Component {
   }
 
   onStackClick = ({ dataSourceId, topMostImageId }) => {
-    this.topMostImageForStack[ dataSourceId ] = topMostImageId
+    this.topmostImageForStack[ dataSourceId ] = topMostImageId
   }
 
   onDetailClick = () => {
@@ -200,7 +213,7 @@ export default class Home extends React.Component {
 
   handleScrollbarDrag = (e, data) => {
     const { y } = data;
-    const scrollPosition = y * this.scrollContainer.childNodes.length;
+    const scrollPosition = Math.floor(y) / (this.windowHeight - (TRACKBAR_HEIGHT + 10)) * (this.scrollableHeight - this.windowHeight)
     this.scrollContainer.scrollTo(0, scrollPosition );
   }
 
@@ -300,7 +313,7 @@ export default class Home extends React.Component {
         { this.state.isProjectDetail && (
           <ProjectDetail
             data={ activePortfolioItem }
-            activeImageId={ get(this.topMostImageForStack, get(activePortfolioItem, '_id')) }
+            activeImageId={ get(this.topmostImageForStack, get(activePortfolioItem, '_id')) }
           />
         )}
         <div className="scroll-hider">

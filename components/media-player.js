@@ -35,7 +35,7 @@ class MediaPlayer extends React.Component {
           <SanityMuxPlayer
             assetDocument={get(image, 'videoColor.asset')}
             autoload={true}
-            autoplay={true}
+            autoplay={false}
             className={ activeClassName }
             loop={true}
             muted={true}
@@ -46,7 +46,7 @@ class MediaPlayer extends React.Component {
           <SanityMuxPlayer
             assetDocument={get(image, 'videoMono.asset') || get(image, 'videoColor.asset')}
             autoload={true}
-            autoplay={true}
+            autoplay={false}
             className={ inactiveClassName }
             loop={true}
             muted={true}
@@ -60,13 +60,13 @@ class MediaPlayer extends React.Component {
           <img
             key={ get(image,'imageColor._id') || 'xyz456'}
             className={ activeClassName }
-            src={ urlFor(image.imageColor) }
+            src={ urlFor(image.imageColor, width) }
             style={{ maxWidth: width }}
           />
           <img
             key={ get(image,'imageMono._id') || 'abc123'}
             className={ inactiveClassName }
-            src={ urlFor(image.imageMono) || urlFor(image.imageColor) }
+            src={ urlFor(image.imageMono, width) || urlFor(image.imageColor, width) }
             style={{ maxWidth: width }}
           />
         </div>

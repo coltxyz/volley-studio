@@ -1,17 +1,18 @@
 import classname from 'classnames';
+import { get } from 'dotty';
 import { debounce } from 'throttle-debounce';
 
 import MediaPlayer from './media-player';
 import {
   calcDimensions,
-  STACK_SHUFFLE_ANIMATION_TIME
+  STACK_SHUFFLE_ANIMATION_TIME,
+  RESIZE_DEBOUNCE_TIME
 } from '../lib/util';
 
 export default class Stack extends React.Component {
 
   static defaultProps = {
     imgWidthRatio: 1/2,
-    imgAspectRatio: 3/4,
     isVisible: true,
     isExpanded: false,
     isActiveFrame: false
@@ -24,6 +25,7 @@ export default class Stack extends React.Component {
       currentTargetId: null,
       isAnimating: false
     };
+    this.avgImgHeight = 600;
     this.target = null;
     this.imageTransforms = null;
     this.imageStack = images.map( image => (image._key) );
@@ -33,11 +35,31 @@ export default class Stack extends React.Component {
     this.computeTransforms()
     this.setState({
       isReady: true
+    }, () => {
+      window.setTimeout(this.computeAvgImageHeight.bind(this), 1000)
     });
-    window.addEventListener('resize', debounce(300, this.computeTransforms.bind(this)))
+    window.addEventListener(
+      'resize',
+      debounce(RESIZE_DEBOUNCE_TIME, this.computeTransforms.bind(this)
+    ))
+  }
+
+  computeAvgImageHeight() {
+    let sumHeights = 0;
+    let numHeights = 0;
+    const stackImages = document.querySelectorAll(`[data-frameid="${ this.props.frameId }"] .stack__image`);
+    for (var i = 0; i < stackImages.length; i++) {
+      const imgHeight = get(stackImages, [i, 'clientHeight'])
+      if (imgHeight) {
+        sumHeights += imgHeight
+        numHeights ++
+      }
+    }
+    this.avgImgHeight = sumHeights / numHeights
   }
 
   computeTransforms() {
+    this.computeAvgImageHeight();
     const { unit } = calcDimensions()
     this.imageTransforms = this.imageStack.reduce((acc, imgId, i) => {
       acc[imgId] = { x:unit*i , y: -unit*i , s: 1};
@@ -107,13 +129,13 @@ export default class Stack extends React.Component {
     const {windowWidth, unit, actualWidth} = calcDimensions();
     let imgWidth = windowWidth * this.props.imgWidthRatio;
     let stackWidth = imgWidth + (this.imageStack.length - 1) * unit;
-    let imgHeight = imgWidth * this.props.imgAspectRatio;
+    let imgHeight = this.avgImgHeight + (this.imageStack.length - 1) * unit;
 
     if (actualWidth < 400) {
-      const baseWidth = '120vw';
-      imgWidth = `calc(${ baseWidth } * ${ this.props.imgWidthRatio })`
-      stackWidth = `calc(${ imgWidth } + ${ (this.props.images.length - 1) * unit }px)`
-      imgHeight = `calc(${ imgWidth } * ${ this.props.imgAspectRatio} )`
+      const baseWidth = actualWidth;
+      imgWidth = baseWidth * this.props.imgWidthRatio;
+      stackWidth = imgWidth + (this.props.images.length - 1) * unit;
+      imgHeight = this.avgImgHeight + (this.props.images.length - 1) * unit;
     }
 
     return (

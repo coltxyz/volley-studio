@@ -1,4 +1,5 @@
 import classname from 'classnames';
+import VolleyLogo from './svg/volley-logo';
 
 const HomeHero = props => (
   <div
@@ -10,7 +11,9 @@ const HomeHero = props => (
     data-frametype={ props.frameType }
   >
     <div className="home-hero__copy text-center">
-      <img className="logo" src="/logo-lg.png" />
+      <div className="logo">
+        <VolleyLogo color="var(--black-ln)"/>
+      </div>
       <h2>
         { props.blurb }
       </h2>

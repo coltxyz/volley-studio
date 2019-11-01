@@ -1,15 +1,18 @@
 .controls {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 3em;
   bottom: 0;
   top: 0;
+  pointer-events: none;
+  z-index: 200;
   &__item {
     position: absolute;
     z-index: 10;
     opacity: 1;
     transition: opacity $timing_controls $ease $delay_controls;
     cursor: pointer;
+    pointer-events: all;
     &.hide {
       opacity: 0;
       cursor: default;
@@ -66,6 +69,7 @@
     bottom: 7rem;
   }
   .text {
+    color: var(--black-ln);
     z-index: 116;
     bottom: 3em;
     left: 0;

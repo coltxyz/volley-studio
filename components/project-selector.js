@@ -38,7 +38,9 @@ class ProjectSelector extends React.Component {
     if (!items || !activeItem) {
       return <span />
     }
-    const menuItems = items.filter( item => item._id !== activeItem._id )
+    const menuItems = items
+      .filter( item => item._id !== activeItem._id && !item.hidden )
+      .sort((a, b) => a.title < b.title ? -1 : 1)
     return (
       <div
         className={ classname("project-selector", {

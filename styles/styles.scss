@@ -10,16 +10,15 @@ $timing_contenttransition: 800ms;
 $delay_contenttransition: 100ms;
 $timing_stackshuffle: 1000ms;
 $timing_stackfade: 2000ms;
-$delay_stackfade: 100ms;
+$delay_stackfade: 350ms;
 $timing_hover: 300ms;
-$timing_trackbar: 150ms;
-$theme_switch_default_opacity: 0.15;
+$timing_trackbar: 100ms;
+$theme_switch_default_opacity: 0.4;
 
+$break_xl: 1500px;
 $break_lg: 1200px;
 $break_med: 900px;
 $break_sm: 600px;
-
-@import './typography';
 
 html {
   background: var(--white);
@@ -33,7 +32,7 @@ html {
     color $timing_themechange $ease $delay_themechange;
 }
 
-svg {
+svg * {
   transition:
     fill $timing_themechange $ease $delay_themechange,
     stroke $timing_themechange $ease $delay_themechange;
@@ -42,7 +41,6 @@ svg {
 #main {
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
   .content-container {
     opacity: 1;
     transition: opacity $timing_contenttransition $ease $delay_contenttransition;
@@ -63,55 +61,32 @@ svg {
   }
 }
 .content-main {
-  height: 100%;
-  overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  pointer-events: all;
 }
 .content-inner {
-  height: 100%;
   position: relative;
 }
 .flex-container {
   display: flex;
-  height: 100%;
 }
-
 .bg-gray {
   background: var(--gray);
 }
 .bg-white {
   background: var(--white);
 }
+.text-center {
+  text-align: center;
+}
 
 .module {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   padding-right: 3rem;
-}
-
-.scroll-hider {
-  overflow: hidden;
-  height: 100%;
-  > div {
-    width: 102%;
-    padding-right: 2%;
-    overflow: scroll;
-    height: 100vh;
-  }
-}
-
-.margin-copy {
-  position: absolute;
-  top: 3em;
-  left: 3em;
-  width: 8em;
-  pointer-events: none;
-}
-
-.module {
   .margin-copy {
     opacity: 0;
     transition: opacity $timing_controls $ease $delay_controls;
@@ -121,87 +96,29 @@ svg {
   }
 }
 
-.about-pg {
-  &__inner {
-    display: flex;
-    flex-direction: row;
-    @media (max-width: $break_sm) {
-      flex-direction: column;
-    }
-    &__left {
-      margin-left: percentage(2/12);
-      width: percentage(4/12);
-      padding-right: 2rem;
-      @media (max-width: $break_med) {
-        margin-left: percentage(1/12);
-        width: percentage(6/12);
-      }
-      @media (max-width: $break_sm) {
-        margin-left: 3rem;
-        width: auto;
-      }
-    }
-    &__right {
-      width: percentage(5/12);
-      margin-left: percentage(1/12);
-      padding-right: 2rem;
-      @media (max-width: $break_med) {
-        margin-left: percentage(1/12);
-        width: percentage(4/12);
-      }
-      @media (max-width: $break_sm) {
-        margin-left: 3rem;
-        width: auto;
-      }
-    }
+.scroll-hider {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  > div {
+    width: calc(100% + 40px);
+    height: calc(100vh + 40px);
+    padding-right: 40px;
+    padding-bottom: 40px;
+    overflow: auto;
+    overscroll-behavior: contain;
   }
 }
 
-@media (max-width: $break_sm) {
-  .about-pg--services .about-pg__inner__right {
-    padding-top: 4rem;
-  }
+.margin-copy {
+  position: fixed;
+  top: 3em;
+  left: 3em;
+  width: 8em;
+  pointer-events: none;
 }
 
-.team-bio {
-  width: 32em;
-  padding-top: 3rem;
-  padding-right: 4rem;
-  @media (max-width: $break_sm) {
-    width: auto;
-  }
-  p {
-    margin-bottom: 0;
-  }
-}
-
-.select-clients-column {
-  line-height: 1.5em;
-  margin: 0 percentage(2/12);
-  @media (max-width: $break_med) {
-    margin: 0 percentage(1/12);
-  }
-  @media (max-width: $break_sm) {
-    margin: 0 2rem;
-    .client-name {
-      padding-bottom: 0.4em;
-    }
-  }
-  &.col {
-    columns: 4;
-    @media (max-width: $break_med) {
-      columns: 3;
-    }
-    @media (max-width: $break_sm) {
-      columns: 2;
-    }
-  }
-}
-
-.text-center {
-  text-align: center;
-}
-
+@import './typography';
 @import './home-hero';
 @import './stack';
 @import './project';
@@ -209,3 +126,4 @@ svg {
 @import './controls';
 @import './navigation';
 @import './project-selector';
+@import './about';

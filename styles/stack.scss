@@ -2,7 +2,8 @@
 .stack-wrapper {
   flex-direction: row;
   align-items: center;
-  margin: 10% 0;
+  padding-bottom: 20%;
+  box-sizing: content-box;
   .stack-btn {
     position: absolute;
     height: 75%;
@@ -38,18 +39,19 @@
       bottom: 0;
       left: 0;
       z-index: 1;
-      transition: opacity $timing_stackfade $ease, transform $timing_stackshuffle $ease;
+      transition: transform $timing_stackshuffle $ease;
       pointer-events: all;
       cursor: pointer;
       transform-origin: bottom left;
       &__inner {
         pointer-events: none;
-        img, video {
-          outline: 1px solid var(--white);
+        .stack-img-active, .stack-img-default {
+          outline: 0.1rem solid var(--white);
           height: auto;
           max-width: 100%;
           max-height: 60vh;
           pointer-events: none;
+          overflow: hidden;
           -webkit-user-select: none;
           -khtml-user-select: none;
           -moz-user-select: none;
@@ -94,7 +96,7 @@
 }
 .team-stack .stack {
   margin: 0 auto;
-  &__image__inner img, video {
-    outline: 1px solid var(--white-permanent);
+  .stack-img-active, .stack-img-default {
+    outline: 0.1rem solid var(--white-permanent);
   }
 }

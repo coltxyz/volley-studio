@@ -2,7 +2,7 @@ nav {
   text-orientation: sideways;
   writing-mode: vertical-lr;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   width: 3rem;
@@ -11,6 +11,7 @@ nav {
   padding-right: 1.6em;
   z-index: 200;
   font-weight: 500;
+  transition: border-color $timing_themechange $ease $delay_themechange;
   a {
     margin: 2em 0;
     padding: 0.2em 0;
@@ -46,6 +47,10 @@ nav {
   z-index: 30;
   background: var(--trackbar);
   cursor: grab;
+  &--dragging {
+    cursor: grabbing;
+    transition: none;
+  }
   @media (max-width: $break_sm) {
     display: none;
   }

@@ -3,14 +3,12 @@
   width: 45rem;
   position: relative;
   background: var(--white);
-
-  * {
+  div, input {
     transition:
       background $timing_themechange $ease $delay_themechange,
       border $timing_themechange $ease $delay_themechange,
       color $timing_themechange $ease $delay_themechange;
   }
-
   @media (max-width: $break_med) {
     width: 40rem;
   }
@@ -24,7 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    img {
+    .logo svg {
       height: 2.8rem;
       padding: 0rem 2rem;
       @media (max-width: $break_sm) {

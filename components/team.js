@@ -39,11 +39,11 @@ class Team extends React.Component {
             <Stack
               className="team-stack"
               isActiveFrame={ props.activeFrameId  === props.frameId }
-              imgWidthRatio={ 1/6 }
-              imgAspectRatio={ 1.88 }
+              imgWidthRatio={ 1/7 }
               images={ props.content.map( processTeamImages ).reverse() }
               marginCopy="team"
               onChange={ this.onStackItemChange }
+              frameId="team-stack-frame"
             />
           </div>
           <div className="about-pg__inner__right team-bio">

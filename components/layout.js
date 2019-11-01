@@ -6,7 +6,8 @@ import Controls from './controls';
 import {
   TRANSITION_ENTERING,
   TRANSITION_EXITING,
-  COLORS
+  COLORS,
+  THEME_LIGHT
 } from '../lib/util';
 
 const social_img_url = '';
@@ -17,7 +18,8 @@ const ga_id = ''
 export default class Layout extends React.Component {
 
   static defaultProps = {
-    srollPos: 0
+    srollPos: 0,
+    theme: THEME_LIGHT
   }
 
   render () {

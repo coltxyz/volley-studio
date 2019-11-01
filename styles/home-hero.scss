@@ -2,15 +2,20 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  img.logo {
-    height: 7rem;
+  .logo {
+    height: 8rem;
     padding-bottom: 2rem;
+    svg {
+      height: 100%;
+      max-width: 90%;
+    }
   }
   &__copy {
-    transition: all $timing_homehero $ease $delay_homehero;
+    transition: opacity $timing_homehero $ease $delay_homehero;
     position: relative;
     top: 0;
     opacity: 1;
+    padding: 0 2rem;
   }
   .margin-copy {
     bottom: 5rem;

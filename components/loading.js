@@ -10,12 +10,16 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
-    window.setInterval(() => {
+    this.interval = window.setInterval(() => {
       const nextDots = this.state.dots > 3 ? 0 : this.state.dots + 1;
       this.setState({
         dots: nextDots
       })
     }, UPDATE_INTERVAL)
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.interval);
   }
 
   render() {

@@ -1,4 +1,5 @@
 import classname from 'classnames';
+import VolleyLogo from './svg/volley-logo';
 
 export default props => (
   <div
@@ -17,7 +18,9 @@ export default props => (
       <div className="contact-card__bg-2" />
       <div className="contact-card__bg-0">
         <div className="contact-card__header">
-          <img src="/logo-black.png"/>
+          <div className="logo">
+            <VolleyLogo color="var(--black-ln)" />
+          </div>
           <div className="info">
             <p>
               <strong>{ props.content.contactEmail }</strong>
