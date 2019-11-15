@@ -105,6 +105,9 @@
       width: 20rem;
       opacity: 0;
       transition: opacity $timing_controls $ease $delay_controls;
+      @media (max-width: $break_sm) {
+        display: none;
+      }
     }
     &:hover {
       .project-nav--left__label, .project-nav--right__label {
