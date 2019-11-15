@@ -30,11 +30,17 @@
     z-index: 101;
     top: 0.5em;
     left: 11em;
+    pointer-events: none;
   }
   .close {
     top: 1em;
     right: 1em;
     z-index: 101;
+    @media (max-width: $break_sm) {
+      top: unset;
+      bottom: 2.5em;
+      right: 2em;
+    }
   }
   .loading {
     top: 1em;
@@ -92,6 +98,22 @@
       height: 1.1em;
       transform: rotate(90deg);
     }
+    &__label {
+      position: absolute;
+      bottom: 0.3rem;
+      left: 4rem;
+      width: 20rem;
+      opacity: 0;
+      transition: opacity $timing_controls $ease $delay_controls;
+    }
+    &:hover {
+      .project-nav--left__label, .project-nav--right__label {
+        opacity: 1;
+      }
+    }
+  }
+  .project-nav--left__label {
+    left: 9.5rem;
   }
   .project-nav--right {
     left: 7.5em;

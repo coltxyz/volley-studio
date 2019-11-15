@@ -44,12 +44,14 @@ const Controls = props => {
         onClick={ () => props.onProjectChange({ direction: 'left'}) }
       >
         <Carat color="var(--black-ln)" />
+        <span className="project-nav--left__label mono">Previous Project</span>
       </div>
       <div
         className={ classname("controls__item project-nav--right", { hide: !projectNav })}
         onClick={ () => props.onProjectChange({ direction: 'right'}) }
       >
         <Carat color="var(--black-ln)" />
+        <span className="project-nav--right__label mono">Next Project</span>
       </div>
       <div
         className={ classname("controls__item up-arrow", { hide: !upArrow }) }

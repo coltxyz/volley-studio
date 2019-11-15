@@ -175,9 +175,7 @@ export default class Stack extends React.Component {
                 onMouseLeave={ this.onMouseLeave }
                 onClick={ this.onStackClick }
                 key={ image._key }
-                className={classname('stack__image', {
-                  'stack__image--active': this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1]
-                })}
+                className="stack__image"
                 style={{
                   transform: this.getTransform({
                     id: image._key,
@@ -192,6 +190,8 @@ export default class Stack extends React.Component {
                   activeClassName="stack-img-active"
                   inactiveClassName="stack-img-default"
                   width={ imgWidth }
+                  isPlaying={ this.props.isActiveFrame }
+                  isActive={ this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1] }
                 />
               </div>
             ))

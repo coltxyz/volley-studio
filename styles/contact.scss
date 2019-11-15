@@ -14,7 +14,6 @@
   }
   @media (max-width: $break_sm) {
     width: 80vw;
-    height: 70vh;
   }
   &__header {
     border-bottom: 1px solid var(--black-ln);
@@ -25,12 +24,20 @@
     .logo svg {
       height: 2.8rem;
       padding: 0rem 2rem;
-      @media (max-width: $break_sm) {
-        height: 1.4rem;
-      }
     }
     .info {
       padding: 1rem 2rem 0 1rem;
+    }
+    @media (max-width: $break_sm) {
+      display: block;
+      .logo svg {
+        height: 2.4rem;
+        padding: 1.5rem 1rem 0;
+        box-sizing: content-box;
+      }
+      .info {
+         padding: 1rem 2rem 1rem 1.2rem;
+      }
     }
   }
   &__body {
@@ -98,6 +105,9 @@
     border: 1px solid var(--black-ln);
     background: var(--white);
     z-index: 99;
+    @media (max-width: $break_sm) {
+      display: none;
+    }
   }
   &__bg-2 {
     left: -20px;
@@ -106,14 +116,12 @@
   &__bg-1 {
     left: -40px;
     top: 40px;
-    @media (max-width: $break_sm) {
-      display: none;
-    }
   }
   &__bg-0 {
     z-index: 100;
     position: relative;
     background: var(--white);
     border: 1px solid var(--black-ln);
+
   }
 }

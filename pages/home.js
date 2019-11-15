@@ -55,8 +55,11 @@ export default class Home extends React.Component {
     const about = await sanity.fetch(aboutQuery);
     const activeSlug = req.url.replace("/", "") || null;
     const featured = await sanity.fetch(featuredContent);
-    const projects = await sanity.fetch(projectsQuery);
+    const projectsRaw = await sanity.fetch(projectsQuery);
     const team = await sanity.fetch(teamQuery);
+    const projects = projectsRaw
+      .filter( item => !item.hidden )
+      .sort((a, b) => a.title < b.title ? -1 : 1);
     return {
       about,
       activeSlug,
@@ -67,12 +70,12 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    window.setTimeout(() => {
-      const videos = document.getElementsByTagName('video');
-      for (let el of videos) {
-        el.play();
-      }
-    }, 3000);
+    // window.setTimeout(() => {
+    //   const videos = document.getElementsByTagName('video');
+    //   for (let el of videos) {
+    //     el.play();
+    //   }
+    // }, 3000);
     this.topmostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = get(item, ['images', item.images.length - 1, '_key']);
       return acc;

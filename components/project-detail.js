@@ -37,27 +37,37 @@ export default class ProjectDetail extends React.Component {
       <div className="project-detail">
         <div className="project-detail__inner">
           <div className="project-detail__main-photo">
-            <MediaPlayer
-              image={ activeImage }
-              activeClassName="main-photo--active"
-              inactiveClassName="main-photo--inactive"
-            />
-            <div className="project-detail__main-photo__title">
-              { activeImage.title }
+            <div className="rel sidescroll-mobile-container">
+              {
+                projectImages.map( (image, i) => (
+                  <MediaPlayer
+                    image={ image }
+                    className="media"
+                    activeClassName="main-photo--active"
+                    inactiveClassName="main-photo--inactive"
+                    isPlaying={ true }
+                    isActive={ get(activeImage, '_key') === image._key }
+                  />
+                ))
+              }
             </div>
           </div>
           <div className="project-detail__side-panel">
             <div className="project-detail__side-panel__thumbnails">
               {
                 projectImages.map( (image, i) => (
-                  <MediaPlayer
-                    key={ image._key }
-                    onClick={ () => this.onThumbnailClick(i) }
-                    className="thumbnail"
-                    activeClassName="thumbnail--active"
-                    inactiveClassName="thumbnail--inactive"
-                    image={ image }
-                  />
+                  <div className="thumbnail">
+                    <MediaPlayer
+                      key={ image._key }
+                      onClick={ () => this.onThumbnailClick(i) }
+                      className="rel"
+                      activeClassName="thumbnail--active"
+                      inactiveClassName="thumbnail--inactive"
+                      image={ image }
+                      isPlaying={ true }
+                      isActive={ get(activeImage, '_key') === image._key }
+                    />
+                  </div>
                 ))
               }
             </div>
@@ -69,6 +79,8 @@ export default class ProjectDetail extends React.Component {
                 { this.props.data.year && `Completed: ${ this.props.data.year}`}
                 <br/>
                 { this.props.data.location && `Location: ${ this.props.data.location }`}
+                <br/>
+                { get(activeImage, 'title') && `Pictured: ${ activeImage.title }` }
               </p>
             </div>
           </div>
