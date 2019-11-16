@@ -44,6 +44,7 @@
   padding-right: 4rem;
   @media (max-width: $break_sm) {
     width: auto;
+    padding-right: 3rem;
   }
   p {
     margin-bottom: 0;
@@ -57,7 +58,7 @@
     margin: 0 percentage(1/12);
   }
   @media (max-width: $break_sm) {
-    margin: 0 2rem;
+    margin: 0 3rem;
     .client-name {
       padding-bottom: 0.4em;
     }

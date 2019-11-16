@@ -7,7 +7,8 @@ import {
   TRANSITION_ENTERING,
   TRANSITION_EXITING,
   COLORS,
-  THEME_LIGHT
+  THEME_LIGHT,
+  THEME_DARK,
 } from '../lib/util';
 
 const social_img_url = '';

@@ -12,7 +12,7 @@ import {
 export default class Stack extends React.Component {
 
   static defaultProps = {
-    imgWidthRatio: 1/2,
+    imgWidthRatio: [1/2, 1/2],
     isVisible: true,
     isExpanded: false,
     isActiveFrame: false
@@ -127,13 +127,13 @@ export default class Stack extends React.Component {
     }
 
     const {windowWidth, unit, actualWidth} = calcDimensions();
-    let imgWidth = windowWidth * this.props.imgWidthRatio;
+    let imgWidth = windowWidth * this.props.imgWidthRatio[0];
     let stackWidth = imgWidth + (this.imageStack.length - 1) * unit;
     let imgHeight = this.avgImgHeight + (this.imageStack.length - 1) * unit;
 
     if (actualWidth < 400) {
       const baseWidth = actualWidth;
-      imgWidth = baseWidth * this.props.imgWidthRatio;
+      imgWidth = baseWidth * this.props.imgWidthRatio[1];
       stackWidth = imgWidth + (this.props.images.length - 1) * unit;
       imgHeight = this.avgImgHeight + (this.props.images.length - 1) * unit;
     }
