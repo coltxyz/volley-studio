@@ -57,7 +57,7 @@
           -moz-user-select: none;
           -o-user-select: none;
           user-select: none;
-          transition: opacity $timing_stackfade $ease $delay_stackfade, outline $timing_themechange $ease $delay_themechange;
+          transition: opacity $timing_stackfade $ease $delay_stackfade;
           @media (max-width: $break_sm) {
             max-height: 40vh;
           }

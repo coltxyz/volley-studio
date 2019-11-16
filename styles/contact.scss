@@ -3,12 +3,6 @@
   width: 45rem;
   position: relative;
   background: var(--white);
-  div, input {
-    transition:
-      background $timing_themechange $ease $delay_themechange,
-      border $timing_themechange $ease $delay_themechange,
-      color $timing_themechange $ease $delay_themechange;
-  }
   @media (max-width: $break_med) {
     width: 40rem;
   }
@@ -90,7 +84,6 @@
       background: inherit;
       border-left: 1px solid var(--black-ln);
       cursor: pointer;
-      transition: border-left-color $timing_themechange $ease $delay_themechange;
       &:hover {
         background-color: var(--black-ln);
         color: var(--white);

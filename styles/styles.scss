@@ -27,15 +27,6 @@ html {
 
 * {
   box-sizing: border-box;
-  transition:
-    background $timing_themechange $ease $delay_themechange,
-    color $timing_themechange $ease $delay_themechange;
-}
-
-svg * {
-  transition:
-    fill $timing_themechange $ease $delay_themechange,
-    stroke $timing_themechange $ease $delay_themechange;
 }
 
 #main {

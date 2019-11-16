@@ -11,7 +11,6 @@ nav {
   padding-right: 1.6em;
   z-index: 200;
   font-weight: 500;
-  transition: border-color $timing_themechange $ease $delay_themechange;
   a {
     margin: 2em 0;
     padding: 0.2em 0;
@@ -24,7 +23,6 @@ nav {
     height: 2.3em;
     opacity: $theme_switch_default_opacity;
     cursor: pointer;
-    transition: opacity $timing_themechange $ease $delay_themechange;
     &:hover {
       opacity: 1;
     }
@@ -40,7 +38,6 @@ nav {
   margin-top: 0.3rem;
   transition:
     transform $timing_trackbar linear,
-    background $timing_themechange $ease $delay_themechange,
     opacity $timing_themechange $ease $delay_themechange;
   width: 10px;
   height: 90px;
