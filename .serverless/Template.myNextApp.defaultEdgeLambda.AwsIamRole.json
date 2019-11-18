@@ -1,0 +1,12 @@
+{
+  "name": "wm37iap-7zu4rkr",
+  "arn": "arn:aws:iam::680198729557:role/wm37iap-7zu4rkr",
+  "service": [
+    "lambda.amazonaws.com",
+    "edgelambda.amazonaws.com"
+  ],
+  "policy": {
+    "arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  },
+  "region": "us-east-1"
+}
