@@ -13,6 +13,7 @@
   color: var(--black-ln);
   outline: 1px solid var(--black-ln);
   transition: outline-color $timing_dropdown $ease;
+  pointer-events: all;
   &__selected {
     font-weight: 500;
     position: relative;
