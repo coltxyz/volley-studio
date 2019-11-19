@@ -5,6 +5,7 @@ import { debounce } from 'throttle-debounce';
 import MediaPlayer from './media-player';
 import {
   calcDimensions,
+  aspectRatioForImage,
   STACK_SHUFFLE_ANIMATION_TIME,
   RESIZE_DEBOUNCE_TIME
 } from '../lib/util';
@@ -25,18 +26,16 @@ export default class Stack extends React.Component {
       currentTargetId: null,
       isAnimating: false
     };
-    this.avgImgHeight = 600;
     this.target = null;
     this.imageTransforms = null;
     this.imageStack = images.map( image => (image._key) );
+    this.avgImgHeight = 600;
   }
 
   componentDidMount() {
-    this.computeTransforms()
+    this.computeTransforms();
     this.setState({
       isReady: true
-    }, () => {
-      window.setTimeout(this.computeAvgImageHeight.bind(this), 1000)
     });
     window.addEventListener(
       'resize',
@@ -44,13 +43,15 @@ export default class Stack extends React.Component {
     ))
   }
 
-  computeAvgImageHeight() {
+  computeAvgImageHeight(images) {
+    const {windowWidth} = calcDimensions();
     let sumHeights = 0;
     let numHeights = 0;
-    const stackImages = document.querySelectorAll(`[data-frameid="${ this.props.frameId }"] .stack__image`);
-    for (var i = 0; i < stackImages.length; i++) {
-      const imgHeight = get(stackImages, [i, 'clientHeight'])
-      if (imgHeight) {
+    for (var i = 0; i < images.length; i++) {
+      const imgWidth = windowWidth * this.props.imgWidthRatio[0];
+      const imgAspect = aspectRatioForImage(images[0]);
+      const imgHeight = imgWidth / imgAspect;
+      if (typeof imgHeight === 'number') {
         sumHeights += imgHeight
         numHeights ++
       }
@@ -59,7 +60,7 @@ export default class Stack extends React.Component {
   }
 
   computeTransforms() {
-    this.computeAvgImageHeight();
+    this.computeAvgImageHeight(this.props.images);
     const { unit } = calcDimensions()
     this.imageTransforms = this.imageStack.reduce((acc, imgId, i) => {
       acc[imgId] = { x:unit*i , y: -unit*i , s: 1};
@@ -121,21 +122,23 @@ export default class Stack extends React.Component {
   }
 
   render() {
-
+    let { shouldLoadVideo } = this.props;
+    let isPlaying = this.props.isActiveFrame;
     if (!this.state.isReady) {
       return <div className={ classname("stack-wrapper", this.props.className)} />
     }
 
-    const {windowWidth, unit, actualWidth} = calcDimensions();
+    const {windowWidth, windowHeight, unit, actualWidth} = calcDimensions();
     let imgWidth = windowWidth * this.props.imgWidthRatio[0];
     let stackWidth = imgWidth + (this.imageStack.length - 1) * unit;
     let imgHeight = this.avgImgHeight + (this.imageStack.length - 1) * unit;
 
     if (actualWidth < 400) {
-      const baseWidth = actualWidth;
-      imgWidth = baseWidth * this.props.imgWidthRatio[1];
+      imgWidth = actualWidth * this.props.imgWidthRatio[1];
       stackWidth = imgWidth + (this.props.images.length - 1) * unit;
       imgHeight = this.avgImgHeight + (this.props.images.length - 1) * unit;
+      shouldLoadVideo = false;
+      isPlaying = false;
     }
 
     return (
@@ -169,32 +172,37 @@ export default class Stack extends React.Component {
           }}
         >
           {
-            this.props.images.map( image => (
-              <div
-                onMouseEnter={ this.onMouseEnter }
-                onMouseLeave={ this.onMouseLeave }
-                onClick={ this.onStackClick }
-                key={ image._key }
-                className="stack__image"
-                style={{
-                  transform: this.getTransform({
-                    id: image._key,
-                    isActiveFrame: this.props.isActiveFrame
-                  }),
-                  zIndex: this.imageStack.indexOf(image._key) + 10
-                }}
-              >
-                <MediaPlayer
-                  image={ image }
-                  className="stack__image__inner"
-                  activeClassName="stack-img-active"
-                  inactiveClassName="stack-img-default"
-                  width={ imgWidth }
-                  isPlaying={ this.props.isActiveFrame }
-                  isActive={ this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1] }
-                />
-              </div>
-            ))
+            this.props.images.map( image => {
+              const aspectRatio = aspectRatioForImage(image);
+              return (
+                <div
+                  onMouseEnter={ this.onMouseEnter }
+                  onMouseLeave={ this.onMouseLeave }
+                  onClick={ this.onStackClick }
+                  key={ image._key }
+                  className="stack__image"
+                  style={{
+                    transform: this.getTransform({
+                      id: image._key,
+                      isActiveFrame: this.props.isActiveFrame
+                    }),
+                    zIndex: this.imageStack.indexOf(image._key) + 10
+                  }}
+                >
+                  <MediaPlayer
+                    image={ image }
+                    className="stack__image__inner"
+                    activeClassName="stack-img-active"
+                    inactiveClassName="stack-img-default"
+                    width={ imgWidth }
+                    height={ imgWidth / aspectRatio }
+                    isPlaying={ isPlaying }
+                    isActive={ this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1] }
+                    shouldLoadVideo={ shouldLoadVideo }
+                  />
+                </div>
+              );
+            })
           }
         </div>
       </div>

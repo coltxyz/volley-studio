@@ -1,85 +1,96 @@
 import { get } from 'dotty';
-import classname from 'classnames';
+import classnames from 'classnames';
 import SanityMuxPlayer from 'sanity-mux-player';
-import { urlFor } from '../lib/util';
+import { urlFor, aspectRatioForImage, calcDimensions } from '../lib/util';
 
 class MediaPlayer extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {
-      isReady: false
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      isReady: true
-    })
-  }
-
   render() {
-    if (!this.state.isReady) {
-      return <div />
-    }
-    const {
+    let {
       image,
       width,
+      height,
       className,
       activeClassName,
       inactiveClassName,
       onClick,
-      isActive
+      isActive,
+      shouldLoadVideo,
+      shouldPlayVideo
     } = this.props;
+
+    if (typeof window === 'undefined') {
+      return <div />
+    }
+
+    /*
+      For tall images, adjust the sizing
+    */
+    const { windowHeight } = calcDimensions();
+    const aspectRatio = aspectRatioForImage(image);
+    if (aspectRatio < 1) {
+      height = Math.min(height, Math.floor(windowHeight * 0.55))
+      width = height * aspectRatio
+    }
+
     return (
       image.videoColor ? (
         <div
-          className={ classname(className, { 'media--active': isActive } ) }
+          className={ classnames('lol', className, { 'media--active': isActive } ) }
           onClick={ onClick }
         >
           <SanityMuxPlayer
             assetDocument={get(image, 'videoMono.asset') || get(image, 'videoColor.asset')}
-            autoload={true}
-            autoplay={ this.props.isPlaying &&  Boolean( image.videoMono ) }
-            className={ classname('mediaplayer', inactiveClassName, {
+            autoload={ shouldLoadVideo }
+            autoplay={ this.props.isPlaying && Boolean( image.videoMono ) }
+            className={ classnames('mediaplayer', inactiveClassName, {
               'mock--monotone': !Boolean( image.videoMono )
             }) }
             loop={true}
             muted={true}
             showControls={false}
-            style={{ maxWidth: width }}
+            height={ height }
             width={ width }
+            style={{ height: '100%'}}
           />
           <SanityMuxPlayer
             assetDocument={get(image, 'videoColor.asset')}
-            autoload={true}
+            autoload={shouldLoadVideo}
             autoplay={ this.props.isPlaying }
-            className={ classname( 'mediaplayer', activeClassName) }
+            className={ classnames( 'mediaplayer', activeClassName) }
             loop={true}
             muted={true}
             showControls={false}
-            style={{ maxWidth: width, opacity: isActive ? 1 : 0 }}
+            style={{ opacity: isActive ? 1 : 0, height: '100%'}}
+            height={ height }
             width={ width }
           />
         </div>
       ) : (
         <div
-          className={ classname(className, { 'media--active': isActive } ) }
+          className={ classnames('lol', className, { 'media--active': isActive } ) }
           onClick={ onClick }
         >
           <img
             key={ get(image,'imageMono._id') || 'abc123'}
-            className={ classname(inactiveClassName, {
+            className={ classnames('image', inactiveClassName, {
               'mock--monotone': !Boolean( image.imageMono )
             }) }
             src={ urlFor(image.imageMono, width) || urlFor(image.imageColor, width) }
-            style={{ maxWidth: width }}
+            style={{
+              width,
+              height
+            }}
           />
           <img
             key={ get(image,'imageColor._id') || 'xyz456'}
-            className={ activeClassName }
+            className={ classnames('image', activeClassName) }
             src={ urlFor(image.imageColor, width) }
-            style={{ maxWidth: width, opacity: isActive ? 1 : 0 }}
+            style={{
+              width,
+              height,
+              opacity: isActive ? 1 : 0
+            }}
           />
         </div>
       )

@@ -70,12 +70,6 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    // window.setTimeout(() => {
-    //   const videos = document.getElementsByTagName('video');
-    //   for (let el of videos) {
-    //     el.play();
-    //   }
-    // }, 3000);
     this.topmostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = get(item, ['images', item.images.length - 1, '_key']);
       return acc;
@@ -89,7 +83,7 @@ export default class Home extends React.Component {
       debounce(RESIZE_DEBOUNCE_TIME, this.populateCachedData)
     )
     this.populateCachedData();
-    this.transitionIn(() => {})
+    this.transition(TRANSITION_ENTERING, TRANSITION_INTERVAL_ENTER, () => {}, false);
   }
 
   componentWillUnmount() {
@@ -344,6 +338,7 @@ export default class Home extends React.Component {
                   images={ portfolioItem.images }
                   isActiveFrame={ this.state.isFocus && this.state.activeFrameId == i+1 }
                   onStackClick={ this.onStackClick }
+                  shouldLoadVideo={ Math.abs(this.state.activeFrameId - i+1 ) < 2 }
                 />
               ))
             }
