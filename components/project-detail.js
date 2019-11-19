@@ -56,9 +56,11 @@ export default class ProjectDetail extends React.Component {
             <div className="project-detail__side-panel__thumbnails">
               {
                 projectImages.map( (image, i) => (
-                  <div className="thumbnail">
+                  <div
+                    className="thumbnail"
+                    key={ image._key }
+                  >
                     <MediaPlayer
-                      key={ image._key }
                       onClick={ () => this.onThumbnailClick(i) }
                       className="rel"
                       activeClassName="thumbnail--active"

@@ -57,7 +57,7 @@
           -o-user-select: none;
           user-select: none;
           transition: opacity $timing_stackfade $ease $delay_stackfade;
-          background-size: cover;
+          background-size: contain;
           @media (max-width: $break_sm) {
             max-height: 40vh;
           }

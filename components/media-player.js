@@ -33,6 +33,9 @@ class MediaPlayer extends React.Component {
       width = height * aspectRatio
     }
 
+    const colorLqip = get(image, 'imageColor.asset.metadata.lqip');
+    const monoLqip = get(image, 'imageMono.asset.metadata.lqip');
+
     return (
       image.videoColor ? (
         <div
@@ -79,7 +82,8 @@ class MediaPlayer extends React.Component {
             src={ urlFor(image.imageMono, width) || urlFor(image.imageColor, width) }
             style={{
               width,
-              height
+              height,
+              backgroundImage: `url(${ monoLqip || colorLqip })`
             }}
           />
           <img
@@ -89,7 +93,8 @@ class MediaPlayer extends React.Component {
             style={{
               width,
               height,
-              opacity: isActive ? 1 : 0
+              opacity: isActive ? 1 : 0,
+              backgroundImage: `url(${ colorLqip })`
             }}
           />
         </div>

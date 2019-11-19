@@ -64,6 +64,8 @@
       position: absolute;
       object-fit: contain;
       transition: opacity $timing_hover $ease;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     .main-photo--active, .main-photo--inactive {
       height: 100%;
@@ -114,13 +116,17 @@
         }
         img, .image, video {
           cursor: pointer;
+          background-size: cover;
+          background-repeat: no-repeat;
         }
         > div {
           height: 100%;
           width: 100%;
+          position: relative;
           > div {
             height: 100%;
             height: 100%;
+            position: relative;
           }
         }
       }
