@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "9bgP");
+/******/ 	return __webpack_require__(__webpack_require__.s = "bbJi");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -7868,143 +7868,6 @@ module.exports = arrayFilter;
 
 /***/ }),
 
-/***/ "9bgP":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var _slug_namespaceObject = {};
-__webpack_require__.r(_slug_namespaceObject);
-__webpack_require__.d(_slug_namespaceObject, "default", function() { return home["default"]; });
-
-// EXTERNAL MODULE: external "url"
-var external_url_ = __webpack_require__("bzos");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/render.js
-var render = __webpack_require__("/bjS");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/send-html.js
-var send_html = __webpack_require__("LuNM");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/lib/router/utils/index.js
-var utils = __webpack_require__("uV6m");
-
-// EXTERNAL MODULE: ./.next/build-manifest.json
-var build_manifest = __webpack_require__("LZ9C");
-
-// EXTERNAL MODULE: ./.next/react-loadable-manifest.json
-var react_loadable_manifest = __webpack_require__("67Bq");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
-var _document = __webpack_require__("VDXt");
-var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_error.js
-var _error = __webpack_require__("/a9y");
-var _error_default = /*#__PURE__*/__webpack_require__.n(_error);
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_app.js
-var _app = __webpack_require__("B5Ud");
-var _app_default = /*#__PURE__*/__webpack_require__.n(_app);
-
-// EXTERNAL MODULE: ./pages/home.js + 25 modules
-var home = __webpack_require__("CH2o");
-
-// CONCATENATED MODULE: ./pages/[slug].js
-
-// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F%5Bslug%5D&absolutePagePath=private-next-pages%2F%5Bslug%5D.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=Q-M4RCxKZKLbL3VFLCqQ6&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticParams", function() { return unstable_getStaticParams; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Q_M4RCxKZKLbL3VFLCqQ6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Q_M4RCxKZKLbL3VFLCqQ6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    const Component = home["default"]
-    /* harmony default export */ var next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Q_M4RCxKZKLbL3VFLCqQ6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
-    const unstable_getStaticProps = _slug_namespaceObject['unstable_getStaticProp' + 's']
-    const unstable_getStaticParams = _slug_namespaceObject['unstable_getStaticParam' + 's']
-    const config = _slug_namespaceObject['confi' + 'g'] || {}
-    const next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Q_M4RCxKZKLbL3VFLCqQ6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
-    async function renderReqToHTML(req, res, fromExport) {
-      const options = {
-        App: _app_default.a,
-        Document: _document_default.a,
-        buildManifest: build_manifest,
-        unstable_getStaticProps,
-        reactLoadableManifest: react_loadable_manifest,
-        canonicalBase: "",
-        buildId: "Q-M4RCxKZKLbL3VFLCqQ6",
-        assetPrefix: "",
-        ampBindInitData: false,
-      }
-      let sprData = false
-
-      if (req.url.match(/_next\/data/)) {
-        sprData = true
-        req.url = req.url
-          .replace(/\/_next\/data\//, '/')
-          .replace(/\.json$/, '')
-      }
-      const parsedUrl = Object(external_url_["parse"])(req.url, true)
-      const renderOpts = Object.assign(
-        {
-          Component,
-          pageConfig: config,
-          dataOnly: req.headers && (req.headers.accept || '').indexOf('application/amp.bind+json') !== -1,
-          nextExport: fromExport
-        },
-        options,
-      )
-      try {
-        
-        const params = fromExport && !unstable_getStaticProps ? {} : Object(utils["getRouteMatcher"])(Object(utils["getRouteRegex"])("/[slug]"))(parsedUrl.pathname) || {};
-        const result = await Object(render["renderToHTML"])(req, res, "/[slug]", Object.assign({}, unstable_getStaticProps ? {} : parsedUrl.query, params, sprData ? { _nextSprData: '1' } : {}), renderOpts)
-
-        if (fromExport) return { html: result, renderOpts }
-        return result
-      } catch (err) {
-        if (err.code === 'ENOENT') {
-          res.statusCode = 404
-          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
-            Component: _error_default.a
-          }))
-          return result
-        } else {
-          console.error(err)
-          res.statusCode = 500
-          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
-            Component: _error_default.a,
-            err
-          }))
-          return result
-        }
-      }
-    }
-    async function next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Q_M4RCxKZKLbL3VFLCqQ6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
-      try {
-        const html = await renderReqToHTML(req, res)
-        Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})
-      } catch(err) {
-        console.error(err)
-        res.statusCode = 500
-        res.end('Internal Server Error')
-      }
-    }
-  
-
-/***/ }),
-
 /***/ "9bx3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9098,7 +8961,10 @@ const projectsQuery = `*[_type == 'portfolio-item']{
   }
 }`;
 const teamQuery = `*[_id == 'team-member-list'] {
-  members[] -> {...}
+  members[] -> {
+    ...,
+    photo { asset -> {...}}
+  }
 }`;
 const aboutQuery = `*[_type == 'about-pages']`;
 const featuredContent = `*[_id == 'portfolio-item-list']`;
@@ -9288,6 +9154,7 @@ var sanityClient_default = /*#__PURE__*/__webpack_require__.n(sanityClient);
 // CONCATENATED MODULE: ./lib/util.js
 
 
+
 const PORTFOLIO_ITEM_LIST_TYPE = 'portfolio-item-list';
 const TEAM_MEMBER_LIST_TYPE = 'team-member-list';
 const TRANSITION_ENTERING = 'transition--entering';
@@ -9326,10 +9193,12 @@ const getBucketedWindowHeight = () => {
   return Math.ceil(window.innerHeight / 200) * 200;
 };
 const calcDimensions = () => {
-  const windowWidth = Math.min(Math.max(getBucketedWindowWidth(), 600), Math.floor(getBucketedWindowHeight() * 4 / 3));
+  const windowWidth = Math.max(getBucketedWindowWidth(), 600);
+  const windowHeight = Math.max(getBucketedWindowHeight(), 400);
   const unit = windowWidth / 60;
   return {
     windowWidth,
+    windowHeight,
     unit,
     actualWidth: window.innerWidth
   };
@@ -9339,11 +9208,13 @@ const urlFor = (image, width) => {
     return '';
   }
 
+  const aspectRatio = aspectRatioForImage(image);
   const builder = image_url_default()(sanity);
   const {
-    windowWidth
+    windowWidth,
+    windowHeight
   } = calcDimensions();
-  let assetWidth = width ? Math.floor(width * 1.5) : getBucketedWindowWidth();
+  let assetWidth = width ? Math.floor(width * 1.25) : getBucketedWindowWidth();
   return builder.image(image.asset).width(assetWidth).url();
 };
 const ControlSettingsForFrameType = {
@@ -9440,6 +9311,14 @@ const checkOnInterval = ({
   }
 
   loop();
+};
+const aspectRatioForImage = image => {
+  const imgAspectRatio = Object(lib["get"])(image, 'imageColor.asset.metadata.dimensions.aspectRatio');
+  const videoAspectRatio = {
+    '16:9': 16 / 9,
+    '4:3': 4 / 3
+  }[Object(lib["get"])(image, 'videoColor.asset.data.aspect_ratio')];
+  return imgAspectRatio || videoAspectRatio || 4 / 3;
 };
 // CONCATENATED MODULE: ./components/nav.js
 
@@ -9926,41 +9805,46 @@ var media_player_jsx = react_default.a.createElement;
 
 
 class media_player_MediaPlayer extends react_default.a.Component {
-  constructor() {
-    super();
-    this.state = {
-      isReady: false
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      isReady: true
-    });
-  }
-
   render() {
-    if (!this.state.isReady) {
-      return media_player_jsx("div", null);
-    }
-
-    const {
+    let {
       image,
       width,
+      height,
       className,
       activeClassName,
       inactiveClassName,
       onClick,
-      isActive
+      isActive,
+      shouldLoadVideo,
+      shouldPlayVideo
     } = this.props;
+
+    if (true) {
+      return media_player_jsx("div", null);
+    }
+    /*
+      For tall images, adjust the sizing
+    */
+
+
+    const {
+      windowHeight
+    } = calcDimensions();
+    const aspectRatio = aspectRatioForImage(image);
+
+    if (aspectRatio < 1) {
+      height = Math.min(height, Math.floor(windowHeight * 0.55));
+      width = height * aspectRatio;
+    }
+
     return image.videoColor ? media_player_jsx("div", {
-      className: classnames_default()(className, {
+      className: classnames_default()('lol', className, {
         'media--active': isActive
       }),
       onClick: onClick
     }, media_player_jsx(build_default.a, {
       assetDocument: Object(lib["get"])(image, 'videoMono.asset') || Object(lib["get"])(image, 'videoColor.asset'),
-      autoload: true,
+      autoload: shouldLoadVideo,
       autoplay: this.props.isPlaying && Boolean(image.videoMono),
       className: classnames_default()('mediaplayer', inactiveClassName, {
         'mock--monotone': !Boolean(image.videoMono)
@@ -9968,43 +9852,47 @@ class media_player_MediaPlayer extends react_default.a.Component {
       loop: true,
       muted: true,
       showControls: false,
+      height: height,
+      width: width,
       style: {
-        maxWidth: width
-      },
-      width: width
+        height: '100%'
+      }
     }), media_player_jsx(build_default.a, {
       assetDocument: Object(lib["get"])(image, 'videoColor.asset'),
-      autoload: true,
+      autoload: shouldLoadVideo,
       autoplay: this.props.isPlaying,
       className: classnames_default()('mediaplayer', activeClassName),
       loop: true,
       muted: true,
       showControls: false,
       style: {
-        maxWidth: width,
-        opacity: isActive ? 1 : 0
+        opacity: isActive ? 1 : 0,
+        height: '100%'
       },
+      height: height,
       width: width
     })) : media_player_jsx("div", {
-      className: classnames_default()(className, {
+      className: classnames_default()('lol', className, {
         'media--active': isActive
       }),
       onClick: onClick
     }, media_player_jsx("img", {
       key: Object(lib["get"])(image, 'imageMono._id') || 'abc123',
-      className: classnames_default()(inactiveClassName, {
+      className: classnames_default()('image', inactiveClassName, {
         'mock--monotone': !Boolean(image.imageMono)
       }),
       src: urlFor(image.imageMono, width) || urlFor(image.imageColor, width),
       style: {
-        maxWidth: width
+        width,
+        height
       }
     }), media_player_jsx("img", {
       key: Object(lib["get"])(image, 'imageColor._id') || 'xyz456',
-      className: activeClassName,
+      className: classnames_default()('image', activeClassName),
       src: urlFor(image.imageColor, width),
       style: {
-        maxWidth: width,
+        width,
+        height,
         opacity: isActive ? 1 : 0
       }
     }));
@@ -10159,31 +10047,33 @@ class stack_Stack extends react_default.a.Component {
       currentTargetId: null,
       isAnimating: false
     };
-    this.avgImgHeight = 600;
     this.target = null;
     this.imageTransforms = null;
     this.imageStack = images.map(image => image._key);
+    this.avgImgHeight = 600;
   }
 
   componentDidMount() {
     this.computeTransforms();
     this.setState({
       isReady: true
-    }, () => {
-      window.setTimeout(this.computeAvgImageHeight.bind(this), 1000);
     });
     window.addEventListener('resize', Object(index_cjs["debounce"])(RESIZE_DEBOUNCE_TIME, this.computeTransforms.bind(this)));
   }
 
-  computeAvgImageHeight() {
+  computeAvgImageHeight(images) {
+    const {
+      windowWidth
+    } = calcDimensions();
     let sumHeights = 0;
     let numHeights = 0;
-    const stackImages = document.querySelectorAll(`[data-frameid="${this.props.frameId}"] .stack__image`);
 
-    for (var i = 0; i < stackImages.length; i++) {
-      const imgHeight = Object(lib["get"])(stackImages, [i, 'clientHeight']);
+    for (var i = 0; i < images.length; i++) {
+      const imgWidth = windowWidth * this.props.imgWidthRatio[0];
+      const imgAspect = aspectRatioForImage(images[0]);
+      const imgHeight = imgWidth / imgAspect;
 
-      if (imgHeight) {
+      if (typeof imgHeight === 'number') {
         sumHeights += imgHeight;
         numHeights++;
       }
@@ -10193,7 +10083,7 @@ class stack_Stack extends react_default.a.Component {
   }
 
   computeTransforms() {
-    this.computeAvgImageHeight();
+    this.computeAvgImageHeight(this.props.images);
     const {
       unit
     } = calcDimensions();
@@ -10224,6 +10114,11 @@ class stack_Stack extends react_default.a.Component {
   }
 
   render() {
+    let {
+      shouldLoadVideo
+    } = this.props;
+    let isPlaying = this.props.isActiveFrame;
+
     if (!this.state.isReady) {
       return stack_jsx("div", {
         className: classnames_default()("stack-wrapper", this.props.className)
@@ -10232,6 +10127,7 @@ class stack_Stack extends react_default.a.Component {
 
     const {
       windowWidth,
+      windowHeight,
       unit,
       actualWidth
     } = calcDimensions();
@@ -10240,10 +10136,11 @@ class stack_Stack extends react_default.a.Component {
     let imgHeight = this.avgImgHeight + (this.imageStack.length - 1) * unit;
 
     if (actualWidth < 400) {
-      const baseWidth = actualWidth;
-      imgWidth = baseWidth * this.props.imgWidthRatio[1];
+      imgWidth = actualWidth * this.props.imgWidthRatio[1];
       stackWidth = imgWidth + (this.props.images.length - 1) * unit;
       imgHeight = this.avgImgHeight + (this.props.images.length - 1) * unit;
+      shouldLoadVideo = false;
+      isPlaying = false;
     }
 
     return stack_jsx("div", {
@@ -10264,28 +10161,33 @@ class stack_Stack extends react_default.a.Component {
         width: stackWidth,
         height: imgHeight
       }
-    }, this.props.images.map(image => stack_jsx("div", {
-      onMouseEnter: this.onMouseEnter,
-      onMouseLeave: this.onMouseLeave,
-      onClick: this.onStackClick,
-      key: image._key,
-      className: "stack__image",
-      style: {
-        transform: this.getTransform({
-          id: image._key,
-          isActiveFrame: this.props.isActiveFrame
-        }),
-        zIndex: this.imageStack.indexOf(image._key) + 10
-      }
-    }, stack_jsx(media_player, {
-      image: image,
-      className: "stack__image__inner",
-      activeClassName: "stack-img-active",
-      inactiveClassName: "stack-img-default",
-      width: imgWidth,
-      isPlaying: this.props.isActiveFrame,
-      isActive: this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1]
-    })))));
+    }, this.props.images.map(image => {
+      const aspectRatio = aspectRatioForImage(image);
+      return stack_jsx("div", {
+        onMouseEnter: this.onMouseEnter,
+        onMouseLeave: this.onMouseLeave,
+        onClick: this.onStackClick,
+        key: image._key,
+        className: "stack__image",
+        style: {
+          transform: this.getTransform({
+            id: image._key,
+            isActiveFrame: this.props.isActiveFrame
+          }),
+          zIndex: this.imageStack.indexOf(image._key) + 10
+        }
+      }, stack_jsx(media_player, {
+        image: image,
+        className: "stack__image__inner",
+        activeClassName: "stack-img-active",
+        inactiveClassName: "stack-img-default",
+        width: imgWidth,
+        height: imgWidth / aspectRatio,
+        isPlaying: isPlaying,
+        isActive: this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1],
+        shouldLoadVideo: shouldLoadVideo
+      }));
+    })));
   }
 
 }
@@ -10661,12 +10563,6 @@ class home_Home extends react_default.a.Component {
   }
 
   componentDidMount() {
-    // window.setTimeout(() => {
-    //   const videos = document.getElementsByTagName('video');
-    //   for (let el of videos) {
-    //     el.play();
-    //   }
-    // }, 3000);
     this.topmostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = Object(lib["get"])(item, ['images', item.images.length - 1, '_key']);
       return acc;
@@ -10674,7 +10570,7 @@ class home_Home extends react_default.a.Component {
     this.interval = window.setInterval(this.updateScroll.bind(this), SCROLL_UPDATE_INTERVAL);
     window.addEventListener('resize', Object(index_cjs["debounce"])(RESIZE_DEBOUNCE_TIME, this.populateCachedData));
     this.populateCachedData();
-    this.transitionIn(() => {});
+    this.transition(TRANSITION_ENTERING, TRANSITION_INTERVAL_ENTER, () => {}, false);
   }
 
   componentWillUnmount() {
@@ -10754,7 +10650,8 @@ class home_Home extends react_default.a.Component {
       dataSourceId: portfolioItem._id,
       images: portfolioItem.images,
       isActiveFrame: this.state.isFocus && this.state.activeFrameId == i + 1,
-      onStackClick: this.onStackClick
+      onStackClick: this.onStackClick,
+      shouldLoadVideo: Math.abs(this.state.activeFrameId - i + 1) < 2
     })), home_jsx(firm_profile, {
       id: "about",
       content: this.props.about[0],
@@ -14194,7 +14091,7 @@ module.exports = __webpack_require__("s0dr");
 /***/ "LZ9C":
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c1bfbc67.chunk.css\",\"static/chunks/commons.b6a6d1e0cfbb74fabd02.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c1bfbc67.chunk.css\",\"static/chunks/commons.b6a6d1e0cfbb74fabd02.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c1bfbc67.chunk.css\",\"static/chunks/commons.b6a6d1e0cfbb74fabd02.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c1bfbc67.chunk.css\",\"static/chunks/commons.b6a6d1e0cfbb74fabd02.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c1bfbc67.chunk.css\",\"static/chunks/commons.b6a6d1e0cfbb74fabd02.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c1bfbc67.chunk.css\",\"static/chunks/commons.b6a6d1e0cfbb74fabd02.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
+module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.bd300a35.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.bd300a35.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.bd300a35.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.bd300a35.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.bd300a35.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.bd300a35.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
 
 /***/ }),
 
@@ -19578,6 +19475,143 @@ module.exports = {
 	stderr: getSupportLevel(process.stderr)
 };
 
+
+/***/ }),
+
+/***/ "bbJi":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var _slug_namespaceObject = {};
+__webpack_require__.r(_slug_namespaceObject);
+__webpack_require__.d(_slug_namespaceObject, "default", function() { return home["default"]; });
+
+// EXTERNAL MODULE: external "url"
+var external_url_ = __webpack_require__("bzos");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/render.js
+var render = __webpack_require__("/bjS");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/send-html.js
+var send_html = __webpack_require__("LuNM");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/lib/router/utils/index.js
+var utils = __webpack_require__("uV6m");
+
+// EXTERNAL MODULE: ./.next/build-manifest.json
+var build_manifest = __webpack_require__("LZ9C");
+
+// EXTERNAL MODULE: ./.next/react-loadable-manifest.json
+var react_loadable_manifest = __webpack_require__("67Bq");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
+var _document = __webpack_require__("VDXt");
+var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_error.js
+var _error = __webpack_require__("/a9y");
+var _error_default = /*#__PURE__*/__webpack_require__.n(_error);
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_app.js
+var _app = __webpack_require__("B5Ud");
+var _app_default = /*#__PURE__*/__webpack_require__.n(_app);
+
+// EXTERNAL MODULE: ./pages/home.js + 25 modules
+var home = __webpack_require__("CH2o");
+
+// CONCATENATED MODULE: ./pages/[slug].js
+
+// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F%5Bslug%5D&absolutePagePath=private-next-pages%2F%5Bslug%5D.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=h3Y5sH5eDuTaf1c8iqjWp&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticParams", function() { return unstable_getStaticParams; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_h3Y5sH5eDuTaf1c8iqjWp_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_h3Y5sH5eDuTaf1c8iqjWp_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    const Component = home["default"]
+    /* harmony default export */ var next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_h3Y5sH5eDuTaf1c8iqjWp_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
+    const unstable_getStaticProps = _slug_namespaceObject['unstable_getStaticProp' + 's']
+    const unstable_getStaticParams = _slug_namespaceObject['unstable_getStaticParam' + 's']
+    const config = _slug_namespaceObject['confi' + 'g'] || {}
+    const next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_h3Y5sH5eDuTaf1c8iqjWp_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
+    async function renderReqToHTML(req, res, fromExport) {
+      const options = {
+        App: _app_default.a,
+        Document: _document_default.a,
+        buildManifest: build_manifest,
+        unstable_getStaticProps,
+        reactLoadableManifest: react_loadable_manifest,
+        canonicalBase: "",
+        buildId: "h3Y5sH5eDuTaf1c8iqjWp",
+        assetPrefix: "",
+        ampBindInitData: false,
+      }
+      let sprData = false
+
+      if (req.url.match(/_next\/data/)) {
+        sprData = true
+        req.url = req.url
+          .replace(/\/_next\/data\//, '/')
+          .replace(/\.json$/, '')
+      }
+      const parsedUrl = Object(external_url_["parse"])(req.url, true)
+      const renderOpts = Object.assign(
+        {
+          Component,
+          pageConfig: config,
+          dataOnly: req.headers && (req.headers.accept || '').indexOf('application/amp.bind+json') !== -1,
+          nextExport: fromExport
+        },
+        options,
+      )
+      try {
+        
+        const params = fromExport && !unstable_getStaticProps ? {} : Object(utils["getRouteMatcher"])(Object(utils["getRouteRegex"])("/[slug]"))(parsedUrl.pathname) || {};
+        const result = await Object(render["renderToHTML"])(req, res, "/[slug]", Object.assign({}, unstable_getStaticProps ? {} : parsedUrl.query, params, sprData ? { _nextSprData: '1' } : {}), renderOpts)
+
+        if (fromExport) return { html: result, renderOpts }
+        return result
+      } catch (err) {
+        if (err.code === 'ENOENT') {
+          res.statusCode = 404
+          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
+            Component: _error_default.a
+          }))
+          return result
+        } else {
+          console.error(err)
+          res.statusCode = 500
+          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
+            Component: _error_default.a,
+            err
+          }))
+          return result
+        }
+      }
+    }
+    async function next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_h3Y5sH5eDuTaf1c8iqjWp_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
+      try {
+        const html = await renderReqToHTML(req, res)
+        Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})
+      } catch(err) {
+        console.error(err)
+        res.statusCode = 500
+        res.end('Internal Server Error')
+      }
+    }
+  
 
 /***/ }),
 

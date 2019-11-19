@@ -1,6 +1,6 @@
 {
   "name": "wm37iap-6a6gwpa",
-  "hash": "Nws5o52gjuThtoJe5121RsjLaQAg012DIiU6EoQzdoU=",
+  "hash": "OX9Ng6U6IxteRQVrlhSA4QLwanqCIW/hzw0LH+aghZU=",
   "description": "Default Lambda@Edge for Next CloudFront distribution",
   "memory": 512,
   "timeout": 10,
