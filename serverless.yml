@@ -13,3 +13,24 @@
 
 myNextApp:
   component: serverless-next.js
+
+contactForm:
+  component: "@serverless/aws-lambda"
+  inputs:
+    name: contact-form
+    description: Send a contact form email
+    memory: 128
+    timeout: 20
+    code: ./functions
+    handler: contactForm.submit
+    runtime: nodejs8.10
+    region: us-east-1
+
+api:
+  component: "@serverless/aws-api-gateway"
+  inputs:
+    description: Volley Contact Form
+    endpoints:
+      - path: /contact
+        method: POST
+        function: ${contactForm.arn}

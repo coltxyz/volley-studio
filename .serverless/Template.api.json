@@ -1,0 +1,16 @@
+{
+  "id": "hxiwhjmrr2",
+  "endpoints": [
+    {
+      "path": "/contact",
+      "method": "POST",
+      "function": "arn:aws:lambda:us-east-1:680198729557:function:wm37iap-fzq1j0t",
+      "url": "https://hxiwhjmrr2.execute-api.us-east-1.amazonaws.com/dev/contact",
+      "id": "a8zjzx"
+    }
+  ],
+  "name": "wm37iap-a257ut",
+  "region": "us-east-1",
+  "stage": "dev",
+  "url": "https://hxiwhjmrr2.execute-api.us-east-1.amazonaws.com/dev"
+}
