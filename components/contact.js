@@ -1,4 +1,4 @@
-import axios from 'axios';
+import superagent from 'superagent';
 import validator from 'email-validator';
 import classnames from 'classnames';
 
@@ -40,23 +40,23 @@ class Contact extends React.Component {
       })
     }
 
-    axios.post(
-      "https://hxiwhjmrr2.execute-api.us-east-1.amazonaws.com/dev/contact",
-      {
+    superagent
+      .post("https://hxiwhjmrr2.execute-api.us-east-1.amazonaws.com/dev/contact")
+      .send({
           "fromAddress": email,
           "toAddress": this.props.content.contactEmail,
           "message": message,
           "subject": "Your Volley Inquiry"
-      }
-    ).then( res => {
-      this.setState({
-        apiStatus: API_STATUS_SUCCESS
       })
-    }).catch( err => {
-      this.setState({
-        apiStatus: API_STATUS_ERROR
+      .then( res => {
+        this.setState({
+          apiStatus: API_STATUS_SUCCESS
+        })
+      }).catch( err => {
+        this.setState({
+          apiStatus: API_STATUS_ERROR
+        })
       })
-    })
   }
 
   onTextChange = (e) => {

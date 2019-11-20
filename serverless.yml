@@ -26,6 +26,18 @@ contactForm:
     runtime: nodejs8.10
     region: us-east-1
 
+cors:
+  component: "@serverless/aws-lambda"
+  inputs:
+    name: contact-form-cors
+    description: Just implement cors
+    memory: 128
+    timeout: 20
+    code: ./functions
+    handler: contactForm.cors
+    runtime: nodejs8.10
+    region: us-east-1
+
 api:
   component: "@serverless/aws-api-gateway"
   inputs:
@@ -35,3 +47,6 @@ api:
       - path: /contact
         method: POST
         function: ${contactForm.arn}
+      - path: /contact
+        method: OPTIONS
+        function: ${cors.arn}

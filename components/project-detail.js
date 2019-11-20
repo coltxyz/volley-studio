@@ -5,7 +5,7 @@ export default class ProjectDetail extends React.Component {
 
   constructor({ data, activeImageId }) {
     super()
-    const index = data.images.findIndex(
+    const index = (data.images || []).findIndex(
       img => img._key === activeImageId
     )
     this.state = {

@@ -25,6 +25,7 @@
     "react-draggable": "^3.3.0",
     "sanity-mux-player": "^0.0.26",
     "serverless-next.js": "^1.6.0",
+    "superagent": "^5.1.0",
     "throttle-debounce": "^2.1.0",
     "webpack": "^4.34.0"
   },
