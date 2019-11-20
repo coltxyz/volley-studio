@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "yT7O");
+/******/ 	return __webpack_require__(__webpack_require__.s = "yMo0");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -9837,6 +9837,8 @@ class media_player_MediaPlayer extends react_default.a.Component {
       width = height * aspectRatio;
     }
 
+    const colorLqip = Object(lib["get"])(image, 'imageColor.asset.metadata.lqip');
+    const monoLqip = Object(lib["get"])(image, 'imageMono.asset.metadata.lqip');
     return image.videoColor ? media_player_jsx("div", {
       className: classnames_default()('lol', className, {
         'media--active': isActive
@@ -9884,7 +9886,8 @@ class media_player_MediaPlayer extends react_default.a.Component {
       src: urlFor(image.imageMono, width) || urlFor(image.imageColor, width),
       style: {
         width,
-        height
+        height,
+        backgroundImage: `url(${monoLqip || colorLqip})`
       }
     }), media_player_jsx("img", {
       key: Object(lib["get"])(image, 'imageColor._id') || 'xyz456',
@@ -9893,7 +9896,8 @@ class media_player_MediaPlayer extends react_default.a.Component {
       style: {
         width,
         height,
-        opacity: isActive ? 1 : 0
+        opacity: isActive ? 1 : 0,
+        backgroundImage: `url(${colorLqip})`
       }
     }));
   }
@@ -9962,9 +9966,9 @@ class project_detail_ProjectDetail extends react_default.a.Component {
     }, project_detail_jsx("div", {
       className: "project-detail__side-panel__thumbnails"
     }, projectImages.map((image, i) => project_detail_jsx("div", {
-      className: "thumbnail"
+      className: "thumbnail",
+      key: image._key
     }, project_detail_jsx(media_player, {
-      key: image._key,
       onClick: () => this.onThumbnailClick(i),
       className: "rel",
       activeClassName: "thumbnail--active",
@@ -14091,7 +14095,7 @@ module.exports = __webpack_require__("s0dr");
 /***/ "LZ9C":
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.384a6439.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.384a6439.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.384a6439.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.384a6439.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.384a6439.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.384a6439.chunk.css\",\"static/chunks/commons.b3c509c010a917f1b5a1.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
+module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c5f6d530.chunk.css\",\"static/chunks/commons.1e73cad7c5ca218efdb8.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c5f6d530.chunk.css\",\"static/chunks/commons.1e73cad7c5ca218efdb8.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c5f6d530.chunk.css\",\"static/chunks/commons.1e73cad7c5ca218efdb8.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c5f6d530.chunk.css\",\"static/chunks/commons.1e73cad7c5ca218efdb8.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c5f6d530.chunk.css\",\"static/chunks/commons.1e73cad7c5ca218efdb8.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.c5f6d530.chunk.css\",\"static/chunks/commons.1e73cad7c5ca218efdb8.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
 
 /***/ }),
 
@@ -47342,7 +47346,7 @@ module.exports = __webpack_require__("36Dm").default
 
 /***/ }),
 
-/***/ "yT7O":
+/***/ "yMo0":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47383,12 +47387,12 @@ var home = __webpack_require__("CH2o");
 
 // CONCATENATED MODULE: ./pages/index.js
 
-// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F&absolutePagePath=private-next-pages%2Findex.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=yz3LUeENKdiEkQw4K7VI6&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
+// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F&absolutePagePath=private-next-pages%2Findex.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=Jytyr7ABF0JhJG5s35BAZ&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_yz3LUeENKdiEkQw4K7VI6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Jytyr7ABF0JhJG5s35BAZ_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_yz3LUeENKdiEkQw4K7VI6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Jytyr7ABF0JhJG5s35BAZ_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
 
     
     
@@ -47401,11 +47405,11 @@ var home = __webpack_require__("CH2o");
     
     
     const Component = home["default"]
-    /* harmony default export */ var next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_yz3LUeENKdiEkQw4K7VI6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
+    /* harmony default export */ var next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Jytyr7ABF0JhJG5s35BAZ_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
     const unstable_getStaticProps = pages_namespaceObject['unstable_getStaticProp' + 's']
     
     const config = pages_namespaceObject['confi' + 'g'] || {}
-    const next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_yz3LUeENKdiEkQw4K7VI6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
+    const next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Jytyr7ABF0JhJG5s35BAZ_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
     async function renderReqToHTML(req, res, fromExport) {
       const options = {
         App: _app_default.a,
@@ -47414,7 +47418,7 @@ var home = __webpack_require__("CH2o");
         unstable_getStaticProps,
         reactLoadableManifest: react_loadable_manifest,
         canonicalBase: "",
-        buildId: "yz3LUeENKdiEkQw4K7VI6",
+        buildId: "Jytyr7ABF0JhJG5s35BAZ",
         assetPrefix: "",
         ampBindInitData: false,
       }
@@ -47461,7 +47465,7 @@ var home = __webpack_require__("CH2o");
         }
       }
     }
-    async function next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_yz3LUeENKdiEkQw4K7VI6_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
+    async function next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_Jytyr7ABF0JhJG5s35BAZ_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
       try {
         const html = await renderReqToHTML(req, res)
         Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})

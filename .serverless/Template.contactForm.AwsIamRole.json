@@ -1,0 +1,9 @@
+{
+  "name": "wm37iap-ayjq37c",
+  "arn": "arn:aws:iam::680198729557:role/wm37iap-ayjq37c",
+  "service": "lambda.amazonaws.com",
+  "policy": {
+    "arn": "arn:aws:iam::aws:policy/AdministratorAccess"
+  },
+  "region": "us-east-1"
+}

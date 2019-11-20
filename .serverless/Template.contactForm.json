@@ -1,0 +1,17 @@
+{
+  "name": "wm37iap-fzq1j0t",
+  "hash": "XRtIyJ/ThJ7UAsrmgwt3dakyQoJtcnaC214bmrfDkz0=",
+  "description": "Send a contact form email",
+  "memory": 128,
+  "timeout": 20,
+  "code": "./functions",
+  "shims": [],
+  "handler": "contactForm.submit",
+  "runtime": "nodejs8.10",
+  "env": {},
+  "role": {
+    "arn": "arn:aws:iam::680198729557:role/wm37iap-ayjq37c"
+  },
+  "arn": "arn:aws:lambda:us-east-1:680198729557:function:wm37iap-fzq1j0t",
+  "region": "us-east-1"
+}
