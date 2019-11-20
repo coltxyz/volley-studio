@@ -50,6 +50,9 @@
       &::placeholder {
         color: var(--black-ln);
       }
+      &.form-invalid::placeholder {
+        color: red;
+      }
       @media (max-width: $break_med) {
         height: 16rem;
       }
@@ -57,17 +60,24 @@
   }
   &__footer {
     position: relative;
-    padding: 1rem 11rem 1rem 1rem;
+    padding-right: 10rem;
     height: 3rem;
     background: var(--white);
     color: var(--black-ln);
+    &.form-invalid {
+      input, input::placeholder {
+        color: red;
+      }
+    }
     input {
       font-family: 'Basis-Mono';
       font-size: 1rem;
       border: none;
       width: 100%;
-      background: inherit;
+      height: 100%;
+      background: transparent;
       color: inherit;
+      padding: 1rem;
       &::placeholder {
         color: var(--black-ln);
       }
@@ -82,7 +92,7 @@
       border: none;
       height: 3rem;
       color: inherit;
-      background: inherit;
+      background: var(--white);
       border-left: 1px solid var(--black-ln);
       cursor: pointer;
       &:hover {

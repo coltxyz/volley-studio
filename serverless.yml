@@ -30,6 +30,7 @@ api:
   component: "@serverless/aws-api-gateway"
   inputs:
     description: Volley Contact Form
+    cors: true
     endpoints:
       - path: /contact
         method: POST

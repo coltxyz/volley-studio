@@ -36,7 +36,7 @@
     @media (max-width: $break_sm ) {
       width: 100%;
       height: 60vh;
-      padding: 0 2rem;
+      padding: 2rem;
 
       .sidescroll-mobile-container {
         display: flex;
@@ -64,7 +64,6 @@
       position: absolute;
       object-fit: contain;
       transition: opacity $timing_hover $ease;
-      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
