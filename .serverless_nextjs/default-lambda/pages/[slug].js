@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "yro5");
+/******/ 	return __webpack_require__(__webpack_require__.s = "tIly");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10232,34 +10232,6 @@ var email_validator_default = /*#__PURE__*/__webpack_require__.n(email_validator
 var classnames = __webpack_require__("TSYQ");
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
-// CONCATENATED MODULE: ./components/svg/volley-logo.js
-var __jsx = react_default.a.createElement;
-
-
-const svg = p => `
-<svg viewBox="0 0 2282 468" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0)">
-<path d="M660.364 424C624.679 423.127 590.228 417.488 558.189 401.442C510.978 377.844 482.134 339.004 468.521 288.709C454.015 235.158 453.898 181.4 472 128.683C494.072 64.4113 539.215 25.052 605.636 10.9874C651.22 1.34621 696.49 2.78798 740.516 19.4223C782.66 35.3209 812.915 64.2838 832.448 104.643C852.677 146.435 857.46 190.777 853.942 236.472C851.364 269.937 843.347 301.891 827.136 331.442C800.429 380.129 759.392 409.219 704.919 418.978C690.247 421.666 675.222 422.401 660.364 424ZM569.49 209.559C569.598 238.326 573.969 262.385 586.573 284.453C618.347 340.064 693.403 341.907 725.961 286.865C753.816 239.856 753.933 190.237 728.902 142.404C700.979 89.1273 632.088 84.0468 594.913 130.87C575.743 154.978 569.823 183.254 569.49 209.559Z" fill="${p.color}"/>
-<path d="M1568.7 415.58V10.5H1844.03V108.23H1697.03V164.74H1822.52V261.18H1697.1V317.69H1901.59L1846.8 415.58H1568.7Z" fill="${p.color}"/>
-<path d="M337.37 10.5298H469.57C414.39 145.77 359.383 280.59 304.55 414.99H190.7C136.553 280.45 82.32 145.703 28 10.7498H169.31L252.41 257.99L337.37 10.5298Z" fill="${p.color}"/>
-<path d="M2138.36 270.99C2138.18 314.99 2138.25 365.31 2138.25 409.31V415.49H2007.71V409.49C2007.71 368.99 2007.26 311.49 2007.98 270.98" fill="${p.color}"/>
-<path d="M2138.25 415.49L2138.36 270.99L2195.36 168.27C2221.99 120.27 2248.62 72.2967 2275.25 24.3501C2277.6 20.1201 2279.7 15.7401 2282.25 10.8101H2145.66C2122.87 55.8101 2100.05 100.81 2076.66 146.91L2009.4 11.0801H1864.29C1865.29 13.2201 1865.96 14.7001 1866.74 16.0801C1889.41 56.9401 1912.07 97.7901 1934.74 138.63L2007.98 270.99" fill="${p.color}"/>
-<path d="M902.07 415.42V10.9902H1031.31V316.69H1212.43L1155.53 415.42H902.07Z" fill="${p.color}"/>
-<path d="M1487.96 415.58H1235.02V10.9902H1363.8V316.73H1545.01L1487.96 415.58Z" fill="${p.color}"/>
-</g>
-<defs>
-<clipPath id="clip0">
-<rect width="2282" height="468" fill="white"/>
-</clipPath>
-</defs>
-</svg>
-`;
-
-/* harmony default export */ var volley_logo = (props => __jsx("span", {
-  dangerouslySetInnerHTML: {
-    __html: svg(props)
-  }
-}));
 // EXTERNAL MODULE: ./node_modules/@sanity/image-url/index.js
 var image_url = __webpack_require__("y8i5");
 var image_url_default = /*#__PURE__*/__webpack_require__.n(image_url);
@@ -10283,6 +10255,7 @@ var sanityClient_default = /*#__PURE__*/__webpack_require__.n(sanityClient);
 
 
 
+const API_GATEWAY_BASE = "https://w3acxezia6.execute-api.us-east-1.amazonaws.com/dev";
 const API_STATUS_ERROR = "api_error";
 const API_STATUS_SUCCESS = "api_success";
 const API_STATUS_LOADING = "api_loading";
@@ -10299,6 +10272,7 @@ const RESIZE_DEBOUNCE_TIME = 1000;
 const THEME_DARK = 'dark';
 const THEME_LIGHT = 'light';
 const TRACKBAR_HEIGHT = 90;
+const MAX_LOAD_TIME = 3000;
 const COLORS = {
   [THEME_LIGHT]: {
     stroke: '#444',
@@ -10317,6 +10291,9 @@ const COLORS = {
     black: "#444"
   }
 };
+
+const now = () => new Date().getTime();
+
 const getBucketedWindowWidth = () => {
   return Math.ceil(window.innerWidth / 200) * 200;
 };
@@ -10431,9 +10408,13 @@ const checkOnInterval = ({
   then,
   every
 }) => {
+  const startTime = now();
+
   function loop() {
     window.setTimeout(() => {
-      if (ifCond()) {
+      const elapsedTime = now() - startTime;
+
+      if (ifCond() || elapsedTime > MAX_LOAD_TIME) {
         window.setTimeout(then, every);
       } else {
         loop();
@@ -10451,10 +10432,39 @@ const aspectRatioForImage = image => {
   }[Object(lib["get"])(image, 'videoColor.asset.data.aspect_ratio')];
   return imgAspectRatio || videoAspectRatio || 4 / 3;
 };
+// CONCATENATED MODULE: ./components/svg/volley-logo.js
+var __jsx = react_default.a.createElement;
+
+
+const svg = p => `
+<svg viewBox="0 0 2282 468" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<path d="M660.364 424C624.679 423.127 590.228 417.488 558.189 401.442C510.978 377.844 482.134 339.004 468.521 288.709C454.015 235.158 453.898 181.4 472 128.683C494.072 64.4113 539.215 25.052 605.636 10.9874C651.22 1.34621 696.49 2.78798 740.516 19.4223C782.66 35.3209 812.915 64.2838 832.448 104.643C852.677 146.435 857.46 190.777 853.942 236.472C851.364 269.937 843.347 301.891 827.136 331.442C800.429 380.129 759.392 409.219 704.919 418.978C690.247 421.666 675.222 422.401 660.364 424ZM569.49 209.559C569.598 238.326 573.969 262.385 586.573 284.453C618.347 340.064 693.403 341.907 725.961 286.865C753.816 239.856 753.933 190.237 728.902 142.404C700.979 89.1273 632.088 84.0468 594.913 130.87C575.743 154.978 569.823 183.254 569.49 209.559Z" fill="${p.color}"/>
+<path d="M1568.7 415.58V10.5H1844.03V108.23H1697.03V164.74H1822.52V261.18H1697.1V317.69H1901.59L1846.8 415.58H1568.7Z" fill="${p.color}"/>
+<path d="M337.37 10.5298H469.57C414.39 145.77 359.383 280.59 304.55 414.99H190.7C136.553 280.45 82.32 145.703 28 10.7498H169.31L252.41 257.99L337.37 10.5298Z" fill="${p.color}"/>
+<path d="M2138.36 270.99C2138.18 314.99 2138.25 365.31 2138.25 409.31V415.49H2007.71V409.49C2007.71 368.99 2007.26 311.49 2007.98 270.98" fill="${p.color}"/>
+<path d="M2138.25 415.49L2138.36 270.99L2195.36 168.27C2221.99 120.27 2248.62 72.2967 2275.25 24.3501C2277.6 20.1201 2279.7 15.7401 2282.25 10.8101H2145.66C2122.87 55.8101 2100.05 100.81 2076.66 146.91L2009.4 11.0801H1864.29C1865.29 13.2201 1865.96 14.7001 1866.74 16.0801C1889.41 56.9401 1912.07 97.7901 1934.74 138.63L2007.98 270.99" fill="${p.color}"/>
+<path d="M902.07 415.42V10.9902H1031.31V316.69H1212.43L1155.53 415.42H902.07Z" fill="${p.color}"/>
+<path d="M1487.96 415.58H1235.02V10.9902H1363.8V316.73H1545.01L1487.96 415.58Z" fill="${p.color}"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="2282" height="468" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+`;
+
+/* harmony default export */ var volley_logo = (props => __jsx("span", {
+  dangerouslySetInnerHTML: {
+    __html: svg(props)
+  }
+}));
 // CONCATENATED MODULE: ./components/contact.js
 
 
 var contact_jsx = react_default.a.createElement;
+
 
 
 
@@ -10484,16 +10494,18 @@ class contact_Contact extends react_default.a.Component {
         });
       }
 
-      node_default.a.post("https://hxiwhjmrr2.execute-api.us-east-1.amazonaws.com/dev/contact").send({
+      node_default.a.post(`${API_GATEWAY_BASE}/contact`).send({
         "fromAddress": email,
         "toAddress": this.props.content.contactEmail,
         "message": message,
-        "subject": "Your Volley Inquiry"
+        "subject": this.props.content.emailSubject,
+        "footer": this.props.emailFooter
       }).then(res => {
         this.setState({
           apiStatus: API_STATUS_SUCCESS
         });
       }).catch(err => {
+        console.log(err);
         this.setState({
           apiStatus: API_STATUS_ERROR
         });
@@ -10503,31 +10515,50 @@ class contact_Contact extends react_default.a.Component {
     _defineProperty(this, "onTextChange", e => {
       const val = e.target.value;
       this.setState({
-        message: val
+        message: val,
+        hasInvalidMessage: false
       });
     });
 
     _defineProperty(this, "onInputChange", e => {
       const val = e.target.value;
-
-      if (this.state.hasInvalidEmail && email_validator_default.a.validate(val)) {
-        this.setState({
-          hasInvalidEmail: false
-        });
-      }
-
       this.setState({
-        email: val
+        email: val,
+        hasInvalidEmail: false
       });
     });
 
     this.state = {
-      apiStatus: null,
+      apiStatus: API_STATUS_LOADING,
       email: '',
       message: '',
       hasInvalidEmail: false,
       hasInvalidMessage: false
     };
+  }
+
+  renderInnerContent() {
+    if (this.state.apiStatus === API_STATUS_LOADING) {
+      return contact_jsx("div", {
+        className: "contact-card__status"
+      }, "Loading...");
+    } else if (this.state.apiStatus === API_STATUS_ERROR) {
+      return contact_jsx("div", {
+        className: "contact-card__status"
+      }, "We're sorry, an error occurred and the message didn't go through.");
+    } else if (this.state.apiStatus === API_STATUS_SUCCESS) {
+      return contact_jsx("div", {
+        className: "contact-card__status"
+      }, this.props.content.successMessage);
+    }
+
+    return contact_jsx("textarea", {
+      className: classnames_default()({
+        'form-invalid': this.state.hasInvalidMessage
+      }),
+      onChange: this.onTextChange,
+      placeholder: this.props.content.contactPrompt
+    });
   }
 
   render() {
@@ -10562,13 +10593,7 @@ class contact_Contact extends react_default.a.Component {
       className: "info"
     }, contact_jsx("p", null, contact_jsx("strong", null, props.content.contactEmail)), contact_jsx("p", null, props.content.contactAddress1, contact_jsx("br", null), props.content.contactAddress2, contact_jsx("br", null), props.content.contactPhone, contact_jsx("br", null)))), contact_jsx("div", {
       className: "contact-card__body"
-    }, contact_jsx("textarea", {
-      className: classnames_default()({
-        'form-invalid': this.state.hasInvalidMessage
-      }),
-      onChange: this.onTextChange,
-      placeholder: props.content.contactPrompt
-    })), contact_jsx("div", {
+    }, this.renderInnerContent()), contact_jsx("div", {
       className: classnames_default()("contact-card__footer", {
         'form-invalid': this.state.hasInvalidEmail
       })
@@ -16676,7 +16701,7 @@ module.exports = __webpack_require__("s0dr");
 /***/ "LZ9C":
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.81391256.chunk.css\",\"static/chunks/commons.3c9d1b857b599c22c7f4.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.81391256.chunk.css\",\"static/chunks/commons.3c9d1b857b599c22c7f4.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.81391256.chunk.css\",\"static/chunks/commons.3c9d1b857b599c22c7f4.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.81391256.chunk.css\",\"static/chunks/commons.3c9d1b857b599c22c7f4.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.81391256.chunk.css\",\"static/chunks/commons.3c9d1b857b599c22c7f4.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.81391256.chunk.css\",\"static/chunks/commons.3c9d1b857b599c22c7f4.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
+module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.aad94f9a.chunk.css\",\"static/chunks/commons.c3282da1ecb4007bb274.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.aad94f9a.chunk.css\",\"static/chunks/commons.c3282da1ecb4007bb274.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.aad94f9a.chunk.css\",\"static/chunks/commons.c3282da1ecb4007bb274.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.aad94f9a.chunk.css\",\"static/chunks/commons.c3282da1ecb4007bb274.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.aad94f9a.chunk.css\",\"static/chunks/commons.c3282da1ecb4007bb274.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.aad94f9a.chunk.css\",\"static/chunks/commons.c3282da1ecb4007bb274.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
 
 /***/ }),
 
@@ -35087,6 +35112,143 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 module.exports = true;
 
+
+/***/ }),
+
+/***/ "tIly":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var _slug_namespaceObject = {};
+__webpack_require__.r(_slug_namespaceObject);
+__webpack_require__.d(_slug_namespaceObject, "default", function() { return home["default"]; });
+
+// EXTERNAL MODULE: external "url"
+var external_url_ = __webpack_require__("bzos");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/render.js
+var render = __webpack_require__("/bjS");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/send-html.js
+var send_html = __webpack_require__("LuNM");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/lib/router/utils/index.js
+var utils = __webpack_require__("uV6m");
+
+// EXTERNAL MODULE: ./.next/build-manifest.json
+var build_manifest = __webpack_require__("LZ9C");
+
+// EXTERNAL MODULE: ./.next/react-loadable-manifest.json
+var react_loadable_manifest = __webpack_require__("67Bq");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
+var _document = __webpack_require__("VDXt");
+var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_error.js
+var _error = __webpack_require__("/a9y");
+var _error_default = /*#__PURE__*/__webpack_require__.n(_error);
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_app.js
+var _app = __webpack_require__("B5Ud");
+var _app_default = /*#__PURE__*/__webpack_require__.n(_app);
+
+// EXTERNAL MODULE: ./pages/home.js + 25 modules
+var home = __webpack_require__("CH2o");
+
+// CONCATENATED MODULE: ./pages/[slug].js
+
+// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F%5Bslug%5D&absolutePagePath=private-next-pages%2F%5Bslug%5D.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=O42RjbeDBcsGcre2gRAX0&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticParams", function() { return unstable_getStaticParams; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_O42RjbeDBcsGcre2gRAX0_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_O42RjbeDBcsGcre2gRAX0_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    const Component = home["default"]
+    /* harmony default export */ var next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_O42RjbeDBcsGcre2gRAX0_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
+    const unstable_getStaticProps = _slug_namespaceObject['unstable_getStaticProp' + 's']
+    const unstable_getStaticParams = _slug_namespaceObject['unstable_getStaticParam' + 's']
+    const config = _slug_namespaceObject['confi' + 'g'] || {}
+    const next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_O42RjbeDBcsGcre2gRAX0_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
+    async function renderReqToHTML(req, res, fromExport) {
+      const options = {
+        App: _app_default.a,
+        Document: _document_default.a,
+        buildManifest: build_manifest,
+        unstable_getStaticProps,
+        reactLoadableManifest: react_loadable_manifest,
+        canonicalBase: "",
+        buildId: "O42RjbeDBcsGcre2gRAX0",
+        assetPrefix: "",
+        ampBindInitData: false,
+      }
+      let sprData = false
+
+      if (req.url.match(/_next\/data/)) {
+        sprData = true
+        req.url = req.url
+          .replace(/\/_next\/data\//, '/')
+          .replace(/\.json$/, '')
+      }
+      const parsedUrl = Object(external_url_["parse"])(req.url, true)
+      const renderOpts = Object.assign(
+        {
+          Component,
+          pageConfig: config,
+          dataOnly: req.headers && (req.headers.accept || '').indexOf('application/amp.bind+json') !== -1,
+          nextExport: fromExport
+        },
+        options,
+      )
+      try {
+        
+        const params = fromExport && !unstable_getStaticProps ? {} : Object(utils["getRouteMatcher"])(Object(utils["getRouteRegex"])("/[slug]"))(parsedUrl.pathname) || {};
+        const result = await Object(render["renderToHTML"])(req, res, "/[slug]", Object.assign({}, unstable_getStaticProps ? {} : parsedUrl.query, params, sprData ? { _nextSprData: '1' } : {}), renderOpts)
+
+        if (fromExport) return { html: result, renderOpts }
+        return result
+      } catch (err) {
+        if (err.code === 'ENOENT') {
+          res.statusCode = 404
+          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
+            Component: _error_default.a
+          }))
+          return result
+        } else {
+          console.error(err)
+          res.statusCode = 500
+          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
+            Component: _error_default.a,
+            err
+          }))
+          return result
+        }
+      }
+    }
+    async function next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_O42RjbeDBcsGcre2gRAX0_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
+      try {
+        const html = await renderReqToHTML(req, res)
+        Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})
+      } catch(err) {
+        console.error(err)
+        res.statusCode = 500
+        res.end('Internal Server Error')
+      }
+    }
+  
 
 /***/ }),
 
@@ -57455,143 +57617,6 @@ function vk(a,b){if(!qk(a))throw t(Error(299),"unstable_createRoot");return new 
 (function(a){var b=a.findFiberByHostInstance;return dk(n({},a,{overrideHookState:null,overrideProps:null,setSuspenseHandler:null,scheduleUpdate:null,currentDispatcherRef:Da.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=Ec(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null},findHostInstancesForRefresh:null,scheduleRefresh:null,scheduleRoot:null,setRefreshHandler:null,getCurrentFiber:null}))})({findFiberByHostInstance:Cd,bundleType:0,version:"16.10.2",
 rendererPackageName:"react-dom"});var xk={default:wk},yk=xk&&wk||xk;module.exports=yk.default||yk;
 
-
-/***/ }),
-
-/***/ "yro5":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var _slug_namespaceObject = {};
-__webpack_require__.r(_slug_namespaceObject);
-__webpack_require__.d(_slug_namespaceObject, "default", function() { return home["default"]; });
-
-// EXTERNAL MODULE: external "url"
-var external_url_ = __webpack_require__("bzos");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/render.js
-var render = __webpack_require__("/bjS");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/send-html.js
-var send_html = __webpack_require__("LuNM");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/lib/router/utils/index.js
-var utils = __webpack_require__("uV6m");
-
-// EXTERNAL MODULE: ./.next/build-manifest.json
-var build_manifest = __webpack_require__("LZ9C");
-
-// EXTERNAL MODULE: ./.next/react-loadable-manifest.json
-var react_loadable_manifest = __webpack_require__("67Bq");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
-var _document = __webpack_require__("VDXt");
-var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_error.js
-var _error = __webpack_require__("/a9y");
-var _error_default = /*#__PURE__*/__webpack_require__.n(_error);
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_app.js
-var _app = __webpack_require__("B5Ud");
-var _app_default = /*#__PURE__*/__webpack_require__.n(_app);
-
-// EXTERNAL MODULE: ./pages/home.js + 25 modules
-var home = __webpack_require__("CH2o");
-
-// CONCATENATED MODULE: ./pages/[slug].js
-
-// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F%5Bslug%5D&absolutePagePath=private-next-pages%2F%5Bslug%5D.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=CwV5gEEx5X8JcKQE3P75W&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticParams", function() { return unstable_getStaticParams; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_CwV5gEEx5X8JcKQE3P75W_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_CwV5gEEx5X8JcKQE3P75W_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    const Component = home["default"]
-    /* harmony default export */ var next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_CwV5gEEx5X8JcKQE3P75W_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
-    const unstable_getStaticProps = _slug_namespaceObject['unstable_getStaticProp' + 's']
-    const unstable_getStaticParams = _slug_namespaceObject['unstable_getStaticParam' + 's']
-    const config = _slug_namespaceObject['confi' + 'g'] || {}
-    const next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_CwV5gEEx5X8JcKQE3P75W_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
-    async function renderReqToHTML(req, res, fromExport) {
-      const options = {
-        App: _app_default.a,
-        Document: _document_default.a,
-        buildManifest: build_manifest,
-        unstable_getStaticProps,
-        reactLoadableManifest: react_loadable_manifest,
-        canonicalBase: "",
-        buildId: "CwV5gEEx5X8JcKQE3P75W",
-        assetPrefix: "",
-        ampBindInitData: false,
-      }
-      let sprData = false
-
-      if (req.url.match(/_next\/data/)) {
-        sprData = true
-        req.url = req.url
-          .replace(/\/_next\/data\//, '/')
-          .replace(/\.json$/, '')
-      }
-      const parsedUrl = Object(external_url_["parse"])(req.url, true)
-      const renderOpts = Object.assign(
-        {
-          Component,
-          pageConfig: config,
-          dataOnly: req.headers && (req.headers.accept || '').indexOf('application/amp.bind+json') !== -1,
-          nextExport: fromExport
-        },
-        options,
-      )
-      try {
-        
-        const params = fromExport && !unstable_getStaticProps ? {} : Object(utils["getRouteMatcher"])(Object(utils["getRouteRegex"])("/[slug]"))(parsedUrl.pathname) || {};
-        const result = await Object(render["renderToHTML"])(req, res, "/[slug]", Object.assign({}, unstable_getStaticProps ? {} : parsedUrl.query, params, sprData ? { _nextSprData: '1' } : {}), renderOpts)
-
-        if (fromExport) return { html: result, renderOpts }
-        return result
-      } catch (err) {
-        if (err.code === 'ENOENT') {
-          res.statusCode = 404
-          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
-            Component: _error_default.a
-          }))
-          return result
-        } else {
-          console.error(err)
-          res.statusCode = 500
-          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
-            Component: _error_default.a,
-            err
-          }))
-          return result
-        }
-      }
-    }
-    async function next_serverless_loaderpage_2F_5Bslug_5D_absolutePagePath_private_next_pages_2F_5Bslug_5D_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_CwV5gEEx5X8JcKQE3P75W_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
-      try {
-        const html = await renderReqToHTML(req, res)
-        Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})
-      } catch(err) {
-        console.error(err)
-        res.statusCode = 500
-        res.end('Internal Server Error')
-      }
-    }
-  
 
 /***/ }),
 
