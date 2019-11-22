@@ -2,6 +2,8 @@ import superagent from 'superagent';
 import validator from 'email-validator';
 import classnames from 'classnames';
 
+import Loading from './loading';
+import { API_GATEWAY_BASE } from '../lib/util';
 import VolleyLogo from './svg/volley-logo';
 
 import {
@@ -41,18 +43,20 @@ class Contact extends React.Component {
     }
 
     superagent
-      .post("https://hxiwhjmrr2.execute-api.us-east-1.amazonaws.com/dev/contact")
+      .post(`${ API_GATEWAY_BASE }/contact`)
       .send({
-          "fromAddress": email,
-          "toAddress": this.props.content.contactEmail,
+          "fromAddress": this.props.content.contactEmail,
+          "toAddress": email,
           "message": message,
-          "subject": "Your Volley Inquiry"
+          "subject": this.props.content.emailSubject,
+          "footer": this.props.content.contactEmailFooter
       })
       .then( res => {
         this.setState({
           apiStatus: API_STATUS_SUCCESS
         })
       }).catch( err => {
+        console.log(err)
         this.setState({
           apiStatus: API_STATUS_ERROR
         })
@@ -62,20 +66,48 @@ class Contact extends React.Component {
   onTextChange = (e) => {
     const val = e.target.value;
     this.setState({
-      message: val
+      message: val,
+      hasInvalidMessage: false
     })
   }
 
   onInputChange = (e) => {
     const val = e.target.value;
-    if (this.state.hasInvalidEmail && validator.validate(val)) {
-      this.setState({
-        hasInvalidEmail: false
-      })
-    }
     this.setState({
-      email: val
+      email: val,
+      hasInvalidEmail: false
     })
+  }
+
+  renderInnerContent() {
+      if (this.state.apiStatus === API_STATUS_LOADING) {
+        return (
+          <div className="contact-card__status">
+            <Loading />
+          </div>
+        )
+      } else if (this.state.apiStatus === API_STATUS_ERROR) {
+          return (
+            <div className="contact-card__status">
+              We're sorry, an error occurred and the message didn't go through.
+            </div>
+          )
+      } else if (this.state.apiStatus === API_STATUS_SUCCESS) {
+          return (
+            <div className="contact-card__status">
+              { this.props.content.successMessage }
+            </div>
+          )
+      }
+      return (
+        <textarea
+          className={classnames({
+            'form-invalid': this.state.hasInvalidMessage
+          })}
+          onChange={ this.onTextChange }
+          placeholder={ this.props.content.contactPrompt }
+        />
+      )
   }
 
   render() {
@@ -115,13 +147,9 @@ class Contact extends React.Component {
               </div>
             </div>
             <div className="contact-card__body">
-              <textarea
-                className={classnames({
-                  'form-invalid': this.state.hasInvalidMessage
-                })}
-                onChange={ this.onTextChange }
-                placeholder={ props.content.contactPrompt }
-              />
+              {
+                this.renderInnerContent()
+              }
             </div>
             <div
               className={classnames("contact-card__footer", {

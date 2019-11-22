@@ -35,26 +35,34 @@
       }
     }
   }
+  &__status {
+    text-align: center;
+    padding: 0 10rem;
+  }
   &__body {
     padding: 1rem;
     border-bottom: 1px solid var(--black-ln);
+    height: 20rem;
+    font-family: 'Basis-Mono';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: $break_med) {
+      height: 16rem;
+    }
     textarea {
       font-family: 'Basis-Mono';
       font-size: 1rem;
       resize: none;
       border: none;
-      height: 18rem;
+      height: 100%;
       width: 100%;
       background: var(--white);
-      color: var(--black-ln);
-      &::placeholder {
+      color: var(--black-ln);      &::placeholder {
         color: var(--black-ln);
       }
       &.form-invalid::placeholder {
         color: red;
-      }
-      @media (max-width: $break_med) {
-        height: 16rem;
       }
     }
   }
@@ -127,5 +135,14 @@
     background: var(--white);
     border: 1px solid var(--black-ln);
 
+  }
+}
+
+.contact {
+  &--loading, &--error, &--success {
+    textarea, input, button {
+      opacity: 0.4;
+      pointer-events: none;
+    }
   }
 }

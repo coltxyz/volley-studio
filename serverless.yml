@@ -13,12 +13,14 @@
 
 myNextApp:
   component: serverless-next.js
+  # inputs:
+  #   domain: ["new", "volleystudio.us"]
 
 contactForm:
   component: "@serverless/aws-lambda"
   inputs:
-    name: contact-form
-    description: Send a contact form email
+    name: contact-form-prod
+    description: "[volleystudio.us] Sends a contact form email"
     memory: 128
     timeout: 20
     code: ./functions
@@ -29,8 +31,8 @@ contactForm:
 cors:
   component: "@serverless/aws-lambda"
   inputs:
-    name: contact-form-cors
-    description: Just implement cors
+    name: contact-form-cors-prod
+    description: "[volleystudio.us] CORS endpoint"
     memory: 128
     timeout: 20
     code: ./functions

@@ -29,6 +29,12 @@ html {
   box-sizing: border-box;
 }
 
+input, button, textarea {
+  &:focus {
+    outline: none;
+  }
+}
+
 #main {
   height: 100vh;
   width: 100vw;

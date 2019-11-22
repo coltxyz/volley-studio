@@ -18,11 +18,11 @@ module.exports.cors = (event, context, cb) => {
 module.exports.submit = (event, context, cb) => {
 
   try {
-    var { fromAddress, toAddress, message, subject } = JSON.parse(event.body)
+    var { fromAddress, toAddress, message, subject, footer } = JSON.parse(event.body)
   } catch (e) {
     return cb(null, {
       statusCode: 500,
-      body: 'Error parsing request',
+      body: JSON.stringify({ message:'Error parsing request'}),
       headers: corsHeaders
     })
   }
@@ -41,7 +41,7 @@ module.exports.submit = (event, context, cb) => {
           Body: {
               Html: {
                   Charset: "UTF-8",
-                  Data: `${ message } <br/><br/><hr/>Sent via the contact form at volleystudio.us`
+                  Data: `${ message } <br/><br/><hr/>${ footer }`
               },
               Text: {
                   Charset: "UTF-8",
@@ -60,13 +60,13 @@ module.exports.submit = (event, context, cb) => {
           console.log(err);
           return cb(null, {
             statusCode: 500,
-            body: 'Error sending message',
+            body: JSON.stringify({ message:'Error sending message'}),
             headers: corsHeaders
           })
         }
         cb(null, {
           statusCode: 200,
-          body: 'Success',
+          body: JSON.stringify({ message: 'Success'}),
           headers: corsHeaders
         })
     });
