@@ -13,8 +13,8 @@
 
 myNextApp:
   component: serverless-next.js
-  # inputs:
-  #   domain: ["new", "volleystudio.us"]
+  inputs:
+    domain: ["new", "volleystudio.us"]
 
 contactForm:
   component: "@serverless/aws-lambda"
