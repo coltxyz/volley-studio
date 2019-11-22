@@ -286,6 +286,7 @@ export default class Home extends React.Component {
     const portfolioItems = this.props.projects;
     const featuredProjects = this.getFeaturedProjects();
     const activePortfolioItem = this.getActivePortfolioItem();
+    const description = this.props.about[0].homepageBlurb;
 
     return (
       <Layout
@@ -306,7 +307,7 @@ export default class Home extends React.Component {
         onScrollNavRequest={ this.onScrollNavRequest }
         onToggleTheme={ this.onToggleTheme }
         theme={ this.state.theme }
-        description={ get(this.props, 'about.0.content.homepageBlurb')}
+        description={ description }
       >
         { this.state.isProjectDetail && (
           <ProjectDetail
@@ -324,7 +325,7 @@ export default class Home extends React.Component {
               frameId={ 0 }
               isActiveFrame={ this.state.activeFrameId == 0 }
               frameType="homeHero"
-              blurb={ this.props.about[0].homepageBlurb }
+              blurb={ description }
               onLatestProjectsClick={ () => this.onScrollNavRequest({ direction: 'down'})}
             />
             {
