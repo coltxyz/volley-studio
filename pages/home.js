@@ -306,6 +306,7 @@ export default class Home extends React.Component {
         onScrollNavRequest={ this.onScrollNavRequest }
         onToggleTheme={ this.onToggleTheme }
         theme={ this.state.theme }
+        description={ get(this.props, 'about.0.content.homepageBlurb')}
       >
         { this.state.isProjectDetail && (
           <ProjectDetail

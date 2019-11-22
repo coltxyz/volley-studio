@@ -11,10 +11,10 @@ import {
   THEME_DARK,
 } from '../lib/util';
 
-const social_img_url = '';
-const title = '';
-const description = '';
+const social_img_url = '/favicon-xxxl.png';
+const title = 'Volley Studio';
 const ga_id = ''
+const url = 'volleystudio.us'
 
 export default class Layout extends React.Component {
 
@@ -24,6 +24,7 @@ export default class Layout extends React.Component {
   }
 
   render () {
+    const description = this.props.description;
     const themeColor = name => get(COLORS, [this.props.theme, name]);
     return (
       <div>
@@ -40,7 +41,9 @@ export default class Layout extends React.Component {
             `
           }}/>
 
-          <link rel="shortcut icon" href="/logo-black.png" />
+          <link rel="shortcut icon" href="/favicon-32.png" />
+          <link rel="icon" type="image/png" href="/favicon-196.png" />
+          <link rel="apple-touch-icon" href="/favicon-180.png" />
 
           <meta name="description" content={ description } />
           <meta itemProp="name" content={ title } />
@@ -55,7 +58,7 @@ export default class Layout extends React.Component {
           <meta property="og:image" content={ social_img_url } />
           <meta property="og:description" content={ description } />
           <meta property="og:site_name" content={ title } />
-          <meta property="og:url" content="https://fey-arts.com" />
+          <meta property="og:url" content={ url } />
 
           <title>{ title }</title>
           <meta charSet="utf-8" />
