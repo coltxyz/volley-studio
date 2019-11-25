@@ -38,6 +38,9 @@
   &__status {
     text-align: center;
     padding: 0 10rem;
+    @media (max-width: $break_sm) {
+      padding: 1rem;
+    }
   }
   &__body {
     padding: 1rem;
@@ -58,7 +61,8 @@
       height: 100%;
       width: 100%;
       background: var(--white);
-      color: var(--black-ln);      &::placeholder {
+      color: var(--black-ln);
+      &::placeholder {
         color: var(--black-ln);
       }
       &.form-invalid::placeholder {

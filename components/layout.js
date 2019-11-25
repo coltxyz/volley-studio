@@ -14,7 +14,7 @@ import {
 const social_img_url = '/favicon-xxxl.png';
 const title = 'Volley Studio';
 const ga_id = ''
-const url = 'volleystudio.us'
+const url = 'https://volleystudio.us'
 
 export default class Layout extends React.Component {
 
@@ -56,6 +56,10 @@ export default class Layout extends React.Component {
           <meta name="twitter:image:src" content={ social_img_url } />
           <meta property="og:title" content={ title } />
           <meta property="og:image" content={ social_img_url } />
+          <meta property="og:description" content={ description } />
+          <meta property="og:type" content="website" />
+          <meta property="og:image:height" content={ 1000 } />
+          <meta property="og:image:width" content={ 1000 } />
           <meta property="og:description" content={ description } />
           <meta property="og:site_name" content={ title } />
           <meta property="og:url" content={ url } />

@@ -70,6 +70,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.projects)
     this.topmostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = get(item, ['images', item.images.length - 1, '_key']);
       return acc;

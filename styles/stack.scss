@@ -91,9 +91,12 @@
 .stack.portfolio-stack {
   position: static;
 }
-.team-stack .stack {
-  margin: 0 auto;
-  .stack-img-active, .stack-img-default {
-    outline: 0.1rem solid var(--white-permanent);
+.stack-wrapper.team-stack {
+  padding-bottom: 0;
+  .stack {
+    margin: 0 auto;
+    .stack-img-active, .stack-img-default {
+      outline: 0.1rem solid var(--white-permanent);
+    }
   }
 }

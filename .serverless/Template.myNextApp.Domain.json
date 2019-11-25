@@ -4,7 +4,7 @@
   "domain": "volleystudio.us",
   "subdomains": [
     {
-      "domain": "www.volleystudio.us",
+      "domain": "new.volleystudio.us",
       "distributionId": "E3JZWBEDLLBR72",
       "url": "https://d29hvpz0fy1hi4.cloudfront.net",
       "type": "awsCloudFront"
