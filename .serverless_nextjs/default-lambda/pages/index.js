@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "NE9V");
+/******/ 	return __webpack_require__(__webpack_require__.s = "KAyQ");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11208,6 +11208,21 @@ var media_player_jsx = react_default.a.createElement;
 
 
 class media_player_MediaPlayer extends react_default.a.Component {
+  componentDidMount() {
+    const {
+      windowWidth
+    } = calcDimensions();
+
+    if (windowWidth < 400) {
+      const videos = this.refs.containerElement.getElementsByTagName('video');
+
+      for (var i = 0; i < videos.length; i++) {
+        const video = videos[i];
+        video.setAttribute('controls', 'true');
+      }
+    }
+  }
+
   render() {
     let {
       image,
@@ -11224,8 +11239,7 @@ class media_player_MediaPlayer extends react_default.a.Component {
 
     if (true) {
       return media_player_jsx("div", null);
-    } // shouldLoadVideo = true;
-
+    }
     /*
       For tall images, adjust the sizing
     */
@@ -11385,7 +11399,11 @@ class project_detail_ProjectDetail extends react_default.a.Component {
       isActive: Object(lib["get"])(activeImage, '_key') === image._key
     })))), project_detail_jsx("div", {
       className: "project-detail__side-panel__description"
-    }, project_detail_jsx("p", null, this.props.data.description), project_detail_jsx("p", {
+    }, project_detail_jsx("div", {
+      className: "project-detail__dots"
+    }, projectImages.map(() => project_detail_jsx("div", {
+      className: "dot"
+    }))), project_detail_jsx("p", null, this.props.data.description), project_detail_jsx("p", {
       className: "mono"
     }, this.props.data.year && `Completed: ${this.props.data.year}`, project_detail_jsx("br", null), this.props.data.location && `Location: ${this.props.data.location}`, project_detail_jsx("br", null), Object(lib["get"])(activeImage, 'title') && `Pictured: ${activeImage.title}`)))));
   }
@@ -16064,6 +16082,139 @@ module.exports = function (object, names) {
 
 /***/ }),
 
+/***/ "KAyQ":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var pages_namespaceObject = {};
+__webpack_require__.r(pages_namespaceObject);
+__webpack_require__.d(pages_namespaceObject, "default", function() { return home["default"]; });
+
+// EXTERNAL MODULE: external "url"
+var external_url_ = __webpack_require__("bzos");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/render.js
+var render = __webpack_require__("/bjS");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/send-html.js
+var send_html = __webpack_require__("LuNM");
+
+// EXTERNAL MODULE: ./.next/build-manifest.json
+var build_manifest = __webpack_require__("LZ9C");
+
+// EXTERNAL MODULE: ./.next/react-loadable-manifest.json
+var react_loadable_manifest = __webpack_require__("67Bq");
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
+var _document = __webpack_require__("VDXt");
+var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_error.js
+var _error = __webpack_require__("/a9y");
+var _error_default = /*#__PURE__*/__webpack_require__.n(_error);
+
+// EXTERNAL MODULE: ./node_modules/next/dist/pages/_app.js
+var _app = __webpack_require__("B5Ud");
+var _app_default = /*#__PURE__*/__webpack_require__.n(_app);
+
+// EXTERNAL MODULE: ./pages/home.js + 25 modules
+var home = __webpack_require__("CH2o");
+
+// CONCATENATED MODULE: ./pages/index.js
+
+// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F&absolutePagePath=private-next-pages%2Findex.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=9_D4FIs85pDn5V0kMuhmP&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_9_D4FIs85pDn5V0kMuhmP_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_9_D4FIs85pDn5V0kMuhmP_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    const Component = home["default"]
+    /* harmony default export */ var next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_9_D4FIs85pDn5V0kMuhmP_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
+    const unstable_getStaticProps = pages_namespaceObject['unstable_getStaticProp' + 's']
+    
+    const config = pages_namespaceObject['confi' + 'g'] || {}
+    const next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_9_D4FIs85pDn5V0kMuhmP_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
+    async function renderReqToHTML(req, res, fromExport) {
+      const options = {
+        App: _app_default.a,
+        Document: _document_default.a,
+        buildManifest: build_manifest,
+        unstable_getStaticProps,
+        reactLoadableManifest: react_loadable_manifest,
+        canonicalBase: "",
+        buildId: "9_D4FIs85pDn5V0kMuhmP",
+        assetPrefix: "",
+        ampBindInitData: false,
+      }
+      let sprData = false
+
+      if (req.url.match(/_next\/data/)) {
+        sprData = true
+        req.url = req.url
+          .replace(/\/_next\/data\//, '/')
+          .replace(/\.json$/, '')
+      }
+      const parsedUrl = Object(external_url_["parse"])(req.url, true)
+      const renderOpts = Object.assign(
+        {
+          Component,
+          pageConfig: config,
+          dataOnly: req.headers && (req.headers.accept || '').indexOf('application/amp.bind+json') !== -1,
+          nextExport: fromExport
+        },
+        options,
+      )
+      try {
+        
+        const params = {};
+        const result = await Object(render["renderToHTML"])(req, res, "/", Object.assign({}, unstable_getStaticProps ? {} : parsedUrl.query, params, sprData ? { _nextSprData: '1' } : {}), renderOpts)
+
+        if (fromExport) return { html: result, renderOpts }
+        return result
+      } catch (err) {
+        if (err.code === 'ENOENT') {
+          res.statusCode = 404
+          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
+            Component: _error_default.a
+          }))
+          return result
+        } else {
+          console.error(err)
+          res.statusCode = 500
+          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
+            Component: _error_default.a,
+            err
+          }))
+          return result
+        }
+      }
+    }
+    async function next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_9_D4FIs85pDn5V0kMuhmP_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
+      try {
+        const html = await renderReqToHTML(req, res)
+        Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})
+      } catch(err) {
+        console.error(err)
+        res.statusCode = 500
+        res.end('Internal Server Error')
+      }
+    }
+  
+
+/***/ }),
+
 /***/ "KEll":
 /***/ (function(module, exports) {
 
@@ -16730,7 +16881,7 @@ module.exports = __webpack_require__("s0dr");
 /***/ "LZ9C":
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.efc18bef.chunk.css\",\"static/chunks/commons.accfbfbdcee0c32e5761.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.efc18bef.chunk.css\",\"static/chunks/commons.accfbfbdcee0c32e5761.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.efc18bef.chunk.css\",\"static/chunks/commons.accfbfbdcee0c32e5761.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.efc18bef.chunk.css\",\"static/chunks/commons.accfbfbdcee0c32e5761.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.efc18bef.chunk.css\",\"static/chunks/commons.accfbfbdcee0c32e5761.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.efc18bef.chunk.css\",\"static/chunks/commons.accfbfbdcee0c32e5761.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
+module.exports = JSON.parse("{\"devFiles\":[],\"pages\":{\"/\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.4fc1a391.chunk.css\",\"static/chunks/commons.0d4b22bc1b1ca1f1f1dd.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/[slug]\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.4fc1a391.chunk.css\",\"static/chunks/commons.0d4b22bc1b1ca1f1f1dd.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_app\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.4fc1a391.chunk.css\",\"static/chunks/commons.0d4b22bc1b1ca1f1f1dd.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/_error\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.4fc1a391.chunk.css\",\"static/chunks/commons.0d4b22bc1b1ca1f1f1dd.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/home\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.4fc1a391.chunk.css\",\"static/chunks/commons.0d4b22bc1b1ca1f1f1dd.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"],\"/index\":[\"static/runtime/webpack-4b444dab214c6491079c.js\",\"static/css/commons.4fc1a391.chunk.css\",\"static/chunks/commons.0d4b22bc1b1ca1f1f1dd.js\",\"static/runtime/main-6c7f3b0d18b750f23af6.js\"]}}");
 
 /***/ }),
 
@@ -17675,139 +17826,6 @@ module.exports = stackSet;
 /***/ (function(module, exports) {
 
 module.exports = {"application/andrew-inset":["ez"],"application/applixware":["aw"],"application/atom+xml":["atom"],"application/atomcat+xml":["atomcat"],"application/atomsvc+xml":["atomsvc"],"application/bdoc":["bdoc"],"application/ccxml+xml":["ccxml"],"application/cdmi-capability":["cdmia"],"application/cdmi-container":["cdmic"],"application/cdmi-domain":["cdmid"],"application/cdmi-object":["cdmio"],"application/cdmi-queue":["cdmiq"],"application/cu-seeme":["cu"],"application/dash+xml":["mpd"],"application/davmount+xml":["davmount"],"application/docbook+xml":["dbk"],"application/dssc+der":["dssc"],"application/dssc+xml":["xdssc"],"application/ecmascript":["ecma","es"],"application/emma+xml":["emma"],"application/epub+zip":["epub"],"application/exi":["exi"],"application/font-tdpfr":["pfr"],"application/geo+json":["geojson"],"application/gml+xml":["gml"],"application/gpx+xml":["gpx"],"application/gxf":["gxf"],"application/gzip":["gz"],"application/hjson":["hjson"],"application/hyperstudio":["stk"],"application/inkml+xml":["ink","inkml"],"application/ipfix":["ipfix"],"application/java-archive":["jar","war","ear"],"application/java-serialized-object":["ser"],"application/java-vm":["class"],"application/javascript":["js","mjs"],"application/json":["json","map"],"application/json5":["json5"],"application/jsonml+json":["jsonml"],"application/ld+json":["jsonld"],"application/lost+xml":["lostxml"],"application/mac-binhex40":["hqx"],"application/mac-compactpro":["cpt"],"application/mads+xml":["mads"],"application/manifest+json":["webmanifest"],"application/marc":["mrc"],"application/marcxml+xml":["mrcx"],"application/mathematica":["ma","nb","mb"],"application/mathml+xml":["mathml"],"application/mbox":["mbox"],"application/mediaservercontrol+xml":["mscml"],"application/metalink+xml":["metalink"],"application/metalink4+xml":["meta4"],"application/mets+xml":["mets"],"application/mods+xml":["mods"],"application/mp21":["m21","mp21"],"application/mp4":["mp4s","m4p"],"application/msword":["doc","dot"],"application/mxf":["mxf"],"application/n-quads":["nq"],"application/n-triples":["nt"],"application/octet-stream":["bin","dms","lrf","mar","so","dist","distz","pkg","bpk","dump","elc","deploy","exe","dll","deb","dmg","iso","img","msi","msp","msm","buffer"],"application/oda":["oda"],"application/oebps-package+xml":["opf"],"application/ogg":["ogx"],"application/omdoc+xml":["omdoc"],"application/onenote":["onetoc","onetoc2","onetmp","onepkg"],"application/oxps":["oxps"],"application/patch-ops-error+xml":["xer"],"application/pdf":["pdf"],"application/pgp-encrypted":["pgp"],"application/pgp-signature":["asc","sig"],"application/pics-rules":["prf"],"application/pkcs10":["p10"],"application/pkcs7-mime":["p7m","p7c"],"application/pkcs7-signature":["p7s"],"application/pkcs8":["p8"],"application/pkix-attr-cert":["ac"],"application/pkix-cert":["cer"],"application/pkix-crl":["crl"],"application/pkix-pkipath":["pkipath"],"application/pkixcmp":["pki"],"application/pls+xml":["pls"],"application/postscript":["ai","eps","ps"],"application/pskc+xml":["pskcxml"],"application/raml+yaml":["raml"],"application/rdf+xml":["rdf","owl"],"application/reginfo+xml":["rif"],"application/relax-ng-compact-syntax":["rnc"],"application/resource-lists+xml":["rl"],"application/resource-lists-diff+xml":["rld"],"application/rls-services+xml":["rs"],"application/rpki-ghostbusters":["gbr"],"application/rpki-manifest":["mft"],"application/rpki-roa":["roa"],"application/rsd+xml":["rsd"],"application/rss+xml":["rss"],"application/rtf":["rtf"],"application/sbml+xml":["sbml"],"application/scvp-cv-request":["scq"],"application/scvp-cv-response":["scs"],"application/scvp-vp-request":["spq"],"application/scvp-vp-response":["spp"],"application/sdp":["sdp"],"application/set-payment-initiation":["setpay"],"application/set-registration-initiation":["setreg"],"application/shf+xml":["shf"],"application/sieve":["siv","sieve"],"application/smil+xml":["smi","smil"],"application/sparql-query":["rq"],"application/sparql-results+xml":["srx"],"application/srgs":["gram"],"application/srgs+xml":["grxml"],"application/sru+xml":["sru"],"application/ssdl+xml":["ssdl"],"application/ssml+xml":["ssml"],"application/tei+xml":["tei","teicorpus"],"application/thraud+xml":["tfi"],"application/timestamped-data":["tsd"],"application/voicexml+xml":["vxml"],"application/wasm":["wasm"],"application/widget":["wgt"],"application/winhlp":["hlp"],"application/wsdl+xml":["wsdl"],"application/wspolicy+xml":["wspolicy"],"application/xaml+xml":["xaml"],"application/xcap-diff+xml":["xdf"],"application/xenc+xml":["xenc"],"application/xhtml+xml":["xhtml","xht"],"application/xml":["xml","xsl","xsd","rng"],"application/xml-dtd":["dtd"],"application/xop+xml":["xop"],"application/xproc+xml":["xpl"],"application/xslt+xml":["xslt"],"application/xspf+xml":["xspf"],"application/xv+xml":["mxml","xhvml","xvml","xvm"],"application/yang":["yang"],"application/yin+xml":["yin"],"application/zip":["zip"],"audio/3gpp":["*3gpp"],"audio/adpcm":["adp"],"audio/basic":["au","snd"],"audio/midi":["mid","midi","kar","rmi"],"audio/mp3":["*mp3"],"audio/mp4":["m4a","mp4a"],"audio/mpeg":["mpga","mp2","mp2a","mp3","m2a","m3a"],"audio/ogg":["oga","ogg","spx"],"audio/s3m":["s3m"],"audio/silk":["sil"],"audio/wav":["wav"],"audio/wave":["*wav"],"audio/webm":["weba"],"audio/xm":["xm"],"font/collection":["ttc"],"font/otf":["otf"],"font/ttf":["ttf"],"font/woff":["woff"],"font/woff2":["woff2"],"image/aces":["exr"],"image/apng":["apng"],"image/bmp":["bmp"],"image/cgm":["cgm"],"image/dicom-rle":["drle"],"image/emf":["emf"],"image/fits":["fits"],"image/g3fax":["g3"],"image/gif":["gif"],"image/heic":["heic"],"image/heic-sequence":["heics"],"image/heif":["heif"],"image/heif-sequence":["heifs"],"image/ief":["ief"],"image/jls":["jls"],"image/jp2":["jp2","jpg2"],"image/jpeg":["jpeg","jpg","jpe"],"image/jpm":["jpm"],"image/jpx":["jpx","jpf"],"image/jxr":["jxr"],"image/ktx":["ktx"],"image/png":["png"],"image/sgi":["sgi"],"image/svg+xml":["svg","svgz"],"image/t38":["t38"],"image/tiff":["tif","tiff"],"image/tiff-fx":["tfx"],"image/webp":["webp"],"image/wmf":["wmf"],"message/disposition-notification":["disposition-notification"],"message/global":["u8msg"],"message/global-delivery-status":["u8dsn"],"message/global-disposition-notification":["u8mdn"],"message/global-headers":["u8hdr"],"message/rfc822":["eml","mime"],"model/3mf":["3mf"],"model/gltf+json":["gltf"],"model/gltf-binary":["glb"],"model/iges":["igs","iges"],"model/mesh":["msh","mesh","silo"],"model/stl":["stl"],"model/vrml":["wrl","vrml"],"model/x3d+binary":["*x3db","x3dbz"],"model/x3d+fastinfoset":["x3db"],"model/x3d+vrml":["*x3dv","x3dvz"],"model/x3d+xml":["x3d","x3dz"],"model/x3d-vrml":["x3dv"],"text/cache-manifest":["appcache","manifest"],"text/calendar":["ics","ifb"],"text/coffeescript":["coffee","litcoffee"],"text/css":["css"],"text/csv":["csv"],"text/html":["html","htm","shtml"],"text/jade":["jade"],"text/jsx":["jsx"],"text/less":["less"],"text/markdown":["markdown","md"],"text/mathml":["mml"],"text/mdx":["mdx"],"text/n3":["n3"],"text/plain":["txt","text","conf","def","list","log","in","ini"],"text/richtext":["rtx"],"text/rtf":["*rtf"],"text/sgml":["sgml","sgm"],"text/shex":["shex"],"text/slim":["slim","slm"],"text/stylus":["stylus","styl"],"text/tab-separated-values":["tsv"],"text/troff":["t","tr","roff","man","me","ms"],"text/turtle":["ttl"],"text/uri-list":["uri","uris","urls"],"text/vcard":["vcard"],"text/vtt":["vtt"],"text/xml":["*xml"],"text/yaml":["yaml","yml"],"video/3gpp":["3gp","3gpp"],"video/3gpp2":["3g2"],"video/h261":["h261"],"video/h263":["h263"],"video/h264":["h264"],"video/jpeg":["jpgv"],"video/jpm":["*jpm","jpgm"],"video/mj2":["mj2","mjp2"],"video/mp2t":["ts"],"video/mp4":["mp4","mp4v","mpg4"],"video/mpeg":["mpeg","mpg","mpe","m1v","m2v"],"video/ogg":["ogv"],"video/quicktime":["qt","mov"],"video/webm":["webm"]};
-
-/***/ }),
-
-/***/ "NE9V":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var pages_namespaceObject = {};
-__webpack_require__.r(pages_namespaceObject);
-__webpack_require__.d(pages_namespaceObject, "default", function() { return home["default"]; });
-
-// EXTERNAL MODULE: external "url"
-var external_url_ = __webpack_require__("bzos");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/render.js
-var render = __webpack_require__("/bjS");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/send-html.js
-var send_html = __webpack_require__("LuNM");
-
-// EXTERNAL MODULE: ./.next/build-manifest.json
-var build_manifest = __webpack_require__("LZ9C");
-
-// EXTERNAL MODULE: ./.next/react-loadable-manifest.json
-var react_loadable_manifest = __webpack_require__("67Bq");
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
-var _document = __webpack_require__("VDXt");
-var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_error.js
-var _error = __webpack_require__("/a9y");
-var _error_default = /*#__PURE__*/__webpack_require__.n(_error);
-
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_app.js
-var _app = __webpack_require__("B5Ud");
-var _app_default = /*#__PURE__*/__webpack_require__.n(_app);
-
-// EXTERNAL MODULE: ./pages/home.js + 25 modules
-var home = __webpack_require__("CH2o");
-
-// CONCATENATED MODULE: ./pages/index.js
-
-// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader.js?page=%2F&absolutePagePath=private-next-pages%2Findex.js&absoluteAppPath=next%2Fdist%2Fpages%2F_app&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&distDir=private-dot-next&buildId=bdvcZCb0lIbtRB2b35VEL&assetPrefix=&generateEtags=true&ampBindInitData=false&canonicalBase=
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_getStaticProps", function() { return unstable_getStaticProps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_app", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_bdvcZCb0lIbtRB2b35VEL_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderReqToHTML", function() { return renderReqToHTML; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_bdvcZCb0lIbtRB2b35VEL_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render; });
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    const Component = home["default"]
-    /* harmony default export */ var next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_bdvcZCb0lIbtRB2b35VEL_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_ = __webpack_exports__["default"] = (Component);
-    const unstable_getStaticProps = pages_namespaceObject['unstable_getStaticProp' + 's']
-    
-    const config = pages_namespaceObject['confi' + 'g'] || {}
-    const next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_bdvcZCb0lIbtRB2b35VEL_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_app = _app_default.a
-    async function renderReqToHTML(req, res, fromExport) {
-      const options = {
-        App: _app_default.a,
-        Document: _document_default.a,
-        buildManifest: build_manifest,
-        unstable_getStaticProps,
-        reactLoadableManifest: react_loadable_manifest,
-        canonicalBase: "",
-        buildId: "bdvcZCb0lIbtRB2b35VEL",
-        assetPrefix: "",
-        ampBindInitData: false,
-      }
-      let sprData = false
-
-      if (req.url.match(/_next\/data/)) {
-        sprData = true
-        req.url = req.url
-          .replace(/\/_next\/data\//, '/')
-          .replace(/\.json$/, '')
-      }
-      const parsedUrl = Object(external_url_["parse"])(req.url, true)
-      const renderOpts = Object.assign(
-        {
-          Component,
-          pageConfig: config,
-          dataOnly: req.headers && (req.headers.accept || '').indexOf('application/amp.bind+json') !== -1,
-          nextExport: fromExport
-        },
-        options,
-      )
-      try {
-        
-        const params = {};
-        const result = await Object(render["renderToHTML"])(req, res, "/", Object.assign({}, unstable_getStaticProps ? {} : parsedUrl.query, params, sprData ? { _nextSprData: '1' } : {}), renderOpts)
-
-        if (fromExport) return { html: result, renderOpts }
-        return result
-      } catch (err) {
-        if (err.code === 'ENOENT') {
-          res.statusCode = 404
-          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
-            Component: _error_default.a
-          }))
-          return result
-        } else {
-          console.error(err)
-          res.statusCode = 500
-          const result = await Object(render["renderToHTML"])(req, res, "/_error", parsedUrl.query, Object.assign({}, options, {
-            Component: _error_default.a,
-            err
-          }))
-          return result
-        }
-      }
-    }
-    async function next_serverless_loaderpage_2F_absolutePagePath_private_next_pages_2Findex_js_absoluteAppPath_next_2Fdist_2Fpages_2F_app_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_distDir_private_dot_next_buildId_bdvcZCb0lIbtRB2b35VEL_assetPrefix_generateEtags_true_ampBindInitData_false_canonicalBase_render (req, res) {
-      try {
-        const html = await renderReqToHTML(req, res)
-        Object(send_html["sendHTML"])(req, res, html, {generateEtags: true})
-      } catch(err) {
-        console.error(err)
-        res.statusCode = 500
-        res.end('Internal Server Error')
-      }
-    }
-  
 
 /***/ }),
 

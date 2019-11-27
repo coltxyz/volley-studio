@@ -75,6 +75,13 @@ export default class ProjectDetail extends React.Component {
               }
             </div>
             <div className="project-detail__side-panel__description">
+              <div className="project-detail__dots">
+                {
+                  projectImages.map( () => (
+                    <div className="dot" />
+                  ))
+                }
+              </div>
               <p>
                 { this.props.data.description }
               </p>

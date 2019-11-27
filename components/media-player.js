@@ -5,6 +5,17 @@ import { urlFor, aspectRatioForImage, calcDimensions } from '../lib/util';
 
 class MediaPlayer extends React.Component {
 
+  componentDidMount() {
+    const { windowWidth } = calcDimensions();
+    if (windowWidth < 400) {
+      const videos = this.refs.containerElement.getElementsByTagName('video');
+      for (var i = 0; i < videos.length; i++) {
+        const video = videos[i];
+        video.setAttribute('controls', 'true')
+      }
+    }
+  }
+
   render() {
     let {
       image,
@@ -20,10 +31,8 @@ class MediaPlayer extends React.Component {
     } = this.props;
 
     if (typeof window === 'undefined') {
-      return <div />
+      return <div className={ classnames('l', className, { 'media--active': isActive } ) } />
     }
-
-    // shouldLoadVideo = true;
 
     /*
       For tall images, adjust the sizing

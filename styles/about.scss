@@ -2,6 +2,7 @@
   &__inner {
     display: flex;
     flex-direction: row;
+    align-items: center;
     @media (max-width: $break_sm) {
       flex-direction: column;
     }
