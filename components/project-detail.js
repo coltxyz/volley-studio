@@ -24,6 +24,7 @@ export default class ProjectDetail extends React.Component {
       this.setState({
         activeImageIndex: 0
       })
+      document.getElementsByClassName('sidescroll-mobile-container')[0].scrollTo(0, 0);
     }
   }
 
