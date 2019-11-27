@@ -16,12 +16,14 @@ class MediaPlayer extends React.Component {
       onClick,
       isActive,
       shouldLoadVideo,
-      shouldPlayVideo
+      isPlaying
     } = this.props;
 
     if (typeof window === 'undefined') {
       return <div />
     }
+
+    // shouldLoadVideo = true;
 
     /*
       For tall images, adjust the sizing
@@ -39,13 +41,14 @@ class MediaPlayer extends React.Component {
     return (
       image.videoColor ? (
         <div
-          className={ classnames('lol', className, { 'media--active': isActive } ) }
+          className={ classnames('l', className, { 'media--active': isActive } ) }
           onClick={ onClick }
+          ref="containerElement"
         >
           <SanityMuxPlayer
             assetDocument={get(image, 'videoMono.asset') || get(image, 'videoColor.asset')}
             autoload={ shouldLoadVideo }
-            autoplay={ this.props.isPlaying && Boolean( image.videoMono ) }
+            autoplay={ this.props.isPlaying }
             className={ classnames('mediaplayer', inactiveClassName, {
               'mock--monotone': !Boolean( image.videoMono )
             }) }
@@ -58,7 +61,7 @@ class MediaPlayer extends React.Component {
           />
           <SanityMuxPlayer
             assetDocument={get(image, 'videoColor.asset')}
-            autoload={shouldLoadVideo}
+            autoload={ shouldLoadVideo }
             autoplay={ this.props.isPlaying }
             className={ classnames( 'mediaplayer', activeClassName) }
             loop={true}
@@ -71,8 +74,9 @@ class MediaPlayer extends React.Component {
         </div>
       ) : (
         <div
-          className={ classnames('lol', className, { 'media--active': isActive } ) }
+          className={ classnames('l', className, { 'media--active': isActive } ) }
           onClick={ onClick }
+          ref="containerElement"
         >
           <img
             key={ get(image,'imageMono._id') || 'abc123'}

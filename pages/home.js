@@ -70,7 +70,6 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.projects)
     this.topmostImageForStack = this.props.projects.reduce((acc, item) => {
       acc[item._id] = get(item, ['images', item.images.length - 1, '_key']);
       return acc;
@@ -340,7 +339,7 @@ export default class Home extends React.Component {
                   images={ portfolioItem.images }
                   isActiveFrame={ this.state.isFocus && this.state.activeFrameId == i+1 }
                   onStackClick={ this.onStackClick }
-                  shouldLoadVideo={ Math.abs(this.state.activeFrameId - i+1 ) < 2 }
+                  shouldLoadVideo={ true }
                 />
               ))
             }
