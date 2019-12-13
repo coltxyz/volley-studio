@@ -57,7 +57,7 @@ class MediaPlayer extends React.Component {
           <SanityMuxPlayer
             assetDocument={get(image, 'videoMono.asset') || get(image, 'videoColor.asset')}
             autoload={ shouldLoadVideo }
-            autoplay={ this.props.isPlaying }
+            autoplay={ true }
             className={ classnames('mediaplayer', inactiveClassName, {
               'mock--monotone': !Boolean( image.videoMono )
             }) }
@@ -71,7 +71,7 @@ class MediaPlayer extends React.Component {
           <SanityMuxPlayer
             assetDocument={get(image, 'videoColor.asset')}
             autoload={ shouldLoadVideo }
-            autoplay={ this.props.isPlaying }
+            autoplay={ true }
             className={ classnames( 'mediaplayer', activeClassName) }
             loop={true}
             muted={true}

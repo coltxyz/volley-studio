@@ -44,13 +44,16 @@ export default class Stack extends React.Component {
   }
 
   computeAvgImageHeight(images) {
-    const {windowWidth} = calcDimensions();
+    const {windowWidth, windowHeight} = calcDimensions();
     let sumHeights = 0;
     let numHeights = 0;
     for (var i = 0; i < images.length; i++) {
       const imgWidth = windowWidth * this.props.imgWidthRatio[0];
       const imgAspect = aspectRatioForImage(images[i]);
-      const imgHeight = imgWidth / imgAspect;
+      let imgHeight = imgWidth / imgAspect;
+      if (imgAspect < 1) {
+        imgHeight = Math.min(imgHeight, Math.floor(windowHeight * 0.55))
+      }
       if (typeof imgHeight === 'number') {
         sumHeights += imgHeight
         numHeights ++
