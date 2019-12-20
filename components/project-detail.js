@@ -46,7 +46,6 @@ export default class ProjectDetail extends React.Component {
                     className="media"
                     activeClassName="main-photo--active"
                     inactiveClassName="main-photo--inactive"
-                    isPlaying={ true }
                     isActive={ get(activeImage, '_key') === image._key }
                   />
                 ))
@@ -67,7 +66,6 @@ export default class ProjectDetail extends React.Component {
                       activeClassName="thumbnail--active"
                       inactiveClassName="thumbnail--inactive"
                       image={ image }
-                      isPlaying={ true }
                       isActive={ get(activeImage, '_key') === image._key }
                     />
                   </div>

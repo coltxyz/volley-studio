@@ -5,14 +5,30 @@ import { urlFor, aspectRatioForImage, calcDimensions } from '../lib/util';
 
 class MediaPlayer extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      isReady: false,
+      isPlaying: false,
+      shouldLoadVideo: false
+    }
+  }
+
   componentDidMount() {
-    const { windowWidth } = calcDimensions();
-    if (windowWidth < 400) {
-      const videos = this.refs.containerElement.getElementsByTagName('video');
-      for (var i = 0; i < videos.length; i++) {
-        const video = videos[i];
-        video.setAttribute('controls', 'true')
-      }
+    /*
+      On mobile, don't play or load videos
+    */
+    const windowWidth = window.innerWidth
+    if (windowWidth >= 400) {
+      this.setState({
+        isReady: true,
+        isPlaying: true,
+        shouldLoadVideo: true
+      });
+    } else {
+      this.setState({
+        isReady: true
+      })
     }
   }
 
@@ -25,12 +41,10 @@ class MediaPlayer extends React.Component {
       activeClassName,
       inactiveClassName,
       onClick,
-      isActive,
-      shouldLoadVideo,
-      isPlaying
+      isActive
     } = this.props;
 
-    if (typeof window === 'undefined') {
+    if (!this.state.isReady) {
       return <div className={ classnames('l', className, { 'media--active': isActive } ) } />
     }
 
@@ -39,10 +53,8 @@ class MediaPlayer extends React.Component {
     */
     const { windowHeight } = calcDimensions();
     const aspectRatio = aspectRatioForImage(image);
-    if (aspectRatio < 1) {
-      height = Math.min(height, Math.floor(windowHeight * 0.55))
-      width = height * aspectRatio
-    }
+    height = Math.min(height, Math.floor(windowHeight * 0.50))
+    width = height * aspectRatio
 
     const colorLqip = get(image, 'imageColor.asset.metadata.lqip');
     const monoLqip = get(image, 'imageMono.asset.metadata.lqip');
@@ -56,8 +68,8 @@ class MediaPlayer extends React.Component {
         >
           <SanityMuxPlayer
             assetDocument={get(image, 'videoMono.asset') || get(image, 'videoColor.asset')}
-            autoload={ shouldLoadVideo }
-            autoplay={ true }
+            autoload={ this.state.shouldLoadVideo }
+            autoplay={ this.state.isPlaying }
             className={ classnames('mediaplayer', inactiveClassName, {
               'mock--monotone': !Boolean( image.videoMono )
             }) }
@@ -70,8 +82,8 @@ class MediaPlayer extends React.Component {
           />
           <SanityMuxPlayer
             assetDocument={get(image, 'videoColor.asset')}
-            autoload={ shouldLoadVideo }
-            autoplay={ true }
+            autoload={ this.state.shouldLoadVideo }
+            autoplay={ this.state.isPlaying }
             className={ classnames( 'mediaplayer', activeClassName) }
             loop={true}
             muted={true}

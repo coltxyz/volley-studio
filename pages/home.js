@@ -21,7 +21,7 @@ import {
   TRANSITION_INTERVAL_EXIT,
   PORTFOLIO_ITEM_LIST_TYPE,
   TEAM_MEMBER_LIST_TYPE,
-  DISTANCE_THRESHOLD,
+  DISTANCE_THRESHOLD_RATIO,
   RESIZE_DEBOUNCE_TIME,
   SCROLL_UPDATE_INTERVAL,
   THEME_DARK,
@@ -143,7 +143,7 @@ export default class Home extends React.Component {
         const bestDistance = getScrollDistance(acc);
         return distance < bestDistance ? child : acc;
       })
-      const isFocus = getScrollDistance(closestChild) < DISTANCE_THRESHOLD;
+      const isFocus = getScrollDistance(closestChild) < this.windowHeight * DISTANCE_THRESHOLD_RATIO;
 
       let activeFrameType = null;
       if (this.state.isProjectDetail) {

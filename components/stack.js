@@ -51,7 +51,7 @@ export default class Stack extends React.Component {
       const imgWidth = windowWidth * this.props.imgWidthRatio[0];
       const imgAspect = aspectRatioForImage(images[i]);
       let imgHeight = imgWidth / imgAspect;
-      if (imgAspect < 1) {
+      if (imgAspect <= 1) {
         imgHeight = Math.min(imgHeight, Math.floor(windowHeight * 0.55))
       }
       if (typeof imgHeight === 'number') {
@@ -128,7 +128,7 @@ export default class Stack extends React.Component {
 
   render() {
     let { shouldLoadVideo } = this.props;
-    let isPlaying = this.props.isActiveFrame;
+    let isPlaying = true;
     if (!this.state.isReady) {
       return <div className={ classname("stack-wrapper", this.props.className)} />
     }
@@ -142,8 +142,6 @@ export default class Stack extends React.Component {
       imgWidth = actualWidth * this.props.imgWidthRatio[1];
       stackWidth = imgWidth + (this.props.images.length - 1) * unit;
       imgHeight = this.avgImgHeight + (this.props.images.length - 1) * unit;
-      shouldLoadVideo = false;
-      isPlaying = false;
     }
 
     return (
@@ -201,9 +199,7 @@ export default class Stack extends React.Component {
                     inactiveClassName="stack-img-default"
                     width={ imgWidth }
                     height={ imgWidth / aspectRatio }
-                    isPlaying={ isPlaying }
                     isActive={ this.props.isActiveFrame && image._key === this.imageStack[this.imageStack.length - 1] }
-                    shouldLoadVideo={ shouldLoadVideo }
                   />
                 </div>
               );
